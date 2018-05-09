@@ -8,6 +8,6 @@ namespace BuildSchool.MvcSolution.OnlineStore.Models
 {
     public class Members
     {
-
+        string s = "阿規";
     }
 }
