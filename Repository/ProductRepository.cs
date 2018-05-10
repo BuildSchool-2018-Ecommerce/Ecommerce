@@ -26,6 +26,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
             command.Parameters.AddWithValue("@CategoryID", model.CategoryID);
             command.Parameters.AddWithValue("@ProductImage", model.ProductImage);
 
+
             connection.Open();
             command.ExecuteNonQuery();
             connection.Close();
