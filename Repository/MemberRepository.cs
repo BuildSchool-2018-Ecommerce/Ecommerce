@@ -15,7 +15,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
         {
             SqlConnection connection = new SqlConnection(
                 "data source=.; database=Commerce; integrated security=true");
-            var sql = "INSERT INTO Customers VALUES (@MemberID, @Password, @Name, @Phone, @Address, @Email)";
+            var sql = "INSERT INTO Members VALUES (@MemberID, @Password, @Name, @Phone, @Address, @Email)";
 
             SqlCommand command = new SqlCommand(sql, connection);
 
@@ -35,7 +35,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
         {
             SqlConnection connection = new SqlConnection(
                 "data source=.; database=Commerce; integrated security=true");
-            var sql = "UPDATE Customers SET MemberID=@MemberID, Password=@Password, Name=@Name, Phone=@Phone, Address=@Address, Email=@Email";
+            var sql = "UPDATE Members SET Password=@Password, Name=@Name, Phone=@Phone, Address=@Address, Email=@Email WHERE MemberID = @MemberID";
 
             SqlCommand command = new SqlCommand(sql, connection);
 
@@ -55,7 +55,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
         {
             SqlConnection connection = new SqlConnection(
                 "data source=.; database=Commerce; integrated security=true");
-            var sql = "DELETE FROM Customers WHERE MemberID = @MemberID";
+            var sql = "DELETE FROM Members WHERE MemberID = @MemberID";
 
             SqlCommand command = new SqlCommand(sql, connection);
 
@@ -70,7 +70,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
         {
             SqlConnection connection = new SqlConnection(
                 "data source=.; database=Commerce; integrated security=true");
-            var sql = "SELECT * FROM Customers WHERE MemberID = @MemberID";
+            var sql = "SELECT * FROM Members WHERE MemberID = @MemberID";
 
             SqlCommand command = new SqlCommand(sql, connection);
 
