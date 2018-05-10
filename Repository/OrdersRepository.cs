@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Utils;
 
 namespace BuildSchool.MvcSolution.OnlineStore.Repository
 {
@@ -90,16 +91,41 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
             connection.Open();
 
             var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
-
-            var Orders = new Orders();
+            var properties = typeof(Orders).GetProperties();
+            Orders Order = null;
 
             while (reader.Read())
             {
-                Orders.OrderID = (int)reader.GetValue(reader.GetOrdinal("OrderID"));
-                Orders.EmployeeID = (int)reader.GetValue(reader.GetOrdinal("EmployeeID"));
-                Orders.MemberID = reader.GetValue(reader.GetOrdinal("MemberID")).ToString();
-                Orders.ShipName = reader
+                Order = new Orders();
+                Order = DbReaderModelBinder<Orders>.Bind(reader);
+
             }
+            reader.Close();
+
+            return Order;
+        }
+        public IEnumerable<Orders> GetAll()
+        {
+            SqlConnection connection = new SqlConnection(
+                "data source=.; database=Commerce; integrated security=true");
+            var sql = "SELECT * FROM Orders";
+
+            SqlCommand command = new SqlCommand(sql, connection);
+            connection.Open();
+
+            var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
+            var properties = typeof(Orders).GetProperties();
+            var Orders = new List<Orders>();
+
+            while(reader.Read())
+            {
+                var Order = new Orders();
+                Order = DbReaderModelBinder<Orders>.Bind(reader);
+                Orders.Add(Order);
+            }
+            reader.Close();
+
+            return Orders;
         }
     }
 }
