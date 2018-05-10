@@ -49,8 +49,22 @@ namespace CommerceTest
         public void Test_FindByName()
         {
             var repository = new EmployeesRepository();
-            var product = repository.FindByName("abc");
-            Assert.IsNull(product);
+            var employee = repository.FindByName("abc");
+            Assert.IsNull(employee);
+        }
+        [TestMethod]
+        public void Test_GetStatus()
+        {
+            var repository = new OrdersRepository();
+            var orders = repository.GetStatus("出貨中");
+            Assert.IsNull(orders);
+        }
+        [TestMethod]
+        public void Test_GetOrderDate()
+        {
+            var repository = new OrdersRepository();
+            var orders = repository.GetOrderDate("1999/05/01");
+            Assert.IsNull(orders);
         }
     }
 }

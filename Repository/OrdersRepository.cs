@@ -157,7 +157,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
         {
             SqlConnection connection = new SqlConnection(
                 "data source=.; database=Commerce; integrated security=true");
-            var sql = "select * FROM Orders WHERE OrderDate LIKE '%@OrderDate%'";
+            var sql = "select * FROM Orders WHERE OrderDate LIKE '@OrderDate"+"%'";
 
             SqlCommand command = new SqlCommand(sql, connection);
 
