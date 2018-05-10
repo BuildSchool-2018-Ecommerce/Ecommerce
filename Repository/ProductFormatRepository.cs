@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Utils;
 
 namespace BuildSchool.MvcSolution.OnlineStore.Repository
 {
@@ -78,15 +79,13 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
             connection.Open();
 
             var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
-            var productFormat = new ProductFormat();
+            var properties = typeof(ProductFormat).GetProperties();
+            ProductFormat productFormat = null;
 
             while (reader.Read())
             {
-                productFormat.ProductFormatID = (int)reader.GetValue(reader.GetOrdinal("ProductFormatID"));
-                productFormat.ProductID = (int)reader.GetValue(reader.GetOrdinal("ProductID"));
-                productFormat.Size = reader.GetValue(reader.GetOrdinal("Size")).ToString();
-                productFormat.Color = reader.GetValue(reader.GetOrdinal("Color")).ToString();
-                productFormat.StockQuantity = (int)reader.GetValue(reader.GetOrdinal("StockQuantity"));
+                productFormat = new ProductFormat();
+                productFormat = DbReaderModelBinder<ProductFormat>.Bind(reader);
             }
 
             reader.Close();
@@ -104,17 +103,13 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
             connection.Open();
 
             var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
+            var properties = typeof(ProductFormat).GetProperties();
             var productFormats = new List<ProductFormat>();
 
             while (reader.Read())
             {
                 var productFormat = new ProductFormat();
-                productFormat.ProductFormatID = (int)reader.GetValue(reader.GetOrdinal("ProductFormatID"));
-                productFormat.ProductID = (int)reader.GetValue(reader.GetOrdinal("ProductID"));
-                productFormat.Size = reader.GetValue(reader.GetOrdinal("Size")).ToString();
-                productFormat.Color = reader.GetValue(reader.GetOrdinal("Color")).ToString();
-                productFormat.StockQuantity = (int)reader.GetValue(reader.GetOrdinal("StockQuantity"));
-
+                productFormat = DbReaderModelBinder<ProductFormat>.Bind(reader);
                 productFormats.Add(productFormat);
             }
 
