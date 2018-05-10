@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace CommerceTest
 {
     [TestClass]
-    public class TestFindAll
+    public class TestGetAll
     {
         [TestMethod]
         public void Test_GetAll_Category()
