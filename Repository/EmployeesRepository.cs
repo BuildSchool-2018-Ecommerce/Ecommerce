@@ -62,7 +62,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
             connection.Close();
         }
 
-        public Employees FindById(string EmployeeID)
+        public Employees FindById(int EmployeeID)
         {
             SqlConnection connection = new SqlConnection(
                 "data source=.; database=Commerce; integrated security=true");
