@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Utils;
 
 namespace BuildSchool.MvcSolution.OnlineStore.Repository
 {
@@ -76,29 +77,17 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
 
             var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
             var properties = typeof(Employees).GetProperties();
-            Employees employees = null;
+            Employees employee = null;
 
             while (reader.Read())
             {
-                employees = new Employees();
-                for (var i = 0; i < reader.FieldCount; i++)
-                {
-                    var fieldName = reader.GetName(i);
-                    var property = properties.FirstOrDefault(
-                        p => p.Name == fieldName);
-
-                    if (property == null)
-                        continue;
-
-                    if (!reader.IsDBNull(i))
-                        property.SetValue(employees,
-                            reader.GetValue(i));
-                }
+                employee = new Employees();
+                employee = DbReaderModelBinder<Employees>.Bind(reader);
             }
 
             reader.Close();
 
-            return employees;
+            return employee;
         }
 
         public IEnumerable<Employees> GetAll()
@@ -117,19 +106,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
             while (reader.Read())
             {
                 var employee = new Employees();
-                for (var i = 0; i < reader.FieldCount; i++)
-                {
-                    var fieldName = reader.GetName(i);
-                    var property = properties.FirstOrDefault(
-                        p => p.Name == fieldName);
-
-                    if (property == null)
-                        continue;
-
-                    if (!reader.IsDBNull(i))
-                        property.SetValue(employees,
-                            reader.GetValue(i));
-                }
+                employee = DbReaderModelBinder<Employees>.Bind(reader);
                 employees.Add(employee);
             }
 

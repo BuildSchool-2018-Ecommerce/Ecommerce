@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Utils;
 
 namespace BuildSchool.MvcSolution.OnlineStore.Repository
 {
@@ -80,29 +81,17 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
 
             var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
             var properties = typeof(Members).GetProperties();
-            Members members = null;
+            Members member = null;
 
             while (reader.Read())
             {
-                members = new Members();
-                for (var i = 0; i < reader.FieldCount; i++)
-                {
-                    var fieldName = reader.GetName(i);
-                    var property = properties.FirstOrDefault(
-                        p => p.Name == fieldName);
-
-                    if (property == null)
-                        continue;
-
-                    if (!reader.IsDBNull(i))
-                        property.SetValue(members,
-                            reader.GetValue(i));
-                }
+                member = new Members();
+                member =  DbReaderModelBinder<Members>.Bind(reader);
             }
 
             reader.Close();
 
-            return members;
+            return member;
         }
 
         public IEnumerable<Members> GetAll()
@@ -121,19 +110,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
             while (reader.Read())
             {
                 var member = new Members();
-                for (var i = 0; i < reader.FieldCount; i++)
-                {
-                    var fieldName = reader.GetName(i);
-                    var property = properties.FirstOrDefault(
-                        p => p.Name == fieldName);
-
-                    if (property == null)
-                        continue;
-
-                    if (!reader.IsDBNull(i))
-                        property.SetValue(members,
-                            reader.GetValue(i));
-                }
+                member = DbReaderModelBinder<Members>.Bind(reader);
                 members.Add(member);
             }
 
