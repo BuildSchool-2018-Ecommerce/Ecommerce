@@ -33,7 +33,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
         {
             SqlConnection connection = new SqlConnection(
                 "data source=.; database=Commerce; integrated security=true");
-            var sql = "UPDATE Category SET CategoryID = @CategoryID, CategoryName = @CategoryName ";
+            var sql = "UPDATE Category SET CategoryName = @CategoryName WHERE CategoryID = @CategoryID";
 
             SqlCommand command = new SqlCommand(sql, connection);
 
