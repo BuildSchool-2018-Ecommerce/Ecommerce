@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F0185E25-D0F1-40AC-ADE1-F22197A1C6D3}</ProjectGuid>
+    <ProjectGuid>{4EF2F1D1-049B-42A9-91C5-9F52FE9708B9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BuildSchool.MvcSolution.OnlineStore.Repository</RootNamespace>
-    <AssemblyName>BuildSchool.MvcSolution.OnlineStore.Repository</AssemblyName>
+    <RootNamespace>Utils</RootNamespace>
+    <AssemblyName>Utils</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,22 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CategoryRepository.cs" />
-    <Compile Include="OderDetailsRepository.cs" />
-    <Compile Include="EmployeesRepository.cs" />
-    <Compile Include="MemberRepository.cs" />
-    <Compile Include="ProductRepository.cs" />
+    <Compile Include="Utils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Models\Models.csproj">
-      <Project>{522B70B1-BA21-4FE0-990C-31D5780A86A3}</Project>
-      <Name>Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Utils\Utils.csproj">
-      <Project>{4EF2F1D1-049B-42A9-91C5-9F52FE9708B9}</Project>
-      <Name>Utils</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

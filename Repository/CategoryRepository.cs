@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Utils;
 
 namespace BuildSchool.MvcSolution.OnlineStore.Repository
 {
@@ -73,12 +73,13 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
             connection.Open();
 
             var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
-            var category = new Category();
+            var properties = typeof(Category).GetProperties();
+            Category category = null;
 
             while (reader.Read())
             {
-                category.CategoryID = (int)reader.GetValue(reader.GetOrdinal("CategoryID"));
-                category.CategoryName = reader.GetValue(reader.GetOrdinal("CategoryName")).ToString();
+                category = new Category();
+                category = DbReaderModelBinder<Category>.Bind(reader);
             }
 
             reader.Close();
@@ -96,14 +97,13 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
             connection.Open();
 
             var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
+            var properties = typeof(Category).GetProperties();
             var categories = new List<Category>();
 
             while (reader.Read())
             {
                 var category = new Category();
-                category.CategoryID = (int)reader.GetValue(reader.GetOrdinal("CategoryID"));
-                category.CategoryName = reader.GetValue(reader.GetOrdinal("CategoryName")).ToString();
-
+                category = DbReaderModelBinder<Category>.Bind(reader);
                 categories.Add(category);
             }
 
