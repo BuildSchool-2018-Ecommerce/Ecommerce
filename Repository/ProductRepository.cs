@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Utils;
 
 namespace BuildSchool.MvcSolution.OnlineStore.Repository
 {
@@ -80,16 +81,13 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
             connection.Open();
 
             var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
-            var product = new Product();
+            Product product = null;
+            var properties = typeof(Product).GetProperties();
 
             while (reader.Read())
             {
-                product.ProductID = (int)reader.GetValue(reader.GetOrdinal("ProductID"));
-                product.ProductName = reader.GetValue(reader.GetOrdinal("ProductName")).ToString();
-                product.UnitPrice = (int)reader.GetValue(reader.GetOrdinal("UnitPrice"));
-                product.Description = reader.GetValue(reader.GetOrdinal("Description")).ToString();
-                product.CategoryID = (int)reader.GetValue(reader.GetOrdinal("CategoryID"));
-                product.ProductImage = reader.GetValue(reader.GetOrdinal("ProductImage")).ToString();
+                product = new Product();
+                product = DbReaderModelBinder<Product>.Bind(reader);
             }
 
             reader.Close();
@@ -108,16 +106,12 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
 
             var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
             var products = new List<Product>();
+            var properties = typeof(Product).GetProperties();
 
             while (reader.Read())
             {
                 var product = new Product();
-                product.ProductID = (int)reader.GetValue(reader.GetOrdinal("ProductID"));
-                product.ProductName = reader.GetValue(reader.GetOrdinal("ProductName")).ToString();
-                product.UnitPrice = (int)reader.GetValue(reader.GetOrdinal("UnitPrice"));
-                product.Description = reader.GetValue(reader.GetOrdinal("Description")).ToString();
-                product.CategoryID = (int)reader.GetValue(reader.GetOrdinal("CategoryID"));
-                product.ProductImage = reader.GetValue(reader.GetOrdinal("ProductImage")).ToString();
+                product = DbReaderModelBinder<Product>.Bind(reader);
 
                 products.Add(product);
             }
