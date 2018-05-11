@@ -32,13 +32,13 @@ namespace CommerceTest
         //
         #endregion
 
-        [TestMethod]
-        public void Test_GetCategoryName()
-        {
-            var repository = new CategoryRepository();
-            var category = repository.FindCategoryName("abc");
-            Assert.IsNull(category);
-        }
+        //[TestMethod]
+        //public void Test_GetCategoryName()
+        //{
+        //    var repository = new CategoryRepository();
+        //    var category = repository.FindCategoryName("abc");
+        //    Assert.IsNull(category);
+        //}
         [TestMethod]
         public void Test_FindByProductName()
         {
