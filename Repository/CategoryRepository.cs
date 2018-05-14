@@ -1,4 +1,5 @@
 ﻿using BuildSchool.MvcSolution.OnlineStore.Models;
+using Dapper;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -16,7 +17,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
         {
             SqlConnection connection = new SqlConnection(
                 "data source=.; database=Commerce; integrated security=true");
-            var sql = "INSERT INTO Category VALUES (@CategoryName)";
+            var sql = "INSERT INTO Category VALUES ( @CategoryName)";
 
             SqlCommand command = new SqlCommand(sql, connection);
 
@@ -61,28 +62,13 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
 
         public Category FindById(int CategoryID)
         {
-            SqlConnection connection = new SqlConnection(
-                "data source=.; database=Commerce; integrated security=true");
-            var sql = "SELECT * FROM Category WHERE CategoryID = @CategoryID";
-
-            SqlCommand command = new SqlCommand(sql, connection);
-
-            command.Parameters.AddWithValue("@CategoryID", CategoryID);
-
-            connection.Open();
-
-            var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
-            var properties = typeof(Category).GetProperties();
+            IDbConnection connection = new SqlConnection("data source=.; database=Commerce; integrated security=true");
+            var result = connection.Query<Category>("SELECT * FROM Category WHERE CategoryID = @CategoryID", new { CategoryID = CategoryID });
             Category category = null;
-
-            while (reader.Read())
+            foreach (var item in result)
             {
-                category = new Category();
-                category = DbReaderModelBinder<Category>.Bind(reader);
+                category = item;
             }
-
-            reader.Close();
-
             return category;
         }
         //public Category FindCategoryName(string CategoryName)
@@ -111,30 +97,10 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
 
         //    return category;
         //}
-
         public IEnumerable<Category> GetAll()
         {
-            SqlConnection connection = new SqlConnection(
-                "data source=.; database=Commerce; integrated security=true");
-            var sql = "SELECT * FROM Category";
-
-            SqlCommand command = new SqlCommand(sql, connection);
-            connection.Open();
-
-            var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
-            var properties = typeof(Category).GetProperties();
-            var categories = new List<Category>();
-
-            while (reader.Read())
-            {
-                var category = new Category();
-                category = DbReaderModelBinder<Category>.Bind(reader);
-                categories.Add(category);
-            }
-
-            reader.Close();
-
-            return categories;
+            IDbConnection connection = new SqlConnection("data source=.; database=Commerce; integrated security=true");
+            return connection.Query<Category>("SELECT * FROM Category");
         }
     }
 }
