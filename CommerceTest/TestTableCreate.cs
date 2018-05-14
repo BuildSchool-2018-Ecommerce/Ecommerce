@@ -41,7 +41,7 @@ namespace CommerceTest
             //    UnitPrice = 470,
             //    Description = "如對商品尺寸有任何疑問，請先私訊我詢問，以免造成彼此困擾~感謝~",
             //    CategoryID = 1,
-            //    ProductImage = "test1"  
+            //    ProductImage = "test1"
             //};
             //repository.Create(product);
             //Product product1 = new Product
@@ -138,8 +138,8 @@ namespace CommerceTest
             var repository = new EmployeesRepository();
             //Employees employee = new Employees()
             //{
-            //    Name = "洪識超" ,
-            //    Phone = "0123456789" ,
+            //    Name = "洪識超",
+            //    Phone = "0123456789",
             //    HireDate = new DateTime(1996, 06, 01),
             //};
             //repository.Create(employee);
