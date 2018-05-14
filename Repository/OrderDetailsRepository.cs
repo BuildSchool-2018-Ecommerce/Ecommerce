@@ -20,16 +20,26 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
             var product = request.FindById(model.ProductFormatID);
             if((product.StockQuantity - model.Quantity) >= 0)
             {
-                sql = sql + "UPDATE ProductFormat SET StockQuantity = StockQuantity - @Quantity WHERE ProductFormatID = @ProductFormatID";
-                SqlCommand command = new SqlCommand(sql, connection);
-
-                command.Parameters.AddWithValue("@OrderID", model.OrderID);
-                command.Parameters.AddWithValue("@ProductFormatID", model.ProductFormatID);
-                command.Parameters.AddWithValue("@Quantity", model.Quantity);
-                command.Parameters.AddWithValue("@UnitPrice", model.UnitPrice);
-
                 connection.Open();
-                command.ExecuteNonQuery();
+                var transaction = connection.BeginTransaction();
+                try
+                {
+                    sql = sql + "UPDATE ProductFormat SET StockQuantity = StockQuantity - @Quantity WHERE ProductFormatID = @ProductFormatID";
+                    SqlCommand command = new SqlCommand(sql, connection);
+
+                    command.Parameters.AddWithValue("@OrderID", model.OrderID);
+                    command.Parameters.AddWithValue("@ProductFormatID", model.ProductFormatID);
+                    command.Parameters.AddWithValue("@Quantity", model.Quantity);
+                    command.Parameters.AddWithValue("@UnitPrice", model.UnitPrice);
+
+                    transaction.Commit();
+                    command.ExecuteNonQuery();
+                    
+                }
+                catch (SqlException e)
+                {
+                    transaction.Rollback();
+                }
                 connection.Close();
             }
             else
@@ -88,7 +98,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
 
             while (reader.Read())
             {
-                orderDetails.OrderID = (int)reader.GetValue(reader.GetOrdinal("OderID"));
+                orderDetails.OrderID = (int)reader.GetValue(reader.GetOrdinal("OrderID"));
                 orderDetails.ProductFormatID = (int)reader.GetValue(reader.GetOrdinal("ProductFormatID"));
                 orderDetails.Quantity = (int)reader.GetValue(reader.GetOrdinal("Quantity"));
                 orderDetails.UnitPrice = (decimal)reader.GetValue(reader.GetOrdinal("UnitPrice"));
@@ -114,7 +124,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
             while (reader.Read())
             {
                 var orderDetail = new OrderDetails();
-                orderDetail.OrderID = (int)reader.GetValue(reader.GetOrdinal("OderID"));
+                orderDetail.OrderID = (int)reader.GetValue(reader.GetOrdinal("OrderID"));
                 orderDetail.ProductFormatID = (int)reader.GetValue(reader.GetOrdinal("ProductFormatID"));
                 orderDetail.Quantity = (int)reader.GetValue(reader.GetOrdinal("Quantity"));
                 orderDetail.UnitPrice = (decimal)reader.GetValue(reader.GetOrdinal("UnitPrice"));
