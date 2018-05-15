@@ -68,7 +68,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
             IDbConnection connection = new SqlConnection(
                 "data source=.; database=Commerce; integrated security=true");
 
-            var result = connection.Query<Employees>("SELECT * FROM Employees WHERE EmployeeID = @EmployeeID", new { @EmployeeID = EmployeeID });
+            var result = connection.Query<Employees>("SELECT * FROM Employees WHERE EmployeeID = @EmployeeID");
             Employees employee = null;
             foreach (var item in result)
             {
@@ -143,7 +143,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
             IDbConnection connection = new SqlConnection(
                 "data source=.; database=Commerce; integrated security=true");
 
-            var result = connection.Query<Employees>("SELECT * FROM Employees WHERE YEAR(HireDate) BETWEEN @startYear AND @endYear ORDER BY HireDate DESC", new { @startYear = startYear, @endYear = endYear });
+            var result = connection.Query<Employees>("SELECT * FROM Employees WHERE YEAR(HireDate) BETWEEN @startYear AND @endYear ORDER BY HireDate DESC");
             var employees = new List<Employees>();
             foreach (var item in result)
             {
@@ -182,7 +182,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
             IDbConnection connection = new SqlConnection(
                 "data source=.; database=Commerce; integrated security=true");
 
-            var result = connection.Query<Employees>("SELECT * FROM Employees WHERE Name = @Name", new { @Name = Name });
+            var result = connection.Query<Employees>("SELECT * FROM Employees WHERE Name = @Name");
             Employees employee = null;
             foreach (var item in result)
             {
