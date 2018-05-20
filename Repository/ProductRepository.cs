@@ -79,15 +79,39 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
             }
             return product;
         }
+        public IEnumerable<GetProductOrder> GetHotProduct()
+        {
+            SqlConnection connection = new SqlConnection("data source=.; database=Commerce; integrated security=true");
+            var affectedRows = connection.Query<GetProductOrder>("GetProductOrder", new {  },commandType: CommandType.StoredProcedure);
+            //SqlCommand cmd = new SqlCommand();
+            //cmd.Connection = connection;
+            //cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            //cmd.CommandText = "GetProductOrder";
+            ////add any parameters the stored procedure might require
+            //connection.Open();
+            //var o = cmd.ExecuteNonQuery;
+            //connection.Close();
+            //return o;
+            //SqlConnection cnn = new SqlConnection(cnnString);
+            //SqlCommand cmd = new SqlCommand();
+            //cmd.Connection = cnn;
+            //cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            //cmd.CommandText = "ProcedureName";
+            //add any parameters the stored procedure might require
+            //cnn.Open();
+            //object o = cmd.ExecuteScalar();
+            //cnn.Close();
+            return affectedRows;
+        }
         public IEnumerable<Product> FindByProductName(string ProductName)
         {
             IDbConnection connection = new SqlConnection("data source=.; database=Commerce; integrated security=true");
-            return connection.Query<Product>("SELECT * FROM Products WHERE ProductName = @ProductName", new { ProductName });
+            return connection.Query<Product>("SELECT * FROM Products WHERE ProductName LIKE @ProductName", new { ProductName });
         }
         public IEnumerable<Product> GetAll()
         {
             IDbConnection connection = new SqlConnection("data source=.; database=Commerce; integrated security=true");
-            return connection.Query<Product>("SELECT * FROM Products ");
+            return connection.Query<Product>("SELECT * FROM Products ORDER BY ProductID DESC ");
         }
     }
 }

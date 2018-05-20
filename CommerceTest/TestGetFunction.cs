@@ -16,6 +16,20 @@ namespace CommerceTest
         //    Assert.IsNull(category);
         //}
         [TestMethod]
+        public void Test_GetHotProduct()
+        {
+            var repository = new ProductRepository();
+            var product = repository.GetHotProduct();
+            Assert.IsTrue(product.Count() == 0);
+        }
+        [TestMethod]
+        public void Test_FindOrderdetaiByOrderID()
+        {
+            var repository = new OrdersRepository();
+            var order = repository.FindOrderdetaiByOrderID(1);
+            Assert.IsTrue(order.Count() == 0);
+        }
+        [TestMethod]
         public void Test_FindByProductName()
         {
             var repository = new ProductRepository();

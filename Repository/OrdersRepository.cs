@@ -122,6 +122,11 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
             IDbConnection connection = new SqlConnection("data source=.; database=Commerce; integrated security=true");
             return connection.Query<Orders>("select * FROM Orders WHERE Status = @Status", new { Status });
         }
+        public IEnumerable<FindOrderdetaiByOrderID> FindOrderdetaiByOrderID(int orderid)
+        {
+            IDbConnection connection = new SqlConnection("data source=.; database=Commerce; integrated security=true");
+            return connection.Query<FindOrderdetaiByOrderID>("FindOrderdetaiByOrderID", new {  orderid}, commandType: CommandType.StoredProcedure);
+        }
         public IEnumerable<Orders> GetOrderDate(string OrderDate)
         {
             IDbConnection connection = new SqlConnection("data source=.; database=Commerce; integrated security=true");

@@ -1,32 +1,8 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+
 @{ Html.RenderAction("NotLogInBar"); }
-<div class="modal fade" id="loginModelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="modelTitleId">會員登入</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group row">
-                    <label class="col-2 col-form-label text-right" for="">帳號</label>
-                    <input type="text" class="form-control col-6 text-left" name="" id="account">
-                </div>
-                <div class="form-group row">
-                    <label class="col-2 col-form-label text-right" for="">密碼</label>
-                    <input type="text" class="form-control col-6 text-left" name="" id="password">
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-success" id="addItemBtn">登入</button>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="container-fluid">
     <!-- Content Row(col-3-9) -->
     <div class="row mt-3 mb-3">
@@ -43,7 +19,13 @@
                 <li class="nav-item">
                     <a class="nav-link active font-weight-bold" style="color: #3F4739" href="#">商品類別</a>
                 </li>
-                <li class="nav-item">
+                @foreach (var item in ViewData["allcategory"] as IEnumerable<Category>)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #3F4739" href="#">@item.CategoryName</a>
+                    </li>
+                }
+                @*<li class="nav-item">
                     <a class="nav-link" style="color: #3F4739" href="#">上衣</a>
                 </li>
                 <li class="nav-item">
@@ -60,7 +42,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" style="color: #3F4739" href="#">手套</a>
-                </li>
+                </li>*@
             </ul>
         </div>
         <div class="col-1">
@@ -116,7 +98,24 @@
                 </div>
             </div>
             <div class="row mt-3">
-                <div class="col-4 border border-secondary">
+                @foreach (var item in ViewData["newproduct"] as IEnumerable<Product>)
+                {
+                    <div class="col-4 border border-secondary">
+                        <div>
+                            <img src=@item.ProductImage alt="Card image cap">
+                            <div>
+                                <h5 class="mt-2">@item.ProductName</h5>
+                                <p>
+                                    @item.Description
+                                </p>
+                                <a href="#">
+                                    <p class="text-right" style="color: #3F4739">more</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @*<div class="col-4 border border-secondary">
                     <div>
                         <img src="http://www.niusnews.com/upload/posts/po3_23028_1405580759.jpg" alt="Card image cap">
                         <div>
@@ -160,7 +159,7 @@
                             </a>
                         </div>
                     </div>
-                </div>
+                </div>*@
             </div>
             <!-- (col-9)Row of the hottest Product Info -->
             <div class="row mt-3 pt-2 text-white" style="background-color:#717568">
@@ -169,7 +168,24 @@
                 </div>
             </div>
             <div class="row mt-3">
-                <div class="col-4 border border-secondary">
+                @foreach (var item in ViewData["hotproduct"] as IEnumerable<GetProductOrder>)
+                {
+                    <div class="col-4 border border-secondary">
+                        <div>
+                            <img src=@item.ProductImage alt="Card image cap">
+                            <div>
+                                <h5 class="mt-2">@item.ProductName</h5>
+                                <p>
+                                    @item.Description
+                                </p>
+                                <a href="#">
+                                    <p class="text-right" style="color: #3F4739">more</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @*<div class="col-4 border border-secondary">
                     <div>
                         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8EeJvvHzNOyeScVKhF1HOrr4ep1QDEjamddTAIT9o_yn-MQD7" alt="Card image cap">
                         <div>
@@ -213,7 +229,7 @@
                             </a>
                         </div>
                     </div>
-                </div>
+                </div>*@
             </div>
         </div>
     </div>
