@@ -103,6 +103,11 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
             //cnn.Close();
             return affectedRows;
         }
+        public IEnumerable<Product> FindProductByUnitPrice(decimal lower, decimal upper)
+        {
+            SqlConnection connection = new SqlConnection("data source=.; database=Commerce; integrated security=true");
+            return connection.Query<Product>("FindProductByUnitPrice", new { lower, upper}, commandType: CommandType.StoredProcedure);
+        }
         public IEnumerable<Product> FindByProductName(string ProductName)
         {
             IDbConnection connection = new SqlConnection("data source=.; database=Commerce; integrated security=true");

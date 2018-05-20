@@ -175,7 +175,11 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
 
             //return employees;
         }
-
+        public IEnumerable<GetHowLongHireDate> GetHowLongHireDate()
+        {
+            SqlConnection connection = new SqlConnection("data source=.; database=Commerce; integrated security=true");
+            return connection.Query<GetHowLongHireDate>("GetHowLongHireDate", new { }, commandType: CommandType.StoredProcedure);
+        }
         public Employees FindByName(string Name)
         {
             IDbConnection connection = new SqlConnection(

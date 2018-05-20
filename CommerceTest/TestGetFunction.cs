@@ -23,6 +23,20 @@ namespace CommerceTest
             Assert.IsTrue(product.Count() == 0);
         }
         [TestMethod]
+        public void Test_FindProductsByCategory()
+        {
+            var repository = new CategoryRepository();
+            var category = repository.FindProductsByCategory();
+            Assert.IsTrue(category.Count() == 0);
+        }
+        [TestMethod]
+        public void Test_GetBuyerOrder()
+        {
+            var repository = new MemberRepository();
+            var member = repository.GetBuyerOrder("123");
+            Assert.IsTrue(member.Count() == 0);
+        }
+        [TestMethod]
         public void Test_FindOrderdetaiByOrderID()
         {
             var repository = new OrdersRepository();
@@ -49,6 +63,13 @@ namespace CommerceTest
             var repository = new OrdersRepository();
             var orders = repository.GetStatus("出貨中");
             Assert.IsTrue(orders.Count() == 0);
+        }
+        [TestMethod]
+        public void Test_GetHowLongHireDate()
+        {
+            var repository = new EmployeesRepository();
+            var employee = repository.GetHowLongHireDate();
+            Assert.IsTrue(employee.Count() >= 0);
         }
         [TestMethod]
         public void Test_GetOrderDate()

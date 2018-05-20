@@ -106,7 +106,11 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
 
             //return member;
         }
-
+        public IEnumerable<GetBuyerOrder> GetBuyerOrder(string memberid)
+        {
+            SqlConnection connection = new SqlConnection("data source=.; database=Commerce; integrated security=true");
+            return connection.Query<GetBuyerOrder>("GetBuyerOrder", new { memberid }, commandType: CommandType.StoredProcedure);
+        }
         public IEnumerable<Members> GetAll()
         {
             IDbConnection connection = new SqlConnection(
