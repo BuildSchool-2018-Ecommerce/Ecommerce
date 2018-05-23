@@ -134,6 +134,11 @@ namespace BuildSchool_MVC_Ecommerce.Controllers
             //做order跟orderdetail
             return RedirectToAction("Shopping6", "Shopping");
         }
+        public ActionResult Shopping6()
+        {
+            //新增成功跳轉
+            return View();
+        }
         public ActionResult Shopping4()
         {
             JavaScriptSerializer JSONSerializer = new JavaScriptSerializer();
