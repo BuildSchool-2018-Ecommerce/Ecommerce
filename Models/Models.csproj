@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Category.cs" />
     <Compile Include="FindOrderdetaiByOrderID.cs" />
+    <Compile Include="FindProductFormatByProductID.cs" />
     <Compile Include="FindProductsByCategory.cs" />
     <Compile Include="GetBuyerOrder.cs" />
     <Compile Include="GetHowLongHireDate.cs" />

@@ -15,7 +15,7 @@ else
     <div class="row mt-3 mb-3">
         <div class="mr-5"></div>
         <!-- Category column bar(col-3) -->
-        <div class="col-2 mr-3" style="background-color:#E8E8E8">
+        <div class="col-sm-2 mr-3" style="background-color:#E8E8E8">
             <ul class="nav flex-column">
                 @*<li class="nav-item">
                         <a class="nav-link active font-weight-bold" style="color: #3F4739" href="#">最新商品</a>
@@ -56,13 +56,14 @@ else
             &nbsp;
         </div>
         <!-- (col-9)Carousel Row & Product Info -->
-        <div class="col-7 mr-3 page">
+        <div class="col-sm-7 mr-3 page">
             @{ Html.RenderAction("HomePage"); }
         </div>
     </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
+    
     $(function () {
         $(document).on("click", ".category", function (e) {
             console.log(e.target.innerText);
@@ -78,6 +79,58 @@ else
                 }
             });
            // $(".page").load($(@@Html.RenderAction("CategoryPage", new { categoryName = "上衣1" }; ) ));
+        })
+        $(document).on("click", ".product", function (e) {
+            console.log(e);
+            //var category = e.target.innerText;
+            $(".page").empty();
+            $.ajax({
+                url: "/Home/ProductPage",
+                data: {
+                    productid: e.target.name,
+                },
+                success: function (result) {
+                    $(".page").html(result);
+                }
+            });
+        })
+        $(document).on("click", "#add", function () {
+            $("#count").val(function () {
+                return parseInt($(this).val()) + 1;
+            })
+        })
+        $(document).on("click", "#min", function () {
+            $("#count").val(function () {
+                if (parseInt($(this).val()) <= 0) {
+
+                    return parseInt($(this).val()) = 0;
+                }
+                else {
+                    return parseInt($(this).val()) - 1;
+                }
+            })
+        })
+        var quantity = function () {
+            $(".quantry").text("");
+            $.ajax({
+                url: "/Home/Quantity",
+                data: {
+                    color: $("#Product-Color").val(),
+                    size: $("#Product-Size").val(),
+                    productjson: $("#p").text(),
+                },
+                success: function (result) {
+                    $(".quantry").html(result);
+                }
+            });
+        }
+        $(document).on("change", "#Product-Color", function (e) {
+            console.log(e);
+            quantity();
+        })
+        $(document).on("change", "#Product-Size", function (e) {
+            console.log(e);
+            quantity();
         })
     })
 </script>

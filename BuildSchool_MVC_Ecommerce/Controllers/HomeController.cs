@@ -38,35 +38,33 @@ namespace BuildSchool_MVC_Ecommerce.Controllers
             var cookieName = "user";
             var memberrepository = new MemberRepository();
             var member = memberrepository.FindById(memberid);
-            if(memberid == member.MemberID && password == member.Password)
+            if(member != null)
             {
-                if(Response.Cookies.AllKeys.Contains(cookieName))
+                if (memberid == member.MemberID && password == member.Password)
                 {
-                    var cookieVal = Response.Cookies[cookieName].Value;
-                    HttpContext.Application.Remove(cookieVal);
-                    Response.Cookies.Remove(cookieName);
+                    if (Response.Cookies.AllKeys.Contains(cookieName))
+                    {
+                        var cookieVal = Response.Cookies[cookieName].Value;
+                        HttpContext.Application.Remove(cookieVal);
+                        Response.Cookies.Remove(cookieName);
+                    }
+                    var token = Guid.NewGuid().ToString();
+                    //HttpContext.Application[token] = DateTime.UtcNow.AddHours(12);
+                    var user = new User()
+                    {
+                        UserID = member.MemberID,
+                        Username = member.Name
+                    };
+                    string json = JSONSerializer.Serialize(user);
+                    var hc = new HttpCookie(cookieName, json)
+                    {
+                        Expires = DateTime.Now.AddSeconds(20),
+                        HttpOnly = true
+                    };
+                    Response.Cookies.Add(hc);
                 }
-                var token = Guid.NewGuid().ToString();
-                //HttpContext.Application[token] = DateTime.UtcNow.AddHours(12);
-                var user = new User()
-                {
-                    UserID = member.MemberID,
-                    Username = member.Name
-                };
-                string json = JSONSerializer.Serialize(user);
-                var hc = new HttpCookie(cookieName, json)
-                {
-                    Expires = DateTime.Now.AddSeconds(20),
-                    HttpOnly = true
-                };
-                Response.Cookies.Add(hc);
             }
             return RedirectToAction("Index", "Home");
-        }
-        public ActionResult ShoppingCard()
-        {
-            
-            return View();
         }
 
         public ActionResult About()
@@ -90,6 +88,42 @@ namespace BuildSchool_MVC_Ecommerce.Controllers
             var productcategory = categoryrepository.FindProductsByCategory();
             var data = productcategory.Where((x) => x.CategoryName == categoryName);
             ViewData["productcategory"] = data;
+            return PartialView();
+        }
+        public ActionResult ProductPage(string productid)
+        {
+            JavaScriptSerializer JSONSerializer = new JavaScriptSerializer();
+            var productrepository = new ProductRepository();
+            var product = productrepository.FindProductFormatByProductID(int.Parse(productid));
+            List<string> productcolor = new List<string>();
+            List<string> productsize = new List<string>();
+            foreach (var item in product)
+            {
+                ViewData["productname"] = item.ProductName;
+                ViewData["productprice"] = item.UnitPrice.ToString("#0.00");
+                ViewData["Description"] = item.Description;
+                ViewData["productimage"] = item.ProductImage;
+                productcolor.Add(item.Color);
+                productsize.Add(item.Size);
+            }
+            ViewData["productcolor"] = productcolor.Distinct();
+            ViewData["productsize"] = productsize.Distinct();
+            ViewData["product"] = JSONSerializer.Serialize(product);
+            return PartialView();
+        }
+        public ActionResult Quantity(string color, string size, string productjson)
+        {
+            JavaScriptSerializer JSONSerializer = new JavaScriptSerializer();
+            var products = JSONSerializer.Deserialize<List<FindProductFormatByProductID>>(productjson);
+            var product = products.FirstOrDefault((x) => x.Color == color && x.Size == size);
+            if(product==null)
+            {
+                ViewData["quantity"] = "0";
+            }
+            else
+            {
+                ViewData["quantity"] = product.StockQuantity.ToString();
+            }
             return PartialView();
         }
         public ActionResult NotLogInBar()

@@ -108,6 +108,11 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
             SqlConnection connection = new SqlConnection("data source=.; database=Commerce; integrated security=true");
             return connection.Query<Product>("FindProductByUnitPrice", new { lower, upper}, commandType: CommandType.StoredProcedure);
         }
+        public IEnumerable<FindProductFormatByProductID> FindProductFormatByProductID(int productid)
+        {
+            SqlConnection connection = new SqlConnection("data source=.; database=Commerce; integrated security=true");
+            return connection.Query<FindProductFormatByProductID>("FindProductFormatByProductID", new { productid }, commandType: CommandType.StoredProcedure);
+        }
         public IEnumerable<Product> FindByProductName(string ProductName)
         {
             IDbConnection connection = new SqlConnection("data source=.; database=Commerce; integrated security=true");
