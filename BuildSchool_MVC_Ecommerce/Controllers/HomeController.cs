@@ -24,7 +24,7 @@ namespace BuildSchool_MVC_Ecommerce.Controllers
             }
             else
             {
-                string json = Request.Cookies["user"].Value;
+                string json = HttpUtility.UrlDecode(Request.Cookies["user"].Value);
                 var user = JSONSerializer.Deserialize<User>(json);
                 ViewData["user"] = user.Username;
             }
@@ -56,7 +56,7 @@ namespace BuildSchool_MVC_Ecommerce.Controllers
                         Username = member.Name
                     };
                     string json = JSONSerializer.Serialize(user);
-                    var hc = new HttpCookie(cookieName, json)
+                    var hc = new HttpCookie(cookieName, HttpUtility.UrlEncode(json))
                     {
                         Expires = DateTime.Now.AddSeconds(20),
                         HttpOnly = true
@@ -99,6 +99,7 @@ namespace BuildSchool_MVC_Ecommerce.Controllers
             List<string> productsize = new List<string>();
             foreach (var item in product)
             {
+                ViewData["productid"] = item.ProductID;
                 ViewData["productname"] = item.ProductName;
                 ViewData["productprice"] = item.UnitPrice.ToString("#0.00");
                 ViewData["Description"] = item.Description;
@@ -126,6 +127,7 @@ namespace BuildSchool_MVC_Ecommerce.Controllers
             }
             return PartialView();
         }
+        
         public ActionResult NotLogInBar()
         {
             //var co = new HttpCookie("User", "123")
