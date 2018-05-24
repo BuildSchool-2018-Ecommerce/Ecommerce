@@ -17,5 +17,6 @@ namespace BuildSchool.MvcSolution.OnlineStore.Models
         public string Size { get; set; }
         public int StockQuantity { get; set; }
         public int Quantity { get; set; }
+        public int ProductFormatID { get; set; }
     }
 }

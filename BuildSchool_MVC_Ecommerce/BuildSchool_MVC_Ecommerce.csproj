@@ -144,6 +144,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
+    <Compile Include="Controllers\R7CompanyController.cs" />
     <Compile Include="Controllers\ShoppingController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -206,6 +207,9 @@
     <Content Include="Views\Shopping\Shopping4.cshtml" />
     <Content Include="Views\Shopping\Shopping5.cshtml" />
     <Content Include="Views\Shopping\Shopping6.cshtml" />
+    <Content Include="Views\R7Company\Index.cshtml" />
+    <Content Include="Views\Shared\Employee_Layout.cshtml" />
+    <Content Include="Views\R7Company\Home.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
