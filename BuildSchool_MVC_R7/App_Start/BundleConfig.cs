@@ -25,7 +25,26 @@ namespace BuildSchool_MVC_R7
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/css/util.css",
+                      "~/Content/css/main.css"
+                      ));
+            bundles.Add(new StyleBundle("~/Content/vendor").Include(
+                "~/Content/vendor/bootstrap/css/bootstrap.min.css",
+                "~/Content/vendor/animate/animate.css",
+                "~/Content/vendor/css-hamburgers/hamburgers.min.css",
+                "~/Content/vendor/animsition/css/animsition.min.css",
+                "~/Content/vendor/select2/select2.min.css",
+                "~/Content/vendor/daterangepicker/daterangepicker.css",
+                "~/Content/vendor/slick/slick.css",
+                "~/Content/vendor/lightbox2/css/lightbox.min.css"
+                ));
+            bundles.Add(new StyleBundle("~/Content/fonts").Include(
+                "~/Content/fonts/font-awesome-4.7.0/css/font-awesome.min.css",
+                "~/Content/fonts/themify/themify-icons.css",
+                "~/Content/fonts/Linearicons-Free-v1.0.0/icon-font.min.css",
+                "~/Content/fonts/elegant-font/html-css/style.css"
+                ));
         }
     }
 }
