@@ -34,6 +34,10 @@ namespace BuildSchool_MVC_Ecommerce.Controllers
             }
             return View();
         }
+        public ActionResult NoShoppingCar()
+        {
+            return View();
+        }
         public ActionResult PutInCookie(string productid, string color, string size, string Quantity)
         {
             JavaScriptSerializer JSONSerializer = new JavaScriptSerializer();

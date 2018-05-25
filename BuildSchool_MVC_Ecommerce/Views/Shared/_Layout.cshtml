@@ -29,6 +29,18 @@
     </style>
 </head>
 <body>
+    @if (ViewData["user"] as string == null)
+    {
+        Html.RenderAction("NotLogInBar", "Home");
+        <div id="chicks" hidden class="f">
+        </div>
+    }
+    else
+    {
+        Html.RenderAction("LogInBar", "Home", new { user = @ViewData["user"] });
+        <div id="chicks" hidden class="t">
+        </div>
+    }
     @RenderBody()
     <!-- Other Content Row -->
     <div class="container-fluid">
@@ -122,7 +134,7 @@
         </div>
     </div>
 
-    
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
