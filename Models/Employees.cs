@@ -12,5 +12,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Models
         public string Name { get; set; }
         public string Phone { get; set; }
         public DateTime HireDate { get; set; }
+        public string Email { get; set; }
+        public Guid EmployeeGUID { get; set; }
     }
 }
