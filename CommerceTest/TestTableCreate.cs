@@ -74,7 +74,7 @@ namespace CommerceTest
             //    ProductImage = "test1"
             //};
             //repository.Create(product3);
-            var products = repository.GetAll();
+            var products = repository.GetAll(connection);
             Assert.IsTrue(products.Count() > 0);
         }
         [TestMethod]
@@ -105,7 +105,7 @@ namespace CommerceTest
             //    StockQuantity = 45
             //};
             //repository.Create(productFormat2);
-            var productFormats = repository.GetAll();
+            var productFormats = repository.GetAll(connection);
             Assert.IsTrue(productFormats.Count() > 0);
         }
         [TestMethod]

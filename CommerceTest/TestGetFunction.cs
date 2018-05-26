@@ -15,14 +15,14 @@ namespace CommerceTest
         public void Test_FindProductFormatByProductID()
         {
             var repository = new ProductRepository();
-            var product = repository.FindProductFormatByProductID(1);
+            var product = repository.FindProductFormatByProductID(1, connection);
             Assert.IsTrue(product.Count() > 1);
         }
         [TestMethod]
         public void Test_GetHotProduct()
         {
             var repository = new ProductRepository();
-            var product = repository.GetHotProduct();
+            var product = repository.GetHotProduct(connection);
             Assert.IsTrue(product.Count() == 0);
         }
         [TestMethod]
@@ -43,14 +43,14 @@ namespace CommerceTest
         public void Test_FindOrderdetaiByOrderID()
         {
             var repository = new OrdersRepository();
-            var order = repository.FindOrderdetaiByOrderID(1);
+            var order = repository.FindOrderdetaiByOrderID(1, connection);
             Assert.IsTrue(order.Count() == 0);
         }
         [TestMethod]
         public void Test_FindByProductName()
         {
             var repository = new ProductRepository();
-            var product = repository.FindByProductName("abc");
+            var product = repository.FindByProductName("abc", connection);
             Assert.IsTrue(product.Count() == 0);
         }
         [TestMethod]
@@ -64,7 +64,7 @@ namespace CommerceTest
         public void Test_GetStatus()
         {
             var repository = new OrdersRepository();
-            var orders = repository.GetStatus("出貨中");
+            var orders = repository.GetStatus("出貨中", connection);
             Assert.IsTrue(orders.Count() == 0);
         }
         [TestMethod]
@@ -78,7 +78,7 @@ namespace CommerceTest
         public void Test_GetOrderDate()
         {
             var repository = new OrdersRepository();
-            var orders = repository.GetOrderDate("2018%");
+            var orders = repository.GetOrderDate("2018%", connection);
             Assert.IsTrue(orders.Count() >= 0);
         }
         [TestMethod]

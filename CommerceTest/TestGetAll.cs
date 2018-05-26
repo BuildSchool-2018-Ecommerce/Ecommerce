@@ -22,7 +22,7 @@ namespace CommerceTest
         public void Test_GetAll_Product()
         {
             var repository = new ProductRepository();
-            var product = repository.GetAll();
+            var product = repository.GetAll(connection);
             Assert.IsTrue(product.Count() >= 0);
         }
         [TestMethod]
@@ -43,21 +43,21 @@ namespace CommerceTest
         public void Test_GetAll_Order()
         {
             var repository = new OrdersRepository();
-            var orders = repository.GetAll();
+            var orders = repository.GetAll(connection);
             Assert.IsTrue(orders.Count() >= 0);
         }
         [TestMethod]
         public void Test_GetAll_ProductFormat()
         {
             var repository = new ProductFormatRepository();
-            var product = repository.GetAll();
+            var product = repository.GetAll(connection);
             Assert.IsTrue(product.Count() >= 0);
         }
         [TestMethod]
         public void Test_GetAll_OrderDetails()
         {
             var repository = new OrderDetailsRepository();
-            var orderdetails = repository.GetAll();
+            var orderdetails = repository.GetAll(connection);
             Assert.IsTrue(orderdetails.Count() >= 0);
         }
     }

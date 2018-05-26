@@ -35,11 +35,10 @@ namespace CommerceTest
                 ProductName = "短T1",
                 UnitPrice = 470,
                 Description = "如對商品尺寸有任何疑問，請先私訊我詢問，以免造成彼此困擾~感謝~",
-                CategoryID = 1,
-                ProductImage = "test1"
+                CategoryID = 1
             };
-            repository.Update(product);
-            var products = repository.FindById(1);
+            repository.Update(product, connection);
+            var products = repository.FindById(1, connection);
             Assert.IsTrue(products.ProductName == "短T1");
         }
         [TestMethod]
@@ -52,10 +51,11 @@ namespace CommerceTest
                 ProductID = 1,
                 Color = "紅色",
                 Size = "2L",
-                StockQuantity = 40
+                StockQuantity = 40,
+                Image = "test1"
             };
-            repository.Update(productFormat);
-            var productFormats = repository.FindById(1);
+            repository.Update(productFormat, connection);
+            var productFormats = repository.FindById(1, connection);
             Assert.IsTrue(productFormats.Size == "2L");
         }
         [TestMethod]
@@ -84,7 +84,8 @@ namespace CommerceTest
                 EmployeeID = 1,
                 Name = "洪識超1",
                 Phone = "0123456789",
-                HireDate = new DateTime(1996, 06, 01),
+                Email = "123@gmail.com",
+                Image = "test1"
             };
             repository.Update(employee, connection);
             var employees = repository.FindById(1, connection);
@@ -109,8 +110,8 @@ namespace CommerceTest
                 Discount = 0,
                 Status = "派送中"
             };
-            repository.Update(order);
-            var orders = repository.FindById(1);
+            repository.Update(order, connection);
+            var orders = repository.FindById(1, connection);
             Assert.IsTrue(orders.ShipName == "黃宗畦1");
         }
         [TestMethod]
@@ -124,8 +125,8 @@ namespace CommerceTest
                 Quantity = 5,
                 UnitPrice = 470
             };
-            repository.Update(orderdetail);
-            var orders = repository.GetAll();
+            repository.Update(orderdetail, connection);
+            var orders = repository.GetAll(connection);
             Assert.IsTrue(orders.Count() > 0);
         }
     }

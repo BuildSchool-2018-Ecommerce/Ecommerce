@@ -25,7 +25,7 @@ namespace CommerceTest
         public void Test_FindByID_Product()
         {
             var repository = new ProductRepository();
-            var product = repository.FindById(1);
+            var product = repository.FindById(1, connection);
             Assert.IsNotNull(product);
         }
         [TestMethod]
@@ -46,21 +46,21 @@ namespace CommerceTest
         public void Test_FindByID_Order()
         {
             var repository = new OrdersRepository();
-            var orders = repository.FindById(1);
+            var orders = repository.FindById(1, connection);
             Assert.IsNotNull(orders);
         }
         [TestMethod]
         public void Test_FindByID_ProductFormat()
         {
             var repository = new ProductFormatRepository();
-            var product = repository.FindById(1);
+            var product = repository.FindById(1, connection);
             Assert.IsNotNull(product);
         }
         [TestMethod]
         public void Test_FindByID_OrderDetails()
         {
             var repository = new OrderDetailsRepository();
-            var orderdetails = repository.FindById(1);
+            var orderdetails = repository.FindById(1, connection);
             Assert.IsNotNull(orderdetails);
         }
     }
