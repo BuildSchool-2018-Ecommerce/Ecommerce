@@ -15,57 +15,66 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
     {
         public void Create(Product model)
         {
-            SqlConnection connection = new SqlConnection(
+            IDbConnection connection = new SqlConnection(
                 "data source=.; database=Commerce; integrated security=true");
-            var sql = "INSERT INTO Products VALUES ( @ProductName, @UnitPrice, @Description, @CategoryID, @ProductImage)";
+            connection.Execute("INSERT INTO Products VALUES ( @ProductName, @UnitPrice, @Description, @CategoryID, @ProductImage)",
+                new { model.ProductName, model.UnitPrice, model.Description, model.CategoryID, model.ProductImage });
 
-            SqlCommand command = new SqlCommand(sql, connection);
+            //var sql = "INSERT INTO Products VALUES ( @ProductName, @UnitPrice, @Description, @CategoryID, @ProductImage)";
 
-            command.Parameters.AddWithValue("@ProductName", model.ProductName);
-            command.Parameters.AddWithValue("@UnitPrice", model.UnitPrice);
-            command.Parameters.AddWithValue("@Description", model.Description);
-            command.Parameters.AddWithValue("@CategoryID", model.CategoryID);
-            command.Parameters.AddWithValue("@ProductImage", model.ProductImage);
+            //SqlCommand command = new SqlCommand(sql, connection);
+
+            //command.Parameters.AddWithValue("@ProductName", model.ProductName);
+            //command.Parameters.AddWithValue("@UnitPrice", model.UnitPrice);
+            //command.Parameters.AddWithValue("@Description", model.Description);
+            //command.Parameters.AddWithValue("@CategoryID", model.CategoryID);
+            //command.Parameters.AddWithValue("@ProductImage", model.ProductImage);
 
 
-            connection.Open();
-            command.ExecuteNonQuery();
-            connection.Close();
+            //connection.Open();
+            //command.ExecuteNonQuery();
+            //connection.Close();
         }
 
         public void Update(Product model)
         {
-            SqlConnection connection = new SqlConnection(
+            IDbConnection connection = new SqlConnection(
                 "data source=.; database=Commerce; integrated security=true");
-            var sql = "UPDATE Products SET ProductName = @ProductName, UnitPrice = @UnitPrice, Description = @Description, CategoryID = @CategoryID, ProductImage = @ProductImage WHERE ProductID = @ProductID";
+            connection.Execute("UPDATE Products SET ProductName = @ProductName, UnitPrice = @UnitPrice, Description = @Description, CategoryID = @CategoryID, ProductImage = @ProductImage WHERE ProductID = @ProductID",
+                new { model.ProductName, model.UnitPrice, model.Description, model.CategoryID, model.ProductImage, model.ProductID });
 
-            SqlCommand command = new SqlCommand(sql, connection);
+            //var sql = "UPDATE Products SET ProductName = @ProductName, UnitPrice = @UnitPrice, Description = @Description, CategoryID = @CategoryID, ProductImage = @ProductImage WHERE ProductID = @ProductID";
 
-            command.Parameters.AddWithValue("@ProductID", model.ProductID);
-            command.Parameters.AddWithValue("@ProductName", model.ProductName);
-            command.Parameters.AddWithValue("@UnitPrice", model.UnitPrice);
-            command.Parameters.AddWithValue("@Description", model.Description);
-            command.Parameters.AddWithValue("@CategoryID", model.CategoryID);
-            command.Parameters.AddWithValue("@ProductImage", model.ProductImage);
+            //SqlCommand command = new SqlCommand(sql, connection);
 
-            connection.Open();
-            command.ExecuteNonQuery();
-            connection.Close();
+            //command.Parameters.AddWithValue("@ProductID", model.ProductID);
+            //command.Parameters.AddWithValue("@ProductName", model.ProductName);
+            //command.Parameters.AddWithValue("@UnitPrice", model.UnitPrice);
+            //command.Parameters.AddWithValue("@Description", model.Description);
+            //command.Parameters.AddWithValue("@CategoryID", model.CategoryID);
+            //command.Parameters.AddWithValue("@ProductImage", model.ProductImage);
+
+            //connection.Open();
+            //command.ExecuteNonQuery();
+            //connection.Close();
         }
 
         public void Delete(Product model)
         {
-            SqlConnection connection = new SqlConnection(
+            IDbConnection connection = new SqlConnection(
                 "data source=.; database=Commerce; integrated security=true");
-            var sql = "DELETE FROM Products WHERE ProductID = @ProductID ";
+            connection.Execute("DELETE FROM Products WHERE ProductID = @ProductID",
+                new { model.ProductID });
 
-            SqlCommand command = new SqlCommand(sql, connection);
+            //var sql = "DELETE FROM Products WHERE ProductID = @ProductID ";
 
-            command.Parameters.AddWithValue("@ProductID", model.ProductID);
+            //SqlCommand command = new SqlCommand(sql, connection);
 
-            connection.Open();
-            command.ExecuteNonQuery();
-            connection.Close();
+            //command.Parameters.AddWithValue("@ProductID", model.ProductID);
+
+            //connection.Open();
+            //command.ExecuteNonQuery();
+            //connection.Close();
         }
 
         public Product FindById(int ProductID)

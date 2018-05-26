@@ -15,57 +15,66 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
     {
         public void Create(Members model)
         {
-            SqlConnection connection = new SqlConnection(
+            IDbConnection connection = new SqlConnection(
                 "data source=.; database=Commerce; integrated security=true");
-            var sql = "INSERT INTO Members VALUES (@MemberID, @Password, @Name, @Phone, @Address, @Email)";
+            connection.Execute("INSERT INTO Members VALUES (@MemberID, @Password, @Name, @Phone, @Address, @Email)",
+                new { model.MemberID, model.Password, model.Name, model.Phone, model.Address, model.Email });
 
-            SqlCommand command = new SqlCommand(sql, connection);
+            //var sql = "INSERT INTO Members VALUES (@MemberID, @Password, @Name, @Phone, @Address, @Email)";
 
-            command.Parameters.AddWithValue("@MemberID", model.MemberID);
-            command.Parameters.AddWithValue("@Password", model.Password);
-            command.Parameters.AddWithValue("@Name", model.Name);
-            command.Parameters.AddWithValue("@Phone", model.Phone);
-            command.Parameters.AddWithValue("@Address", model.Address);
-            command.Parameters.AddWithValue("@Email", model.Email);
+            //SqlCommand command = new SqlCommand(sql, connection);
 
-            connection.Open();
-            command.ExecuteNonQuery();
-            connection.Close();
+            //command.Parameters.AddWithValue("@MemberID", model.MemberID);
+            //command.Parameters.AddWithValue("@Password", model.Password);
+            //command.Parameters.AddWithValue("@Name", model.Name);
+            //command.Parameters.AddWithValue("@Phone", model.Phone);
+            //command.Parameters.AddWithValue("@Address", model.Address);
+            //command.Parameters.AddWithValue("@Email", model.Email);
+
+            //connection.Open();
+            //command.ExecuteNonQuery();
+            //connection.Close();
         }
 
         public void Update(Members model)
         {
-            SqlConnection connection = new SqlConnection(
+            IDbConnection connection = new SqlConnection(
                 "data source=.; database=Commerce; integrated security=true");
-            var sql = "UPDATE Members SET Password=@Password, Name=@Name, Phone=@Phone, Address=@Address, Email=@Email WHERE MemberID = @MemberID";
+            connection.Execute("UPDATE Members SET Password=@Password, Name=@Name, Phone=@Phone, Address=@Address, Email=@Email WHERE MemberID = @MemberID",
+                new { model.Password, model.Name, model.Phone, model.Address, model.Email, model.MemberID });
 
-            SqlCommand command = new SqlCommand(sql, connection);
+            //var sql = "UPDATE Members SET Password=@Password, Name=@Name, Phone=@Phone, Address=@Address, Email=@Email WHERE MemberID = @MemberID";
 
-            command.Parameters.AddWithValue("@MemberID", model.MemberID);
-            command.Parameters.AddWithValue("@Password", model.Password);
-            command.Parameters.AddWithValue("@Name", model.Name);
-            command.Parameters.AddWithValue("@Phone", model.Phone);
-            command.Parameters.AddWithValue("@Address", model.Address);
-            command.Parameters.AddWithValue("@Email", model.Email);
+            //SqlCommand command = new SqlCommand(sql, connection);
 
-            connection.Open();
-            command.ExecuteNonQuery();
-            connection.Close();
+            //command.Parameters.AddWithValue("@MemberID", model.MemberID);
+            //command.Parameters.AddWithValue("@Password", model.Password);
+            //command.Parameters.AddWithValue("@Name", model.Name);
+            //command.Parameters.AddWithValue("@Phone", model.Phone);
+            //command.Parameters.AddWithValue("@Address", model.Address);
+            //command.Parameters.AddWithValue("@Email", model.Email);
+
+            //connection.Open();
+            //command.ExecuteNonQuery();
+            //connection.Close();
         }
 
         public void Delete(Members model)
         {
-            SqlConnection connection = new SqlConnection(
+            IDbConnection connection = new SqlConnection(
                 "data source=.; database=Commerce; integrated security=true");
-            var sql = "DELETE FROM Members WHERE MemberID = @MemberID";
+            connection.Execute("DELETE FROM Members WHERE MemberID = @MemberID",
+                new { model.MemberID });
 
-            SqlCommand command = new SqlCommand(sql, connection);
+            //var sql = "DELETE FROM Members WHERE MemberID = @MemberID";
 
-            command.Parameters.AddWithValue("@MemberID", model.MemberID);
+            //SqlCommand command = new SqlCommand(sql, connection);
 
-            connection.Open();
-            command.ExecuteNonQuery();
-            connection.Close();
+            //command.Parameters.AddWithValue("@MemberID", model.MemberID);
+
+            //connection.Open();
+            //command.ExecuteNonQuery();
+            //connection.Close();
         }
 
         public Members FindById(string MemberID)
@@ -108,7 +117,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
         }
         public IEnumerable<GetBuyerOrder> GetBuyerOrder(string memberid)
         {
-            SqlConnection connection = new SqlConnection("data source=.; database=Commerce; integrated security=true");
+            IDbConnection connection = new SqlConnection("data source=.; database=Commerce; integrated security=true");
             return connection.Query<GetBuyerOrder>("GetBuyerOrder", new { memberid }, commandType: CommandType.StoredProcedure);
         }
         public IEnumerable<GetBuyerOrder> GetBuyerOrder(string memberid, SqlConnection connection,IDbTransaction transaction)

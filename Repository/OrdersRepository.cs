@@ -56,56 +56,75 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
 
         public void Update(Orders model)
         {
-            SqlConnection connection = new SqlConnection(
+            IDbConnection connection = new SqlConnection(
                 "data source=.; database=Commerce; integrated security=true");
-            var sql = "UPDATE Orders SET EmployeeID = @EmployeeID, MemberID = @MemberID, ShipName = @ShipName, ShipAddress = @ShipAddress, ShipPhone = @ShipPhone, ShippedDate = @ShippedDate, OrderDate=@OrderDate, ReceiptedDate=@ReceiptedDate, Discount=@Discount, Status = @Status WHERE OrderID = @OrderID ";
+            connection.Execute("UPDATE Orders SET EmployeeID = @EmployeeID, MemberID = @MemberID, ShipName = @ShipName, ShipAddress = @ShipAddress, ShipPhone = @ShipPhone, ShippedDate = @ShippedDate, OrderDate=@OrderDate, ReceiptedDate=@ReceiptedDate, Discount=@Discount, Status = @Status WHERE OrderID = @OrderID",
+                new
+                {
+                    model.EmployeeID,
+                    model.MemberID,
+                    model.ShipName,
+                    model.ShipAddress,
+                    model.ShipPhone,
+                    model.ShippedDate,
+                    model.OrderDate,
+                    model.ReceiptedDate,
+                    model.Discount,
+                    model.Status,
+                    model.OrderID
+                });
 
-            SqlCommand command = new SqlCommand(sql, connection);
+            //var sql = "UPDATE Orders SET EmployeeID = @EmployeeID, MemberID = @MemberID, ShipName = @ShipName, ShipAddress = @ShipAddress, ShipPhone = @ShipPhone, ShippedDate = @ShippedDate, OrderDate=@OrderDate, ReceiptedDate=@ReceiptedDate, Discount=@Discount, Status = @Status WHERE OrderID = @OrderID ";
 
-            command.Parameters.AddWithValue("@OrderID", model.OrderID);
-            command.Parameters.AddWithValue("@EmployeeID", model.EmployeeID);
-            command.Parameters.AddWithValue("@MemberID", model.MemberID);
-            command.Parameters.AddWithValue("@ShipName", model.ShipName);
-            command.Parameters.AddWithValue("@ShipAddress", model.ShipAddress);
-            command.Parameters.AddWithValue("@ShipPhone", model.ShipPhone);
-            if (model.ShippedDate != null)
-            {
-                command.Parameters.AddWithValue("@ShippedDate", model.ShippedDate);
-            }
-            else
-            {
-                command.Parameters.AddWithValue("@ShippedDate", DBNull.Value);
-            }
-            command.Parameters.AddWithValue("@OrderDate", model.OrderDate);
-            if (model.ReceiptedDate != null)
-            {
-                command.Parameters.AddWithValue("@ReceiptedDate", model.ReceiptedDate);
-            }
-            else
-            {
-                command.Parameters.AddWithValue("@ReceiptedDate", DBNull.Value);
-            }
-            command.Parameters.AddWithValue("@Discount", model.Discount);
-            command.Parameters.AddWithValue("@Status", model.Status);
+            //SqlCommand command = new SqlCommand(sql, connection);
 
-            connection.Open();
-            command.ExecuteNonQuery();
-            connection.Close();
+            //command.Parameters.AddWithValue("@OrderID", model.OrderID);
+            //command.Parameters.AddWithValue("@EmployeeID", model.EmployeeID);
+            //command.Parameters.AddWithValue("@MemberID", model.MemberID);
+            //command.Parameters.AddWithValue("@ShipName", model.ShipName);
+            //command.Parameters.AddWithValue("@ShipAddress", model.ShipAddress);
+            //command.Parameters.AddWithValue("@ShipPhone", model.ShipPhone);
+            //if (model.ShippedDate != null)
+            //{
+            //    command.Parameters.AddWithValue("@ShippedDate", model.ShippedDate);
+            //}
+            //else
+            //{
+            //    command.Parameters.AddWithValue("@ShippedDate", DBNull.Value);
+            //}
+            //command.Parameters.AddWithValue("@OrderDate", model.OrderDate);
+            //if (model.ReceiptedDate != null)
+            //{
+            //    command.Parameters.AddWithValue("@ReceiptedDate", model.ReceiptedDate);
+            //}
+            //else
+            //{
+            //    command.Parameters.AddWithValue("@ReceiptedDate", DBNull.Value);
+            //}
+            //command.Parameters.AddWithValue("@Discount", model.Discount);
+            //command.Parameters.AddWithValue("@Status", model.Status);
+
+            //connection.Open();
+            //command.ExecuteNonQuery();
+            //connection.Close();
 
         }
         public void Delete(Orders model)
         {
-            SqlConnection connection = new SqlConnection(
+            IDbConnection connection = new SqlConnection(
                 "data source=.; database=Commerce; integrated security=true");
-            var sql = "DELETE FROM Orders WHERE OrderID = @OrderID";
+            connection.Execute("DELETE FROM Orders WHERE OrderID = @OrderID",
+                new { model.OrderID });
 
-            SqlCommand command = new SqlCommand(sql, connection);
+            //var sql = "DELETE FROM Orders WHERE OrderID = @OrderID";
 
-            command.Parameters.AddWithValue("@OrderID", model.OrderID);
+            //SqlCommand command = new SqlCommand(sql, connection);
 
-            connection.Open();
-            command.ExecuteNonQuery();
-            connection.Close();
+            //command.Parameters.AddWithValue("@OrderID", model.OrderID);
+
+            //connection.Open();
+            //command.ExecuteNonQuery();
+            //connection.Close();
 
         }
         public Orders FindById(int OrderID)

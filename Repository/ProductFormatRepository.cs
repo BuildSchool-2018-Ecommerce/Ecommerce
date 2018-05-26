@@ -15,55 +15,64 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
     {
         public void Create(ProductFormat model)
         {
-            SqlConnection connection = new SqlConnection(
+            IDbConnection connection = new SqlConnection(
                 "data source=.; database=Commerce; integrated security=true");
-            var sql = "INSERT INTO ProductFormat VALUES ( @ProductID, @Size, @Color, @StockQuantity)";
+            connection.Execute("INSERT INTO ProductFormat VALUES ( @ProductID, @Size, @Color, @StockQuantity)",
+                new { model.ProductID, model.Size, model.Color, model.StockQuantity });
 
-            SqlCommand command = new SqlCommand(sql, connection);
+            //var sql = "INSERT INTO ProductFormat VALUES ( @ProductID, @Size, @Color, @StockQuantity)";
 
-            command.Parameters.AddWithValue("@ProductID", model.ProductID);
-            command.Parameters.AddWithValue("@Size", model.Size);
-            command.Parameters.AddWithValue("@Color", model.Color);
-            command.Parameters.AddWithValue("@StockQuantity", model.StockQuantity);
+            //SqlCommand command = new SqlCommand(sql, connection);
+
+            //command.Parameters.AddWithValue("@ProductID", model.ProductID);
+            //command.Parameters.AddWithValue("@Size", model.Size);
+            //command.Parameters.AddWithValue("@Color", model.Color);
+            //command.Parameters.AddWithValue("@StockQuantity", model.StockQuantity);
 
 
-            connection.Open();
-            command.ExecuteNonQuery();
-            connection.Close();
+            //connection.Open();
+            //command.ExecuteNonQuery();
+            //connection.Close();
         }
 
         public void Update(ProductFormat model)
         {
-            SqlConnection connection = new SqlConnection(
+            IDbConnection connection = new SqlConnection(
                 "data source=.; database=Commerce; integrated security=true");
-            var sql = "UPDATE ProductFormat SET Size = @Size, Color = @Color, StockQuantity = @StockQuantity WHERE ProductFormatID = @ProductFormatID";
+            connection.Execute("UPDATE ProductFormat SET Size = @Size, Color = @Color, StockQuantity = @StockQuantity WHERE ProductFormatID = @ProductFormatID",
+                new { model.Size, model.Color, model.StockQuantity, model.ProductFormatID });
 
-            SqlCommand command = new SqlCommand(sql, connection);
+            //var sql = "UPDATE ProductFormat SET Size = @Size, Color = @Color, StockQuantity = @StockQuantity WHERE ProductFormatID = @ProductFormatID";
 
-            command.Parameters.AddWithValue("@ProductFormatID", model.ProductFormatID);
-            command.Parameters.AddWithValue("@ProductID", model.ProductID);
-            command.Parameters.AddWithValue("@Size", model.Size);
-            command.Parameters.AddWithValue("@Color", model.Color);
-            command.Parameters.AddWithValue("@StockQuantity", model.StockQuantity);
+            //SqlCommand command = new SqlCommand(sql, connection);
 
-            connection.Open();
-            command.ExecuteNonQuery();
-            connection.Close();
+            //command.Parameters.AddWithValue("@ProductFormatID", model.ProductFormatID);
+            //command.Parameters.AddWithValue("@ProductID", model.ProductID);
+            //command.Parameters.AddWithValue("@Size", model.Size);
+            //command.Parameters.AddWithValue("@Color", model.Color);
+            //command.Parameters.AddWithValue("@StockQuantity", model.StockQuantity);
+
+            //connection.Open();
+            //command.ExecuteNonQuery();
+            //connection.Close();
         }
 
         public void Delete(ProductFormat model)
         {
-            SqlConnection connection = new SqlConnection(
+            IDbConnection connection = new SqlConnection(
                 "data source=.; database=Commerce; integrated security=true");
-            var sql = "DELETE FROM ProductFormat WHERE ProductFormatID = @ProductFormatID ";
+            connection.Execute("DELETE FROM ProductFormat WHERE ProductFormatID = @ProductFormatID",
+                new { model.ProductFormatID });
 
-            SqlCommand command = new SqlCommand(sql, connection);
+            //var sql = "DELETE FROM ProductFormat WHERE ProductFormatID = @ProductFormatID ";
 
-            command.Parameters.AddWithValue("@ProductFormatID", model.ProductFormatID);
+            //SqlCommand command = new SqlCommand(sql, connection);
 
-            connection.Open();
-            command.ExecuteNonQuery();
-            connection.Close();
+            //command.Parameters.AddWithValue("@ProductFormatID", model.ProductFormatID);
+
+            //connection.Open();
+            //command.ExecuteNonQuery();
+            //connection.Close();
         }
 
         public ProductFormat FindById(int ProductFormatID)

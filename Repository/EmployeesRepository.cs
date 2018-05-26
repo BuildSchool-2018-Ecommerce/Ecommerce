@@ -15,51 +15,59 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
     {
         public void Create(Employees model)
         {
-            SqlConnection connection = new SqlConnection(
+            IDbConnection connection = new SqlConnection(
                 "data source=.; database=Commerce; integrated security=true");
-            var sql = "INSERT INTO Employees VALUES ( @Name, @Phone, @HireDate)";
 
-            SqlCommand command = new SqlCommand(sql, connection);
+            connection.Execute("INSERT INTO Employees VALUES ( @Name, @Phone, @HireDate)",
+                new { model.Name, model.Phone, model.HireDate });
+            //var sql = "INSERT INTO Employees VALUES ( @Name, @Phone, @HireDate)";
 
-            command.Parameters.AddWithValue("@Name", model.Name);
-            command.Parameters.AddWithValue("@Phone", model.Phone);
-            command.Parameters.AddWithValue("@HireDate", model.HireDate);
+            //SqlCommand command = new SqlCommand(sql, connection);
 
-            connection.Open();
-            command.ExecuteNonQuery();
-            connection.Close();
+            //command.Parameters.AddWithValue("@Name", model.Name);
+            //command.Parameters.AddWithValue("@Phone", model.Phone);
+            //command.Parameters.AddWithValue("@HireDate", model.HireDate);
+
+            //connection.Open();
+            //command.ExecuteNonQuery();
+            //connection.Close();
         }
 
         public void Update(Employees model)
         {
-            SqlConnection connection = new SqlConnection(
+            IDbConnection connection = new SqlConnection(
                 "data source=.; database=Commerce; integrated security=true");
-            var sql = "UPDATE Employees SET Name=@Name, Phone=@Phone WHERE EmployeeID = @EmployeeID";
+            connection.Execute("UPDATE Employees SET Name=@Name, Phone=@Phone WHERE EmployeeID = @EmployeeID",
+                    new { model.Name, model.Phone, model.EmployeeID });
+            //var sql = "UPDATE Employees SET Name=@Name, Phone=@Phone WHERE EmployeeID = @EmployeeID";
 
-            SqlCommand command = new SqlCommand(sql, connection);
+            //SqlCommand command = new SqlCommand(sql, connection);
 
-            command.Parameters.AddWithValue("@EmployeeID", model.EmployeeID);
-            command.Parameters.AddWithValue("@Name", model.Name);
-            command.Parameters.AddWithValue("@Phone", model.Phone);
+            //command.Parameters.AddWithValue("@EmployeeID", model.EmployeeID);
+            //command.Parameters.AddWithValue("@Name", model.Name);
+            //command.Parameters.AddWithValue("@Phone", model.Phone);
 
-            connection.Open();
-            command.ExecuteNonQuery();
-            connection.Close();
+            //connection.Open();
+            //command.ExecuteNonQuery();
+            //connection.Close();
         }
 
         public void Delete(Employees model)
         {
-            SqlConnection connection = new SqlConnection(
+            IDbConnection connection = new SqlConnection(
                 "data source=.; database=Commerce; integrated security=true");
-            var sql = "DELETE FROM Employees WHERE EmployeeID = @EmployeeID";
+            connection.Execute("DELETE FROM Employees WHERE EmployeeID = @EmployeeID",
+                    new { model.EmployeeID });
 
-            SqlCommand command = new SqlCommand(sql, connection);
+            //var sql = "DELETE FROM Employees WHERE EmployeeID = @EmployeeID";
 
-            command.Parameters.AddWithValue("@EmployeeID", model.EmployeeID);
+            //SqlCommand command = new SqlCommand(sql, connection);
 
-            connection.Open();
-            command.ExecuteNonQuery();
-            connection.Close();
+            //command.Parameters.AddWithValue("@EmployeeID", model.EmployeeID);
+
+            //connection.Open();
+            //command.ExecuteNonQuery();
+            //connection.Close();
         }
 
         public Employees FindById(int EmployeeID)
@@ -177,7 +185,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
         }
         public IEnumerable<GetHowLongHireDate> GetHowLongHireDate()
         {
-            SqlConnection connection = new SqlConnection("data source=.; database=Commerce; integrated security=true");
+            IDbConnection connection = new SqlConnection("data source=.; database=Commerce; integrated security=true");
             return connection.Query<GetHowLongHireDate>("GetHowLongHireDate", new { }, commandType: CommandType.StoredProcedure);
         }
         public Employees FindByName(string Name)

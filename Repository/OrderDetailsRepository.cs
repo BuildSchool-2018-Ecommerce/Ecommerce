@@ -33,35 +33,41 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
         }
         public void Update(OrderDetails model)
         {
-            SqlConnection connection = new SqlConnection(
+            IDbConnection connection = new SqlConnection(
                 "data source=.; database=Commerce; integrated security=true");
-            var sql = "UPDATE OrderDetails SET ProductFormatID = @ProductFormatID, Quantity = @Quantity, UnitPrice = @UnitPrice WHERE OrderID = @OrderID";
+            connection.Execute("UPDATE OrderDetails SET ProductFormatID = @ProductFormatID, Quantity = @Quantity, UnitPrice = @UnitPrice WHERE OrderID = @OrderID",
+                new { model.ProductFormatID, model.Quantity, model.UnitPrice, model.OrderID });
 
-            SqlCommand command = new SqlCommand(sql, connection);
+            //var sql = "UPDATE OrderDetails SET ProductFormatID = @ProductFormatID, Quantity = @Quantity, UnitPrice = @UnitPrice WHERE OrderID = @OrderID";
 
-            command.Parameters.AddWithValue("@OrderID", model.OrderID);
-            command.Parameters.AddWithValue("@ProductFormatID", model.ProductFormatID);
-            command.Parameters.AddWithValue("@Quantity", model.Quantity);
-            command.Parameters.AddWithValue("@UnitPrice", model.UnitPrice);
+            //SqlCommand command = new SqlCommand(sql, connection);
 
-            connection.Open();
-            command.ExecuteNonQuery();
-            connection.Close();
+            //command.Parameters.AddWithValue("@OrderID", model.OrderID);
+            //command.Parameters.AddWithValue("@ProductFormatID", model.ProductFormatID);
+            //command.Parameters.AddWithValue("@Quantity", model.Quantity);
+            //command.Parameters.AddWithValue("@UnitPrice", model.UnitPrice);
+
+            //connection.Open();
+            //command.ExecuteNonQuery();
+            //connection.Close();
         }
 
         public void Delete(OrderDetails model)
         {
-            SqlConnection connection = new SqlConnection(
+            IDbConnection connection = new SqlConnection(
                 "data source=.; database=Commerce; integrated security=true");
-            var sql = "DELETE FROM OrderDetails WHERE OrderID = @OrderID";
+            connection.Execute("DELETE FROM OrderDetails WHERE OrderID = @OrderID",
+                new { model.OrderID });
 
-            SqlCommand command = new SqlCommand(sql, connection);
+            //var sql = "DELETE FROM OrderDetails WHERE OrderID = @OrderID";
 
-            command.Parameters.AddWithValue("@OrderID", model.OrderID);
+            //SqlCommand command = new SqlCommand(sql, connection);
 
-            connection.Open();
-            command.ExecuteNonQuery();
-            connection.Close();
+            //command.Parameters.AddWithValue("@OrderID", model.OrderID);
+
+            //connection.Open();
+            //command.ExecuteNonQuery();
+            //connection.Close();
         }
 
         public OrderDetails FindById(int OrderID)
