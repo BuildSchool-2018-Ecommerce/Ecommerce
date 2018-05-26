@@ -56,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CategoryRepository.cs" />
+    <Compile Include="ImageRepository.cs" />
     <Compile Include="OrderDetailsRepository.cs" />
     <Compile Include="EmployeesRepository.cs" />
     <Compile Include="MemberRepository.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="ProductFormatRepository.cs" />
     <Compile Include="ProductRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShoppingCartRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

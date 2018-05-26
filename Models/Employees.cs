@@ -14,5 +14,6 @@ namespace BuildSchool.MvcSolution.OnlineStore.Models
         public DateTime HireDate { get; set; }
         public string Email { get; set; }
         public Guid EmployeeGUID { get; set; }
+        public string Image { get; set; }
     }
 }

@@ -17,29 +17,56 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
         {
             connection.Execute("INSERT INTO Members(MemberID, Password, Name, Phone, Address, Email) " +
                 "VALUES (@MemberID, @Password, @Name, @Phone, @Address, @Email)",
-                new { model.MemberID, model.Password, model.Name, model.Phone, model.Address, model.Email });
+                new
+                {
+                    model.MemberID,
+                    model.Password,
+                    model.Name,
+                    model.Phone,
+                    model.Address,
+                    model.Email
+                });
         }
 
         public void Update(Members model, IDbConnection connection)
         {
             connection.Execute("UPDATE Members SET Password=@Password, Name=@Name, Phone=@Phone, Address=@Address, Email=@Email WHERE MemberID = @MemberID",
-                new { model.Password, model.Name, model.Phone, model.Address, model.Email, model.MemberID });
+                new
+                {
+                    model.Password,
+                    model.Name,
+                    model.Phone,
+                    model.Address,
+                    model.Email,
+                    model.MemberID
+                });
         }
         public void UpdateGUID(Members model, IDbConnection connection)
         {
             connection.Execute("UPDATE Members SET MemberGUID=@MemberGUID WHERE MemberID = @MemberID",
-                new { model.MemberGUID, model.MemberID });
+                new
+                {
+                    model.MemberGUID,
+                    model.MemberID
+                });
         }
 
         public void Delete(Members model, IDbConnection connection)
         {
             connection.Execute("DELETE FROM Members WHERE MemberID = @MemberID",
-                new { model.MemberID });
+                new
+                {
+                    model.MemberID
+                });
         }
 
         public Members FindById(string MemberID, IDbConnection connection)
         {
-            var result = connection.Query<Members>("SELECT * FROM Members WHERE MemberID = @MemberID", new { MemberID });
+            var result = connection.Query<Members>("SELECT * FROM Members WHERE MemberID = @MemberID", 
+                new
+                {
+                    MemberID
+                });
             Members member = null;
             foreach(var item in result)
             {
@@ -49,11 +76,19 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
         }
         public IEnumerable<GetBuyerOrder> GetBuyerOrder(string memberid, IDbConnection connection)
         {
-            return connection.Query<GetBuyerOrder>("GetBuyerOrder", new { memberid }, commandType: CommandType.StoredProcedure);
+            return connection.Query<GetBuyerOrder>("GetBuyerOrder", 
+                new
+                {
+                    memberid
+                }, commandType: CommandType.StoredProcedure);
         }
         public IEnumerable<GetBuyerOrder> GetBuyerOrder(string memberid, SqlConnection connection,IDbTransaction transaction)
         {
-            return connection.Query<GetBuyerOrder>("GetBuyerOrder", new { memberid }, transaction, commandType: CommandType.StoredProcedure);
+            return connection.Query<GetBuyerOrder>("GetBuyerOrder", 
+                new
+                {
+                    memberid
+                }, transaction, commandType: CommandType.StoredProcedure);
         }
         public IEnumerable<Members> GetAll(IDbConnection connection)
         {
