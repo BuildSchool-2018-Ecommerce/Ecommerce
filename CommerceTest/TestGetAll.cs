@@ -16,14 +16,14 @@ namespace CommerceTest
         {
             var repository = new CategoryRepository();
             var category = repository.GetAll(connection);
-            Assert.IsTrue(category.Count() >= 0);
+            Assert.IsTrue(category.Count() == 0);
         }
         [TestMethod]
         public void Test_GetAll_Product()
         {
             var repository = new ProductRepository();
             var product = repository.GetAll(connection);
-            Assert.IsTrue(product.Count() >= 0);
+            Assert.IsTrue(product.Count() == 0);
         }
         [TestMethod]
         public void Test_GetAll_Employee()

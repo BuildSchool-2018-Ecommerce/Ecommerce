@@ -2,8 +2,6 @@
     ViewBag.Title = "Home Page";
 }
 
-
-
 <!-- top noti -->
 <div class="flex-c-m size22 bg0 s-text21 pos-relative">
     20% off everything!
@@ -35,7 +33,7 @@
             </a>
 
             <div class="topbar-child2">
-                <span class="topbar-email">
+                @*<span class="topbar-email">
                     fashe@example.com
                 </span>
 
@@ -44,7 +42,7 @@
                         <option>USD</option>
                         <option>EUR</option>
                     </select>
-                </div>
+                </div>*@
 
                 <!--  -->
                 <a href="#" class="header-wrapicon1 dis-block m-l-30">
@@ -55,7 +53,7 @@
 
                 <div class="header-wrapicon2 m-r-13">
                     <img src="@Url.Content("~/Content/images/icons/icon-header-02.png")" class="header-icon1 js-show-header-dropdown" alt="ICON">
-                    <span class="header-icons-noti">0</span>
+                    <span class="header-icons-noti">5</span>
 
                     <!-- Header cart noti -->
                     <div class="header-cart header-dropdown">
@@ -71,7 +69,7 @@
                                     </a>
 
                                     <span class="header-cart-item-info">
-                                        1 x $19.00
+                                        1234 x $19.00
                                     </span>
                                 </div>
                             </li>
@@ -109,7 +107,7 @@
                             </li>
                         </ul>
 
-                        <div class="header-cart-total">
+                        <div class="header-cart-total Total">
                             Total: $75.00
                         </div>
 
@@ -140,12 +138,7 @@
                 <nav class="menu">
                     <ul class="main_menu">
                         <li>
-                            <a href="index.html">Home</a>
-                            <ul class="sub_menu">
-                                <li><a href="index.html">Homepage V1</a></li>
-                                <li><a href="home-02.html">Homepage V2</a></li>
-                                <li><a href="home-03.html">Homepage V3</a></li>
-                            </ul>
+                            <a href="/Home/Index">Home</a>
                         </li>
 
                         <li>
@@ -177,13 +170,12 @@
 
             <!-- Header Icon -->
             <div class="header-icons">
-
             </div>
         </div>
     </div>
 
     <!-- Header Mobile -->
-    <div class="wrap_header_mobile">
+    @*<div class="wrap_header_mobile">
         <!-- Logo moblie -->
         <a href="index.html" class="logo-mobile">
             <img src="@Url.Content("~/Content/images/icons/logo.png")" alt="IMG-LOGO">
@@ -201,7 +193,7 @@
 
                 <div class="header-wrapicon2">
                     <img src="@Url.Content("~/Content/images/icons/icon-header-02.png")" class="header-icon1 js-show-header-dropdown" alt="ICON">
-                    <span class="header-icons-noti">0</span>
+                    <span class="header-icons-noti">5</span>
 
                     <!-- Header cart noti -->
                     <div class="header-cart header-dropdown">
@@ -217,7 +209,7 @@
                                     </a>
 
                                     <span class="header-cart-item-info">
-                                        1 x $19.00
+                                        111111 x $19.00
                                     </span>
                                 </div>
                             </li>
@@ -284,10 +276,10 @@
                 </span>
             </div>
         </div>
-    </div>
+    </div>*@
 
     <!-- Menu Mobile -->
-    <div class="wrap-side-menu">
+    @*<div class="wrap-side-menu">
         <nav class="side-menu">
             <ul class="main-menu">
                 <li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
@@ -356,7 +348,7 @@
                 </li>
             </ul>
         </nav>
-    </div>
+    </div>*@
 </header>
 
 <!-- Slide1 -->
@@ -491,19 +483,19 @@
                     <a class="nav-link active" data-toggle="tab" href="#best-seller" role="tab">Best Seller</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#featured" role="tab">Featured</a>
+                    <a class="nav-link" data-toggle="tab" href="#featured" role="tab">New</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#sale" role="tab">Sale</a>
                 </li>
-                <li class="nav-item">
+                @*<li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#top-rate" role="tab">Top Rate</a>
-                </li>
+                </li>*@
             </ul>
 
             <!-- Tab panes -->
             <div class="tab-content p-t-35">
-                <!-- - -->
+                <!-- -->
                 <div class="tab-pane fade show active" id="best-seller" role="tabpanel">
                     <div class="row">
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
@@ -776,8 +768,8 @@
                     </div>
                 </div>
 
-                <!-- - -->
-                <div class="tab-pane fade" id="featured" role="tabpanel">
+                <!-- -->
+                <div class="tab-pane fade" id="new" role="tabpanel">
                     <div class="row">
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
                             <!-- Block2 -->
@@ -1158,7 +1150,7 @@
                 </div>
 
                 <!--  -->
-                <div class="tab-pane fade" id="top-rate" role="tabpanel">
+                @*<div class="tab-pane fade" id="top-rate" role="tabpanel">
                     <div class="row">
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
                             <!-- Block2 -->
@@ -1432,7 +1424,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>*@
             </div>
         </div>
     </div>
@@ -1741,6 +1733,7 @@
         var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
         $(this).on('click', function () {
             swal(nameProduct, "is added to cart !", "success");
+            $('.header-icons-noti').text($('.header-cart-item').length / 2);
         });
     });
 
@@ -1751,4 +1744,5 @@
         });
     });
     $('.parallax100').parallax100();
+    $('.header-icons-noti').text($('.header-cart-item').length / 2);
 </script>

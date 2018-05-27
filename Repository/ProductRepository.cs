@@ -15,13 +15,14 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
     {
         public void Create(Product model, IDbConnection connection)
         {
-            connection.Execute("INSERT INTO Products VALUES ( @ProductName, @UnitPrice, @Description, @CategoryID)",
+            connection.Execute("INSERT INTO Products VALUES ( @ProductName, @UnitPrice, @Description, @CategoryID, @ShelfDate)",
                 new
                 {
                     model.ProductName,
                     model.UnitPrice,
                     model.Description,
-                    model.CategoryID
+                    model.CategoryID,
+                    model.ShelfDate
                 });
         }
 
@@ -97,7 +98,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
         }
         public IEnumerable<Product> GetAll(IDbConnection connection)
         {
-            return connection.Query<Product>("SELECT * FROM Products ORDER BY ProductID DESC ");
+            return connection.Query<Product>("SELECT * FROM Products");
         }
     }
 }

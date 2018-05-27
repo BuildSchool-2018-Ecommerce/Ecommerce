@@ -1,7 +1,6 @@
 
 (function ($) {
     "use strict";
-
     /*[ Load page ]
     ===========================================================*/
     $(".animsition").animsition({
@@ -53,18 +52,18 @@
     for(var i=0; i<menu.length; i++){
         $(menu[i]).on('click', function(){ 
             
-                if(jQuery.inArray( this, menu ) == sub_menu_is_showed){
-                    $(this).parent().find('.header-dropdown').toggleClass('show-header-dropdown');
-                    sub_menu_is_showed = -1;
+            if(jQuery.inArray( this, menu ) == sub_menu_is_showed){
+                $(this).parent().find('.header-dropdown').toggleClass('show-header-dropdown');
+                sub_menu_is_showed = -1;
+            }
+            else {
+                for (var i = 0; i < menu.length; i++) {
+                    $(menu[i]).parent().find('.header-dropdown').removeClass("show-header-dropdown");
                 }
-                else {
-                    for (var i = 0; i < menu.length; i++) {
-                        $(menu[i]).parent().find('.header-dropdown').removeClass("show-header-dropdown");
-                    }
 
-                    $(this).parent().find('.header-dropdown').toggleClass('show-header-dropdown');
-                    sub_menu_is_showed = jQuery.inArray( this, menu );
-                }
+                $(this).parent().find('.header-dropdown').toggleClass('show-header-dropdown');
+                sub_menu_is_showed = jQuery.inArray( this, menu );
+            }
         });
     }
 
