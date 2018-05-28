@@ -11,7 +11,7 @@ namespace CommerceTest
     [TestClass]
     public class TestTableUpdate
     {
-        IDbConnection connection = new SqlConnection("data source=.; database=Commerce; integrated security=true");
+        
         [TestMethod]
         public void Categorys_Update()
         {
@@ -21,8 +21,8 @@ namespace CommerceTest
                 CategoryID = 1,
                 CategoryName = "上衣1"
             };
-            repository.Update(category, connection);
-            var categorys = repository.FindById(1, connection);
+            repository.Update(category);
+            var categorys = repository.FindById(1);
             Assert.IsTrue(categorys.CategoryName == "上衣1");
         }
         [TestMethod]
@@ -37,8 +37,8 @@ namespace CommerceTest
                 Description = "如對商品尺寸有任何疑問，請先私訊我詢問，以免造成彼此困擾~感謝~",
                 CategoryID = 1
             };
-            repository.Update(product, connection);
-            var products = repository.FindById(1, connection);
+            repository.Update(product);
+            var products = repository.FindById(1);
             Assert.IsTrue(products.ProductName == "短T1");
         }
         [TestMethod]
@@ -54,8 +54,8 @@ namespace CommerceTest
                 StockQuantity = 40,
                 Image = "test1"
             };
-            repository.Update(productFormat, connection);
-            var productFormats = repository.FindById(1, connection);
+            repository.Update(productFormat);
+            var productFormats = repository.FindById(1);
             Assert.IsTrue(productFormats.Size == "2L");
         }
         [TestMethod]
@@ -71,8 +71,8 @@ namespace CommerceTest
                 Email = "456@yahoo.com.tw",
                 Address = "300新竹市香山區五福路二段707號"
             };
-            repository.Update(member, connection);
-            var members = repository.FindById("456", connection);
+            repository.Update(member);
+            var members = repository.FindById("456");
             Assert.IsTrue(members.Email == "456@yahoo.com.tw");
         }
         [TestMethod]
@@ -87,8 +87,8 @@ namespace CommerceTest
                 Email = "123@gmail.com",
                 Image = "test1"
             };
-            repository.Update(employee, connection);
-            var employees = repository.FindById(1, connection);
+            repository.Update(employee);
+            var employees = repository.FindById(1);
             Assert.IsTrue(employees.Name == "洪識超1");
         }
         [TestMethod]
@@ -110,8 +110,8 @@ namespace CommerceTest
                 Discount = 0,
                 Status = "派送中"
             };
-            repository.Update(order, connection);
-            var orders = repository.FindById(1, connection);
+            repository.Update(order);
+            var orders = repository.FindById(1);
             Assert.IsTrue(orders.ShipName == "黃宗畦1");
         }
         [TestMethod]
@@ -125,8 +125,8 @@ namespace CommerceTest
                 Quantity = 5,
                 UnitPrice = 470
             };
-            repository.Update(orderdetail, connection);
-            var orders = repository.GetAll(connection);
+            repository.Update(orderdetail);
+            var orders = repository.GetAll();
             Assert.IsTrue(orders.Count() > 0);
         }
     }
