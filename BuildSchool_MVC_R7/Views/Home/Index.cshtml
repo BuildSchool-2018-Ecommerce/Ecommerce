@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-@model IEnumerable<Product>
+@model IEnumerable<ProductFormat>
 <!-- top noti -->
 <div class="flex-c-m size22 bg0 s-text21 pos-relative">
     20% off everything!
@@ -175,7 +175,7 @@
     </div>
 
     <!-- Header Mobile -->
-    @*<div class="wrap_header_mobile">
+    <div class="wrap_header_mobile">
         <!-- Logo moblie -->
         <a href="index.html" class="logo-mobile">
             <img src="@Url.Content("~/Content/images/icons/logo.png")" alt="IMG-LOGO">
@@ -276,10 +276,10 @@
                 </span>
             </div>
         </div>
-    </div>*@
+    </div>
 
     <!-- Menu Mobile -->
-    @*<div class="wrap-side-menu">
+    <div class="wrap-side-menu">
         <nav class="side-menu">
             <ul class="main-menu">
                 <li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
@@ -348,7 +348,7 @@
                 </li>
             </ul>
         </nav>
-    </div>*@
+    </div>
 </header>
 
 <!-- Slide1 -->
@@ -502,6 +502,41 @@
                 <!-- -->
                 <div class="tab-pane fade show active" id="best-seller" role="tabpanel">
                     <div class="row">
+                        @foreach(var item in Model)
+                        {
+                        <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
+                            <!-- Block2 -->
+                            <div class="block2">
+                                <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
+                                    <img src=@item.Image style="width:255px;height:340px;" alt="IMG-PRODUCT">
+
+                                    <div class="block2-overlay trans-0-4">
+                                        <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                            <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                            <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                                        </a>
+
+                                        <div class="block2-btn-addcart w-size1 trans-0-4">
+                                            <!-- Button -->
+                                            <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                                Add to Cart
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="block2-txt p-t-20">
+                                    <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+                                        @item.ProductFormatID
+                                    </a>
+
+                                    <span class="block2-price m-text6 p-r-5">
+                                        $75.00
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        }
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
                             <!-- Block2 -->
                             <div class="block2">

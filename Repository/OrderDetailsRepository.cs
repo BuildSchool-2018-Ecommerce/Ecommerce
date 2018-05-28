@@ -39,7 +39,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                 });
 
             var request = new ProductFormatRepository();
-            var product = request.FindById(model.ProductFormatID, connection);
+            var product = request.FindById(model.ProductFormatID);
             if ((product.StockQuantity - model.Quantity) >= 0)
             {
                 connection.Execute("UPDATE ProductFormat SET StockQuantity = StockQuantity - @Quantity WHERE ProductFormatID = @ProductFormatID ",

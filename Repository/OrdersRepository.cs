@@ -28,7 +28,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
             }
             connection = new SqlConnection(sql);
         }
-        public void Create(Orders model)
+        public void Create(Orders model, IDbConnection connection)
         {
             connection.Execute("INSERT INTO Orders VALUES ( @EmployeeID, @MemberID, @ShipName, @ShipAddress, @ShipPhone, @ShippedDate, @OrderDate, @ReceiptedDate, @Discount, @Status)", 
                 new

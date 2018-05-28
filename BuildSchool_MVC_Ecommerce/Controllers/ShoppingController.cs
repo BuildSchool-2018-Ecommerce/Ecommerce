@@ -183,9 +183,9 @@ namespace BuildSchool_MVC_Ecommerce.Controllers
                             Status = "未出貨"
                         };
                         var orderrepository = new OrdersRepository();
-                        orderrepository.Create(order, connection, transaction);
+                        orderrepository.Create(order, connection);
                         var memberrepository = new MemberRepository();
-                        var memberorder = memberrepository.GetBuyerOrder(user.UserID, connection, transaction);
+                        var memberorder = memberrepository.GetBuyerOrder(user.UserID, connection);
                         var lastordeer = memberorder.First();
                         var orderdetailrepository = new OrderDetailsRepository();
                         foreach (var item in shopping)
@@ -197,7 +197,7 @@ namespace BuildSchool_MVC_Ecommerce.Controllers
                                 Quantity = item.Quantity,
                                 UnitPrice = item.UnitPrice
                             };
-                            orderdetailrepository.Create(od, connection, transaction);
+                            orderdetailrepository.Create(od, connection);
                         }                        
                         transaction.Commit();
                         return RedirectToAction("Shopping6", "Shopping");
