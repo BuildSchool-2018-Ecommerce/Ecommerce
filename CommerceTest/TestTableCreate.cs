@@ -11,7 +11,7 @@ namespace CommerceTest
     [TestClass]
     public class TestTableCreate
     {
-        IDbConnection connection = new SqlConnection("data source=.; database=Commerce; integrated security=true");
+        
         [TestMethod]
         public void Categorys_Create()
         {
@@ -31,7 +31,7 @@ namespace CommerceTest
             //    CategoryName = "褲子"
             //};
             //repository.Create(category2);
-            var categorys = repository.GetAll(connection);
+            var categorys = repository.GetAll();
             Assert.IsTrue(categorys.Count() > 0);
         }
         [TestMethod]
@@ -74,7 +74,7 @@ namespace CommerceTest
             //    ProductImage = "test1"
             //};
             //repository.Create(product3);
-            var products = repository.GetAll(connection);
+            var products = repository.GetAll();
             Assert.IsTrue(products.Count() > 0);
         }
         [TestMethod]
@@ -105,7 +105,7 @@ namespace CommerceTest
             //    StockQuantity = 45
             //};
             //repository.Create(productFormat2);
-            var productFormats = repository.GetAll(connection);
+            var productFormats = repository.GetAll();
             Assert.IsTrue(productFormats.Count() > 0);
         }
         [TestMethod]
@@ -132,7 +132,7 @@ namespace CommerceTest
             //    Address = "300新竹市香山區五福路二段707號"
             //};
             //repository.Create(member1);
-            var members = repository.GetAll(connection);
+            var members = repository.GetAll();
             Assert.IsTrue(members.Count() > 0);
         }
         [TestMethod]
@@ -160,7 +160,7 @@ namespace CommerceTest
             //    HireDate = new DateTime(1996, 02, 16),
             //};
             //repository.Create(employee2);
-            var employees = repository.GetAll(connection);
+            var employees = repository.GetAll();
             Assert.IsTrue(employees.Count() > 0);
         }
         //[TestMethod]
