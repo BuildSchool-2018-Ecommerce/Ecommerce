@@ -64,6 +64,7 @@
     <Compile Include="GetHowLongHireDate.cs" />
     <Compile Include="GetProductOrder.cs" />
     <Compile Include="Images.cs" />
+    <Compile Include="NewProduct.cs" />
     <Compile Include="ProductFormat.cs" />
     <Compile Include="Employees.cs" />
     <Compile Include="Members.cs" />

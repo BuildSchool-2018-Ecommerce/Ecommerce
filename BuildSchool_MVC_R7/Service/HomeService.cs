@@ -16,7 +16,8 @@ namespace BuildSchool_MVC_R7.Service
             var productRepository =  ContainerManager.Container.GetInstance<ProductRepository>();
             var homeViewModel = new HomeViewModel()
             {
-                Products = productRepository.GetAll()
+                Products = productRepository.GetAll(),
+                NewProduct = productRepository.NewProduct()                
             };
             return homeViewModel;
         }

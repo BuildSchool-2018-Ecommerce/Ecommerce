@@ -2,6 +2,9 @@
     ViewBag.Title = "Home Page";
 }
 @model HomeViewModel
+@{ 
+    var newproduct = Model.NewProduct;
+}
 <!-- top noti -->
 <div class="flex-c-m size22 bg0 s-text21 pos-relative">
     20% off everything!
@@ -669,44 +672,44 @@
                 <!-- -->
                 <div class="tab-pane fade" id="new" role="tabpanel">
                     <div class="row">
+                        @foreach(var item in newproduct)
+                        {
                         <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
                             <!-- Block2 -->
                             <div class="block2">
-                                <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
-                                    <img src="@Url.Content("~/Content/images/item-07.jpg")" alt="IMG-PRODUCT">
+                                <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
+                                    <img src=@item.Image style="width:255px;height:340px;" alt="IMG-PRODUCT">
 
                                     <div class="block2-overlay trans-0-4">
-                                        <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                        <a class="block2-btn-addwishlist hov-pointer trans-0-4">
                                             <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
                                             <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
                                         </a>
 
-                                        <div class="block2-btn-addcart w-size1 trans-0-4">
-                                            <!-- Button -->
+                                        @*<div class="block2-btn-addcart w-size1 trans-0-4">
+                                             Button 
                                             <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
                                                 Add to Cart
                                             </button>
-                                        </div>
+                                        </div>*@
                                     </div>
                                 </div>
 
                                 <div class="block2-txt p-t-20">
                                     <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                        Frayed denim shorts
+                                        @item.ProductName
                                     </a>
 
-                                    <span class="block2-oldprice m-text7 p-r-5">
-                                        $29.50
-                                    </span>
-
-                                    <span class="block2-newprice m-text8 p-r-5">
-                                        $15.90
+                                    <span class="block2-price m-text6 p-r-5">
+                                        @item.UnitPrice.ToString("C", CultureInfo.CurrentCulture)
                                     </span>
                                 </div>
                             </div>
                         </div>
+                        }
+                        
 
-                        <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
+                        @*<div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
                             <!-- Block2 -->
                             <div class="block2">
                                 <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
@@ -906,7 +909,7 @@
                                     </span>
                                 </div>
                             </div>
-                        </div>
+                        </div>*@
                     </div>
                 </div>
 

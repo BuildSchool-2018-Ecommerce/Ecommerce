@@ -113,5 +113,9 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
         {
             return connection.Query<Product>("SELECT * FROM Products");
         }
+        public IEnumerable<NewProduct> NewProduct()
+        {
+            return connection.Query<NewProduct>("SELECT * FROM NewProduct");
+        }
     }
 }
