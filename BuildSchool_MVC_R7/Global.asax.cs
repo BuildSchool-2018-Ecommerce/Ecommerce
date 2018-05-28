@@ -17,8 +17,6 @@ namespace BuildSchool_MVC_R7
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            Container container = new Container();
-
         }
     }
 }

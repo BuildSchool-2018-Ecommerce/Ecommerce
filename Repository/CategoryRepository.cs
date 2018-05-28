@@ -18,11 +18,9 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
         private static IDbConnection connection;
         public CategoryRepository()
         {
-            if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("SQLAZURECONNSTR_ProductionDb")))
-            {
-                sql = Environment.GetEnvironmentVariable("SQLAZURECONNSTR_ProductionDb");
-            }
-            else
+            sql = Environment.GetEnvironmentVariable("SQLAZURECONNSTR_ProductionDb");
+
+            if (string.IsNullOrEmpty(sql))
             {
                 sql = ConfigurationManager.ConnectionStrings["db"].ConnectionString;
             }
