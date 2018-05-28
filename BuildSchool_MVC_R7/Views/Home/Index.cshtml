@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-
+@model IEnumerable<Product>
 <!-- top noti -->
 <div class="flex-c-m size22 bg0 s-text21 pos-relative">
     20% off everything!
@@ -415,6 +415,10 @@
         </div>
     </div>
 </section>
+    @foreach (var item in Model)
+    {
+        <div>@item.ProductID</div>
+    }
 
 <!-- Banner -->
 <div class="banner bgwhite p-t-40 p-b-40">

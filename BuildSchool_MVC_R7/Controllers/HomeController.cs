@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BuildSchool_MVC_R7.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +11,9 @@ namespace BuildSchool_MVC_R7.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            var homeservice = new HomeService();
+            var home = homeservice.Home();
+            return View(home);
         }
 
         public ActionResult About()
