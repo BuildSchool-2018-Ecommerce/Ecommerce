@@ -2,6 +2,7 @@
 using Dapper;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -13,7 +14,21 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
 {
     public class ProductFormatRepository
     {
-        public void Create(ProductFormat model, IDbConnection connection)
+        private static string sql;
+        private static IDbConnection connection;
+        public ProductFormatRepository()
+        {
+            if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("SQLAZURECONNSTR_ProductionDb")))
+            {
+                sql = Environment.GetEnvironmentVariable("SQLAZURECONNSTR_ProductionDb");
+            }
+            else
+            {
+                sql = ConfigurationManager.ConnectionStrings["db"].ConnectionString;
+            }
+            connection = new SqlConnection(sql);
+        }
+        public void Create(ProductFormat model)
         {
             connection.Execute("INSERT INTO ProductFormat VALUES ( @ProductID, @Size, @Color, @StockQuantity, @Image)",
                 new
@@ -26,7 +41,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                 });
         }
 
-        public void Update(ProductFormat model, IDbConnection connection)
+        public void Update(ProductFormat model)
         {
             connection.Execute("UPDATE ProductFormat SET Size = @Size, Color = @Color, StockQuantity = @StockQuantity, Image=@Image WHERE ProductFormatID = @ProductFormatID",
                 new
@@ -39,7 +54,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                 });
         }
 
-        public void Delete(ProductFormat model, IDbConnection connection)
+        public void Delete(ProductFormat model)
         {
             connection.Execute("DELETE FROM ProductFormat WHERE ProductFormatID = @ProductFormatID",
                 new
@@ -48,7 +63,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                 });
         }
 
-        public ProductFormat FindById(int ProductFormatID, IDbConnection connection)
+        public ProductFormat FindById(int ProductFormatID)
         {
             var result = connection.Query<ProductFormat>("SELECT * FROM ProductFormat WHERE ProductFormatID = @ProductFormatID", 
                 new
@@ -63,7 +78,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
             return productFormat;
         }
 
-        public IEnumerable<ProductFormat> GetAll(IDbConnection connection)
+        public IEnumerable<ProductFormat> GetAll()
         {
             return connection.Query<ProductFormat>("SELECT * FROM ProductFormat ");
         }

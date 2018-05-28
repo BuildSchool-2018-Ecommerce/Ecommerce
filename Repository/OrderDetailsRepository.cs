@@ -2,6 +2,7 @@
 using Dapper;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -12,7 +13,21 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
 {
     public class OrderDetailsRepository
     {
-        public void Create(OrderDetails model, IDbConnection connection, IDbTransaction transaction)
+        private static string sql;
+        private static IDbConnection connection;
+        public OrderDetailsRepository()
+        {
+            if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("SQLAZURECONNSTR_ProductionDb")))
+            {
+                sql = Environment.GetEnvironmentVariable("SQLAZURECONNSTR_ProductionDb");
+            }
+            else
+            {
+                sql = ConfigurationManager.ConnectionStrings["db"].ConnectionString;
+            }
+            connection = new SqlConnection(sql);
+        }
+        public void Create(OrderDetails model, IDbConnection connection)
         {
             connection.Execute("INSERT INTO OrderDetails VALUES (@OrderID, @ProductFormatID, @Quantity, @UnitPrice) ",
                 new
@@ -21,7 +36,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                     model.ProductFormatID,
                     model.Quantity,
                     model.UnitPrice
-                }, transaction);
+                });
 
             var request = new ProductFormatRepository();
             var product = request.FindById(model.ProductFormatID, connection);
@@ -32,14 +47,14 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                 {
                     model.Quantity,
                     model.ProductFormatID
-                }, transaction);
+                });
             }
             else
             {
                 throw (new Exception("No Quantity"));
             }
         }
-        public void Update(OrderDetails model, IDbConnection connection)
+        public void Update(OrderDetails model)
         {
             connection.Execute("UPDATE OrderDetails SET ProductFormatID = @ProductFormatID, Quantity = @Quantity, UnitPrice = @UnitPrice WHERE OrderID = @OrderID",
                 new
@@ -51,7 +66,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                 });
         }
 
-        public void Delete(OrderDetails model, IDbConnection connection)
+        public void Delete(OrderDetails model)
         {
             connection.Execute("DELETE FROM OrderDetails WHERE OrderID = @OrderID",
                 new
@@ -60,7 +75,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                 });
         }
 
-        public OrderDetails FindById(int OrderID, IDbConnection connection)
+        public OrderDetails FindById(int OrderID)
         {
             var result = connection.Query<OrderDetails>("SELECT * FROM OrderDetails WHERE OrderID = @OrderID", 
                 new
@@ -75,7 +90,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
             return orderDetail;
         }
 
-        public IEnumerable<OrderDetails> GetAll(IDbConnection connection)
+        public IEnumerable<OrderDetails> GetAll()
         {
             return connection.Query<OrderDetails>("SELECT * FROM OrderDetails ");
         }

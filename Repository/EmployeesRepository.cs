@@ -8,12 +8,27 @@ using System.Text;
 using System.Threading.Tasks;
 using Utils;
 using Dapper;
+using System.Configuration;
 
 namespace BuildSchool.MvcSolution.OnlineStore.Repository
 {
     public class EmployeesRepository
     {
-        public void Create(Employees model, IDbConnection connection)
+        private static string sql;
+        private static IDbConnection connection;
+        public EmployeesRepository()
+        {
+            if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("SQLAZURECONNSTR_ProductionDb")))
+            {
+                sql = Environment.GetEnvironmentVariable("SQLAZURECONNSTR_ProductionDb");
+            }
+            else
+            {
+                sql = ConfigurationManager.ConnectionStrings["db"].ConnectionString;
+            }
+            connection = new SqlConnection(sql);
+        }
+        public void Create(Employees model)
         {
             connection.Execute("INSERT INTO Employees(Name, Phone, HireDate, Email, Image) VALUES ( @Name, @Phone, @HireDate, @Email, @Image)",
                 new
@@ -26,7 +41,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                 });
         }
 
-        public void Update(Employees model, IDbConnection connection)
+        public void Update(Employees model)
         {
             connection.Execute("UPDATE Employees SET Name=@Name, Phone=@Phone, Email=@Email, Image=@Image WHERE EmployeeID = @EmployeeID",
                 new
@@ -38,7 +53,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                     model.EmployeeID
                 });
         }
-        public void UpdateGUID(Employees model, IDbConnection connection)
+        public void UpdateGUID(Employees model)
         {
             connection.Execute("UPDATE Employees SET EmployeeGUID=@EmployeeGUID WHERE EmployeeID = @EmployeeID",
                 new
@@ -48,7 +63,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                 });
         }
 
-        public void Delete(Employees model, IDbConnection connection)
+        public void Delete(Employees model)
         {
             connection.Execute("DELETE FROM Employees WHERE EmployeeID = @EmployeeID", 
                 new
@@ -57,7 +72,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                 });
         }
 
-        public Employees FindById(int EmployeeID, IDbConnection connection)
+        public Employees FindById(int EmployeeID)
         {
             var result = connection.Query<Employees>("SELECT * FROM Employees WHERE EmployeeID = @EmployeeID", 
                 new
@@ -72,12 +87,12 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
             return employee;
         }
 
-        public IEnumerable<Employees> GetAll(IDbConnection connection)
+        public IEnumerable<Employees> GetAll()
         {
             return connection.Query<Employees>("SELECT * FROM employees");
         }
 
-        public IEnumerable<Employees> FindByHireYear(int startYear, int endYear, IDbConnection connection)
+        public IEnumerable<Employees> FindByHireYear(int startYear, int endYear)
         {
             return connection.Query<Employees>("SELECT * FROM Employees WHERE YEAR(HireDate) BETWEEN @startYear AND @endYear ORDER BY HireDate DESC", 
                 new
@@ -85,7 +100,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                     startYear, endYear
                 });
         }
-        public IEnumerable<GetHowLongHireDate> GetHowLongHireDate(IDbConnection connection)
+        public IEnumerable<GetHowLongHireDate> GetHowLongHireDate()
         {
             return connection.Query<GetHowLongHireDate>("GetHowLongHireDate", 
                 new
@@ -93,7 +108,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
 
                 }, commandType: CommandType.StoredProcedure);
         }
-        public IEnumerable<Employees> FindByName(string Name, IDbConnection connection)
+        public IEnumerable<Employees> FindByName(string Name)
         {
             return connection.Query<Employees>("SELECT * FROM Employees WHERE Name = @Name", 
                 new

@@ -2,6 +2,7 @@
 using Dapper;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -13,7 +14,21 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
 {
     public class OrdersRepository
     {
-        public void Create(Orders model, IDbConnection connection, IDbTransaction transaction)
+        private static string sql;
+        private static IDbConnection connection;
+        public OrdersRepository()
+        {
+            if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("SQLAZURECONNSTR_ProductionDb")))
+            {
+                sql = Environment.GetEnvironmentVariable("SQLAZURECONNSTR_ProductionDb");
+            }
+            else
+            {
+                sql = ConfigurationManager.ConnectionStrings["db"].ConnectionString;
+            }
+            connection = new SqlConnection(sql);
+        }
+        public void Create(Orders model)
         {
             connection.Execute("INSERT INTO Orders VALUES ( @EmployeeID, @MemberID, @ShipName, @ShipAddress, @ShipPhone, @ShippedDate, @OrderDate, @ReceiptedDate, @Discount, @Status)", 
                 new
@@ -28,10 +43,10 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                     model.ReceiptedDate,
                     model.Discount,
                     model.Status
-                },transaction);
+                });
         }
 
-        public void Update(Orders model, IDbConnection connection)
+        public void Update(Orders model)
         {
             connection.Execute("UPDATE Orders SET EmployeeID = @EmployeeID, MemberID = @MemberID, ShipName = @ShipName, ShipAddress = @ShipAddress, ShipPhone = @ShipPhone, ShippedDate = @ShippedDate, OrderDate=@OrderDate, ReceiptedDate=@ReceiptedDate, Discount=@Discount, Status = @Status WHERE OrderID = @OrderID",
                 new
@@ -49,7 +64,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                     model.OrderID
                 });
         }
-        public void Delete(Orders model, IDbConnection connection)
+        public void Delete(Orders model)
         {
             connection.Execute("DELETE FROM Orders WHERE OrderID = @OrderID",
                 new
@@ -57,7 +72,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                     model.OrderID
                 });
         }
-        public Orders FindById(int OrderID, IDbConnection connection)
+        public Orders FindById(int OrderID)
         {
             var result = connection.Query<Orders>("select * FROM Orders WHERE OrderID = @OrderID", 
                 new
@@ -71,7 +86,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
             }
             return order;
         }
-        public IEnumerable<Orders> GetStatus(string Status, IDbConnection connection)
+        public IEnumerable<Orders> GetStatus(string Status)
         {
             return connection.Query<Orders>("select * FROM Orders WHERE Status = @Status", 
                 new
@@ -79,7 +94,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                     Status
                 });
         }
-        public IEnumerable<FindOrderdetaiByOrderID> FindOrderdetaiByOrderID(int orderid, IDbConnection connection)
+        public IEnumerable<FindOrderdetaiByOrderID> FindOrderdetaiByOrderID(int orderid)
         {
             return connection.Query<FindOrderdetaiByOrderID>("FindOrderdetaiByOrderID", 
                 new
@@ -87,7 +102,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                     orderid
                 }, commandType: CommandType.StoredProcedure);
         }
-        public IEnumerable<Orders> GetOrderDate(string OrderDate, IDbConnection connection)
+        public IEnumerable<Orders> GetOrderDate(string OrderDate)
         {
             return connection.Query<Orders>("select * FROM Orders WHERE CONVERT(VARCHAR(25), OrderDate, 126) LIKE @OrderDate", 
                 new
@@ -95,7 +110,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                     OrderDate
                 });
         }
-        public IEnumerable<Orders> GetAll(IDbConnection connection)
+        public IEnumerable<Orders> GetAll()
         {
             return connection.Query<Orders>("select * FROM Orders ");
         }

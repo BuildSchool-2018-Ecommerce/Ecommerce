@@ -2,6 +2,7 @@
 using Dapper;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -13,7 +14,21 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
 {
     public class CategoryRepository
     {
-        public void Create(Category model, IDbConnection connection)
+        private static string sql;
+        private static IDbConnection connection;
+        public CategoryRepository()
+        {
+            if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("SQLAZURECONNSTR_ProductionDb")))
+            {
+                sql = Environment.GetEnvironmentVariable("SQLAZURECONNSTR_ProductionDb");
+            }
+            else
+            {
+                sql = ConfigurationManager.ConnectionStrings["db"].ConnectionString;
+            }
+            connection = new SqlConnection(sql);
+        }
+        public void Create(Category model)
         {
             connection.Execute("INSERT INTO Category VALUES ( @CategoryName )", 
                 new
@@ -23,7 +38,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
         }
 
 
-        public void Update(Category model, IDbConnection connection)
+        public void Update(Category model)
         {
             connection.Execute("UPDATE Category SET CategoryName = @CategoryName WHERE CategoryID = @CategoryID",
                 new
@@ -32,7 +47,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                 });
         }
 
-        public void Delete(Category model, IDbConnection connection)
+        public void Delete(Category model)
         {
             connection.Execute("DELETE FROM Category WHERE CategoryID = @CategoryID",
                 new
@@ -41,7 +56,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                 });
         }
 
-        public Category FindById(int CategoryID, IDbConnection connection)
+        public Category FindById(int CategoryID)
         {
             var result = connection.Query<Category>("SELECT * FROM Category WHERE CategoryID = @CategoryID", 
                 new
@@ -55,11 +70,11 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
             }
             return category;
         }
-        public IEnumerable<Category> GetAll(IDbConnection connection)
+        public IEnumerable<Category> GetAll()
         {
             return connection.Query<Category>("SELECT * FROM Category");
         }
-        public IEnumerable<FindProductsByCategory> FindProductsByCategory(IDbConnection connection)
+        public IEnumerable<FindProductsByCategory> FindProductsByCategory()
         {
             return connection.Query<FindProductsByCategory>("FindProductsByCategory", 
                 new

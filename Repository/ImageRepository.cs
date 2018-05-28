@@ -2,7 +2,9 @@
 using Dapper;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +13,21 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
 {
     public class ImageRepository
     {
-        public void Create(Images model, IDbConnection connection)
+        private static string sql;
+        private static IDbConnection connection;
+        public ImageRepository()
+        {
+            if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("SQLAZURECONNSTR_ProductionDb")))
+            {
+                sql = Environment.GetEnvironmentVariable("SQLAZURECONNSTR_ProductionDb");
+            }
+            else
+            {
+                sql = ConfigurationManager.ConnectionStrings["db"].ConnectionString;
+            }
+            connection = new SqlConnection(sql);
+        }
+        public void Create(Images model)
         {
             connection.Execute("INSERT INTO Image VALUES ( @Image )",
                 new
@@ -21,7 +37,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
         }
 
 
-        public void Update(Images model, IDbConnection connection)
+        public void Update(Images model)
         {
             connection.Execute("UPDATE Image SET Image=@Image WHERE ImageID = @ImageID",
                 new
@@ -31,7 +47,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                 });
         }
 
-        public void Delete(Images model, IDbConnection connection)
+        public void Delete(Images model)
         {
             connection.Execute("DELETE FROM Image WHERE ImageID = @ImageID",
                 new
@@ -40,7 +56,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                 });
         }
 
-        public Images FindById(int ImageID, IDbConnection connection)
+        public Images FindById(int ImageID)
         {
             var result = connection.Query<Images>("SELECT * FROM Image WHERE ImageID = @ImageID",
                 new
@@ -54,7 +70,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
             }
             return images;
         }
-        public IEnumerable<Images> GetAll(IDbConnection connection)
+        public IEnumerable<Images> GetAll()
         {
             return connection.Query<Images>("SELECT * FROM Image");
         }

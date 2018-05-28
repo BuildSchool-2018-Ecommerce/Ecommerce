@@ -8,12 +8,27 @@ using System.Text;
 using System.Threading.Tasks;
 using Utils;
 using Dapper;
+using System.Configuration;
 
 namespace BuildSchool.MvcSolution.OnlineStore.Repository
 {
     public class MemberRepository
     {
-        public void Create(Members model, IDbConnection connection)
+        private static string sql;
+        private static IDbConnection connection;
+        public MemberRepository()
+        {
+            if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("SQLAZURECONNSTR_ProductionDb")))
+            {
+                sql = Environment.GetEnvironmentVariable("SQLAZURECONNSTR_ProductionDb");
+            }
+            else
+            {
+                sql = ConfigurationManager.ConnectionStrings["db"].ConnectionString;
+            }
+            connection = new SqlConnection(sql);
+        }
+        public void Create(Members model)
         {
             connection.Execute("INSERT INTO Members(MemberID, Password, Name, Phone, Address, Email) " +
                 "VALUES (@MemberID, @Password, @Name, @Phone, @Address, @Email)",
@@ -28,7 +43,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                 });
         }
 
-        public void Update(Members model, IDbConnection connection)
+        public void Update(Members model)
         {
             connection.Execute("UPDATE Members SET Password=@Password, Name=@Name, Phone=@Phone, Address=@Address, Email=@Email WHERE MemberID = @MemberID",
                 new
@@ -41,7 +56,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                     model.MemberID
                 });
         }
-        public void UpdateGUID(Members model, IDbConnection connection)
+        public void UpdateGUID(Members model)
         {
             connection.Execute("UPDATE Members SET MemberGUID=@MemberGUID WHERE MemberID = @MemberID",
                 new
@@ -51,7 +66,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                 });
         }
 
-        public void Delete(Members model, IDbConnection connection)
+        public void Delete(Members model)
         {
             connection.Execute("DELETE FROM Members WHERE MemberID = @MemberID",
                 new
@@ -60,7 +75,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                 });
         }
 
-        public Members FindById(string MemberID, IDbConnection connection)
+        public Members FindById(string MemberID)
         {
             var result = connection.Query<Members>("SELECT * FROM Members WHERE MemberID = @MemberID", 
                 new
@@ -74,6 +89,14 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
             }
             return member;
         }
+        public IEnumerable<GetBuyerOrder> GetBuyerOrder(string memberid)
+        {
+            return connection.Query<GetBuyerOrder>("GetBuyerOrder", 
+                new
+                {
+                    memberid
+                }, commandType: CommandType.StoredProcedure);
+        }
         public IEnumerable<GetBuyerOrder> GetBuyerOrder(string memberid, IDbConnection connection)
         {
             return connection.Query<GetBuyerOrder>("GetBuyerOrder", 
@@ -82,15 +105,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                     memberid
                 }, commandType: CommandType.StoredProcedure);
         }
-        public IEnumerable<GetBuyerOrder> GetBuyerOrder(string memberid, SqlConnection connection,IDbTransaction transaction)
-        {
-            return connection.Query<GetBuyerOrder>("GetBuyerOrder", 
-                new
-                {
-                    memberid
-                }, transaction, commandType: CommandType.StoredProcedure);
-        }
-        public IEnumerable<Members> GetAll(IDbConnection connection)
+        public IEnumerable<Members> GetAll()
         {
             return connection.Query<Members>("SELECT * FROM Members");
         }

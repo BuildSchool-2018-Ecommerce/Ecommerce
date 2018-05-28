@@ -2,7 +2,9 @@
 using Dapper;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +13,21 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
 {
     public class ShoppingCartRepository
     {
-        public void Create(ShoppingCart model, IDbConnection connection)
+        private static string sql;
+        private static IDbConnection connection;
+        public ShoppingCartRepository()
+        {
+            if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("SQLAZURECONNSTR_ProductionDb")))
+            {
+                sql = Environment.GetEnvironmentVariable("SQLAZURECONNSTR_ProductionDb");
+            }
+            else
+            {
+                sql = ConfigurationManager.ConnectionStrings["db"].ConnectionString;
+            }
+            connection = new SqlConnection(sql);
+        }
+        public void Create(ShoppingCart model)
         {
             connection.Execute("INSERT INTO ShoppingCart VALUES ( @MemberID, @ProductFormatID, @Quantity, @UnitPrice )",
                 new
@@ -24,7 +40,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
         }
 
 
-        public void Update(ShoppingCart model, IDbConnection connection)
+        public void Update(ShoppingCart model)
         {
             connection.Execute("UPDATE ShoppingCart SET MemberID = @MemberID, ProductFormatID = @ProductFormatID, Quantity = @Quantity, UnitPrice = @UnitPrice WHERE ShoppingCartID = @ShoppingCartID",
                 new
@@ -36,7 +52,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                 });
         }
 
-        public void Delete(ShoppingCart model, IDbConnection connection)
+        public void Delete(ShoppingCart model)
         {
             connection.Execute("DELETE FROM ShoppingCart WHERE ShoppingCartID = @ShoppingCartID",
                 new
@@ -45,7 +61,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                 });
         }
 
-        public ShoppingCart FindById(int ShoppingCartID, IDbConnection connection)
+        public ShoppingCart FindById(int ShoppingCartID)
         {
             var result = connection.Query<ShoppingCart>("SELECT * FROM ShoppingCart WHERE ShoppingCartID = @ShoppingCartID",
                 new
@@ -59,7 +75,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
             }
             return shoppingCart;
         }
-        public IEnumerable<ShoppingCart> GetAll(IDbConnection connection)
+        public IEnumerable<ShoppingCart> GetAll()
         {
             return connection.Query<ShoppingCart>("SELECT * FROM ShoppingCart");
         }
