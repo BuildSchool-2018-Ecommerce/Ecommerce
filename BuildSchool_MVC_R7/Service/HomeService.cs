@@ -17,7 +17,9 @@ namespace BuildSchool_MVC_R7.Service
             var homeViewModel = new HomeViewModel()
             {
                 Products = productRepository.GetAll(),
-                NewProduct = productRepository.NewProduct()                
+                NewProduct = productRepository.NewProduct(),
+                SalesProduct = productRepository.SalesProduct(),
+                Top8Product = productRepository.Top8Product()
             };
             return homeViewModel;
         }
