@@ -38,7 +38,8 @@ namespace BuildSchool_MVC_R7
                     "~/Content/vendor/select2/select2.min.css",
                     "~/Content/vendor/daterangepicker/daterangepicker.css",
                     "~/Content/vendor/slick/slick.css",
-                    "~/Content/vendor/lightbox2/css/lightbox.min.css"
+                    "~/Content/vendor/lightbox2/css/lightbox.min.css",
+                    "~/Content/vendor/noui/nouislider.min.css"
                     ));
             bundles.Add(new StyleBundle("~/Content/fonts").Include(
                     "~/Content/fonts/font-awesome-4.7.0/css/font-awesome.min.css",
@@ -58,7 +59,10 @@ namespace BuildSchool_MVC_R7
                     ));
             bundles.Add(new StyleBundle("~/Content/vendors1").Include(
                     "~/Content/vendor/sweetalert/sweetalert.min.js",
-                    "~/Content/vendor/parallax100/parallax100.js"
+                    "~/Content/vendor/parallax100/parallax100.js",
+                    "~/Content/vendor/noui/nouislider.min.js",
+                    "~/Content/vendor/daterangepicker/daterangepicker.js",
+                    "~/Content/vendor/daterangepicker/moment.min.js"
                     ));
             bundles.Add(new StyleBundle("~/Content/js").Include(
                     "~/Content/js/slick-custom.js",
