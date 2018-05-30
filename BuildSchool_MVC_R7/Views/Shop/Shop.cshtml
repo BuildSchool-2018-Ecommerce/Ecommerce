@@ -1,8 +1,10 @@
-﻿
+﻿@model ShopViewModel
 @{
     ViewBag.Title = "Shop";
 }
-
+@{ 
+    var category = Model.Category;
+}
 <header class="header1">
     <!-- Header desktop -->
     <div class="container-menu-header">
@@ -53,7 +55,7 @@
                         </li>
 
                         <li>
-                            <a href="product.html">Shop</a>
+                            <a href="/Shop/Shop">Shop</a>
                         </li>
 
                         <li class="sale-noti">
@@ -308,17 +310,17 @@
                 </li>
 
                 <li class="item-menu-mobile">
-                    <a href="index.html">Home</a>
-                    <ul class="sub-menu">
+                    <a href="/Home/Index">Home</a>
+                    @*<ul class="sub-menu">
                         <li><a href="index.html">Homepage V1</a></li>
                         <li><a href="home-02.html">Homepage V2</a></li>
                         <li><a href="home-03.html">Homepage V3</a></li>
                     </ul>
-                    <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
+                    <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>*@
                 </li>
 
                 <li class="item-menu-mobile">
-                    <a href="product.html">Shop</a>
+                    <a href="/Shop/Shop">Shop</a>
                 </li>
 
                 <li class="item-menu-mobile">
@@ -346,7 +348,7 @@
 </header>
 
 <!-- Title Page -->
-<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(../../Content/images/heading-pages-02.jpg);">
+<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(https://stmed.net/sites/default/files/elle-fanning-wallpapers-26656-4002211.jpg);">
     <h2 class="l-text2 t-center">
         Women
     </h2>
@@ -373,7 +375,14 @@
                                 All
                             </a>
                         </li>
-
+                        @foreach(var item in category)
+                        {
+                            <li class="p-t-4">
+                                <a href="#" class="s-text13">
+                                    @item.CategoryName
+                                </a>
+                            </li>
+                        }
                         <li class="p-t-4">
                             <a href="#" class="s-text13">
                                 Women

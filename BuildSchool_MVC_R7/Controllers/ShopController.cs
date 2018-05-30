@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BuildSchool_MVC_R7.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,9 @@ namespace BuildSchool_MVC_R7.Controllers
         // GET: Shop
         public ActionResult Shop()
         {
-            return View();
+            var shopService = new ShopService();
+            var shop = shopService.Shop();
+            return View(shop);
         }
     }
 }
