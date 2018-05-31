@@ -9,5 +9,6 @@ namespace BuildSchool_MVC_R7.Models
     public class ShopViewModel
     {
         public IEnumerable<Category> Category { get; set; }
+        public IEnumerable<AllProduct> AllProduct { get; set; }
     }
 }
