@@ -1,0 +1,74 @@
+﻿@model BuildSchool_MVC_R7.Models.Member_SignUpViewModel
+@{
+    ViewBag.Title = "SignUp";
+}
+
+@using (Html.BeginForm("SignUp", "Member"))
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 p-b-30">
+                <form class="leave-comment">
+                    <h4 class="m-text26 p-b-36 p-t-15">
+                        會員申請 Member Sing Up
+                    </h4>
+
+                    <div class="bo4 of-hidden size15 m-b-20">
+                        @*<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="MemberID" placeholder="帳號 Account Number">*@
+                        @Html.TextBoxFor(model => model.MemberID, htmlAttributes: new { @class = "sizefull s-text7 p-l-22 p-r-22", placeholder = "帳號 Account Number" })
+                        @Html.ValidationMessageFor(model => model.MemberID)
+                    </div>
+
+                    <div class="bo4 of-hidden size15 m-b-20">
+                        @*<input class="sizefull s-text7 p-l-22 p-r-22" type="password" name="Password" placeholder="密碼 Password">*@
+                        @Html.TextBoxFor(model => model.password, htmlAttributes: new { @class = "sizefull s-text7 p-l-22 p-r-22", placeholder = "密碼 Password", @type = "password" })
+                        @Html.ValidationMessageFor(model => model.password)
+                    </div>
+
+                    <div class="bo4 of-hidden size15 m-b-20">
+                        @*<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="Name" placeholder="姓名 Name">*@
+                        @Html.TextBoxFor(model => model.name, htmlAttributes: new { @class = "sizefull s-text7 p-l-22 p-r-22", placeholder = "姓名 Name" })
+                        @Html.ValidationMessageFor(model => model.name)
+                    </div>
+
+                    <div class="bo4 of-hidden size15 m-b-20">
+                        @*<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="Phone" placeholder="手機號碼 Phone">*@
+                        @Html.TextBoxFor(model => model.Phone, htmlAttributes: new { @class = "sizefull s-text7 p-l-22 p-r-22", placeholder = "手機號碼 Phone" })
+                        @Html.ValidationMessageFor(model => model.Phone)
+                    </div>
+
+                    <div class="bo4 of-hidden size15 m-b-20">
+                        @*<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="Address" placeholder="地址 Address">*@
+                        @Html.TextBoxFor(model => model.Address, htmlAttributes: new { @class = "sizefull s-text7 p-l-22 p-r-22", placeholder = "地址 Address" })
+                        @Html.ValidationMessageFor(model => model.Address)
+                    </div>
+
+                    <div class="bo4 of-hidden size15 m-b-20">
+                        @*<input class="sizefull s-text7 p-l-22 p-r-22" type="email" name="Email" placeholder="電子郵件 E-Mail">*@
+                        @Html.TextBoxFor(model => model.Email, htmlAttributes: new { @class = "sizefull s-text7 p-l-22 p-r-22", placeholder = "電子郵件 E-Mail" })
+                        @Html.ValidationMessageFor(model => model.Email)
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="w-size25">
+                                <!-- Button -->
+                                <button class="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4" type="submit">
+                                    Sign Up
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/Content/vendors")
+    @Scripts.Render("~/Content/vendors1")
+    @Scripts.Render("~/Content/js")
+}
+    
+
+

@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "LogIn";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 p-b-30">
+            <form class="leave-comment">
+                <h4 class="m-text26 p-b-36 p-t-15">
+                    會員登入 Member Login
+                </h4>
+
+                <div class="bo4 of-hidden size15 m-b-20">
+                    <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="name" placeholder="帳號 Account Number">
+                </div>
+
+                <div class="bo4 of-hidden size15 m-b-20">
+                    <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="phone-number" placeholder="密碼 Password">
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-6">
+                        <div class="w-size25">
+                            <!-- Button -->
+                            <button class="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4">
+                                <a>Login</a>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="w-size25">
+                            <!-- Button -->
+                            <button class="flex-c-m size2 bg0 bo-rad-23 hov7 m-text3 trans-0-4" type="button" onclick="location.href='@Url.Action("SignUp", "Member")'">
+                                <a>Sign Up</a>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/Content/vendors")
+@Scripts.Render("~/Content/vendors1")
+@Scripts.Render("~/Content/js")
+
