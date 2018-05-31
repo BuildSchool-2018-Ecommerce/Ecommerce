@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BuildSchool.MvcSolution.OnlineStore.Models;
+using BuildSchool_MVC_R7.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,7 +17,13 @@ namespace BuildSchool_MVC_R7.Controllers
         }
         public ActionResult SignUp()
         {
-            return View();
+            Member_SignUpViewModel Data = new Member_SignUpViewModel();
+            return View(Data);
+        }
+        [HttpPost]
+        public ActionResult SignUp([Bind(Include = "MemberID, password, name, Phone, Address, Email")] Members Data)
+        {
+            return RedirectToAction("Index", "Home");
         }
     }
 }

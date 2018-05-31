@@ -16,13 +16,14 @@ namespace BuildSchool_MVC_R7.Models
         [Required(ErrorMessage = "請輸入密碼 Password")]
         [MinLength(8, ErrorMessage = "長度過短")]
         [MaxLength(50, ErrorMessage = "長度過長")]
+        [DataType(DataType.Password)]
         [Display(Name = "密碼 Password")]
-        public string Password { get; set; }
+        public string password { get; set; }
 
         [Required(ErrorMessage = "請輸入姓名 Name")]
         [MaxLength(50, ErrorMessage = "長度過長")]
         [Display(Name = "姓名 Name")]
-        public string Name { get; set; }
+        public string name { get; set; }
 
         [Required(ErrorMessage = "請輸入電子郵件 E-Mail")]
         [MaxLength(50, ErrorMessage = "長度過長")]
