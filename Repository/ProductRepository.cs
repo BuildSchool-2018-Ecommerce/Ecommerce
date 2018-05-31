@@ -117,14 +117,14 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
         {
             return connection.Query<NewProduct>("SELECT * FROM NewProduct");
         }
-        public IEnumerable<SalesProduct> SalesProduct()
-        {
-            return connection.Query<SalesProduct>("SELECT * FROM SalesProduct");
-        }
-        public IEnumerable<Top8Product> Top8Product()
-        {
-            var top8 = connection.Query<Top8Product>("SELECT * FROM Top8Product");
-            return connection.Query<Top8Product>("SELECT * FROM Top8Product");
-        }
+        //public IEnumerable<SalesProduct> SalesProduct()
+        //{
+        //    return connection.Query<SalesProduct>("SELECT * FROM SalesProduct");
+        //}
+        //public IEnumerable<Top8Product> Top8Product()
+        //{
+        //    var top8 = connection.Query<Top8Product>("SELECT * FROM Top8Product");
+        //    return connection.Query<Top8Product>("SELECT * FROM Top8Product");
+        //}
     }
 }
