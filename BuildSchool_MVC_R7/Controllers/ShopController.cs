@@ -16,5 +16,11 @@ namespace BuildSchool_MVC_R7.Controllers
             var shop = shopService.Shop();
             return View(shop);
         }
+        public ActionResult AllProduct()
+        {
+            var shopService = new ShopService();
+            var shop = shopService.Shop();
+            return PartialView(shop);
+        }
     }
 }
