@@ -58,6 +58,7 @@
     <Compile Include="Activity.cs" />
     <Compile Include="AllProduct.cs" />
     <Compile Include="Category.cs" />
+    <Compile Include="CategoryProduct.cs" />
     <Compile Include="FindOrderdetaiByOrderID.cs" />
     <Compile Include="FindProductFormatByProductID.cs" />
     <Compile Include="FindProductsByCategory.cs" />

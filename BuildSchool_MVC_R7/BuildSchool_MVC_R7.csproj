@@ -2973,6 +2973,7 @@
     <Content Include="Views\Member\LogIn.cshtml" />
     <Content Include="Views\Member\SignUp.cshtml" />
     <Content Include="Views\Shop\AllProduct.cshtml" />
+    <Content Include="Views\Shop\CategoryProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
