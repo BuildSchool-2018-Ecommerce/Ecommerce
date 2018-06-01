@@ -3994,6 +3994,10 @@ EFFECT   EFFECT   EFFECT   EFFECT   EFFECT   EFFECT  EFFECT
 	text-decoration: underline;
 }
 
+.hov7:hover{
+	background-color: #222222
+}
+
 /*[ Active ]
 ///////////////////////////////////////////////////////////
 */
