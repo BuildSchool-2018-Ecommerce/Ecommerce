@@ -17,7 +17,7 @@ namespace BuildSchool_MVC_R7.Service
             var shopViewModel = new ShopViewModel()
             {
                 Category = categoryRepository.GetAll(),
-                AllProduct = productRepository.AllProduct()
+                AllProduct = productRepository.AllProduct().ToList()
             };
             return shopViewModel;
         }
