@@ -123,8 +123,11 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
         }
         public IEnumerable<Top8Product> Top8Product()
         {
-            var top8 = connection.Query<Top8Product>("SELECT * FROM Top8Product");
             return connection.Query<Top8Product>("SELECT * FROM Top8Product");
+        }
+        public IEnumerable<AllProduct> AllProduct()
+        {
+            return connection.Query<AllProduct>("SELECT * FROM AllProduct");
         }
     }
 }
