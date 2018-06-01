@@ -28,5 +28,9 @@ namespace BuildSchool_MVC_R7.Controllers
             var shop = shopService.CategoryShop(categoryid);
             return PartialView(shop);
         }
+        public ActionResult Product()
+        {
+            return View();
+        }
     }
 }
