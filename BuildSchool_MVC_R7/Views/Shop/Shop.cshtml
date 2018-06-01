@@ -500,7 +500,7 @@
                 <div class="flex-sb-m flex-w p-b-35">
                     <div class="flex-w">
                         <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
-                            <select class="selection-2" name="sorting">
+                            <select class="selection-2" name="sorting" style="width: 100%" >
                                 <option>Default Sorting</option>
                                 <option>Popularity</option>
                                 <option>Price: low to high</option>
@@ -509,7 +509,7 @@
                         </div>
 
                         <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
-                            <select class="selection-2" name="sorting">
+                            <select class="selection-2" name="sorting" style="width: 100%">
                                 <option>Price</option>
                                 <option>$0.00 - $50.00</option>
                                 <option>$50.00 - $100.00</option>
@@ -523,13 +523,13 @@
 
                     <span class="s-text8 p-t-5 p-b-5">
                         Showing 1–12 of 16 results
-                    </span>
+                    </span>     
                 </div>
 
                 <!-- Product -->
-                <div class="row">
+                @*<div class="row">
 
-                    <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
+                    <div class="col-sm-4 p-b-50">
                         <!-- Block2 -->
                         <div class="block2">
                             <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
@@ -562,7 +562,7 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
+                    <div class="col-sm-4 p-b-50">
                         <!-- Block2 -->
                         <div class="block2">
                             <div class="block2-img wrap-pic-w of-hidden pos-relative">
@@ -938,9 +938,9 @@
                 <div class="pagination flex-m flex-w p-t-26">
                     <a href="#" class="item-pagination flex-c-m trans-0-4 active-pagination">1</a>
                     <a href="#" class="item-pagination flex-c-m trans-0-4">2</a>
-                </div>
+                </div>*@
 
-                <div class="row">
+                <div>
                     <div class="tab-content" id="pills-tabContent">
                         @for (int i = 0; i < groupcount; i++)
                         {
@@ -949,89 +949,93 @@
                             if (i == 0)
                             {
                                 <div class="tab-pane fade show active" id=@phid role="tabpanel" aria-labelledby=@pid>
-                                    @{ min = i * 12; max = min + 12; }
-                                    @for (int j = min; j < max; j++)
-                                    {
-                                        if (j < allproductcount)
+                                    <div class="row">
+                                        @{ min = i * 12; max = min + 12; }
+                                        @for (int j = min; j < max; j++)
                                         {
-                                            <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
-                                                <!-- Block2 -->
-                                                <div class="block2">
-                                                    <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-                                                        <img src="~/Content/images/item-02.jpg" alt="IMG-PRODUCT">
+                                            if (j < allproductcount)
+                                            {
+                                                <div class="col-sm-4 col-md-4 col-lg-4 p-b-50">
+                                                    <!-- Block2 -->
+                                                    <div class="block2">
+                                                        <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
+                                                            <img src="~/Content/images/item-02.jpg" alt="IMG-PRODUCT">
 
-                                                        <div class="block2-overlay trans-0-4">
-                                                            <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                                                <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                                                <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                                            </a>
+                                                            <div class="block2-overlay trans-0-4">
+                                                                <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                                                    <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                                                    <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                                                                </a>
 
-                                                            <div class="block2-btn-addcart w-size1 trans-0-4">
-                                                                <!-- Button -->
-                                                                <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                                                    Add to Cart
-                                                                </button>
+                                                                <div class="block2-btn-addcart w-size1 trans-0-4">
+                                                                    <!-- Button -->
+                                                                    <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                                                        Add to Cart
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
 
-                                                    <div class="block2-txt p-t-20">
-                                                        <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                                            Herschel supply co 25l
-                                                        </a>
+                                                        <div class="block2-txt p-t-20">
+                                                            <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+                                                                Herschel supply co 25l
+                                                            </a>
 
-                                                        <span class="block2-price m-text6 p-r-5">
-                                                            $75.00
-                                                        </span>
+                                                            <span class="block2-price m-text6 p-r-5">
+                                                                $75.00
+                                                            </span>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            }
                                         }
-                                    }
+                                    </div>
                                 </div>
                             }
                             else
                             {
                                 <div class="tab-pane fade" id=@phid role="tabpanel" aria-labelledby=@pid>
-                                    @{ min = i * 12; max = min + 12; }
-                                    @for (int j = min; j < max; j++)
-                                    {
-                                        if (j < allproductcount)
+                                    <div class="row">
+                                        @{ min = i * 12; max = min + 12; }
+                                        @for (int j = min; j < max; j++)
                                         {
-                                            <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
-                                                <!-- Block2 -->
-                                                <div class="block2">
-                                                    <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-                                                        <img src="~/Content/images/item-02.jpg" alt="IMG-PRODUCT">
+                                            if (j < allproductcount)
+                                            {
+                                                <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
+                                                    <!-- Block2 -->
+                                                    <div class="block2">
+                                                        <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
+                                                            <img src="~/Content/images/item-02.jpg" alt="IMG-PRODUCT">
 
-                                                        <div class="block2-overlay trans-0-4">
-                                                            <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                                                <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                                                <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                                            </a>
+                                                            <div class="block2-overlay trans-0-4">
+                                                                <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                                                    <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                                                    <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                                                                </a>
 
-                                                            <div class="block2-btn-addcart w-size1 trans-0-4">
-                                                                <!-- Button -->
-                                                                <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-                                                                    Add to Cart
-                                                                </button>
+                                                                <div class="block2-btn-addcart w-size1 trans-0-4">
+                                                                    <!-- Button -->
+                                                                    <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
+                                                                        Add to Cart
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
 
-                                                    <div class="block2-txt p-t-20">
-                                                        <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
-                                                            Herschel supply co 25l
-                                                        </a>
+                                                        <div class="block2-txt p-t-20">
+                                                            <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+                                                                Herschel supply co 25l
+                                                            </a>
 
-                                                        <span class="block2-price m-text6 p-r-5">
-                                                            $75.00
-                                                        </span>
+                                                            <span class="block2-price m-text6 p-r-5">
+                                                                $75.00
+                                                            </span>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            }
                                         }
-                                    }
+                                    </div>
                                 </div>
                             }
 
@@ -1095,10 +1099,10 @@
         dropdownParent: $('#dropDownSelect1')
     });
 
-    $(".selection-2").select2({
-        minimumResultsForSearch: 20,
-        dropdownParent: $('#dropDownSelect2')
-    });
+    //$(".selection-2").select2({
+    //    minimumResultsForSearch: 20,
+    //    dropdownParent: $('#dropDownSelect2')
+    //});
     $('.block2-btn-addcart').each(function () {
         var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
         $(this).on('click', function () {
