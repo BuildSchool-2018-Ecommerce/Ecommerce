@@ -371,7 +371,7 @@
 
                     <ul class="p-b-54">
                         <li class="p-t-4">
-                            <a href="/Shop/Shop" class="s-text13 active1">
+                            <a id="0" href="#" class="s-text13 active1">
                                 全部
                             </a>
                         </li>
@@ -559,6 +559,16 @@
 
     filterBar.noUiSlider.on('update', function (values, handle) {
         skipValues[handle].innerHTML = Math.round(values[handle]);
+    });
+
+    $(document).on("click", "#0", function () {
+        $.ajax({
+            url: "/Shop/AllProduct",
+            success: function (result) {
+                $("#page").empty();
+                $("#page").html(result);
+            }
+        });
     });
 </script>
 
