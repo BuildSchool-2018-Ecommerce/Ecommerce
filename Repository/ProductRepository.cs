@@ -129,5 +129,13 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
         {
             return connection.Query<AllProduct>("SELECT * FROM AllProduct");
         }
+        public IEnumerable<CategoryProduct> CategoryProduct(int categoryid)
+        {
+            return connection.Query<CategoryProduct>("CategoryProduct",
+                new
+                {
+                    categoryid
+                }, commandType: CommandType.StoredProcedure);
+        }
     }
 }

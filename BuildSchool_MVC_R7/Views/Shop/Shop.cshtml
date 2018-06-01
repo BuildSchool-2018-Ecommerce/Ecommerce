@@ -371,16 +371,16 @@
 
                     <ul class="p-b-54">
                         <li class="p-t-4">
-                            <a id="0" href="#" class="s-text13 active1">
+                            <button id="0" class="s-text13 active1">
                                 全部
-                            </a>
+                            </button>
                         </li>
                         @foreach (var item in category)
                         {
                             <li class="p-t-4">
-                                <a id="@item.CategoryID" href="#" class="s-text13">
+                                <button id="@item.CategoryID" class="s-text13 category">
                                     @item.CategoryName
-                                </a>
+                                </button>
                             </li>
                         }
                         @*<li class="p-t-4">
@@ -570,5 +570,18 @@
             }
         });
     });
+    $(document).on("click", ".category", function (e) {
+        console.log(e);
+        $.ajax({
+            url: "/Shop/CategoryProduct",
+            data: {
+                categoryid : e.target.id
+            },
+            success: function (result) {
+                $("#page").empty();
+                $("#page").html(result);
+            }
+        });
+    })
 </script>
 

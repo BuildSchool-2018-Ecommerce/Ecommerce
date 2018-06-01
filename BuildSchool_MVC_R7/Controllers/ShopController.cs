@@ -19,7 +19,13 @@ namespace BuildSchool_MVC_R7.Controllers
         public ActionResult AllProduct()
         {
             var shopService = new ShopService();
-            var shop = shopService.Shop();
+            var shop = shopService.AllShop();
+            return PartialView(shop);
+        }
+        public ActionResult CategoryProduct(int categoryid)
+        {
+            var shopService = new ShopService();
+            var shop = shopService.CategoryShop(categoryid);
             return PartialView(shop);
         }
     }
