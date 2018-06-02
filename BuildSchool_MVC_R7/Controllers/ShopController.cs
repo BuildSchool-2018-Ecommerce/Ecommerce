@@ -10,7 +10,7 @@ namespace BuildSchool_MVC_R7.Controllers
     public class ShopController : Controller
     {
         // GET: Shop
-        public ActionResult Shop()
+        public ActionResult Index()
         {
             var shopService = new ShopService();
             var shop = shopService.Shop();

@@ -2969,13 +2969,13 @@
     <Content Include="Content\vendor\slick\slick-theme.scss" />
     <Content Include="Content\vendor\slick\slick.less" />
     <Content Include="Content\vendor\slick\slick.scss" />
-    <Content Include="Views\Shop\Shop.cshtml" />
     <Content Include="Views\Member\LogIn.cshtml" />
     <Content Include="Views\Member\SignUp.cshtml" />
     <Content Include="Views\Shop\Product.cshtml" />
     <Content Include="Views\Shop\ProductQuantity.cshtml" />
     <Content Include="Views\Shop\ProductSize.cshtml" />
     <Content Include="Views\Shop\CategoryProduct.cshtml" />
+    <Content Include="Views\Shop\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
