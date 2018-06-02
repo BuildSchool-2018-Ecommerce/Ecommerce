@@ -1,6 +1,9 @@
-﻿
+﻿@model ShopViewModel
 @{
     ViewBag.Title = "Product";
+}
+@{
+    var product = Model.FindProductByProductID;
 }
 <!-- Header -->
 <header class="header1">
@@ -346,23 +349,18 @@
 </header>
 <!-- breadcrumb -->
 <div class="bread-crumb bgwhite flex-w p-l-52 p-r-15 p-t-30 p-l-15-sm">
-    <a href="index.html" class="s-text16">
-        Home
-        <i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
-    </a>
-
-    <a href="product.html" class="s-text16">
-        Women
+    <a href="/Shop/Shop" class="s-text16">
+        Shop
         <i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
     </a>
 
     <a href="#" class="s-text16">
-        T-Shirt
+        @product[0].CategoryName
         <i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
     </a>
 
     <span class="s-text17">
-        Boxy T-Shirt with Roll Sleeve Detail
+        @product[0].ProductName
     </span>
 </div>
 <!-- Product Detail -->
@@ -373,35 +371,56 @@
                 <div class="wrap-slick3-dots"></div>
 
                 <div class="slick3">
-                    <div class="item-slick3" data-thumb="../Content/images/thumb-item-01.jpg">
-                        <div class="wrap-pic-w">
-                            <img src="~/Content/images/product-detail-01.jpg" alt="IMG-PRODUCT">
+                    @foreach (var item in product)
+                    {
+                        <div class="item-slick3" data-thumb=@item.Image>
+                            <div class="wrap-pic-w">
+                                <img src=@item.Image alt="IMG-PRODUCT">
+                            </div>
                         </div>
-                    </div>
+                    }
+                    @*<div class="item-slick3" data-thumb="../Content/images/thumb-item-01.jpg">
+                            <div class="wrap-pic-w">
+                                <img src="~/Content/images/product-detail-01.jpg" alt="IMG-PRODUCT">
+                            </div>
+                        </div>
 
-                    <div class="item-slick3" data-thumb="../Content/images/thumb-item-02.jpg">
-                        <div class="wrap-pic-w">
-                            <img src="~/Content/images/product-detail-02.jpg" alt="IMG-PRODUCT">
+                        <div class="item-slick3" data-thumb="../Content/images/thumb-item-02.jpg">
+                            <div class="wrap-pic-w">
+                                <img src="~/Content/images/product-detail-02.jpg" alt="IMG-PRODUCT">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="item-slick3" data-thumb="../Content/images/thumb-item-03.jpg">
-                        <div class="wrap-pic-w">
-                            <img src="~/Content/images/product-detail-03.jpg" alt="IMG-PRODUCT">
-                        </div>
-                    </div>
+                        <div class="item-slick3" data-thumb="../Content/images/thumb-item-03.jpg">
+                            <div class="wrap-pic-w">
+                                <img src="~/Content/images/product-detail-03.jpg" alt="IMG-PRODUCT">
+                            </div>
+                        </div>*@
                 </div>
             </div>
         </div>
 
         <div class="w-size14 p-t-30 respon5">
-            <h4 class="product-detail-name m-text16 p-b-13">
-                Boxy T-Shirt with Roll Sleeve Detail
-            </h4>
-
-            <span class="m-text17">
-                $22
-            </span>
+            <div id=@product[0].ProductID></div>
+            @if (product[0].Sale == 0)
+            {
+                <h4 class="product-detail-name m-text16 p-b-13">
+                    @product[0].ProductName
+                </h4>
+                <span class="m-text17">
+                    @product[0].UnitPrice.ToString("C", CultureInfo.CurrentCulture)
+                </span>
+            }
+            else
+            {
+                <h4 class="product-detail-name m-text16 p-b-13">
+                    @product[0].ProductName 
+                </h4>
+                <span class="m-text17" style="color:#e65540">
+                    @product[0].Sale.ToString("C", CultureInfo.CurrentCulture)
+                     for Sale
+                </span>
+            }
 
             <p class="s-text8 p-t-10">
                 Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
@@ -411,11 +430,27 @@
             <div class="p-t-33 p-b-60">
                 <div class="flex-m flex-w p-b-10">
                     <div class="s-text15 w-size15 t-center">
+                        Color
+                    </div>
+
+                    <div class="rs2-select2 rs3-select2 of-hidden w-size16">
+                        <select id="color" class="selection-2" name="color">
+                            @foreach (var item in product)
+                            {
+                                <option>@item.Color</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="flex-m flex-w p-b-10">
+                    <div class="s-text15 w-size15 t-center">
                         Size
                     </div>
 
                     <div class="rs2-select2 rs3-select2 of-hidden w-size16">
-                        <select class="selection-2" name="size">
+                        <select id="size" class="selection-2" name="size">
                             <option>Choose an option</option>
                             <option>Size S</option>
                             <option>Size M</option>
@@ -425,21 +460,17 @@
                     </div>
                 </div>
 
-                <div class="flex-m flex-w">
+                <div class="flex-m flex-w p-b-10">
                     <div class="s-text15 w-size15 t-center">
-                        Color
+                        Quantity
                     </div>
 
-                    <div class="rs2-select2 rs3-select2 of-hidden w-size16">
-                        <select class="selection-2" name="color">
-                            <option>Choose an option</option>
-                            <option>Gray</option>
-                            <option>Red</option>
-                            <option>Black</option>
-                            <option>Blue</option>
-                        </select>
+                    <div id="quantity" class="s-text15 w-size16">
+                        0
                     </div>
                 </div>
+
+
 
                 <div class="flex-r-m flex-w p-t-10">
                     <div class="w-size16 flex-m flex-w">
@@ -474,13 +505,13 @@
             <div class="wrap-dropdown-content bo6 p-t-15 p-b-14 active-dropdown-content">
                 <h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
                     Description
-                    @*<i class="down-mark fs-12 color1 fa fa-minus dis-none" aria-hidden="true"></i>
-                    <i class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>*@
+                    @*<i class="down-mark fs-12 color1 fa fa-minus dis-none" aria-hidden="false"></i>
+                        <i class="up-mark fs-12 color1 fa fa-plus" aria-hidden="false"></i>*@
                 </h5>
 
                 <div class="dropdown-content dis-none p-t-15 p-b-23">
                     <p class="s-text8">
-                        Fusce ornare mi vel risus porttitor dignissim. Nunc eget risus at ipsum blandit ornare vel sed velit. Proin gravida arcu nisl, a dignissim mauris placerat
+                        @product[0].Description
                     </p>
                 </div>
             </div>
@@ -489,7 +520,7 @@
                 <h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
                     Additional information
                     @*<i class="down-mark fs-12 color1 fa fa-minus dis-none" aria-hidden="true"></i>
-                    <i class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>*@
+                        <i class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>*@
                 </h5>
 
                 <div class="dropdown-content dis-none p-t-15 p-b-23">
@@ -503,7 +534,7 @@
                 <h5 class="js-toggle-dropdown-content flex-sb-m cs-pointer m-text19 color0-hov trans-0-4">
                     Reviews (0)
                     @*<i class="down-mark fs-12 color1 fa fa-minus dis-none" aria-hidden="true"></i>
-                    <i class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>*@
+                        <i class="up-mark fs-12 color1 fa fa-plus" aria-hidden="true"></i>*@
                 </h5>
 
                 <div class="dropdown-content dis-none p-t-15 p-b-23">
@@ -814,6 +845,8 @@
 <!-- Container Selection -->
 <div id="dropDownSelect1"></div>
 <div id="dropDownSelect2"></div>
+
+
 @Scripts.Render("~/Content/vendors")
 @Scripts.Render("~/Content/vendors1")
 @Scripts.Render("~/Content/js")
@@ -847,4 +880,68 @@
             swal(nameProduct, "is added to wishlist !", "success");
         });
     });
+    $.ajax({
+        url: "/Shop/ProductSize",
+        data: {
+            productid: @product[0].ProductID,
+            color: $("#color").val()
+        },
+        success: function (result) {
+            $("#size").empty();
+            $("#size").html(result);
+            $.ajax({
+                url: "/Shop/ProductQuantity",
+                data: {
+                    productid: @product[0].ProductID,
+                    color: $("#color").val(),
+                    size: $("#size").val()
+                },
+                success: function (result) {
+                    $("#quantity").empty();
+                    $("#quantity").html(result);
+                }
+            });
+        }
+    });
+    
+    $(document).on('change', '#color', function () {
+        //console.log($(this).val());
+        $.ajax({
+        url: "/Shop/ProductSize",
+        data: {
+            productid: @product[0].ProductID,
+            color: $(this).val()
+        },
+        success: function (result) {
+            $("#size").empty();
+            $("#size").html(result);
+            $.ajax({
+                url: "/Shop/ProductQuantity",
+                data: {
+                    productid: @product[0].ProductID,
+                    color: $("#color").val(),
+                    size: $("#size").val()
+                },
+                success: function (result) {
+                    $("#quantity").empty();
+                    $("#quantity").html(result);
+                }
+            });
+        }
+        });
+        $(document).on('change', "#size", function () {
+            $.ajax({
+                url: "/Shop/ProductQuantity",
+                data: {
+                    productid: @product[0].ProductID,
+                    color: $("#color").val(),
+                    size: $("#size").val()
+                },
+                success: function (result) {
+                    $("#quantity").empty();
+                    $("#quantity").html(result);
+                }
+            });
+        })
+    })
 </script>

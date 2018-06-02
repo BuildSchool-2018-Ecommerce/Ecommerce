@@ -2975,6 +2975,8 @@
     <Content Include="Views\Shop\AllProduct.cshtml" />
     <Content Include="Views\Shop\CategoryProduct.cshtml" />
     <Content Include="Views\Shop\Product.cshtml" />
+    <Content Include="Views\Shop\ProductQuantity.cshtml" />
+    <Content Include="Views\Shop\ProductSize.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

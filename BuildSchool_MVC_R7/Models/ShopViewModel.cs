@@ -11,5 +11,8 @@ namespace BuildSchool_MVC_R7.Models
         public IEnumerable<Category> Category { get; set; }
         public List<AllProduct> AllProduct { get; set; }
         public List<CategoryProduct> CategoryProduct { get; set; }
+        public List<FindProductByProductID> FindProductByProductID { get; set; }
+        public IEnumerable<ProductSizeAndQuantity> ProductSize { get; set; }
+        public ProductSizeAndQuantity ProductQuantity { get; set; }
     }
 }
