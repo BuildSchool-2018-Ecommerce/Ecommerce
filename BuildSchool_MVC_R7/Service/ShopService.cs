@@ -32,9 +32,11 @@ namespace BuildSchool_MVC_R7.Service
         }
         public ShopViewModel CategoryShop(int categoryid)
         {
+            var categoryRepository = ContainerManager.Container.GetInstance<CategoryRepository>();
             var productRepository = ContainerManager.Container.GetInstance<ProductRepository>();
             var shopViewModel = new ShopViewModel()
             {
+                Category = categoryRepository.GetAll(),
                 CategoryProduct = productRepository.CategoryProduct(categoryid).ToList()
             };
             return shopViewModel;

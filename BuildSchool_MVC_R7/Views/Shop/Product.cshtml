@@ -354,7 +354,7 @@
         <i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
     </a>
 
-    <a href="#" class="s-text16">
+    <a href=@Url.Action("CategoryProduct", "Shop", new { @categoryid = product[0].CategoryID }) class="s-text16">
         @product[0].CategoryName
         <i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
     </a>
