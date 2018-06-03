@@ -14,5 +14,6 @@ namespace BuildSchool_MVC_R7.Models
         public List<FindProductByProductID> FindProductByProductID { get; set; }
         public IEnumerable<ProductSizeAndQuantity> ProductSize { get; set; }
         public ProductSizeAndQuantity ProductQuantity { get; set; }
+        public int MaxUnitPrice { get; set; }
     }
 }

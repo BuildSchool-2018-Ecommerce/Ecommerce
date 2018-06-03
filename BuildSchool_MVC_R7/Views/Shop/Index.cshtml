@@ -10,6 +10,7 @@
     var groupcount = Math.Ceiling(allproductcount / (double)groupsize);
     var min = 0;
     var max = 12;
+    var maxunitprice = Model.MaxUnitPrice;
 }
 <header class="header1">
     <!-- Header desktop -->
@@ -431,7 +432,7 @@
                         <div class="flex-sb-m flex-w p-t-16">
                             <div class="w-size11">
                                 <!-- Button -->
-                                <button class="flex-c-m size4 bg7 bo-rad-15 hov1 s-text14 trans-0-4">
+                                <button id="filter" class="flex-c-m size4 bg7 bo-rad-15 hov1 s-text14 trans-0-4">
                                     Filter
                                 </button>
                             </div>
@@ -545,7 +546,7 @@
                                         {
                                             if (allproduct[j].Sale != 0)
                                             {
-                                                <div class="col-sm-4 col-md-4 col-lg-4 p-b-50">
+                                                <div class="col-sm-4 col-md-4 col-lg-4 p-b-50 filter">
                                                     <!-- Block2 -->
                                                     <div class="block2">
                                                         <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
@@ -567,7 +568,7 @@
                                                                 @allproduct[j].UnitPrice.ToString("C", CultureInfo.CurrentCulture)
                                                             </span>
 
-                                                            <span class="block2-newprice m-text8 p-r-5">
+                                                            <span class="block2-newprice m-text8 p-r-5 price">
                                                                 @allproduct[j].Sale.ToString("C", CultureInfo.CurrentCulture)
                                                             </span>
 
@@ -577,7 +578,7 @@
                                             }
                                             else
                                             {
-                                                <div class="col-sm-4 col-md-4 col-lg-4 p-b-50">
+                                                <div class="col-sm-4 col-md-4 col-lg-4 p-b-50 filter">
                                                     <!-- Block2 -->
                                                     <div class="block2">
                                                         <div class="block2-img wrap-pic-w of-hidden pos-relative ">
@@ -596,7 +597,7 @@
                                                                 @allproduct[j].ProductName
                                                             </a>
 
-                                                            <span class="block2-price m-text6 p-r-5">
+                                                            <span class="block2-price m-text6 p-r-5 price">
                                                                 @allproduct[j].UnitPrice.ToString("C", CultureInfo.CurrentCulture)
                                                             </span>
 
@@ -621,7 +622,7 @@
                                         {
                                             if (allproduct[j].Sale != 0)
                                             {
-                                                <div class="col-sm-4 col-md-4 col-lg-4 p-b-50">
+                                                <div class="col-sm-4 col-md-4 col-lg-4 p-b-50 filter">
                                                     <!-- Block2 -->
                                                     <div class="block2">
                                                         <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
@@ -643,7 +644,7 @@
                                                                 @allproduct[j].UnitPrice.ToString("C", CultureInfo.CurrentCulture)
                                                             </span>
 
-                                                            <span class="block2-newprice m-text8 p-r-5">
+                                                            <span class="block2-newprice m-text8 p-r-5 price">
                                                                 @allproduct[j].Sale.ToString("C", CultureInfo.CurrentCulture)
                                                             </span>
 
@@ -653,7 +654,7 @@
                                             }
                                             else
                                             {
-                                                <div class="col-sm-4 col-md-4 col-lg-4 p-b-50">
+                                                <div class="col-sm-4 col-md-4 col-lg-4 p-b-50 filter">
                                                     <!-- Block2 -->
                                                     <div class="block2">
                                                         <div class="block2-img wrap-pic-w of-hidden pos-relative ">
@@ -672,7 +673,7 @@
                                                                 @allproduct[j].ProductName
                                                             </a>
 
-                                                            <span class="block2-price m-text6 p-r-5">
+                                                            <span class="block2-price m-text6 p-r-5 price">
                                                                 @allproduct[j].UnitPrice.ToString("C", CultureInfo.CurrentCulture)
                                                             </span>
 
@@ -756,11 +757,11 @@
     var filterBar = document.getElementById('filter-bar');
 
     noUiSlider.create(filterBar, {
-        start: [0, 1000],
+        start: [0, @maxunitprice],
         connect: true,
         range: {
             'min': 0,
-            'max': 1000
+            'max': @maxunitprice
         }
     });
 
@@ -773,9 +774,21 @@
         skipValues[handle].innerHTML = Math.round(values[handle]);
     });
     $(document).on("click", ".item-pagination", function () {
-            $(".item-pagination").removeClass("active-pagination");
-            $(this).addClass("active-pagination");
-            $("#results").text("Showing " + (($(this).text()-1) * 12 + 1) + " – " + ($(this).text() - 1 + 12) + " of @allproductcount results");
-            console.log($(this).text());
+        $(".item-pagination").removeClass("active-pagination");
+        $(this).addClass("active-pagination");
+        $("#results").text("Showing " + (($(this).text()-1) * 12 + 1) + " – " + ($(this).text() - 1 + 12) + " of @allproductcount results");
+        console.log($(this).text());
+    })
+    $(document).on("click", "#filter", function () {
+        var min = parseInt($("#value-lower").text());
+        var max = parseInt($("#value-upper").text());
+        $(".filter").attr('hidden', true);
+        var filter = $(".filter");
+        $(".filter").each(function () {
+            var item = parseInt($(this).find(".price").html().replace("NT$", "").replace(",", "").trim());
+            if (item > min && item <= max) {
+                $(this).removeAttr("hidden");
+            }
         })
+    })
 </script>

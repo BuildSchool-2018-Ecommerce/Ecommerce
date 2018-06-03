@@ -170,5 +170,15 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
             }
             return quntity;
         }
+        public int MaxUnitPrice()
+        {
+            var result = connection.Query<int>("SELECT MAX(UnitPrice) as UnitPrice FROM Products");
+            int price = 0;
+            foreach(var item in result)
+            {
+                price = item;
+            }
+            return price;
+        }
     }
 }

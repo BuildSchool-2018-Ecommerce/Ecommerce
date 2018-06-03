@@ -17,16 +17,8 @@ namespace BuildSchool_MVC_R7.Service
             var shopViewModel = new ShopViewModel()
             {
                 Category = categoryRepository.GetAll(),
-                AllProduct = productRepository.AllProduct().ToList()
-            };
-            return shopViewModel;
-        }
-        public ShopViewModel AllShop()
-        {
-            var productRepository = ContainerManager.Container.GetInstance<ProductRepository>();
-            var shopViewModel = new ShopViewModel()
-            {
-                AllProduct = productRepository.AllProduct().ToList()
+                AllProduct = productRepository.AllProduct().ToList(),
+                MaxUnitPrice = productRepository.MaxUnitPrice()
             };
             return shopViewModel;
         }
@@ -37,7 +29,8 @@ namespace BuildSchool_MVC_R7.Service
             var shopViewModel = new ShopViewModel()
             {
                 Category = categoryRepository.GetAll(),
-                CategoryProduct = productRepository.CategoryProduct(categoryid).ToList()
+                CategoryProduct = productRepository.CategoryProduct(categoryid).ToList(),
+                MaxUnitPrice = productRepository.MaxUnitPrice()
             };
             return shopViewModel;
         }
