@@ -9,34 +9,38 @@ using System.Web.Security;
 
 namespace BuildSchool_MVC_R7.Controllers
 {
+    [Authorize]
     public class MemberController : Controller
     {
         // GET: Member
-        public ActionResult LogIn()
+        [AllowAnonymous]
+        public ActionResult LogIn(string ReturnUrl)
         {
-            return View();
+            LoginVM vm = new LoginVM() { ReturnUrl = ReturnUrl };
+            return View(vm);
         }
+        [AllowAnonymous]
         [HttpPost]
-        public ActionResult VerifyLogIn(string account, string password)
+        public ActionResult VerifyLogIn(LoginVM vm)
         {
-            if(account=="123" && password=="123")
+            if (!ModelState.IsValid)
             {
-                FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
-                    
-                    );
+                return View("LogIn",vm);
             }
-            return RedirectToAction("LogIn");
+            FormsAuthentication.RedirectFromLoginPage(vm.Account, false);
+            return Redirect(FormsAuthentication.GetRedirectUrl(vm.Account, false));
         }
-        [Authorize]
         public ActionResult test()
         {
             return Content("登入成功");
         }
+        [AllowAnonymous]
         public ActionResult SignUp()
         {
             Member_SignUpViewModel Data = new Member_SignUpViewModel();
             return View(Data);
         }
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult SignUp([Bind(Include = "MemberID, password, name, Phone, Address, Email")] Members Data)
         {

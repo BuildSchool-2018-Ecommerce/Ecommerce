@@ -11,6 +11,14 @@ namespace BuildSchool_MVC_R7.Controllers
     {
         public ActionResult Index()
         {
+            if(User.Identity.Name == null)
+            {
+                ViewBag.user = null;
+            }
+            else
+            {
+                ViewBag.user = User.Identity.Name;
+            }
             var homeservice = new HomeService();
             var home = homeservice.Home();
             return View(home);
