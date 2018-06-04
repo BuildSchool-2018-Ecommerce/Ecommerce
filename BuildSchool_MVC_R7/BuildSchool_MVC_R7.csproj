@@ -149,6 +149,8 @@
     <Compile Include="App_Start\ContainerManager.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
@@ -2977,7 +2979,9 @@
     <Content Include="Views\Shop\ProductQuantity.cshtml" />
     <Content Include="Views\Shop\ProductSize.cshtml" />
     <Content Include="Views\Shop\CategoryProduct.cshtml" />
-    <Content Include="Views\Shop\Index.cshtml" />
+	<Content Include="Views\Shop\Index.cshtml" />
+	<Content Include="Views\About\Index.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

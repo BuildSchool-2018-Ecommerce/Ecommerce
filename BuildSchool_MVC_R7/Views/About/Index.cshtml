@@ -1,7 +1,9 @@
 ﻿
 @{
-    ViewBag.Title = "LogIn";
+    ViewBag.Title = "Index";
 }
+
+<!-- Header -->
 <header class="header1">
     <!-- Header desktop -->
     <div class="container-menu-header">
@@ -22,20 +24,13 @@
                 <span class="topbar-email">
                     fashe@example.com
                 </span>
-
-                @*<div class="topbar-language rs1-select2">
-                        <select class="selection-1" name="time">
-                            <option>USD</option>
-                            <option>EUR</option>
-                        </select>
-                    </div>*@
             </div>
         </div>
 
         <div class="wrap_header">
             <!-- Logo -->
-            <a href="/Home/Index" class="logo">
-                <img src="~/Content/images/icons/logo.png" alt="IMG-LOGO">
+            <a href="index.html" class="logo">
+                <img src="@Url.Content("~/Content/images/icons/logo.png")" alt="IMG-LOGO">
             </a>
 
             <!-- Menu -->
@@ -44,18 +39,18 @@
                     <ul class="main_menu">
                         <li>
                             <a href="/Home/Index">Home</a>
-                            @*<ul class="sub_menu">
-                                    <li><a href="index.html">Homepage V1</a></li>
-                                    <li><a href="home-02.html">Homepage V2</a></li>
-                                    <li><a href="home-03.html">Homepage V3</a></li>
-                                </ul>*@
+                            <ul class="sub_menu">
+                                <li><a href="index.html">Homepage V1</a></li>
+                                <li><a href="home-02.html">Homepage V2</a></li>
+                                <li><a href="home-03.html">Homepage V3</a></li>
+                            </ul>
                         </li>
 
                         <li>
                             <a href="/Shop/Index">Shop</a>
                         </li>
 
-                        <li class="sale-noti">
+                        <li>
                             <a href="product.html">Sale</a>
                         </li>
 
@@ -67,7 +62,7 @@
                             <a href="blog.html">Blog</a>
                         </li>
 
-                        <li>
+                        <li class="sale-noti">
                             <a href="/About/Index">About</a>
                         </li>
 
@@ -80,7 +75,7 @@
 
             <!-- Header Icon -->
             <div class="header-icons">
-                <a href="@Url.Action("LogIn", "Member")" class="header-wrapicon1 dis-block">
+                <a href="#" class="header-wrapicon1 dis-block">
                     <img src="~/Content/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
                 </a>
 
@@ -90,7 +85,7 @@
                     <img src="~/Content/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
                     <span class="header-icons-noti">0</span>
 
-                    <!-- Header cart noti -->
+                    <!-- Header cart -->
                     <div class="header-cart header-dropdown">
                         <ul class="header-cart-wrapitem">
                             <li class="header-cart-item">
@@ -170,7 +165,7 @@
     <!-- Header Mobile -->
     <div class="wrap_header_mobile">
         <!-- Logo moblie -->
-        <a href="/Home/Index" class="logo-mobile">
+        <a href="index.html" class="logo-mobile">
             <img src="~/Content/images/icons/logo.png" alt="IMG-LOGO">
         </a>
 
@@ -178,7 +173,7 @@
         <div class="btn-show-menu">
             <!-- Header Icon mobile -->
             <div class="header-icons-mobile">
-                <a href="@Url.Action("LogIn", "Member")" class="header-wrapicon1 dis-block">
+                <a href="#" class="header-wrapicon1 dis-block">
                     <img src="~/Content/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
                 </a>
 
@@ -286,13 +281,6 @@
                         <span class="topbar-email">
                             fashe@example.com
                         </span>
-
-                        <div class="topbar-language rs1-select2">
-                            <select class="selection-1" name="time">
-                                <option>USD</option>
-                                <option>EUR</option>
-                            </select>
-                        </div>
                     </div>
                 </li>
 
@@ -308,12 +296,12 @@
 
                 <li class="item-menu-mobile">
                     <a href="/Home/Index">Home</a>
-                    @*<ul class="sub-menu">
-                            <li><a href="index.html">Homepage V1</a></li>
-                            <li><a href="home-02.html">Homepage V2</a></li>
-                            <li><a href="home-03.html">Homepage V3</a></li>
-                        </ul>
-                        <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>*@
+                    <ul class="sub-menu">
+                        <li><a href="index.html">Homepage V1</a></li>
+                        <li><a href="home-02.html">Homepage V2</a></li>
+                        <li><a href="home-03.html">Homepage V3</a></li>
+                    </ul>
+                    <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
                 </li>
 
                 <li class="item-menu-mobile">
@@ -333,57 +321,74 @@
                 </li>
 
                 <li class="item-menu-mobile">
-                    <a href="about.html">About</a>
+                    <a href="/About/Index">About</a>
                 </li>
 
                 <li class="item-menu-mobile">
-                    <a href="contact.html">Contact</a>
+                    <a href="/Contact/Index">Contact</a>
                 </li>
             </ul>
         </nav>
     </div>
 </header>
-<div class="container">
-    <div class="row mb-4">
-        <div class="col-2"></div>
-        <div class="col-md-6 p-b-30">
-            <form class="leave-comment">
-                <h4 class="m-text26 p-b-36 p-t-15 mt-4">
-                    <strong>會員登入 Member Login</strong> 
-                </h4>
 
-                <div class="bo4 of-hidden size15 m-b-20">
-                    <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="name" placeholder="帳號 Account Number">
-                </div>
+<!-- Title Page -->
+<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(http://www.zhiwutuan.com/statics/images/ny_banner_bg3.jpg);">
 
-                <div class="bo4 of-hidden size15 m-b-20">
-                    <input class="sizefull s-text7 p-l-22 p-r-22" type="password" name="phone-number" placeholder="密碼 Password">
+</section>
+
+<!-- content page -->
+<section class="bgwhite p-t-66 p-b-38">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 p-b-30">
+                <div class="hov-img-zoom">
+                    <img src="https://lh6.googleusercontent.com/1lMVTA6J6ucYevzj0VJXDeBEDSaBdQ7wm6S9aP_OCUKLo4NcaCkogz32mBrTkHna9WmD05UibPLFDA7sPa37=w1366-h637" alt="IMG-ABOUT">
                 </div>
-                <br />
-                <div class="row">
-                    <div class="col-6">
-                        <div class="w-size25">
-                            <!-- Button -->
-                            <button class="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4">
-                                Login
-                            </button>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="w-size25">
-                            <!-- Button -->
-                            <button class="flex-c-m size2 bg0 bo-rad-23 hov7 m-text3 trans-0-4" type="button" onclick="location.href='@Url.Action("SignUp", "Member")'">
-                                Sign Up
-                            </button>
-                        </div>
-                    </div>
+            </div>
+
+            <div class="col-md-8 p-b-30">
+                <h3 class="m-text26 p-t-15 p-b-16">
+                    洪識超
+                </h3>
+
+                <p class="p-b-28">
+                    Phasellus egestas nisi nisi, lobortis ultricies risus semper nec. Vestibulum pharetra ac ante ut pellentesque. Curabitur fringilla dolor quis lorem accumsan, vitae molestie urna dapibus. Pellentesque porta est ac neque bibendum viverra. Vivamus lobortis magna ut interdum laoreet. Donec gravida lorem elit, quis condimentum ex semper sit amet. Fusce eget ligula magna. Aliquam aliquam imperdiet sodales. Ut fringilla turpis in vehicula vehicula. Pellentesque congue ac orci ut gravida. Aliquam erat volutpat. Donec iaculis lectus a arcu facilisis, eu sodales lectus sagittis. Etiam pellentesque, magna vel dictum rutrum, neque justo eleifend elit, vel tincidunt erat arcu ut sem. Sed rutrum, turpis ut commodo efficitur, quam velit convallis ipsum, et maximus enim ligula ac ligula. Vivamus tristique vulputate ultricies. Sed vitae ultrices orci.
+                </p>
+
+                <div class="bo13 p-l-29 m-l-9 p-b-10">
+                    <p class="p-b-11">
+                        Creativity is just connecting things. When you ask creative people how they did something, they feel a little guilty because they didn't really do it, they just saw something. It seemed obvious to them after a while.
+                    </p>
+
+                    <span class="s-text7">
+                        - Steve Job’s
+                    </span>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
+</section>
+
+<!-- Back to top -->
+<div class="btn-back-to-top bg0-hov" id="myBtn">
+    <span class="symbol-btn-back-to-top">
+        <i class="fa fa-angle-double-up" aria-hidden="true"></i>
+    </span>
 </div>
+
+<!-- Container Selection -->
+<div id="dropDownSelect1"></div>
+<div id="dropDownSelect2"></div>
 
 @Scripts.Render("~/Content/vendors")
 @Scripts.Render("~/Content/vendors1")
 @Scripts.Render("~/Content/js")
+
+<script type="text/javascript">
+    $(".selection-1").select2({
+        minimumResultsForSearch: 20,
+        dropdownParent: $('#dropDownSelect1')
+    });
+</script>
 

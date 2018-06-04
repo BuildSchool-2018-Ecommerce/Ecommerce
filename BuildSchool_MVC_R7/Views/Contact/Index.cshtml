@@ -1,7 +1,9 @@
 ﻿
 @{
-    ViewBag.Title = "LogIn";
+    ViewBag.Title = "Index";
 }
+
+<!-- Header -->
 <header class="header1">
     <!-- Header desktop -->
     <div class="container-menu-header">
@@ -22,19 +24,12 @@
                 <span class="topbar-email">
                     fashe@example.com
                 </span>
-
-                @*<div class="topbar-language rs1-select2">
-                        <select class="selection-1" name="time">
-                            <option>USD</option>
-                            <option>EUR</option>
-                        </select>
-                    </div>*@
             </div>
         </div>
 
         <div class="wrap_header">
             <!-- Logo -->
-            <a href="/Home/Index" class="logo">
+            <a href="index.html" class="logo">
                 <img src="~/Content/images/icons/logo.png" alt="IMG-LOGO">
             </a>
 
@@ -44,18 +39,18 @@
                     <ul class="main_menu">
                         <li>
                             <a href="/Home/Index">Home</a>
-                            @*<ul class="sub_menu">
-                                    <li><a href="index.html">Homepage V1</a></li>
-                                    <li><a href="home-02.html">Homepage V2</a></li>
-                                    <li><a href="home-03.html">Homepage V3</a></li>
-                                </ul>*@
+                            <ul class="sub_menu">
+                                <li><a href="index.html">Homepage V1</a></li>
+                                <li><a href="home-02.html">Homepage V2</a></li>
+                                <li><a href="home-03.html">Homepage V3</a></li>
+                            </ul>
                         </li>
 
                         <li>
                             <a href="/Shop/Index">Shop</a>
                         </li>
 
-                        <li class="sale-noti">
+                        <li>
                             <a href="product.html">Sale</a>
                         </li>
 
@@ -71,7 +66,7 @@
                             <a href="/About/Index">About</a>
                         </li>
 
-                        <li>
+                        <li class="sale-noti">
                             <a href="/Contact/Index">Contact</a>
                         </li>
                     </ul>
@@ -80,7 +75,7 @@
 
             <!-- Header Icon -->
             <div class="header-icons">
-                <a href="@Url.Action("LogIn", "Member")" class="header-wrapicon1 dis-block">
+                <a href="#" class="header-wrapicon1 dis-block">
                     <img src="~/Content/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
                 </a>
 
@@ -170,7 +165,7 @@
     <!-- Header Mobile -->
     <div class="wrap_header_mobile">
         <!-- Logo moblie -->
-        <a href="/Home/Index" class="logo-mobile">
+        <a href="index.html" class="logo-mobile">
             <img src="~/Content/images/icons/logo.png" alt="IMG-LOGO">
         </a>
 
@@ -178,7 +173,7 @@
         <div class="btn-show-menu">
             <!-- Header Icon mobile -->
             <div class="header-icons-mobile">
-                <a href="@Url.Action("LogIn", "Member")" class="header-wrapicon1 dis-block">
+                <a href="#" class="header-wrapicon1 dis-block">
                     <img src="~/Content/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
                 </a>
 
@@ -286,13 +281,6 @@
                         <span class="topbar-email">
                             fashe@example.com
                         </span>
-
-                        <div class="topbar-language rs1-select2">
-                            <select class="selection-1" name="time">
-                                <option>USD</option>
-                                <option>EUR</option>
-                            </select>
-                        </div>
                     </div>
                 </li>
 
@@ -308,12 +296,12 @@
 
                 <li class="item-menu-mobile">
                     <a href="/Home/Index">Home</a>
-                    @*<ul class="sub-menu">
-                            <li><a href="index.html">Homepage V1</a></li>
-                            <li><a href="home-02.html">Homepage V2</a></li>
-                            <li><a href="home-03.html">Homepage V3</a></li>
-                        </ul>
-                        <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>*@
+                    <ul class="sub-menu">
+                        <li><a href="index.html">Homepage V1</a></li>
+                        <li><a href="home-02.html">Homepage V2</a></li>
+                        <li><a href="home-03.html">Homepage V3</a></li>
+                    </ul>
+                    <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
                 </li>
 
                 <li class="item-menu-mobile">
@@ -333,57 +321,91 @@
                 </li>
 
                 <li class="item-menu-mobile">
-                    <a href="about.html">About</a>
+                    <a href="/About/Index">About</a>
                 </li>
 
                 <li class="item-menu-mobile">
-                    <a href="contact.html">Contact</a>
+                    <a href="/Contact/Index">Contact</a>
                 </li>
             </ul>
         </nav>
     </div>
 </header>
-<div class="container">
-    <div class="row mb-4">
-        <div class="col-2"></div>
-        <div class="col-md-6 p-b-30">
-            <form class="leave-comment">
-                <h4 class="m-text26 p-b-36 p-t-15 mt-4">
-                    <strong>會員登入 Member Login</strong> 
-                </h4>
 
-                <div class="bo4 of-hidden size15 m-b-20">
-                    <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="name" placeholder="帳號 Account Number">
-                </div>
+<!-- Title Page -->
+<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(http://www.zhiwutuan.com/statics/images/ny_banner_bg3.jpg);">
+</section>
 
-                <div class="bo4 of-hidden size15 m-b-20">
-                    <input class="sizefull s-text7 p-l-22 p-r-22" type="password" name="phone-number" placeholder="密碼 Password">
+<!-- content page -->
+<section class="bgwhite p-t-66 p-b-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 p-b-30">
+                <div class="p-r-20 p-r-0-lg">
+                    <div class="contact-map size21" id="google_map" data-map-x="40.614439" data-map-y="-73.926781" data-pin="~/Content/images/icons/icon-position-map.png" data-scrollwhell="0" data-draggable="1"></div>
                 </div>
-                <br />
-                <div class="row">
-                    <div class="col-6">
-                        <div class="w-size25">
-                            <!-- Button -->
-                            <button class="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4">
-                                Login
-                            </button>
-                        </div>
+            </div>
+
+            <div class="col-md-6 p-b-30">
+                <form class="leave-comment">
+                    <h4 class="m-text26 p-b-36 p-t-15">
+                        Send us your message
+                    </h4>
+
+                    <div class="bo4 of-hidden size15 m-b-20">
+                        <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="name" placeholder="Full Name">
                     </div>
-                    <div class="col-6">
-                        <div class="w-size25">
-                            <!-- Button -->
-                            <button class="flex-c-m size2 bg0 bo-rad-23 hov7 m-text3 trans-0-4" type="button" onclick="location.href='@Url.Action("SignUp", "Member")'">
-                                Sign Up
-                            </button>
-                        </div>
+
+                    <div class="bo4 of-hidden size15 m-b-20">
+                        <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="phone-number" placeholder="Phone Number">
                     </div>
-                </div>
-            </form>
+
+                    <div class="bo4 of-hidden size15 m-b-20">
+                        <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="email" placeholder="Email Address">
+                    </div>
+
+                    <textarea class="dis-block s-text7 size20 bo4 p-l-22 p-r-22 p-t-13 m-b-20" name="message" placeholder="Message"></textarea>
+
+                    <div class="w-size25">
+                        <!-- Button -->
+                        <button class="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4">
+                            Send
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
+</section>
+
+<!-- Back to top -->
+<div class="btn-back-to-top bg0-hov" id="myBtn">
+    <span class="symbol-btn-back-to-top">
+        <i class="fa fa-angle-double-up" aria-hidden="true"></i>
+    </span>
 </div>
+
+<!-- Container Selection -->
+<div id="dropDownSelect1"></div>
+<div id="dropDownSelect2"></div>
 
 @Scripts.Render("~/Content/vendors")
 @Scripts.Render("~/Content/vendors1")
 @Scripts.Render("~/Content/js")
+
+<script type="text/javascript" src="vendor/select2/select2.min.js"></script>
+<script type="text/javascript">
+		$(".selection-1").select2({
+			minimumResultsForSearch: 20,
+			dropdownParent: $('#dropDownSelect1')
+		});
+
+		$(".selection-2").select2({
+			minimumResultsForSearch: 20,
+			dropdownParent: $('#dropDownSelect2')
+		});
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKFWBqlKAGCeS1rMVoaNlwyayu0e0YRes"></script>
+<script src="js/map-custom.js"></script>
 
