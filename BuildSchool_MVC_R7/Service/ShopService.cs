@@ -37,9 +37,11 @@ namespace BuildSchool_MVC_R7.Service
         public ShopViewModel FindProductByProductID(int productid)
         {
             var productRepository = ContainerManager.Container.GetInstance<ProductRepository>();
+            var product = productRepository.FindProductByProductID(productid).ToList();
             var shopViewModel = new ShopViewModel()
             {
-                FindProductByProductID = productRepository.FindProductByProductID(productid).ToList()
+                FindProductByProductID = product,
+                CategoryProduct = productRepository.CategoryProductNotEqualProductID(product[0].CategoryID, productid).ToList()
             };
             return shopViewModel;
         }

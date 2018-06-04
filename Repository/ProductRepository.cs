@@ -180,5 +180,14 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
             }
             return price;
         }
+        public IEnumerable<CategoryProduct> CategoryProductNotEqualProductID(int categoryid, int productid)
+        {
+            return connection.Query<CategoryProduct>("CategoryProductNotEqualProductID",
+                new
+                {
+                    categoryid,
+                    productid
+                }, commandType: CommandType.StoredProcedure);
+        }
     }
 }
