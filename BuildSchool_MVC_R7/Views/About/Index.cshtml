@@ -1,10 +1,9 @@
-﻿@model ShopViewModel
+﻿
 @{
-    ViewBag.Title = "Shop";
+    ViewBag.Title = "Index";
 }
-@{
-    var category = Model.Category;
-}
+
+<!-- Header -->
 <header class="header1">
     <!-- Header desktop -->
     <div class="container-menu-header">
@@ -25,20 +24,13 @@
                 <span class="topbar-email">
                     fashe@example.com
                 </span>
-
-                @*<div class="topbar-language rs1-select2">
-                        <select class="selection-1" name="time">
-                            <option>USD</option>
-                            <option>EUR</option>
-                        </select>
-                    </div>*@
             </div>
         </div>
 
         <div class="wrap_header">
             <!-- Logo -->
             <a href="index.html" class="logo">
-                <img src="~/Content/images/icons/logo.png" alt="IMG-LOGO">
+                <img src="@Url.Content("~/Content/images/icons/logo.png")" alt="IMG-LOGO">
             </a>
 
             <!-- Menu -->
@@ -46,16 +38,16 @@
                 <nav class="menu">
                     <ul class="main_menu">
                         <li>
-                            <a href="/Home/Index">Home</a>
-                            @*<ul class="sub_menu">
-                    <li><a href="index.html">Homepage V1</a></li>
-                    <li><a href="home-02.html">Homepage V2</a></li>
-                    <li><a href="home-03.html">Homepage V3</a></li>
-                </ul>*@
+                            <a href="index.html">Home</a>
+                            <ul class="sub_menu">
+                                <li><a href="index.html">Homepage V1</a></li>
+                                <li><a href="home-02.html">Homepage V2</a></li>
+                                <li><a href="home-03.html">Homepage V3</a></li>
+                            </ul>
                         </li>
 
-                        <li class="sale-noti">
-                            <a href="/Shop/Shop">Shop</a>
+                        <li>
+                            <a href="product.html">Shop</a>
                         </li>
 
                         <li>
@@ -70,7 +62,7 @@
                             <a href="blog.html">Blog</a>
                         </li>
 
-                        <li>
+                        <li class="sale-noti">
                             <a href="about.html">About</a>
                         </li>
 
@@ -83,7 +75,7 @@
 
             <!-- Header Icon -->
             <div class="header-icons">
-                <a href="@Url.Action("LogIn", "Member")" class="header-wrapicon1 dis-block">
+                <a href="#" class="header-wrapicon1 dis-block">
                     <img src="~/Content/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
                 </a>
 
@@ -93,7 +85,7 @@
                     <img src="~/Content/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
                     <span class="header-icons-noti">0</span>
 
-                    <!-- Header cart noti -->
+                    <!-- Header cart -->
                     <div class="header-cart header-dropdown">
                         <ul class="header-cart-wrapitem">
                             <li class="header-cart-item">
@@ -181,7 +173,7 @@
         <div class="btn-show-menu">
             <!-- Header Icon mobile -->
             <div class="header-icons-mobile">
-                <a href="@Url.Action("LogIn", "Member")" class="header-wrapicon1 dis-block">
+                <a href="#" class="header-wrapicon1 dis-block">
                     <img src="~/Content/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
                 </a>
 
@@ -289,13 +281,6 @@
                         <span class="topbar-email">
                             fashe@example.com
                         </span>
-
-                        <div class="topbar-language rs1-select2">
-                            <select class="selection-1" name="time">
-                                <option>USD</option>
-                                <option>EUR</option>
-                            </select>
-                        </div>
                     </div>
                 </li>
 
@@ -310,17 +295,17 @@
                 </li>
 
                 <li class="item-menu-mobile">
-                    <a href="/Home/Index">Home</a>
-                    @*<ul class="sub-menu">
-                            <li><a href="index.html">Homepage V1</a></li>
-                            <li><a href="home-02.html">Homepage V2</a></li>
-                            <li><a href="home-03.html">Homepage V3</a></li>
-                        </ul>
-                        <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>*@
+                    <a href="index.html">Home</a>
+                    <ul class="sub-menu">
+                        <li><a href="index.html">Homepage V1</a></li>
+                        <li><a href="home-02.html">Homepage V2</a></li>
+                        <li><a href="home-03.html">Homepage V3</a></li>
+                    </ul>
+                    <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
                 </li>
 
                 <li class="item-menu-mobile">
-                    <a href="/Shop/Shop">Shop</a>
+                    <a href="product.html">Shop</a>
                 </li>
 
                 <li class="item-menu-mobile">
@@ -348,152 +333,37 @@
 </header>
 
 <!-- Title Page -->
-<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(https://stmed.net/sites/default/files/elle-fanning-wallpapers-26656-4002211.jpg);">
-    <h2 class="l-text2 t-center">
-        R SEVEN
-    </h2>
-    <p class="m-text13 t-center">
-        New Arrivals Collection 2018
-    </p>
+<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(http://www.zhiwutuan.com/statics/images/ny_banner_bg3.jpg);">
+
 </section>
 
-
-<!-- Content page -->
-<section class="bgwhite p-t-55 p-b-65">
+<!-- content page -->
+<section class="bgwhite p-t-66 p-b-38">
     <div class="container">
         <div class="row">
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                <div class="leftbar p-r-20 p-r-0-sm">
-                    <!--  -->
-                    <h4 class="m-text14 p-b-7">
-                        Categories
-                    </h4>
-
-                    <ul class="p-b-54">
-                        <li class="p-t-4">
-                            <button id="0" class="s-text13 active1">
-                                全部
-                            </button>
-                        </li>
-                        @foreach (var item in category)
-                        {
-                            <li class="p-t-4">
-                                <button id="@item.CategoryID" class="s-text13 category">
-                                    @item.CategoryName
-                                </button>
-                            </li>
-                        }
-                        @*<li class="p-t-4">
-                                <a href="#" class="s-text13">
-                                    Women
-                                </a>
-                            </li>
-
-                            <li class="p-t-4">
-                                <a href="#" class="s-text13">
-                                    Men
-                                </a>
-                            </li>
-
-                            <li class="p-t-4">
-                                <a href="#" class="s-text13">
-                                    Kids
-                                </a>
-                            </li>
-
-                            <li class="p-t-4">
-                                <a href="#" class="s-text13">
-                                    Accesories
-                                </a>
-                            </li>*@
-                    </ul>
-
-                    <!--  -->
-                    <h4 class="m-text14 p-b-32">
-                        Filters
-                    </h4>
-
-                    <div class="filter-price p-t-22 p-b-50 bo3">
-                        <div class="m-text15 p-b-17">
-                            Price
-                        </div>
-
-                        <div class="wra-filter-bar">
-                            <div id="filter-bar"></div>
-                        </div>
-
-                        <div class="flex-sb-m flex-w p-t-16">
-                            <div class="w-size11">
-                                <!-- Button -->
-                                <button class="flex-c-m size4 bg7 bo-rad-15 hov1 s-text14 trans-0-4">
-                                    Filter
-                                </button>
-                            </div>
-
-                            <div class="s-text3 p-t-10 p-b-10">
-                                Range: $<span id="value-lower">610</span> - $<span id="value-upper">980</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="filter-color p-t-22 p-b-50 bo3">
-                        <div class="m-text15 p-b-12">
-                            Color
-                        </div>
-
-                        <ul class="flex-w">
-                            <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter1" type="checkbox" name="color-filter1">
-                                <label class="color-filter color-filter1" for="color-filter1"></label>
-                            </li>
-
-                            <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter2" type="checkbox" name="color-filter2">
-                                <label class="color-filter color-filter2" for="color-filter2"></label>
-                            </li>
-
-                            <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter3" type="checkbox" name="color-filter3">
-                                <label class="color-filter color-filter3" for="color-filter3"></label>
-                            </li>
-
-                            <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter4" type="checkbox" name="color-filter4">
-                                <label class="color-filter color-filter4" for="color-filter4"></label>
-                            </li>
-
-                            <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter5" type="checkbox" name="color-filter5">
-                                <label class="color-filter color-filter5" for="color-filter5"></label>
-                            </li>
-
-                            <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter6" type="checkbox" name="color-filter6">
-                                <label class="color-filter color-filter6" for="color-filter6"></label>
-                            </li>
-
-                            <li class="m-r-10">
-                                <input class="checkbox-color-filter" id="color-filter7" type="checkbox" name="color-filter7">
-                                <label class="color-filter color-filter7" for="color-filter7"></label>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="search-product pos-relative bo4 of-hidden">
-                        <input class="s-text7 size6 p-l-23 p-r-50" type="text" name="search-product" placeholder="Search Products...">
-
-                        <button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
-                            <i class="fs-12 fa fa-search" aria-hidden="true"></i>
-                        </button>
-                    </div>
+            <div class="col-md-4 p-b-30">
+                <div class="hov-img-zoom">
+                    <img src="https://lh6.googleusercontent.com/1lMVTA6J6ucYevzj0VJXDeBEDSaBdQ7wm6S9aP_OCUKLo4NcaCkogz32mBrTkHna9WmD05UibPLFDA7sPa37=w1366-h637" alt="IMG-ABOUT">
                 </div>
             </div>
 
-            <div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
-                <!-- Product -->
+            <div class="col-md-8 p-b-30">
+                <h3 class="m-text26 p-t-15 p-b-16">
+                    洪識超
+                </h3>
 
-                <div id="page">
-                    @{ Html.RenderAction("AllProduct"); }
+                <p class="p-b-28">
+                    Phasellus egestas nisi nisi, lobortis ultricies risus semper nec. Vestibulum pharetra ac ante ut pellentesque. Curabitur fringilla dolor quis lorem accumsan, vitae molestie urna dapibus. Pellentesque porta est ac neque bibendum viverra. Vivamus lobortis magna ut interdum laoreet. Donec gravida lorem elit, quis condimentum ex semper sit amet. Fusce eget ligula magna. Aliquam aliquam imperdiet sodales. Ut fringilla turpis in vehicula vehicula. Pellentesque congue ac orci ut gravida. Aliquam erat volutpat. Donec iaculis lectus a arcu facilisis, eu sodales lectus sagittis. Etiam pellentesque, magna vel dictum rutrum, neque justo eleifend elit, vel tincidunt erat arcu ut sem. Sed rutrum, turpis ut commodo efficitur, quam velit convallis ipsum, et maximus enim ligula ac ligula. Vivamus tristique vulputate ultricies. Sed vitae ultrices orci.
+                </p>
+
+                <div class="bo13 p-l-29 m-l-9 p-b-10">
+                    <p class="p-b-11">
+                        Creativity is just connecting things. When you ask creative people how they did something, they feel a little guilty because they didn't really do it, they just saw something. It seemed obvious to them after a while.
+                    </p>
+
+                    <span class="s-text7">
+                        - Steve Job’s
+                    </span>
                 </div>
             </div>
         </div>
@@ -511,7 +381,6 @@
 <div id="dropDownSelect1"></div>
 <div id="dropDownSelect2"></div>
 
-
 @Scripts.Render("~/Content/vendors")
 @Scripts.Render("~/Content/vendors1")
 @Scripts.Render("~/Content/js")
@@ -521,67 +390,5 @@
         minimumResultsForSearch: 20,
         dropdownParent: $('#dropDownSelect1')
     });
-
-    //$(".selection-2").select2({
-    //    minimumResultsForSearch: 20,
-    //    dropdownParent: $('#dropDownSelect2')
-    //});
-    $('.block2-btn-addcart').each(function () {
-        var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
-        $(this).on('click', function () {
-            swal(nameProduct, "is added to cart !", "success");
-        });
-    });
-
-    $('.block2-btn-addwishlist').each(function () {
-        var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
-        $(this).on('click', function () {
-            swal(nameProduct, "is added to wishlist !", "success");
-        });
-    });
-    /*[ No ui ]
-        ===========================================================*/
-    var filterBar = document.getElementById('filter-bar');
-
-    noUiSlider.create(filterBar, {
-        start: [0, 1000],
-        connect: true,
-        range: {
-            'min': 0,
-            'max': 1000
-        }
-    });
-
-    var skipValues = [
-        document.getElementById('value-lower'),
-        document.getElementById('value-upper')
-    ];
-
-    filterBar.noUiSlider.on('update', function (values, handle) {
-        skipValues[handle].innerHTML = Math.round(values[handle]);
-    });
-
-    $(document).on("click", "#0", function () {
-        $.ajax({
-            url: "/Shop/AllProduct",
-            success: function (result) {
-                $("#page").empty();
-                $("#page").html(result);
-            }
-        });
-    });
-    $(document).on("click", ".category", function (e) {
-        console.log(e);
-        $.ajax({
-            url: "/Shop/CategoryProduct",
-            data: {
-                categoryid : e.target.id
-            },
-            success: function (result) {
-                $("#page").empty();
-                $("#page").html(result);
-            }
-        });
-    })
 </script>
 
