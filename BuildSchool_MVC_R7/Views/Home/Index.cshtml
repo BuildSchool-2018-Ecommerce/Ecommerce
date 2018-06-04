@@ -21,7 +21,7 @@
 
 <div class="wrap_header fixed-header2 trans-0-4">
     <!-- Logo -->
-    <a href="index.html" class="logo">
+    <a href="/Home/Index" class="logo">
         <img src="@Url.Content("~/Content/images/icons/logo.png")" alt="IMG-LOGO">
     </a>
 
@@ -34,7 +34,7 @@
                 </li>
 
                 <li>
-                    <a href="/Shop/Shop">Shop</a>
+                    <a href="/Shop/Index">Shop</a>
                 </li>
 
                 <li>
@@ -63,7 +63,7 @@
     <!-- Header Icon -->
     <div class="header-icons">
         <a href="@Url.Action("LogIn", "Member")" class="header-wrapicon1 dis-block">
-            <img src="@Url.Content("~/Content/images/icons/00.png")" class="header-icon1" alt="ICON">
+            <img src="@Url.Content("~/Content/images/icons/icon-header-01.png")" class="header-icon1" alt="ICON">
         </a>
 
         <span class="linedivide1"></span>
@@ -161,7 +161,7 @@
             </div>
 
             <!-- Logo2 -->
-            <a href="index.html" class="logo2">
+            <a href="/Home/Index" class="logo2">
                 <img src="@Url.Content("~/Content/images/icons/logo.png")" alt="IMG-LOGO">
             </a>
 
@@ -179,7 +179,7 @@
 
                 <!--  -->
                 <a href="@Url.Action("LogIn", "Member")" class="header-wrapicon1 dis-block m-l-30">
-                    <img src="@Url.Content("~/Content/images/icons/00.png")" class="header-icon1" alt="ICON">
+                    <img src="@Url.Content("~/Content/images/icons/icon-header-01.png")" class="header-icon1" alt="ICON">
                 </a>
 
                 <span class="linedivide1"></span>
@@ -275,7 +275,7 @@
                         </li>
 
                         <li>
-                            <a href="/Shop/Shop">Shop</a>
+                            <a href="/Shop/Index">Shop</a>
                         </li>
 
                         <li class="sale-noti">
@@ -310,7 +310,7 @@
     <!-- Header Mobile -->
     <div class="wrap_header_mobile">
         <!-- Logo moblie -->
-        <a href="index.html" class="logo-mobile">
+        <a href="/Home/Index" class="logo-mobile">
             <img src="@Url.Content("~/Content/images/icons/logo.png")" alt="IMG-LOGO">
         </a>
 
@@ -457,7 +457,7 @@
                 </li>
 
                 <li class="item-menu-mobile">
-                    <a href="/Shop/Shop">Shop</a>
+                    <a href="/Shop/Index">Shop</a>
                 </li>
 
                 <li class="item-menu-mobile">
@@ -668,10 +668,7 @@
                                         </div>
 
                                         <div class="block2-txt p-t-20">
-                                            <div hidden>
-                                                <input value=@item.ProductID />
-                                            </div>
-                                            <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+                                            <a href=@Url.Action("Product","Shop",new { @productid = item.ProductID }) class="block2-name dis-block s-text3 p-b-5">
                                                 @item.ProductName
                                             </a>
 
@@ -710,10 +707,7 @@
                                         </div>
 
                                         <div class="block2-txt p-t-20">
-                                            <div hidden>
-                                                <input value=@item.ProductID />
-                                            </div>
-                                            <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+                                            <a href=@Url.Action("Product","Shop",new { @productid = item.ProductID }) class="block2-name dis-block s-text3 p-b-5">
                                                 @item.ProductName
                                             </a>
 
@@ -744,9 +738,6 @@
                                                 <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
                                                 <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
                                             </a>
-                                            <div hidden>
-                                                <input value=@item.ProductID />
-                                            </div>
                                             @*<div class="block2-btn-addcart w-size1 trans-0-4">
                                                      Button
                                                     <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
@@ -757,7 +748,7 @@
                                     </div>
 
                                     <div class="block2-txt p-t-20">
-                                        <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+                                        <a href=@Url.Action("Product","Shop",new { @productid = item.ProductID }) class="block2-name dis-block s-text3 p-b-5">
                                             @item.ProductName
                                         </a>
 
@@ -787,9 +778,6 @@
                                                 <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
                                                 <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
                                             </a>
-                                            <div hidden>
-                                                <input value=@item.ProductID />
-                                            </div>
                                             @*<div class="block2-btn-addcart w-size1 trans-0-4">
                                                      Button
                                                     <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
@@ -800,7 +788,7 @@
                                     </div>
 
                                     <div class="block2-txt p-t-20">
-                                        <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+                                        <a href=@Url.Action("Product","Shop",new { @productid = item.ProductID }) class="block2-name dis-block s-text3 p-b-5">
                                             @item.ProductName
                                         </a>
 

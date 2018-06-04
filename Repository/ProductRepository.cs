@@ -137,5 +137,48 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                     categoryid
                 }, commandType: CommandType.StoredProcedure);
         }
+        public IEnumerable<FindProductByProductID> FindProductByProductID(int productid)
+        {
+            return connection.Query<FindProductByProductID>("FindProductByProductID",
+                new
+                {
+                    productid
+                }, commandType: CommandType.StoredProcedure);
+        }
+        public IEnumerable<ProductSizeAndQuantity> ProductSize(int productid, string color)
+        {
+            return connection.Query<ProductSizeAndQuantity>("ProductSize",
+                new
+                {
+                    productid,
+                    color
+                }, commandType: CommandType.StoredProcedure);
+        }
+        public ProductSizeAndQuantity ProductQuantity(int productid, string color, string size)
+        {
+            var result = connection.Query<ProductSizeAndQuantity>("ProductQuantity",
+                new
+                {
+                    productid,
+                    color,
+                    size
+                }, commandType: CommandType.StoredProcedure);
+            ProductSizeAndQuantity quntity = null;
+            foreach(var item in result)
+            {
+                quntity = item;
+            }
+            return quntity;
+        }
+        public int MaxUnitPrice()
+        {
+            var result = connection.Query<int>("SELECT MAX(UnitPrice) as UnitPrice FROM Products");
+            int price = 0;
+            foreach(var item in result)
+            {
+                price = item;
+            }
+            return price;
+        }
     }
 }

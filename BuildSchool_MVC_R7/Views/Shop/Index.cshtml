@@ -1,9 +1,16 @@
 ﻿@model ShopViewModel
 @{
-    ViewBag.Title = "Shop";
+    ViewBag.Title = "Index";
 }
 @{
     var category = Model.Category;
+    var allproduct = Model.AllProduct;
+    var allproductcount = allproduct.Count();
+    var groupsize = 12;
+    var groupcount = Math.Ceiling(allproductcount / (double)groupsize);
+    var min = 0;
+    var max = 12;
+    var maxunitprice = Model.MaxUnitPrice;
 }
 <header class="header1">
     <!-- Header desktop -->
@@ -55,7 +62,7 @@
                         </li>
 
                         <li class="sale-noti">
-                            <a href="/Shop/Shop">Shop</a>
+                            <a href="/Shop/Index">Shop</a>
                         </li>
 
                         <li>
@@ -320,7 +327,7 @@
                 </li>
 
                 <li class="item-menu-mobile">
-                    <a href="/Shop/Shop">Shop</a>
+                    <a href="/Shop/Index">Shop</a>
                 </li>
 
                 <li class="item-menu-mobile">
@@ -371,16 +378,16 @@
 
                     <ul class="p-b-54">
                         <li class="p-t-4">
-                            <button id="0" class="s-text13 active1">
+                            <a href="/Shop/Index" class="s-text13 active1">
                                 全部
-                            </button>
+                            </a>
                         </li>
                         @foreach (var item in category)
                         {
                             <li class="p-t-4">
-                                <button id="@item.CategoryID" class="s-text13 category">
+                                <a href=@Url.Action("CategoryProduct", "Shop", new { @categoryid = item.CategoryID }) class="s-text13 category">
                                     @item.CategoryName
-                                </button>
+                                </a>
                             </li>
                         }
                         @*<li class="p-t-4">
@@ -425,13 +432,15 @@
                         <div class="flex-sb-m flex-w p-t-16">
                             <div class="w-size11">
                                 <!-- Button -->
-                                <button class="flex-c-m size4 bg7 bo-rad-15 hov1 s-text14 trans-0-4">
+                                <button id="filter" class="flex-c-m size4 bg7 bo-rad-15 hov1 s-text14 trans-0-4">
                                     Filter
                                 </button>
                             </div>
 
                             <div class="s-text3 p-t-10 p-b-10">
-                                Range: $<span id="value-lower">610</span> - $<span id="value-upper">980</span>
+                                Range: $
+                                <span id="value-lower">610</span> - $
+                                <span id="value-upper">980</span>
                             </div>
                         </div>
                     </div>
@@ -492,9 +501,213 @@
             <div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
                 <!-- Product -->
 
-                <div id="page">
-                    @{ Html.RenderAction("AllProduct"); }
+                <div class="flex-sb-m flex-w p-b-35">
+                    <div class="flex-w">
+                        <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
+                            <select class="selection-2" name="sorting" style="width: 100%">
+                                <option>Default Sorting</option>
+                                <option>Popularity</option>
+                                <option>Price: low to high</option>
+                                <option>Price: high to low</option>
+                            </select>
+                        </div>
+
+                        <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
+                            <select class="selection-2" name="sorting" style="width: 100%">
+                                <option>Price</option>
+                                <option>$0.00 - $50.00</option>
+                                <option>$50.00 - $100.00</option>
+                                <option>$100.00 - $150.00</option>
+                                <option>$150.00 - $200.00</option>
+                                <option>$200.00+</option>
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <span id="results" class="s-text8 p-t-5 p-b-5">
+                        Showing 1 – 12 of @allproductcount results
+                    </span>
                 </div>
+
+                <div class="tab-content" id="pills-tabContent">
+                    @for (int i = 0; i < groupcount; i++)
+                    {
+                        var pid = "p" + i;
+                        var phid = "#ph" + i;
+                        if (i == 0)
+                        {
+                            <div class="tab-pane fade show active" id=@phid role="tabpanel" aria-labelledby=@pid>
+                                <div class="row">
+                                    @{ min = i * 12; max = min + 12; }
+                                    @for (int j = min; j < max; j++)
+                                    {
+                                        if (j < allproductcount)
+                                        {
+                                            if (allproduct[j].Sale != 0)
+                                            {
+                                                <div class="col-sm-4 col-md-4 col-lg-4 p-b-50 filter">
+                                                    <!-- Block2 -->
+                                                    <div class="block2">
+                                                        <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
+                                                            <img src=@allproduct[j].Image style="width:255px;height:340px" alt="IMG-PRODUCT">
+
+                                                            <div class="block2-overlay trans-0-4">
+                                                                <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                                                    <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                                                    <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="block2-txt p-t-20">
+                                                            <a href=@Url.Action("Product","Shop",new { @productid = allproduct[j].ProductID }) class="block2-name dis-block s-text3 p-b-5">
+                                                                @allproduct[j].ProductName
+                                                            </a>
+                                                            <span class="block2-oldprice m-text7 p-r-5">
+                                                                @allproduct[j].UnitPrice.ToString("C", CultureInfo.CurrentCulture)
+                                                            </span>
+
+                                                            <span class="block2-newprice m-text8 p-r-5 price">
+                                                                @allproduct[j].Sale.ToString("C", CultureInfo.CurrentCulture)
+                                                            </span>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="col-sm-4 col-md-4 col-lg-4 p-b-50 filter">
+                                                    <!-- Block2 -->
+                                                    <div class="block2">
+                                                        <div class="block2-img wrap-pic-w of-hidden pos-relative ">
+                                                            <img src=@allproduct[j].Image style="width:255px;height:340px" alt="IMG-PRODUCT">
+
+                                                            <div class="block2-overlay trans-0-4">
+                                                                <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                                                    <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                                                    <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="block2-txt p-t-20">
+                                                            <a href=@Url.Action("Product","Shop",new { @productid = allproduct[j].ProductID }) class="block2-name dis-block s-text3 p-b-5">
+                                                                @allproduct[j].ProductName
+                                                            </a>
+
+                                                            <span class="block2-price m-text6 p-r-5 price">
+                                                                @allproduct[j].UnitPrice.ToString("C", CultureInfo.CurrentCulture)
+                                                            </span>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="tab-pane fade" id=@phid role="tabpanel" aria-labelledby=@pid>
+                                <div class="row">
+                                    @{ min = i * 12; max = min + 12; }
+                                    @for (int j = min; j < max; j++)
+                                    {
+                                        if (j < allproductcount)
+                                        {
+                                            if (allproduct[j].Sale != 0)
+                                            {
+                                                <div class="col-sm-4 col-md-4 col-lg-4 p-b-50 filter">
+                                                    <!-- Block2 -->
+                                                    <div class="block2">
+                                                        <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
+                                                            <img src=@allproduct[j].Image style="width:255px;height:340px" alt="IMG-PRODUCT">
+
+                                                            <div class="block2-overlay trans-0-4">
+                                                                <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                                                    <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                                                    <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="block2-txt p-t-20">
+                                                            <a href=@Url.Action("Product","Shop",new { @productid = allproduct[j].ProductID }) class="block2-name dis-block s-text3 p-b-5">
+                                                                @allproduct[j].ProductName
+                                                            </a>
+                                                            <span class="block2-oldprice m-text7 p-r-5">
+                                                                @allproduct[j].UnitPrice.ToString("C", CultureInfo.CurrentCulture)
+                                                            </span>
+
+                                                            <span class="block2-newprice m-text8 p-r-5 price">
+                                                                @allproduct[j].Sale.ToString("C", CultureInfo.CurrentCulture)
+                                                            </span>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="col-sm-4 col-md-4 col-lg-4 p-b-50 filter">
+                                                    <!-- Block2 -->
+                                                    <div class="block2">
+                                                        <div class="block2-img wrap-pic-w of-hidden pos-relative ">
+                                                            <img src=@allproduct[j].Image style="width:255px;height:340px" alt="IMG-PRODUCT">
+
+                                                            <div class="block2-overlay trans-0-4">
+                                                                <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                                                    <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                                                    <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="block2-txt p-t-20">
+                                                            <a href=@Url.Action("Product","Shop",new { @productid = allproduct[j].ProductID }) class="block2-name dis-block s-text3 p-b-5">
+                                                                @allproduct[j].ProductName
+                                                            </a>
+
+                                                            <span class="block2-price m-text6 p-r-5 price">
+                                                                @allproduct[j].UnitPrice.ToString("C", CultureInfo.CurrentCulture)
+                                                            </span>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        }
+
+
+                    }
+                </div>
+
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    @for (int i = 0; i < groupcount; i++)
+                    {
+                        var pid = "p" + i;
+                        var phid = "#ph" + i;
+                        <li class="nav-item">
+                            @if (i == 0)
+                            {
+                                <a class="item-pagination flex-c-m trans-0-4 active-pagination" id=@pid data-toggle="pill" href=@phid role="tab" aria-controls=@phid aria-selected="false">@(i + 1)</a>
+                            }
+                            else
+                            {
+                                <a class="item-pagination flex-c-m trans-0-4" id=@pid data-toggle="pill" href=@phid role="tab" aria-controls=@phid aria-selected="false">@(i + 1)</a>
+                            }
+                        </li>
+                    }
+                </ul>
             </div>
         </div>
     </div>
@@ -544,11 +757,11 @@
     var filterBar = document.getElementById('filter-bar');
 
     noUiSlider.create(filterBar, {
-        start: [0, 1000],
+        start: [0, @maxunitprice],
         connect: true,
         range: {
             'min': 0,
-            'max': 1000
+            'max': @maxunitprice
         }
     });
 
@@ -560,28 +773,22 @@
     filterBar.noUiSlider.on('update', function (values, handle) {
         skipValues[handle].innerHTML = Math.round(values[handle]);
     });
-
-    $(document).on("click", "#0", function () {
-        $.ajax({
-            url: "/Shop/AllProduct",
-            success: function (result) {
-                $("#page").empty();
-                $("#page").html(result);
+    $(document).on("click", ".item-pagination", function () {
+        $(".item-pagination").removeClass("active-pagination");
+        $(this).addClass("active-pagination");
+        $("#results").text("Showing " + (($(this).text()-1) * 12 + 1) + " – " + ($(this).text() - 1 + 12) + " of @allproductcount results");
+        console.log($(this).text());
+    })
+    $(document).on("click", "#filter", function () {
+        var min = parseInt($("#value-lower").text());
+        var max = parseInt($("#value-upper").text());
+        $(".filter").attr('hidden', true);
+        var filter = $(".filter");
+        $(".filter").each(function () {
+            var item = parseInt($(this).find(".price").html().replace("NT$", "").replace(",", "").trim());
+            if (item > min && item <= max) {
+                $(this).removeAttr("hidden");
             }
-        });
-    });
-    $(document).on("click", ".category", function (e) {
-        console.log(e);
-        $.ajax({
-            url: "/Shop/CategoryProduct",
-            data: {
-                categoryid : e.target.id
-            },
-            success: function (result) {
-                $("#page").empty();
-                $("#page").html(result);
-            }
-        });
+        })
     })
 </script>
-

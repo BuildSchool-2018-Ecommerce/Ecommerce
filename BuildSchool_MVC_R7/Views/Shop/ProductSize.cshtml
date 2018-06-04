@@ -1,0 +1,8 @@
+﻿@model ShopViewModel
+@{
+    var sizequantity = Model.ProductSize;
+}
+@foreach (var item in sizequantity)
+{
+    <option>@item.Size</option>
+}
