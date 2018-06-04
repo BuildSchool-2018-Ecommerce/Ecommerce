@@ -34,7 +34,7 @@ namespace BuildSchool_MVC_R7.Models
             //todo到DB抓使用者資料
             //假如抓不到系統使用者資料
             //※為了Demo用這種寫法，實際請換成判斷DB的資料存不存在
-            if (!(Account == "123" && base64Password == "123"))
+            if (!(Account == "123" && Password == "123" || Account == "456" && Password == "456"))
             {
                 yield return new ValidationResult("無此帳號或密碼"+base64Password, new string[] { "Account" });
             }

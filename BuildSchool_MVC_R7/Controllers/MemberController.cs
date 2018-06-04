@@ -9,26 +9,54 @@ using System.Web.Security;
 
 namespace BuildSchool_MVC_R7.Controllers
 {
-    [Authorize]
+    //需要驗證
+    //[Authorize]
     public class MemberController : Controller
     {
         // GET: Member
-        [AllowAnonymous]
+        //不用驗證直接過
+        //[AllowAnonymous]
         public ActionResult LogIn(string ReturnUrl)
         {
             LoginVM vm = new LoginVM() { ReturnUrl = ReturnUrl };
             return View(vm);
         }
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [HttpPost]
-        public ActionResult VerifyLogIn(LoginVM vm)
+        public ActionResult VerifyLogIn(/*LoginVM vm*/string account, string password)
         {
-            if (!ModelState.IsValid)
-            {
-                return View("LogIn",vm);
-            }
-            FormsAuthentication.RedirectFromLoginPage(vm.Account, false);
-            return Redirect(FormsAuthentication.GetRedirectUrl(vm.Account, false));
+            var username = "";
+            var userdata = "";
+            FormsAuthenticationTicket ticket = new FormsAuthenticationTicket
+                (1, username, DateTime.Now, DateTime.Now.AddMinutes(30), false, userdata, FormsAuthentication.FormsCookiePath);
+            // Encrypt the ticket.
+            string encTicket = FormsAuthentication.Encrypt(ticket);
+            // Create the cookie.
+            Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket));
+            //if (!ModelState.IsValid)
+            //{
+            //    return View("LogIn",vm);
+            //}
+            //string userData = "ApplicationSpecific data for this user";
+
+            //string strUsername = "你想要存放在 User.Identy.Name 的值，通常是使用者帳號";
+
+            //FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1,
+            //  strUsername,
+            //  DateTime.Now,
+            //  DateTime.Now.AddMinutes(30),
+            //  isPersistent,
+            //  userData,
+            //  FormsAuthentication.FormsCookiePath);
+
+            //// Encrypt the ticket.
+            //string encTicket = FormsAuthentication.Encrypt(ticket);
+
+            //// Create the cookie.
+            //Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket));
+            //FormsAuthentication.RedirectFromLoginPage(vm.Account, false);
+            //return Redirect(FormsAuthentication.GetRedirectUrl(vm.Account, false));
+            return View("Index", "Home");
         }
         public ActionResult test()
         {
@@ -40,7 +68,7 @@ namespace BuildSchool_MVC_R7.Controllers
             Member_SignUpViewModel Data = new Member_SignUpViewModel();
             return View(Data);
         }
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [HttpPost]
         public ActionResult SignUp([Bind(Include = "MemberID, password, name, Phone, Address, Email")] Members Data)
         {

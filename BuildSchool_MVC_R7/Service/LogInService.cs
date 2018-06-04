@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 
 namespace BuildSchool_MVC_R7.Service
 {
@@ -9,7 +10,7 @@ namespace BuildSchool_MVC_R7.Service
     {
         public void LogIn(string account, string password)
         {
-
+            
         }
     }
 }
