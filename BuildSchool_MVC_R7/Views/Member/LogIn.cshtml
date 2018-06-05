@@ -1,4 +1,4 @@
-﻿
+﻿@model LogInV
 @*@model LoginVM*@
 @{
     ViewBag.Title = "LogIn";
@@ -349,22 +349,28 @@
         <div class="col-2"></div>
         <div class="col-md-6 p-b-30">
             @*@using (Html.BeginForm("VerifyLogIn", "Member", new { ReturnUrl = Model.ReturnUrl }, FormMethod.Post, new { autocomplete = "off" }))
-            {*@
+                {*@
+            @using (Html.BeginForm("VerifyLogIn", "Member"))
+            {
                 <form class="leave-comment">
                     <h4 class="m-text26 p-b-36 p-t-15 mt-4">
                         <strong>會員登入 Member Login</strong>
                     </h4>
-
+                    <h5 style="color:red">@ViewBag.Error</h5>
                     <div class="bo4 of-hidden size15 m-b-20">
-                        <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="account" placeholder="帳號 Account Number">
-                        @*@Html.TextBoxFor(m => m.Account, htmlAttributes: new { @class = "sizefull s-text7 p-l-22 p-r-22", @placeholder = "帳號 Account" }) 
-                        @Html.ValidationMessageFor(m => m.Account)*@
+                        @*<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="account" placeholder="帳號 Account Number">*@
+                        @*@Html.TextBoxFor(m => m.Account, htmlAttributes: new { @class = "sizefull s-text7 p-l-22 p-r-22", @placeholder = "帳號 Account" })
+                            @Html.ValidationMessageFor(m => m.Account)*@
+                        @Html.TextBoxFor(model => model.Account, htmlAttributes: new { @class = "sizefull s-text7 p-l-22 p-r-22", @placeholder = "帳號 Account" })
+                        @Html.ValidationMessageFor(model => model.Account)
                     </div>
 
                     <div class="bo4 of-hidden size15 m-b-20">
-                        <input class="sizefull s-text7 p-l-22 p-r-22" type="password" name="phone-number" placeholder="密碼 Password">
-                        @*@Html.PasswordFor(m => m.Password, htmlAttributes: new { @class = "sizefull s-text7 p-l-22 p-r-22", @placeholder = "密碼 Password" }) 
-                        @Html.ValidationMessageFor(m => m.Password)*@
+                        @*<input class="sizefull s-text7 p-l-22 p-r-22" type="password" name="password" placeholder="密碼 Password">*@
+                        @*@Html.PasswordFor(m => m.Password, htmlAttributes: new { @class = "sizefull s-text7 p-l-22 p-r-22", @placeholder = "密碼 Password" })
+                            @Html.ValidationMessageFor(m => m.Password)*@
+                        @Html.TextBoxFor(model => model.Password, htmlAttributes: new { @class = "sizefull s-text7 p-l-22 p-r-22", @placeholder = "密碼 Password", @type = "password" })
+                        @Html.ValidationMessageFor(model => model.Password)
                     </div>
                     <br />
                     <div class="row">
@@ -386,6 +392,7 @@
                         </div>
                     </div>
                 </form>
+            }
             @*}*@
         </div>
     </div>
@@ -394,5 +401,6 @@
 @Scripts.Render("~/Content/vendors")
 @Scripts.Render("~/Content/vendors1")
 @Scripts.Render("~/Content/js")
+@Scripts.Render("~/bundles/jqueryval")
 
 

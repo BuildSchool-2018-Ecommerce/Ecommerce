@@ -1,4 +1,9 @@
 ﻿using BuildSchool.MvcSolution.OnlineStore.Repository;
+using BuildSchool.PasswordValidationTool.Abstracts;
+using BuildSchool.PasswordValidationTool.Client;
+using BuildSchool.PasswordValidationTool.Implementation.HashingProviders;
+using BuildSchool.PasswordValidationTool.Implementation.PasswordRules;
+using BuildSchool.PasswordValidationTool.Implementation.SaltStrategies;
 using SimpleInjector;
 using System;
 using System.Collections.Generic;
@@ -37,7 +42,11 @@ namespace BuildSchool_MVC_R7.App_Start
             _container.Register<OrdersRepository, OrdersRepository>();
             _container.Register<SalesRepository, SalesRepository>();
             _container.Register<ShoppingCartRepository, ShoppingCartRepository>();
-          
+            _container.Register<IHashingProvider, SHA512HashingProvider>();
+            _container.Register<IPasswordRule, MediumComplexityPasswordRule>();
+            _container.Register<ISaltStrategy, DefaultSaltStrategy>();
+            _container.Register<IPasswordValidationService, PasswordValidationService>();
+
         }
     }
 }

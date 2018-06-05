@@ -1,4 +1,5 @@
-﻿using BuildSchool.MvcSolution.OnlineStore.Repository;
+﻿using BuildSchool.MvcSolution.OnlineStore.Models;
+using BuildSchool.MvcSolution.OnlineStore.Repository;
 using BuildSchool_MVC_R7.App_Start;
 using BuildSchool_MVC_R7.Models;
 using System;
@@ -10,36 +11,63 @@ namespace BuildSchool_MVC_R7.Service
 {
     public class ShopService
     {
-        public ShopViewModel Shop()
+        public ShopViewModel Shop(string memberid)
         {
             var categoryRepository = ContainerManager.Container.GetInstance<CategoryRepository>();
             var productRepository = ContainerManager.Container.GetInstance<ProductRepository>();
+            var memberRepository = ContainerManager.Container.GetInstance<MemberRepository>();
+            var member = memberRepository.FindById(memberid);
+            User user = new User();
+            if (member != null)
+            {
+                user.UserID = memberid;
+                user.Username = member.Name;
+            }
             var shopViewModel = new ShopViewModel()
             {
+                User = user,
                 Category = categoryRepository.GetAll(),
                 AllProduct = productRepository.AllProduct().ToList(),
                 MaxUnitPrice = productRepository.MaxUnitPrice()
             };
             return shopViewModel;
         }
-        public ShopViewModel CategoryShop(int categoryid)
+        public ShopViewModel CategoryShop(int categoryid, string memberid)
         {
             var categoryRepository = ContainerManager.Container.GetInstance<CategoryRepository>();
             var productRepository = ContainerManager.Container.GetInstance<ProductRepository>();
+            var memberRepository = ContainerManager.Container.GetInstance<MemberRepository>();
+            var member = memberRepository.FindById(memberid);
+            User user = new User();
+            if (member != null)
+            {
+                user.UserID = memberid;
+                user.Username = member.Name;
+            }
             var shopViewModel = new ShopViewModel()
             {
+                User = user,
                 Category = categoryRepository.GetAll(),
                 CategoryProduct = productRepository.CategoryProduct(categoryid).ToList(),
                 MaxUnitPrice = productRepository.MaxUnitPrice()
             };
             return shopViewModel;
         }
-        public ShopViewModel FindProductByProductID(int productid)
+        public ShopViewModel FindProductByProductID(int productid, string memberid)
         {
             var productRepository = ContainerManager.Container.GetInstance<ProductRepository>();
             var product = productRepository.FindProductByProductID(productid).ToList();
+            var memberRepository = ContainerManager.Container.GetInstance<MemberRepository>();
+            var member = memberRepository.FindById(memberid);
+            User user = new User();
+            if (member != null)
+            {
+                user.UserID = memberid;
+                user.Username = member.Name;
+            }
             var shopViewModel = new ShopViewModel()
             {
+                User = user,
                 FindProductByProductID = product,
                 CategoryProduct = productRepository.CategoryProductNotEqualProductID(product[0].CategoryID, productid).ToList()
             };

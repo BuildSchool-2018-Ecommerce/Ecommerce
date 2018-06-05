@@ -157,9 +157,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\HomeViewModel.cs" />
+    <Compile Include="Models\LogInV.cs" />
     <Compile Include="Models\LoginVM .cs" />
     <Compile Include="Models\Member_SignUpViewModel.cs" />
     <Compile Include="Models\ShopViewModel.cs" />
+    <Compile Include="PD\IPasswordValidationService.cs" />
+    <Compile Include="PD\PasswordValidationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\HomeService.cs" />
     <Compile Include="Service\LogInService.cs" />
@@ -2996,6 +2999,14 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Desktop\buildschool-passwordvalidationtool-master\buildschool-passwordvalidationtool-master\Abstracts\Abstracts.csproj">
+      <Project>{6040c057-5224-4591-a890-c8a31df2c470}</Project>
+      <Name>Abstracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Desktop\buildschool-passwordvalidationtool-master\buildschool-passwordvalidationtool-master\Implementation\Implementation.csproj">
+      <Project>{691c4948-2559-44b5-a71b-9245dcdb86af}</Project>
+      <Name>Implementation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{522b70b1-ba21-4fe0-990c-31d5780a86a3}</Project>
       <Name>Models</Name>
