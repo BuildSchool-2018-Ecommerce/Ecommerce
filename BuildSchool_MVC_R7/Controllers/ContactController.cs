@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BuildSchool_MVC_R7.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,13 @@ namespace BuildSchool_MVC_R7.Controllers
         // GET: Contact
         public ActionResult Index()
         {
-            return View();
+            var homeservice = new HomeService();
+            var home = homeservice.Contact("0");
+            if (Request.Cookies["R7CompanyMember"] != null)
+            {
+                home = homeservice.Contact(Request.Cookies["R7CompanyMember"].Value);
+            }
+            return View(home);
         }
     }
 }

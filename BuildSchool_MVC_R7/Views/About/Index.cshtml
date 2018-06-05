@@ -1,4 +1,4 @@
-﻿
+﻿@model HomeViewModel
 @{
     ViewBag.Title = "Index";
 }
@@ -39,11 +39,6 @@
                     <ul class="main_menu">
                         <li>
                             <a href="/Home/Index">Home</a>
-                            <ul class="sub_menu">
-                                <li><a href="index.html">Homepage V1</a></li>
-                                <li><a href="home-02.html">Homepage V2</a></li>
-                                <li><a href="home-03.html">Homepage V3</a></li>
-                            </ul>
                         </li>
 
                         <li>
@@ -75,9 +70,18 @@
 
             <!-- Header Icon -->
             <div class="header-icons">
-                <a href="@Url.Action("LogIn", "Member")" class="header-wrapicon1 dis-block">
-                    <img src="~/Content/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
-                </a>
+                @if (Model.User.Username == null)
+                {
+                    <a href="@Url.Action("LogIn", "Member")" class="header-wrapicon1 dis-block">
+                        <img src="@Url.Content("~/Content/images/icons/icon-header-01.png")" class="header-icon1" alt="ICON">
+                    </a>
+                }
+                else
+                {
+                    <a href="#" class="header-wrapicon1 dis-block">
+                        <img src="@Url.Content("~/Content/images/icons/00.png")" class="header-icon1" alt="ICON">
+                    </a>
+                }
 
                 <span class="linedivide1"></span>
 
@@ -173,9 +177,18 @@
         <div class="btn-show-menu">
             <!-- Header Icon mobile -->
             <div class="header-icons-mobile">
-                <a href="@Url.Action("LogIn", "Member")" class="header-wrapicon1 dis-block">
-                    <img src="~/Content/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
-                </a>
+                @if (Model.User.Username == null)
+                {
+                    <a href="@Url.Action("LogIn", "Member")" class="header-wrapicon1 dis-block">
+                        <img src="@Url.Content("~/Content/images/icons/icon-header-01.png")" class="header-icon1" alt="ICON">
+                    </a>
+                }
+                else
+                {
+                    <a href="#" class="header-wrapicon1 dis-block">
+                        <img src="@Url.Content("~/Content/images/icons/00.png")" class="header-icon1" alt="ICON">
+                    </a>
+                }
 
                 <span class="linedivide2"></span>
 
@@ -296,12 +309,6 @@
 
                 <li class="item-menu-mobile">
                     <a href="/Home/Index">Home</a>
-                    <ul class="sub-menu">
-                        <li><a href="index.html">Homepage V1</a></li>
-                        <li><a href="home-02.html">Homepage V2</a></li>
-                        <li><a href="home-03.html">Homepage V3</a></li>
-                    </ul>
-                    <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
                 </li>
 
                 <li class="item-menu-mobile">
@@ -333,9 +340,7 @@
 </header>
 
 <!-- Title Page -->
-<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(http://www.zhiwutuan.com/statics/images/ny_banner_bg3.jpg);">
-
-</section>
+<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(http://www.zhiwutuan.com/statics/images/ny_banner_bg3.jpg);"></section>
 
 <!-- content page -->
 <section class="bgwhite p-t-66 p-b-38">

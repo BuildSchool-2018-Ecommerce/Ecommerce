@@ -31,5 +31,37 @@ namespace BuildSchool_MVC_R7.Service
             };
             return homeViewModel;
         }
+        public HomeViewModel About(string memberid)
+        {
+            var memberRepository = ContainerManager.Container.GetInstance<MemberRepository>();
+            var member = memberRepository.FindById(memberid);
+            User user = new User();
+            if (member != null)
+            {
+                user.UserID = memberid;
+                user.Username = member.Name;
+            }
+            var homeViewModel = new HomeViewModel()
+            {
+                User = user
+            };
+            return homeViewModel;
+        }
+        public HomeViewModel Contact(string memberid)
+        {
+            var memberRepository = ContainerManager.Container.GetInstance<MemberRepository>();
+            var member = memberRepository.FindById(memberid);
+            User user = new User();
+            if (member != null)
+            {
+                user.UserID = memberid;
+                user.Username = member.Name;
+            }
+            var homeViewModel = new HomeViewModel()
+            {
+                User = user
+            };
+            return homeViewModel;
+        }
     }
 }
