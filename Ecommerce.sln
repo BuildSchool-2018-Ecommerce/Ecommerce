@@ -15,9 +15,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildSchool_MVC_Ecommerce",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildSchool_MVC_R7", "BuildSchool_MVC_R7\BuildSchool_MVC_R7.csproj", "{6E92C320-3E91-44CF-977B-B930B75DCB24}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abstracts", "..\..\..\Desktop\buildschool-passwordvalidationtool-master\buildschool-passwordvalidationtool-master\Abstracts\Abstracts.csproj", "{6040C057-5224-4591-A890-C8A31DF2C470}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abstracts", "Abstracts\Abstracts.csproj", "{6040C057-5224-4591-A890-C8A31DF2C470}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Implementation", "..\..\..\Desktop\buildschool-passwordvalidationtool-master\buildschool-passwordvalidationtool-master\Implementation\Implementation.csproj", "{691C4948-2559-44B5-A71B-9245DCDB86AF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Implementation", "Implementation\Implementation.csproj", "{691C4948-2559-44B5-A71B-9245DCDB86AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

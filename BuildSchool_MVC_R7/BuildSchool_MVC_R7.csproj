@@ -2999,11 +2999,11 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Desktop\buildschool-passwordvalidationtool-master\buildschool-passwordvalidationtool-master\Abstracts\Abstracts.csproj">
+    <ProjectReference Include="..\Abstracts\Abstracts.csproj">
       <Project>{6040c057-5224-4591-a890-c8a31df2c470}</Project>
       <Name>Abstracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Desktop\buildschool-passwordvalidationtool-master\buildschool-passwordvalidationtool-master\Implementation\Implementation.csproj">
+    <ProjectReference Include="..\Implementation\Implementation.csproj">
       <Project>{691c4948-2559-44b5-a71b-9245dcdb86af}</Project>
       <Name>Implementation</Name>
     </ProjectReference>
