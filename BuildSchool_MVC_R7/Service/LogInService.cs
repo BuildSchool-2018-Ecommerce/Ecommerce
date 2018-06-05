@@ -17,14 +17,13 @@ namespace BuildSchool_MVC_R7.Service
             var service = ContainerManager.Container.GetInstance<IPasswordValidationService>();
             var memberrepository = ContainerManager.Container.GetInstance<MemberRepository>();
             var member = memberrepository.FindById(account);
-            
             if (member != null)
             {
                 byte[] userPwdData = Encoding.UTF8.GetBytes(password);
                 byte[] saltData = Encoding.UTF8.GetBytes(member.MemberGUID.ToString());
                 if (service.ValidatePassword(member.Password, userPwdData, saltData))
                 {
-                    var hc = new HttpCookie("user", "")
+                    var hc = new HttpCookie("R7CompanyMember", member.MemberID)
                     {
                         Expires = DateTime.Now.AddHours(6),
                         HttpOnly = true
@@ -32,7 +31,7 @@ namespace BuildSchool_MVC_R7.Service
                     return hc;
                 }
             }      
-            return new HttpCookie("user","null");
+            return null;
         }
     }
 }

@@ -9,15 +9,15 @@
 }
 <!-- top noti -->
 @*<div class="flex-c-m size22 bg0 s-text21 pos-relative">
-    20% off everything!
-    <a href="product.html" class="s-text22 hov6 p-l-5">
-        Shop Now
-    </a>
+        20% off everything!
+        <a href="product.html" class="s-text22 hov6 p-l-5">
+            Shop Now
+        </a>
 
-    <button class="flex-c-m pos2 size23 colorwhite eff3 trans-0-4 btn-romove-top-noti">
-        <i class="fa fa-remove fs-13" aria-hidden="true"></i>
-    </button>
-</div>*@
+        <button class="flex-c-m pos2 size23 colorwhite eff3 trans-0-4 btn-romove-top-noti">
+            <i class="fa fa-remove fs-13" aria-hidden="true"></i>
+        </button>
+    </div>*@
 <div class="wrap_header fixed-header2 trans-0-4">
     <!-- Logo -->
     <a href="/Home/Index" class="logo">
@@ -61,9 +61,19 @@
 
     <!-- Header Icon -->
     <div class="header-icons">
-        <a href="@Url.Action("LogIn", "Member")" class="header-wrapicon1 dis-block">
-            <img src="@Url.Content("~/Content/images/icons/icon-header-01.png")" class="header-icon1" alt="ICON">
-        </a>
+        @if (Model.User.Username == null)
+        {
+            <a href="@Url.Action("LogIn", "Member")" class="header-wrapicon1 dis-block">
+                <img src="@Url.Content("~/Content/images/icons/icon-header-01.png")" class="header-icon1" alt="ICON">
+            </a>
+        }
+        else
+        {
+            <a href="#" class="header-wrapicon1 dis-block">
+                <img src="@Url.Content("~/Content/images/icons/00.png")" class="header-icon1" alt="ICON">
+            </a>
+        }
+
 
         <span class="linedivide1"></span>
 
@@ -177,9 +187,18 @@
                     </div>*@
 
                 <!--  -->
-                <a href="@Url.Action("LogIn", "Member")" class="header-wrapicon1 dis-block m-l-30">
-                    <img src="@Url.Content("~/Content/images/icons/icon-header-01.png")" class="header-icon1" alt="ICON">
-                </a>
+                @if (Model.User.Username == null)
+                {
+                    <a href="@Url.Action("LogIn", "Member")" class="header-wrapicon1 dis-block">
+                        <img src="@Url.Content("~/Content/images/icons/icon-header-01.png")" class="header-icon1" alt="ICON">
+                    </a>
+                }
+                else
+                {
+                    <a href="#" class="header-wrapicon1 dis-block">
+                        <img src="@Url.Content("~/Content/images/icons/00.png")" class="header-icon1" alt="ICON">
+                    </a>
+                }
 
                 <span class="linedivide1"></span>
 
@@ -317,9 +336,18 @@
         <div class="btn-show-menu">
             <!-- Header Icon mobile -->
             <div class="header-icons-mobile">
-                <a href="@Url.Action("LogIn", "Member")" class="header-wrapicon1 dis-block">
-                    <img src="@Url.Content("~/Content/images/icons/icon-header-01.png")" class="header-icon1" alt="ICON">
-                </a>
+                @if (Model.User.Username == null)
+                {
+                    <a href="@Url.Action("LogIn", "Member")" class="header-wrapicon1 dis-block">
+                        <img src="@Url.Content("~/Content/images/icons/icon-header-01.png")" class="header-icon1" alt="ICON">
+                    </a>
+                }
+                else
+                {
+                    <a href="#" class="header-wrapicon1 dis-block">
+                        <img src="@Url.Content("~/Content/images/icons/00.png")" class="header-icon1" alt="ICON">
+                    </a>
+                }
 
                 <span class="linedivide2"></span>
 
@@ -448,11 +476,11 @@
                 <li class="item-menu-mobile">
                     <a href="/Home/Index">Home</a>
                     @*<ul class="sub-menu">
-                        <li><a href="index.html">Homepage V1</a></li>
-                        <li><a href="home-02.html">Homepage V2</a></li>
-                        <li><a href="home-03.html">Homepage V3</a></li>
-                    </ul>
-                    <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>*@
+                            <li><a href="index.html">Homepage V1</a></li>
+                            <li><a href="home-02.html">Homepage V2</a></li>
+                            <li><a href="home-03.html">Homepage V3</a></li>
+                        </ul>
+                        <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>*@
                 </li>
 
                 <li class="item-menu-mobile">
@@ -555,8 +583,8 @@
     </a>
 
     @*<button class="flex-c-m pos2 size23 colorwhite eff3 trans-0-4 btn-romove-top-noti">
-        <i class="fa fa-remove fs-13" aria-hidden="true"></i>
-    </button>*@
+            <i class="fa fa-remove fs-13" aria-hidden="true"></i>
+        </button>*@
 </div>
 
 <!-- Banner -->
@@ -854,8 +882,10 @@
                             </a>
                         </h4>
 
-                        <span class="s-text6">By</span> <span class="s-text7">Nancy Ward</span>
-                        <span class="s-text6">on</span> <span class="s-text7">July 22, 2017</span>
+                        <span class="s-text6">By</span>
+                        <span class="s-text7">Nancy Ward</span>
+                        <span class="s-text6">on</span>
+                        <span class="s-text7">July 22, 2017</span>
 
                         <p class="s-text8 p-t-16">
                             Duis ut velit gravida nibh bibendum commodo. Sus-pendisse pellentesque mattis augue id euismod. Inter-dum et malesuada fames
@@ -878,8 +908,10 @@
                             </a>
                         </h4>
 
-                        <span class="s-text6">By</span> <span class="s-text7">Nancy Ward</span>
-                        <span class="s-text6">on</span> <span class="s-text7">July 18, 2017</span>
+                        <span class="s-text6">By</span>
+                        <span class="s-text7">Nancy Ward</span>
+                        <span class="s-text6">on</span>
+                        <span class="s-text7">July 18, 2017</span>
 
                         <p class="s-text8 p-t-16">
                             Nullam scelerisque, lacus sed consequat laoreet, dui enim iaculis leo, eu viverra ex nulla in tellus. Nullam nec ornare tellus, ac fringilla lacus. Ut sit ame
@@ -902,8 +934,10 @@
                             </a>
                         </h4>
 
-                        <span class="s-text6">By</span> <span class="s-text7">Nancy Ward</span>
-                        <span class="s-text6">on</span> <span class="s-text7">July 2, 2017</span>
+                        <span class="s-text6">By</span>
+                        <span class="s-text7">Nancy Ward</span>
+                        <span class="s-text6">on</span>
+                        <span class="s-text7">July 2, 2017</span>
 
                         <p class="s-text8 p-t-16">
                             Proin nec vehicula lorem, a efficitur ex. Nam vehicula nulla vel erat tincidunt, sed hendrerit ligula porttitor. Fusce sit amet maximus nunc

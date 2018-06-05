@@ -19,15 +19,29 @@ namespace BuildSchool_MVC_R7.Controllers
         //[AllowAnonymous]
         public ActionResult LogIn(string ReturnUrl)
         {
-            LoginVM vm = new LoginVM() { ReturnUrl = ReturnUrl };
-            return View(vm);
+            //LoginVM vm = new LoginVM() { ReturnUrl = ReturnUrl };
+            if (Request.Cookies["R7CompanyMember"] != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            if (ReturnUrl == "null")
+            {
+                ViewBag.Error = "帳號或密碼輸入錯誤";
+            }
+            LogInV v = new LogInV();
+            return View(v);
         }
         //[AllowAnonymous]
         [HttpPost]
-        public ActionResult VerifyLogIn(/*LoginVM vm*/string account, string password)
+        public ActionResult VerifyLogIn(/*LoginVM vm*/LogInV LV)
         {
             var loginservice = new LogInService();
-            var login = loginservice.LogIn(account,password);
+            var login = loginservice.LogIn(LV.Account, LV.Password);
+            if(login == null)
+            {
+                return RedirectToAction("LogIn", "Member", new { ReturnUrl = "null" });
+            }
+            Response.Cookies.Add(login);
             //if (!ModelState.IsValid)
             //{
             //    return View("LogIn",vm);
@@ -37,13 +51,13 @@ namespace BuildSchool_MVC_R7.Controllers
             //return Redirect(FormsAuthentication.GetRedirectUrl(vm.Account, false));
             return RedirectToAction("Index", "Home");
         }
-        public ActionResult test()
-        {
-            return Content("登入成功");
-        }
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public ActionResult SignUp()
         {
+            if(Request.Cookies["R7CompanyMember"] != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             Member_SignUpViewModel Data = new Member_SignUpViewModel();
             return View(Data);
         }

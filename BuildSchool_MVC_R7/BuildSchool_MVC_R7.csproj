@@ -156,6 +156,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\HomeViewModel.cs" />
+    <Compile Include="Models\LogInV.cs" />
     <Compile Include="Models\LoginVM .cs" />
     <Compile Include="Models\Member_SignUpViewModel.cs" />
     <Compile Include="Models\ShopViewModel.cs" />
