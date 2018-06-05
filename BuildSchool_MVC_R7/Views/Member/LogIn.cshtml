@@ -350,6 +350,8 @@
         <div class="col-md-6 p-b-30">
             @*@using (Html.BeginForm("VerifyLogIn", "Member", new { ReturnUrl = Model.ReturnUrl }, FormMethod.Post, new { autocomplete = "off" }))
             {*@
+            @using (Html.BeginForm("VerifyLogIn", "Member"))
+            {
                 <form class="leave-comment">
                     <h4 class="m-text26 p-b-36 p-t-15 mt-4">
                         <strong>會員登入 Member Login</strong>
@@ -362,7 +364,7 @@
                     </div>
 
                     <div class="bo4 of-hidden size15 m-b-20">
-                        <input class="sizefull s-text7 p-l-22 p-r-22" type="password" name="phone-number" placeholder="密碼 Password">
+                        <input class="sizefull s-text7 p-l-22 p-r-22" type="password" name="password" placeholder="密碼 Password">
                         @*@Html.PasswordFor(m => m.Password, htmlAttributes: new { @class = "sizefull s-text7 p-l-22 p-r-22", @placeholder = "密碼 Password" }) 
                         @Html.ValidationMessageFor(m => m.Password)*@
                     </div>
@@ -386,6 +388,7 @@
                         </div>
                     </div>
                 </form>
+            }
             @*}*@
         </div>
     </div>

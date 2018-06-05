@@ -1,5 +1,6 @@
 ﻿using BuildSchool.MvcSolution.OnlineStore.Models;
 using BuildSchool_MVC_R7.Models;
+using BuildSchool_MVC_R7.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,38 +26,16 @@ namespace BuildSchool_MVC_R7.Controllers
         [HttpPost]
         public ActionResult VerifyLogIn(/*LoginVM vm*/string account, string password)
         {
-            var username = "";
-            var userdata = "";
-            FormsAuthenticationTicket ticket = new FormsAuthenticationTicket
-                (1, username, DateTime.Now, DateTime.Now.AddMinutes(30), false, userdata, FormsAuthentication.FormsCookiePath);
-            // Encrypt the ticket.
-            string encTicket = FormsAuthentication.Encrypt(ticket);
-            // Create the cookie.
-            Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket));
+            var loginservice = new LogInService();
+            var login = loginservice.LogIn(account,password);
             //if (!ModelState.IsValid)
             //{
             //    return View("LogIn",vm);
             //}
-            //string userData = "ApplicationSpecific data for this user";
 
-            //string strUsername = "你想要存放在 User.Identy.Name 的值，通常是使用者帳號";
-
-            //FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1,
-            //  strUsername,
-            //  DateTime.Now,
-            //  DateTime.Now.AddMinutes(30),
-            //  isPersistent,
-            //  userData,
-            //  FormsAuthentication.FormsCookiePath);
-
-            //// Encrypt the ticket.
-            //string encTicket = FormsAuthentication.Encrypt(ticket);
-
-            //// Create the cookie.
-            //Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket));
             //FormsAuthentication.RedirectFromLoginPage(vm.Account, false);
             //return Redirect(FormsAuthentication.GetRedirectUrl(vm.Account, false));
-            return View("Index", "Home");
+            return RedirectToAction("Index", "Home");
         }
         public ActionResult test()
         {
