@@ -62,12 +62,12 @@ namespace BuildSchool_MVC_R7.Service
             User user = new User();
             if (member != null)
             {
-                User = user,
                 user.UserID = memberid;
                 user.Username = member.Name;
             }
             var shopViewModel = new ShopViewModel()
             {
+                User = user,
                 FindProductByProductID = product,
                 CategoryProduct = productRepository.CategoryProductNotEqualProductID(product[0].CategoryID, productid).ToList()
             };
