@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+
 @model HomeViewModel
 @{
     var newproduct = Model.NewProduct;
@@ -69,9 +70,52 @@
         }
         else
         {
-            <a href="#" class="header-wrapicon1 dis-block">
-                <img src="@Url.Content("~/Content/images/icons/00.png")" class="header-icon1" alt="ICON">
-            </a>
+            <div class="header-wrapicon2 m-r-13">
+                <img src="@Url.Content("~/Content/images/icons/00.png")" class="header-icon1 js-show-header-dropdown" alt="ICON">
+
+                <!-- Header cart noti -->
+                <div class="header-cart header-dropdown" style="width:160px;height:200px">
+                    <ul class="header-cart-wrapitem">
+                        <li class="header-cart-item">
+                            <div>
+                                <a href="#" class="header-cart-item-name" style="color:royalblue">
+                                    @Model.User.Username
+                                </a>
+                            </div>
+                        </li>
+
+                        <li class="header-cart-item">
+
+                            <div>
+
+                                <a href="#" class="header-cart-item-name">
+                                    <i class="far fa-edit"></i>
+                                    修改會員
+                                </a>
+                            </div>
+                        </li>
+
+                        <li class="header-cart-item">
+
+                            <div>
+                                <a href="#" class="header-cart-item-name">
+                                    <i class="fas fa-search"></i>
+                                    查詢訂單
+                                </a>
+                            </div>
+                        </li>
+                        <li class="header-cart-item">
+
+                            <div>
+                                <a href="@Url.Action("LogOut","Member")" class="header-cart-item-name">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                    登出
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         }
 
 
@@ -176,72 +220,72 @@
 
             <div class="topbar-child2">
                 @*<span class="topbar-email">
-            fashe@example.com
-        </span>
+                        fashe@example.com
+                    </span>
 
-        <div class="topbar-language rs1-select2">
-            <select class="selection-1" name="time">
-                <option>USD</option>
-                <option>EUR</option>
-            </select>
-        </div>*@
+                    <div class="topbar-language rs1-select2">
+                        <select class="selection-1" name="time">
+                            <option>USD</option>
+                            <option>EUR</option>
+                        </select>
+                    </div>*@
 
                 <!--  -->
                 @if (Model.User.Username == null)
-    {
-            <a href="@Url.Action("LogIn", "Member")" class="header-wrapicon1 dis-block">
-                <img src="@Url.Content("~/Content/images/icons/icon-header-01.png")" class="header-icon1" alt="ICON">
-            </a>
-}
-else
-{
-            <div class="header-wrapicon2 m-r-13">
-                <img src="@Url.Content("~/Content/images/icons/00.png")" class="header-icon1 js-show-header-dropdown" alt="ICON">
-
-                <!-- Header cart noti -->
-                <div class="header-cart header-dropdown" style="width:160px;height:200px">
-                    <ul class="header-cart-wrapitem">
-                        <li class="header-cart-item">
-                            <div>
-                                <a href="#" class="header-cart-item-name" style="color:royalblue">
-                                    @Model.User.Username
+                {
+                    <a href="@Url.Action("LogIn", "Member")" class="header-wrapicon1 dis-block">
+                        <img src="@Url.Content("~/Content/images/icons/icon-header-01.png")" class="header-icon1" alt="ICON">
                     </a>
+                }
+                else
+                {
+                    <div class="header-wrapicon2 m-r-13">
+                        <img src="@Url.Content("~/Content/images/icons/00.png")" class="header-icon1 js-show-header-dropdown" alt="ICON">
+
+                        <!-- Header cart noti -->
+                        <div class="header-cart header-dropdown" style="width:160px;height:200px">
+                            <ul class="header-cart-wrapitem">
+                                <li class="header-cart-item">
+                                    <div>
+                                        <a href="#" class="header-cart-item-name" style="color:royalblue">
+                                            @Model.User.Username
+                                        </a>
+                                    </div>
+                                </li>
+
+                                <li class="header-cart-item">
+
+                                    <div>
+
+                                        <a href="#" class="header-cart-item-name">
+                                            <i class="far fa-edit"></i>
+                                            修改會員
+                                        </a>
+                                    </div>
+                                </li>
+
+                                <li class="header-cart-item">
+
+                                    <div>
+                                        <a href="#" class="header-cart-item-name">
+                                            <i class="fas fa-search"></i>
+                                            查詢訂單
+                                        </a>
+                                    </div>
+                                </li>
+                                <li class="header-cart-item">
+
+                                    <div>
+                                        <a href="@Url.Action("LogOut","Member")" class="header-cart-item-name">
+                                            <i class="fas fa-sign-out-alt"></i>
+                                            登出
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    </li>
-
-                    <li class="header-cart-item">
-
-                        <div>
-
-                            <a href="#" class="header-cart-item-name">
-                                <i class="far fa-edit"></i>
-                                修改會員
-                            </a>
-                        </div>
-                    </li>
-
-                    <li class="header-cart-item">
-
-                        <div>
-                            <a href="#" class="header-cart-item-name">
-                                <i class="fas fa-search"></i>
-                                查詢訂單
-                            </a>
-                        </div>
-                    </li>
-                    <li class="header-cart-item">
-
-                        <div>
-                            <a href="#" class="header-cart-item-name">
-                                <i class="fas fa-sign-out-alt"></i>
-                                登出
-                            </a>
-                        </div>
-                    </li>
-                    </ul>
-                </div>
-            </div>
-}
+                }
 
                 <span class="linedivide1"></span>
 
@@ -387,9 +431,52 @@ else
                 }
                 else
                 {
-                    <a href="#" class="header-wrapicon1 dis-block">
-                        <img src="@Url.Content("~/Content/images/icons/00.png")" class="header-icon1" alt="ICON">
-                    </a>
+                    <div class="header-wrapicon2 m-r-13">
+                        <img src="@Url.Content("~/Content/images/icons/00.png")" class="header-icon1 js-show-header-dropdown" alt="ICON">
+
+                        <!-- Header cart noti -->
+                        <div class="header-cart header-dropdown" style="width:160px;height:200px">
+                            <ul class="header-cart-wrapitem">
+                                <li class="header-cart-item">
+                                    <div>
+                                        <a href="#" class="header-cart-item-name" style="color:royalblue">
+                                            @Model.User.Username
+                                        </a>
+                                    </div>
+                                </li>
+
+                                <li class="header-cart-item">
+
+                                    <div>
+
+                                        <a href="#" class="header-cart-item-name">
+                                            <i class="far fa-edit"></i>
+                                            修改會員
+                                        </a>
+                                    </div>
+                                </li>
+
+                                <li class="header-cart-item">
+
+                                    <div>
+                                        <a href="#" class="header-cart-item-name">
+                                            <i class="fas fa-search"></i>
+                                            查詢訂單
+                                        </a>
+                                    </div>
+                                </li>
+                                <li class="header-cart-item">
+
+                                    <div>
+                                        <a href="@Url.Action("LogOut","Member")" class="header-cart-item-name">
+                                            <i class="fas fa-sign-out-alt"></i>
+                                            登出
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 }
 
                 <span class="linedivide2"></span>
@@ -1198,7 +1285,7 @@ else
         var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
         $(this).on('click', function () {
             swal(nameProduct, "is added to cart !", "success");
-            $('.header-icons-noti').text($('.header-cart-item').length / 3);
+            //$('.header-icons-noti').text($('.header-cart-item').length / 3);
         });
     });
 
@@ -1209,5 +1296,5 @@ else
         });
     });
     $('.parallax100').parallax100();
-    $('.header-icons-noti').text($('.header-cart-item').length / 3);
+    //$('.header-icons-noti').text($('.header-cart-item').length / 3);
 </script>

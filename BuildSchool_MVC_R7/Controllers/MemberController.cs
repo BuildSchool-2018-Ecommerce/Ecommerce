@@ -67,5 +67,14 @@ namespace BuildSchool_MVC_R7.Controllers
         {
             return RedirectToAction("Index", "Home");
         }
+        public ActionResult LogOut()
+        {
+            var cookie = Request.Cookies["R7CompanyMember"];
+            cookie.Expires = DateTime.Now;
+            Response.Cookies.Add(cookie);
+            //Response.Write("<script>location ='xxx.aspx'</script>");
+            //Response.Write("<script language=javascript>self.location=document.referrer;</script>");
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
