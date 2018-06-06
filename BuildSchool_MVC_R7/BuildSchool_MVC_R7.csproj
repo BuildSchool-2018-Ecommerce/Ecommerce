@@ -2988,6 +2988,9 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
+    <Content Include="Views\Member\Account_Member.cshtml" />
+    <Content Include="Views\Member\Account_Order.cshtml" />
+    <Content Include="Views\Member\Account_UpdateMember.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

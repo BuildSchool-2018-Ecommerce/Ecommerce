@@ -70,11 +70,24 @@ namespace BuildSchool_MVC_R7.Controllers
         public ActionResult LogOut()
         {
             var cookie = Request.Cookies["R7CompanyMember"];
-            cookie.Expires = DateTime.Now;
-            Response.Cookies.Add(cookie);
-            //Response.Write("<script>location ='xxx.aspx'</script>");
-            //Response.Write("<script language=javascript>self.location=document.referrer;</script>");
+            if(cookie != null)
+            {
+                cookie.Expires = DateTime.Now;
+                Response.Cookies.Add(cookie);
+            }
             return RedirectToAction("Index", "Home");
+        }
+        public ActionResult Account_Member()
+        {
+            return View();
+        }
+        public ActionResult Account_Order()
+        {
+            return View();
+        }
+        public ActionResult Account_UpdateMember()
+        {
+            return View();
         }
     }
 }
