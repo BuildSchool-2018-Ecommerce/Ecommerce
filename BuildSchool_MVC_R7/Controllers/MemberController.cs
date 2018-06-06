@@ -65,6 +65,8 @@ namespace BuildSchool_MVC_R7.Controllers
         [HttpPost]
         public ActionResult SignUp([Bind(Include = "MemberID, password, name, Phone, Address, Email")] Members Data)
         {
+            var memberservice = new MemberService();
+            var member = memberservice.SignUp(Data);
             return RedirectToAction("Index", "Home");
         }
         public ActionResult LogOut()
