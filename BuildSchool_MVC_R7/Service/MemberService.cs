@@ -7,5 +7,9 @@ namespace BuildSchool_MVC_R7.Service
 {
     public class MemberService
     {
+        public void SignUp()
+        {
+
+        }
     }
 }
