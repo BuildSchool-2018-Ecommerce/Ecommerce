@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Text;
+using BuildSchool_MVC_R7.Models;
 
 namespace BuildSchool_MVC_R7.Service
 {
@@ -31,21 +32,6 @@ namespace BuildSchool_MVC_R7.Service
             }
             return false;
         }
-    }
-}
-using BuildSchool.MvcSolution.OnlineStore.Models;
-using BuildSchool.MvcSolution.OnlineStore.Repository;
-using BuildSchool_MVC_R7.App_Start;
-using BuildSchool_MVC_R7.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace BuildSchool_MVC_R7.Service
-{
-    public class MemberService
-    {
         public MemberViewModel GetMembers()
         {
             var memberRepository = ContainerManager.Container.GetInstance<MemberRepository>();

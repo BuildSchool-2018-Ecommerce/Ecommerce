@@ -160,6 +160,7 @@
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\LogInV.cs" />
     <Compile Include="Models\LoginVM .cs" />
+    <Compile Include="Models\MemberViewModel.cs" />
     <Compile Include="Models\Member_SignUpViewModel.cs" />
     <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Models\ProductFormatViewModel.cs" />
@@ -173,7 +174,6 @@
     <Compile Include="Service\OrderService.cs" />
     <Compile Include="Service\ProductService.cs" />
     <Compile Include="Service\LogInService.cs" />
-    <Compile Include="Service\MemberService.cs" />
     <Compile Include="Service\ShopService.cs" />
   </ItemGroup>
   <ItemGroup>
