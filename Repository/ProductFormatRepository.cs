@@ -52,6 +52,18 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                 });
         }
 
+        public void UpdateProductFormat(ProductFormat model)
+        {
+            connection.Execute("UPDATE ProductFormat SET Size = @Size, Color = @Color, StockQuantity = @StockQuantity WHERE ProductFormatID = @ProductFormatID",
+                new
+                {
+                    model.Size,
+                    model.Color,
+                    model.StockQuantity,
+                    model.ProductFormatID
+                });
+        }
+
         public void Delete(ProductFormat model)
         {
             connection.Execute("DELETE FROM ProductFormat WHERE ProductFormatID = @ProductFormatID",
@@ -79,6 +91,15 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
         public IEnumerable<ProductFormat> GetAll()
         {
             return connection.Query<ProductFormat>("SELECT * FROM ProductFormat ");
+        }
+
+        public IEnumerable<GetProductFormatByProductID> GetProductFormatByProductFormatID(int ProductFormatID)
+        {
+            return connection.Query<GetProductFormatByProductID>("GetProductFormatByProductFormatID",
+                new
+                {
+                    ProductFormatID
+                }, commandType: CommandType.StoredProcedure);
         }
     }
 }

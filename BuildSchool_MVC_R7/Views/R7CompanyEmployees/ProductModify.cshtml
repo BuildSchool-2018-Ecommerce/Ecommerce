@@ -1,0 +1,50 @@
+﻿@model BuildSchool_MVC_R7.Models.ProductViewModel
+@{
+    var productDetail = Model.Product;
+}
+
+
+<style>
+    .field {
+        padding-top: 1.3em;
+    }
+
+    input {
+        width: 100%;
+    }
+
+    label {
+        width: 6em;
+    }
+
+    .col-sm-12 {
+        margin-bottom: 2em;
+    }
+</style>
+
+@using (Html.BeginForm("UpdateProduct", "R7CompanyEmployees"))
+{
+    <div class="row">
+        <div id="display" class="col-sm-12 mb-2">
+            <input name="ProductID" value="@ViewBag.ProductID" hidden />
+            <div class="field">
+                <label>產品名稱: </label>
+                <input name="ProductName" value="@productDetail.ProductName" type="text" /><br />
+            </div>
+            <div class="field">
+                <label>單價: </label>
+                <input name="UnitPrice" value="@productDetail.UnitPrice" type="text" /><br />
+            </div>
+            <div class="field">
+                <label>商品描述: </label>
+                <input name="Description" value="@productDetail.Description" type="text" /><br />
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <button class="btn btn-primary" type="submit">儲存</button>
+            <a href=@Url.RouteUrl(new { Controller = "R7CompanyEmployees", Action = "ProductList" })>
+                <button class="btn btn-danger cancelBtn">取消</button>
+            </a>
+        </div>
+    </div>
+}

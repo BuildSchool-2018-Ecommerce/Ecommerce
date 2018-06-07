@@ -43,10 +43,9 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
 
         public void Update(Members model)
         {
-            connection.Execute("UPDATE Members SET Password=@Password, Name=@Name, Phone=@Phone, Address=@Address, Email=@Email WHERE MemberID = @MemberID",
+            connection.Execute("UPDATE Members SET Name=@Name, Phone=@Phone, Address=@Address, Email=@Email WHERE MemberID = @MemberID",
                 new
                 {
-                    model.Password,
                     model.Name,
                     model.Phone,
                     model.Address,

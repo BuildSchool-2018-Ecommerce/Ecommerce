@@ -1,0 +1,76 @@
+﻿@model MemberViewModel
+@{
+    ViewBag.Title = "MemberList";
+    Layout = "~/Views/Shared/CompanyLayout.cshtml";
+    var members = Model.Members;
+}
+<style>
+    table {
+        text-align: center;
+    }
+
+    tr {
+        border: 0.1em solid rgb(225, 225, 225);
+    }
+
+    th, td {
+        padding-right: 2em;
+        line-height: 3.5em;
+    }
+
+    button {
+        width: 5em;
+    }
+</style>
+<h1>This is MemberList</h1>
+<div class="row">
+    <div id="display" class="col-sm-12">
+        <table>
+            <thead>
+                <tr>
+                    <th>會員編號</th>
+                    <th>姓名</th>
+                    <th>住址</th>
+                    <th>電子郵件</th>
+                    <th>電話</th>
+                    <th> </th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var member in members)
+                {
+                    <tr>
+                        <td class="memberId">@member.MemberID</td>
+                        <td>@member.Name</td>
+                        <td>@member.Address</td>
+                        <td>@member.Email</td>
+                        <td>@member.Phone</td>
+                        <td><button class="btn btn-primary modifyBtn">修改</button></td>
+                        <td><button class="btn btn-danger deleteBtn">刪除</button></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).on("click", ".modifyBtn", function (e) {
+        console.log(e);
+        console.log($(".modifyBtn").index(this));
+        console.log($(".memberId").eq($(".modifyBtn").index(this)).html());
+        $.ajax({
+            url: "/R7CompanyEmployees/MemberDetail",
+            data: {
+                memberId: $(".memberId").eq($(".modifyBtn").index(this)).html()
+            },
+            success: function (result) {
+                $("#display").empty();
+                $("#display").html(result);
+            }
+        });
+    })
+</script>

@@ -88,9 +88,20 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
             return orderDetail;
         }
 
-        public IEnumerable<OrderDetails> GetAll()
+        public IEnumerable<GetOrderDetailByOrderID> GetOrderDetailByOrderID(int OrderID)
         {
-            return connection.Query<OrderDetails>("SELECT * FROM OrderDetails ");
+            var result = connection.Query<GetOrderDetailByOrderID>("GetOrderDetailByOrderID", new
+            {
+                OrderID
+            },
+            commandType: CommandType.StoredProcedure);
+
+            return result;
+        }
+
+        public object GetAll()
+        {
+            throw new NotImplementedException();
         }
     }
 }

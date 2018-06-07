@@ -1,0 +1,81 @@
+﻿@model OrderViewModel
+
+@{
+    ViewBag.Title = "OrderList";
+    Layout = "~/Views/Shared/CompanyLayout.cshtml";
+    var orders = Model.Orders;
+}
+
+
+
+<style>
+    table {
+        text-align: center;
+    }
+
+    tr {
+        border: 0.1em solid rgb(225, 225, 225);
+    }
+
+    th, td {
+        padding-right: 2em;
+        line-height: 3.5em;
+    }
+
+    button {
+        width: 5em;
+    }
+</style>
+<div class="row">
+    <div id="display" class="col-sm-12">
+        <h1>This is OrderList</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>訂單編號</th>
+                    <th>日期</th>
+                    <th>送件人</th>
+                    <th>送件位置</th>
+                    <th>訂單狀態</th>
+                    <th> </th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var order in orders)
+                {
+                    <tr>
+                        <td class="orderId">@order.OrderID</td>
+                        <td>@order.OrderDate</td>
+                        <td>@order.ShipName</td>
+                        <td>@order.ShipAddress</td>
+                        <td>@order.Status</td>
+                        <td><button class="btn btn-primary checkBtn">查看</button></td>
+                        <td><button class="btn btn-danger deleteBtn">刪除</button></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).on("click", ".checkBtn", function (e) {
+        console.log(e);
+        console.log($(".checkBtn").index(this));
+        console.log($(".orderId").eq($(".checkBtn").index(this)).html());
+        $.ajax({
+            url: "/R7CompanyEmployees/OrderDetail",
+            data: {
+                orderID: $(".orderId").eq($(".checkBtn").index(this)).html()
+            },
+            success: function (result) {
+                $("#display").empty();
+                $("#display").html(result);
+            }
+        });
+    })
+</script>

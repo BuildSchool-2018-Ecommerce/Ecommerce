@@ -1,0 +1,126 @@
+﻿@model BuildSchool_MVC_R7.Models.ProductViewModel
+@{
+    var products = Model.Products;
+    Layout = "~/Views/Shared/CompanyLayout.cshtml";
+}
+<style>
+    table {
+        text-align: center;
+    }
+
+    tr {
+        border: 0.1em solid rgb(225, 225, 225);
+    }
+
+    th, td {
+        padding-right: 3em;
+        line-height: 3.5em;
+        text-align: center;
+    }
+
+    .productName {
+        display: block;
+        width: 25em;
+        height: 3em;
+        overflow: hidden;
+        text-overflow: clip;
+    }
+
+    button {
+        width: 5em;
+    }
+
+    .search {
+        display: flex;
+        justify-content: space-between;
+    }
+
+        .search i {
+            position: relative;
+            left: 2em;
+        }
+
+        .search input {
+            text-indent: 2em;
+            border-radius: 3em;
+            outline: none;
+        }
+</style>
+<div class="row">
+    <div id="display" class="col-sm-12">
+        <div class="search">
+            <h1>This is ProductList</h1>
+            @using (Html.BeginForm("ProductByProductName", "R7CompanyEmployees"))
+            {
+                <form>
+                    <i class="fas fa-search"></i>
+                    <input name="ProductName" id="search" type="text" placeholder="Search" />
+                    <button id="submitBtn" type="submit">Submit</button>
+                </form>
+            }
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>產品編號</th>
+                    <th class="productName">名稱</th>
+                    <th>單價</th>
+                    <th> </th>
+                    <th> </th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in products)
+                {
+                    <tr>
+                        <td class="productID">@product.ProductID</td>
+                        <td class="productName">@product.ProductName</td>
+                        <td>@product.UnitPrice</td>
+                        <td><button class="btn btn-info checkBtn">查看</button></td>
+                        <td><button class="btn btn-primary modifyBtn">修改</button></td>
+                        <td><button class="btn btn-danger deleteBtn">刪除</button></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).on("click", ".checkBtn", function (e) {
+        console.log(e);
+        console.log($(".checkBtn").index(this));
+        console.log($(".productID").eq($(".checkBtn").index(this)).html());
+        $.ajax({
+            url: "/R7CompanyEmployees/ProductFormatDetail",
+            data: {
+                ProductID: $(".productID").eq($(".checkBtn").index(this)).html()
+            },
+            success: function (result) {
+                $("#display").empty();
+                $("#display").html(result);
+            }
+        });
+    })
+</script>
+
+
+<script>
+    $(document).on("click", ".modifyBtn", function (e) {
+        console.log(e);
+        console.log($(".modifyBtn").index(this));
+        console.log($(".productID").eq($(".modifyBtn").index(this)).html());
+        $.ajax({
+            url: "/R7CompanyEmployees/ProductModify",
+            data: {
+                ProductID: $(".productID").eq($(".modifyBtn").index(this)).html()
+            },
+            success: function (result) {
+                $("#display").empty();
+                $("#display").html(result);
+            }
+        });
+    })
+</script>

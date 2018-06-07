@@ -151,15 +151,23 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
+    <Compile Include="Controllers\R7CompanyEmployeesController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\HomeViewModel.cs" />
+    <Compile Include="Models\MemberViewModel.cs" />
     <Compile Include="Models\Member_SignUpViewModel.cs" />
+    <Compile Include="Models\OrderViewModel.cs" />
+    <Compile Include="Models\ProductFormatViewModel.cs" />
+    <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\ShopViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\HomeService.cs" />
+    <Compile Include="Service\MemberService.cs" />
+    <Compile Include="Service\OrderService.cs" />
+    <Compile Include="Service\ProductService.cs" />
     <Compile Include="Service\ShopService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -169,6 +177,19 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\font-awesome.css" />
+    <Content Include="Content\css\font-awesome.min.css" />
+    <Content Include="Content\css\metisMenu.min.css" />
+    <Content Include="Content\css\morris.css" />
+    <Content Include="Content\css\sb-admin-2.min.css" />
+    <Content Include="Content\js\bootstrap.min.js" />
+    <Content Include="Content\js\jquery.min.js" />
+    <Content Include="Content\js\metisMenu.min.js" />
+    <Content Include="Content\js\morris-data.js" />
+    <Content Include="Content\js\morris.min.js" />
+    <Content Include="Content\js\raphael.min.js" />
+    <Content Include="Content\js\sb-admin-2.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -2973,6 +2994,19 @@
     <Content Include="Views\Member\LogIn.cshtml" />
     <Content Include="Views\Member\SignUp.cshtml" />
     <Content Include="Views\Shop\AllProduct.cshtml" />
+    <Content Include="Views\R7CompanyEmployees\Index.cshtml" />
+    <Content Include="Views\Shared\CompanyLayout.cshtml" />
+    <Content Include="Views\R7CompanyEmployees\ProductList.cshtml" />
+    <Content Include="Views\R7CompanyEmployees\OrderList.cshtml" />
+    <Content Include="Views\R7CompanyEmployees\MemberList.cshtml" />
+    <Content Include="Views\R7CompanyEmployees\OrderDetail.cshtml" />
+    <Content Include="Views\R7CompanyEmployees\MemberDetail.cshtml" />
+    <Content Include="Views\R7CompanyEmployees\ProductFormatDetail.cshtml" />
+    <Content Include="Views\R7CompanyEmployees\ProductModify.cshtml" />
+    <Content Include="Views\R7CompanyEmployees\ProductFormatModify.cshtml" />
+    <Content Include="Views\R7CompanyEmployees\ProductListByCategoryName.cshtml" />
+    <Content Include="Views\R7CompanyEmployees\ProductByProductName.cshtml" />
+    <Content Include="Views\R7CompanyEmployees\OrderDetailModify.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
