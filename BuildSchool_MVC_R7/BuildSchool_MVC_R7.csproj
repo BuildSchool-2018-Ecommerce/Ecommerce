@@ -3011,6 +3011,18 @@
     <Content Include="Views\Member\Account_Member.cshtml" />
     <Content Include="Views\Member\Account_Order.cshtml" />
     <Content Include="Views\Member\Account_UpdateMember.cshtml" />
+    <Content Include="Views\R7CompanyEmployees\Index.cshtml" />
+    <Content Include="Views\R7CompanyEmployees\MemberDetail.cshtml" />
+    <Content Include="Views\R7CompanyEmployees\MemberList.cshtml" />
+    <Content Include="Views\R7CompanyEmployees\OrderDetail.cshtml" />
+    <Content Include="Views\R7CompanyEmployees\OrderDetailModify.cshtml" />
+    <Content Include="Views\R7CompanyEmployees\OrderList.cshtml" />
+    <Content Include="Views\R7CompanyEmployees\ProductByProductName.cshtml" />
+    <Content Include="Views\R7CompanyEmployees\ProductFormatDetail.cshtml" />
+    <Content Include="Views\R7CompanyEmployees\ProductFormatModify.cshtml" />
+    <Content Include="Views\R7CompanyEmployees\ProductList.cshtml" />
+    <Content Include="Views\R7CompanyEmployees\ProductListByCategoryName.cshtml" />
+    <Content Include="Views\R7CompanyEmployees\ProductModify.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
