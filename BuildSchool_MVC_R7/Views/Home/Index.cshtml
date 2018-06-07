@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+
 @model HomeViewModel
 @{
     var newproduct = Model.NewProduct;
@@ -9,19 +10,18 @@
 }
 <!-- top noti -->
 @*<div class="flex-c-m size22 bg0 s-text21 pos-relative">
-    20% off everything!
-    <a href="product.html" class="s-text22 hov6 p-l-5">
-        Shop Now
-    </a>
+        20% off everything!
+        <a href="product.html" class="s-text22 hov6 p-l-5">
+            Shop Now
+        </a>
 
-    <button class="flex-c-m pos2 size23 colorwhite eff3 trans-0-4 btn-romove-top-noti">
-        <i class="fa fa-remove fs-13" aria-hidden="true"></i>
-    </button>
-</div>*@
-
+        <button class="flex-c-m pos2 size23 colorwhite eff3 trans-0-4 btn-romove-top-noti">
+            <i class="fa fa-remove fs-13" aria-hidden="true"></i>
+        </button>
+    </div>*@
 <div class="wrap_header fixed-header2 trans-0-4">
     <!-- Logo -->
-    <a href="index.html" class="logo">
+    <a href="/Home/Index" class="logo">
         <img src="@Url.Content("~/Content/images/icons/logo.png")" alt="IMG-LOGO">
     </a>
 
@@ -29,15 +29,15 @@
     <div class="wrap_menu">
         <nav class="menu">
             <ul class="main_menu">
-                <li>
+                <li class="sale-noti">
                     <a href="/Home/Index">Home</a>
                 </li>
 
                 <li>
-                    <a href="/Shop/Shop">Shop</a>
+                    <a href="/Shop/Index">Shop</a>
                 </li>
 
-                <li class="sale-noti">
+                <li>
                     <a href="product.html">Sale</a>
                 </li>
 
@@ -50,11 +50,11 @@
                 </li>
 
                 <li>
-                    <a href="about.html">About</a>
+                    <a href="/About/Index">About</a>
                 </li>
 
                 <li>
-                    <a href="contact.html">Contact</a>
+                    <a href="/Contact/Index">Contact</a>
                 </li>
             </ul>
         </nav>
@@ -62,9 +62,62 @@
 
     <!-- Header Icon -->
     <div class="header-icons">
-        <a href="@Url.Action("LogIn", "Member")" class="header-wrapicon1 dis-block">
-            <img src="@Url.Content("~/Content/images/icons/00.png")" class="header-icon1" alt="ICON">
-        </a>
+        @if (Model.User.Username == null)
+        {
+            <a href="@Url.Action("LogIn", "Member")" class="header-wrapicon1 dis-block">
+                <img src="@Url.Content("~/Content/images/icons/icon-header-01.png")" class="header-icon1" alt="ICON">
+            </a>
+        }
+        else
+        {
+            <div class="header-wrapicon2 m-r-13">
+                <img src="@Url.Content("~/Content/images/icons/00.png")" class="header-icon1 js-show-header-dropdown" alt="ICON">
+
+                <!-- Header cart noti -->
+                <div class="header-cart header-dropdown" style="width:160px;height:200px">
+                    <ul class="header-cart-wrapitem">
+                        <li class="header-cart-item">
+                            <div>
+                                <a href="@Url.Action("Account_Member","Member")" class="header-cart-item-name" style="color:royalblue">
+                                    @Model.User.Username
+                                </a>
+                            </div>
+                        </li>
+
+                        <li class="header-cart-item">
+
+                            <div>
+
+                                <a href="@Url.Action("Account_UpdateMember","Member")" class="header-cart-item-name">
+                                    <i class="far fa-edit"></i>
+                                    修改會員
+                                </a>
+                            </div>
+                        </li>
+
+                        <li class="header-cart-item">
+
+                            <div>
+                                <a href="@Url.Action("Account_Order","Member")" class="header-cart-item-name">
+                                    <i class="fas fa-search"></i>
+                                    查詢訂單
+                                </a>
+                            </div>
+                        </li>
+                        <li class="header-cart-item">
+
+                            <div>
+                                <a href="@Url.Action("LogOut","Member")" class="header-cart-item-name">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                    登出
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        }
+
 
         <span class="linedivide1"></span>
 
@@ -161,7 +214,7 @@
             </div>
 
             <!-- Logo2 -->
-            <a href="index.html" class="logo2">
+            <a href="/Home/Index" class="logo2">
                 <img src="@Url.Content("~/Content/images/icons/logo.png")" alt="IMG-LOGO">
             </a>
 
@@ -178,9 +231,61 @@
                     </div>*@
 
                 <!--  -->
-                <a href="@Url.Action("LogIn", "Member")" class="header-wrapicon1 dis-block m-l-30">
-                    <img src="@Url.Content("~/Content/images/icons/00.png")" class="header-icon1" alt="ICON">
-                </a>
+                @if (Model.User.Username == null)
+                {
+                    <a href="@Url.Action("LogIn", "Member")" class="header-wrapicon1 dis-block">
+                        <img src="@Url.Content("~/Content/images/icons/icon-header-01.png")" class="header-icon1" alt="ICON">
+                    </a>
+                }
+                else
+                {
+                    <div class="header-wrapicon2 m-r-13">
+                        <img src="@Url.Content("~/Content/images/icons/00.png")" class="header-icon1 js-show-header-dropdown" alt="ICON">
+
+                        <!-- Header cart noti -->
+                        <div class="header-cart header-dropdown" style="width:160px;height:200px">
+                            <ul class="header-cart-wrapitem">
+                                <li class="header-cart-item">
+                                    <div>
+                                        <a href="@Url.Action("Account_Member","Member")" class="header-cart-item-name" style="color:royalblue">
+                                            @Model.User.Username
+                                        </a>
+                                    </div>
+                                </li>
+
+                                <li class="header-cart-item">
+
+                                    <div>
+
+                                        <a href="@Url.Action("Account_UpdateMember","Member")" class="header-cart-item-name">
+                                            <i class="far fa-edit"></i>
+                                            修改會員
+                                        </a>
+                                    </div>
+                                </li>
+
+                                <li class="header-cart-item">
+
+                                    <div>
+                                        <a href="@Url.Action("Account_Order","Member")" class="header-cart-item-name">
+                                            <i class="fas fa-search"></i>
+                                            查詢訂單
+                                        </a>
+                                    </div>
+                                </li>
+                                <li class="header-cart-item">
+
+                                    <div>
+                                        <a href="@Url.Action("LogOut","Member")" class="header-cart-item-name">
+                                            <i class="fas fa-sign-out-alt"></i>
+                                            登出
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                }
 
                 <span class="linedivide1"></span>
 
@@ -270,15 +375,15 @@
             <div class="wrap_menu">
                 <nav class="menu">
                     <ul class="main_menu">
-                        <li>
+                        <li class="sale-noti">
                             <a href="/Home/Index">Home</a>
                         </li>
 
                         <li>
-                            <a href="/Shop/Shop">Shop</a>
+                            <a href="/Shop/Index">Shop</a>
                         </li>
 
-                        <li class="sale-noti">
+                        <li>
                             <a href="product.html">Sale</a>
                         </li>
 
@@ -291,11 +396,11 @@
                         </li>
 
                         <li>
-                            <a href="about.html">About</a>
+                            <a href="/About/Index">About</a>
                         </li>
 
                         <li>
-                            <a href="contact.html">Contact</a>
+                            <a href="/Contact/Index">Contact</a>
                         </li>
                     </ul>
                 </nav>
@@ -310,7 +415,7 @@
     <!-- Header Mobile -->
     <div class="wrap_header_mobile">
         <!-- Logo moblie -->
-        <a href="index.html" class="logo-mobile">
+        <a href="/Home/Index" class="logo-mobile">
             <img src="@Url.Content("~/Content/images/icons/logo.png")" alt="IMG-LOGO">
         </a>
 
@@ -318,9 +423,61 @@
         <div class="btn-show-menu">
             <!-- Header Icon mobile -->
             <div class="header-icons-mobile">
-                <a href="@Url.Action("LogIn", "Member")" class="header-wrapicon1 dis-block">
-                    <img src="@Url.Content("~/Content/images/icons/icon-header-01.png")" class="header-icon1" alt="ICON">
-                </a>
+                @if (Model.User.Username == null)
+                {
+                    <a href="@Url.Action("LogIn", "Member")" class="header-wrapicon1 dis-block">
+                        <img src="@Url.Content("~/Content/images/icons/icon-header-01.png")" class="header-icon1" alt="ICON">
+                    </a>
+                }
+                else
+                {
+                    <div class="header-wrapicon2 m-r-13">
+                        <img src="@Url.Content("~/Content/images/icons/00.png")" class="header-icon1 js-show-header-dropdown" alt="ICON">
+
+                        <!-- Header cart noti -->
+                        <div class="header-cart header-dropdown" style="width:160px;height:200px">
+                            <ul class="header-cart-wrapitem">
+                                <li class="header-cart-item">
+                                    <div>
+                                        <a href="@Url.Action("Account_Member","Member")" class="header-cart-item-name" style="color:royalblue">
+                                            @Model.User.Username
+                                        </a>
+                                    </div>
+                                </li>
+
+                                <li class="header-cart-item">
+
+                                    <div>
+
+                                        <a href="@Url.Action("Account_UpdateMember","Member")" class="header-cart-item-name">
+                                            <i class="far fa-edit"></i>
+                                            修改會員
+                                        </a>
+                                    </div>
+                                </li>
+
+                                <li class="header-cart-item">
+
+                                    <div>
+                                        <a href="@Url.Action("Account_Order","Member")" class="header-cart-item-name">
+                                            <i class="fas fa-search"></i>
+                                            查詢訂單
+                                        </a>
+                                    </div>
+                                </li>
+                                <li class="header-cart-item">
+
+                                    <div>
+                                        <a href="@Url.Action("LogOut","Member")" class="header-cart-item-name">
+                                            <i class="fas fa-sign-out-alt"></i>
+                                            登出
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                }
 
                 <span class="linedivide2"></span>
 
@@ -449,15 +606,15 @@
                 <li class="item-menu-mobile">
                     <a href="/Home/Index">Home</a>
                     @*<ul class="sub-menu">
-                        <li><a href="index.html">Homepage V1</a></li>
-                        <li><a href="home-02.html">Homepage V2</a></li>
-                        <li><a href="home-03.html">Homepage V3</a></li>
-                    </ul>
-                    <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>*@
+                            <li><a href="index.html">Homepage V1</a></li>
+                            <li><a href="home-02.html">Homepage V2</a></li>
+                            <li><a href="home-03.html">Homepage V3</a></li>
+                        </ul>
+                        <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>*@
                 </li>
 
                 <li class="item-menu-mobile">
-                    <a href="/Shop/Shop">Shop</a>
+                    <a href="/Shop/Index">Shop</a>
                 </li>
 
                 <li class="item-menu-mobile">
@@ -473,11 +630,11 @@
                 </li>
 
                 <li class="item-menu-mobile">
-                    <a href="about.html">About</a>
+                    <a href="/About/Index">About</a>
                 </li>
 
                 <li class="item-menu-mobile">
-                    <a href="contact.html">Contact</a>
+                    <a href="/Contact/Index">Contact</a>
                 </li>
             </ul>
         </nav>
@@ -556,8 +713,8 @@
     </a>
 
     @*<button class="flex-c-m pos2 size23 colorwhite eff3 trans-0-4 btn-romove-top-noti">
-        <i class="fa fa-remove fs-13" aria-hidden="true"></i>
-    </button>*@
+            <i class="fa fa-remove fs-13" aria-hidden="true"></i>
+        </button>*@
 </div>
 
 <!-- Banner -->
@@ -668,10 +825,7 @@
                                         </div>
 
                                         <div class="block2-txt p-t-20">
-                                            <div hidden>
-                                                <input value=@item.ProductID />
-                                            </div>
-                                            <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+                                            <a href=@Url.Action("Product","Shop",new { @productid = item.ProductID }) class="block2-name dis-block s-text3 p-b-5">
                                                 @item.ProductName
                                             </a>
 
@@ -710,10 +864,7 @@
                                         </div>
 
                                         <div class="block2-txt p-t-20">
-                                            <div hidden>
-                                                <input value=@item.ProductID />
-                                            </div>
-                                            <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+                                            <a href=@Url.Action("Product","Shop",new { @productid = item.ProductID }) class="block2-name dis-block s-text3 p-b-5">
                                                 @item.ProductName
                                             </a>
 
@@ -744,9 +895,6 @@
                                                 <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
                                                 <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
                                             </a>
-                                            <div hidden>
-                                                <input value=@item.ProductID />
-                                            </div>
                                             @*<div class="block2-btn-addcart w-size1 trans-0-4">
                                                      Button
                                                     <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
@@ -757,7 +905,7 @@
                                     </div>
 
                                     <div class="block2-txt p-t-20">
-                                        <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+                                        <a href=@Url.Action("Product","Shop",new { @productid = item.ProductID }) class="block2-name dis-block s-text3 p-b-5">
                                             @item.ProductName
                                         </a>
 
@@ -787,9 +935,6 @@
                                                 <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
                                                 <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
                                             </a>
-                                            <div hidden>
-                                                <input value=@item.ProductID />
-                                            </div>
                                             @*<div class="block2-btn-addcart w-size1 trans-0-4">
                                                      Button
                                                     <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
@@ -800,7 +945,7 @@
                                     </div>
 
                                     <div class="block2-txt p-t-20">
-                                        <a href="product-detail.html" class="block2-name dis-block s-text3 p-b-5">
+                                        <a href=@Url.Action("Product","Shop",new { @productid = item.ProductID }) class="block2-name dis-block s-text3 p-b-5">
                                             @item.ProductName
                                         </a>
 
@@ -867,8 +1012,10 @@
                             </a>
                         </h4>
 
-                        <span class="s-text6">By</span> <span class="s-text7">Nancy Ward</span>
-                        <span class="s-text6">on</span> <span class="s-text7">July 22, 2017</span>
+                        <span class="s-text6">By</span>
+                        <span class="s-text7">Nancy Ward</span>
+                        <span class="s-text6">on</span>
+                        <span class="s-text7">July 22, 2017</span>
 
                         <p class="s-text8 p-t-16">
                             Duis ut velit gravida nibh bibendum commodo. Sus-pendisse pellentesque mattis augue id euismod. Inter-dum et malesuada fames
@@ -891,8 +1038,10 @@
                             </a>
                         </h4>
 
-                        <span class="s-text6">By</span> <span class="s-text7">Nancy Ward</span>
-                        <span class="s-text6">on</span> <span class="s-text7">July 18, 2017</span>
+                        <span class="s-text6">By</span>
+                        <span class="s-text7">Nancy Ward</span>
+                        <span class="s-text6">on</span>
+                        <span class="s-text7">July 18, 2017</span>
 
                         <p class="s-text8 p-t-16">
                             Nullam scelerisque, lacus sed consequat laoreet, dui enim iaculis leo, eu viverra ex nulla in tellus. Nullam nec ornare tellus, ac fringilla lacus. Ut sit ame
@@ -915,8 +1064,10 @@
                             </a>
                         </h4>
 
-                        <span class="s-text6">By</span> <span class="s-text7">Nancy Ward</span>
-                        <span class="s-text6">on</span> <span class="s-text7">July 2, 2017</span>
+                        <span class="s-text6">By</span>
+                        <span class="s-text7">Nancy Ward</span>
+                        <span class="s-text6">on</span>
+                        <span class="s-text7">July 2, 2017</span>
 
                         <p class="s-text8 p-t-16">
                             Proin nec vehicula lorem, a efficitur ex. Nam vehicula nulla vel erat tincidunt, sed hendrerit ligula porttitor. Fusce sit amet maximus nunc
@@ -1134,7 +1285,7 @@
         var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
         $(this).on('click', function () {
             swal(nameProduct, "is added to cart !", "success");
-            $('.header-icons-noti').text($('.header-cart-item').length / 3);
+            //$('.header-icons-noti').text($('.header-cart-item').length / 3);
         });
     });
 
@@ -1145,5 +1296,5 @@
         });
     });
     $('.parallax100').parallax100();
-    $('.header-icons-noti').text($('.header-cart-item').length / 3);
+    //$('.header-icons-noti').text($('.header-cart-item').length / 3);
 </script>

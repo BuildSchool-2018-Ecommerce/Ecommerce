@@ -34,7 +34,7 @@
 
         <div class="wrap_header">
             <!-- Logo -->
-            <a href="index.html" class="logo">
+            <a href="/Home/Index" class="logo">
                 <img src="~/Content/images/icons/logo.png" alt="IMG-LOGO">
             </a>
 
@@ -52,7 +52,7 @@
                         </li>
 
                         <li>
-                            <a href="/Shop/Shop">Shop</a>
+                            <a href="/Shop/Index">Shop</a>
                         </li>
 
                         <li class="sale-noti">
@@ -68,11 +68,11 @@
                         </li>
 
                         <li>
-                            <a href="about.html">About</a>
+                            <a href="/About/Index">About</a>
                         </li>
 
                         <li>
-                            <a href="contact.html">Contact</a>
+                            <a href="/Contact/Index">Contact</a>
                         </li>
                     </ul>
                 </nav>
@@ -80,7 +80,7 @@
 
             <!-- Header Icon -->
             <div class="header-icons">
-                <a href="#" class="header-wrapicon1 dis-block">
+                <a href="@Url.Action("LogIn", "Member")" class="header-wrapicon1 dis-block">
                     <img src="~/Content/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
                 </a>
 
@@ -170,7 +170,7 @@
     <!-- Header Mobile -->
     <div class="wrap_header_mobile">
         <!-- Logo moblie -->
-        <a href="index.html" class="logo-mobile">
+        <a href="/Home/Index" class="logo-mobile">
             <img src="~/Content/images/icons/logo.png" alt="IMG-LOGO">
         </a>
 
@@ -178,7 +178,7 @@
         <div class="btn-show-menu">
             <!-- Header Icon mobile -->
             <div class="header-icons-mobile">
-                <a href="#" class="header-wrapicon1 dis-block">
+                <a href="@Url.Action("LogIn", "Member")" class="header-wrapicon1 dis-block">
                     <img src="~/Content/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
                 </a>
 
@@ -317,7 +317,7 @@
                 </li>
 
                 <li class="item-menu-mobile">
-                    <a href="/Shop/Shop">Shop</a>
+                    <a href="/Shop/Index">Shop</a>
                 </li>
 
                 <li class="item-menu-mobile">
@@ -333,11 +333,11 @@
                 </li>
 
                 <li class="item-menu-mobile">
-                    <a href="about.html">About</a>
+                    <a href="/About/Index">About</a>
                 </li>
 
                 <li class="item-menu-mobile">
-                    <a href="contact.html">Contact</a>
+                    <a href="/Contact/Index">Contact</a>
                 </li>
             </ul>
         </nav>
@@ -346,46 +346,53 @@
 @using (Html.BeginForm("SignUp", "Member"))
 {
     <div class="container">
-        <div class="row">
-            <div class="col-md-6 p-b-30">
+        <div class="row mb-4">
+            <div class="col-2"></div>
+            <div class="col-md-6 p-b-30 mt-4">
                 <form class="leave-comment">
-                    <h4 class="m-text26 p-b-36 p-t-15">
-                        會員申請 Member Sing Up
-                    </h4>
-
+                    <h3 class="m-text26 p-b-36 p-t-15">
+                        <strong>會員申請 Member Sing Up</strong>
+                    </h3>
+                    @Html.Label("MemberID")
                     <div class="bo4 of-hidden size15 m-b-20">
                         @*<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="MemberID" placeholder="帳號 Account Number">*@
-                        @Html.TextBoxFor(model => model.MemberID, htmlAttributes: new { @class = "sizefull s-text7 p-l-22 p-r-22", placeholder = "帳號 Account Number" })
+                        @Html.TextBoxFor(model => model.MemberID, htmlAttributes: new { @class = "sizefull s-text7 p-l-22 p-r-22" })
                         @Html.ValidationMessageFor(model => model.MemberID)
                     </div>
-
+                    @Html.Label("password")
                     <div class="bo4 of-hidden size15 m-b-20">
                         @*<input class="sizefull s-text7 p-l-22 p-r-22" type="password" name="Password" placeholder="密碼 Password">*@
-                        @Html.TextBoxFor(model => model.password, htmlAttributes: new { @class = "sizefull s-text7 p-l-22 p-r-22", placeholder = "密碼 Password", @type = "password" })
+                        @Html.TextBoxFor(model => model.password, htmlAttributes: new { @class = "sizefull s-text7 p-l-22 p-r-22", @type = "password" })
                         @Html.ValidationMessageFor(model => model.password)
                     </div>
-
+                    @Html.Label("passwordCheck")
+                    <div class="bo4 of-hidden size15 m-b-20">
+                        @*<input class="sizefull s-text7 p-l-22 p-r-22" type="password" name="Password" placeholder="密碼 Password">*@
+                        @Html.TextBoxFor(model => model.passwordCheck, htmlAttributes: new { @class = "sizefull s-text7 p-l-22 p-r-22", @type = "password" })
+                        @Html.ValidationMessageFor(model => model.passwordCheck)
+                    </div>
+                    @Html.Label("name")
                     <div class="bo4 of-hidden size15 m-b-20">
                         @*<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="Name" placeholder="姓名 Name">*@
-                        @Html.TextBoxFor(model => model.name, htmlAttributes: new { @class = "sizefull s-text7 p-l-22 p-r-22", placeholder = "姓名 Name" })
+                        @Html.TextBoxFor(model => model.name, htmlAttributes: new { @class = "sizefull s-text7 p-l-22 p-r-22" })
                         @Html.ValidationMessageFor(model => model.name)
                     </div>
-
+                    @Html.Label("Phone")
                     <div class="bo4 of-hidden size15 m-b-20">
                         @*<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="Phone" placeholder="手機號碼 Phone">*@
-                        @Html.TextBoxFor(model => model.Phone, htmlAttributes: new { @class = "sizefull s-text7 p-l-22 p-r-22", placeholder = "手機號碼 Phone" })
+                        @Html.TextBoxFor(model => model.Phone, htmlAttributes: new { @class = "sizefull s-text7 p-l-22 p-r-22" })
                         @Html.ValidationMessageFor(model => model.Phone)
                     </div>
-
+                    @Html.Label("Address")
                     <div class="bo4 of-hidden size15 m-b-20">
                         @*<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="Address" placeholder="地址 Address">*@
-                        @Html.TextBoxFor(model => model.Address, htmlAttributes: new { @class = "sizefull s-text7 p-l-22 p-r-22", placeholder = "地址 Address" })
+                        @Html.TextBoxFor(model => model.Address, htmlAttributes: new { @class = "sizefull s-text7 p-l-22 p-r-22" })
                         @Html.ValidationMessageFor(model => model.Address)
                     </div>
-
+                    @Html.Label("Email")
                     <div class="bo4 of-hidden size15 m-b-20">
                         @*<input class="sizefull s-text7 p-l-22 p-r-22" type="email" name="Email" placeholder="電子郵件 E-Mail">*@
-                        @Html.TextBoxFor(model => model.Email, htmlAttributes: new { @class = "sizefull s-text7 p-l-22 p-r-22", placeholder = "電子郵件 E-Mail" })
+                        @Html.TextBoxFor(model => model.Email, htmlAttributes: new { @class = "sizefull s-text7 p-l-22 p-r-22" })
                         @Html.ValidationMessageFor(model => model.Email)
                     </div>
                     <br />
@@ -399,11 +406,10 @@
                             </div>
                         </div>
                     </div>
-
                 </form>
             </div>
+            </div>
         </div>
-    </div>
 
     @Scripts.Render("~/Content/vendors")
     @Scripts.Render("~/Content/vendors1")

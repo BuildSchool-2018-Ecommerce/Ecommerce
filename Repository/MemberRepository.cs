@@ -28,8 +28,8 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
         }
         public void Create(Members model)
         {
-            connection.Execute("INSERT INTO Members(MemberID, Password, Name, Phone, Address, Email) " +
-                "VALUES (@MemberID, @Password, @Name, @Phone, @Address, @Email)",
+            connection.Execute("INSERT INTO Members " +
+                "VALUES (@MemberID, @Password, @Name, @Phone, @Address, @Email, @MemberGUID)",
                 new
                 {
                     model.MemberID,
@@ -37,7 +37,8 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                     model.Name,
                     model.Phone,
                     model.Address,
-                    model.Email
+                    model.Email,
+                    model.MemberGUID
                 });
         }
 

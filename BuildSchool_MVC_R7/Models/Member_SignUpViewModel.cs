@@ -20,6 +20,12 @@ namespace BuildSchool_MVC_R7.Models
         [Display(Name = "密碼 Password")]
         public string password { get; set; }
 
+        [Compare("password", ErrorMessage = "兩次密碼輸入不一致")]
+        [Required(ErrorMessage = "請輸入確認密碼")]
+        [DataType(DataType.Password)]
+        [Display(Name = "確認密碼")]
+        public string passwordCheck { get; set; }
+
         [Required(ErrorMessage = "請輸入姓名 Name")]
         [MaxLength(50, ErrorMessage = "長度過長")]
         [Display(Name = "姓名 Name")]

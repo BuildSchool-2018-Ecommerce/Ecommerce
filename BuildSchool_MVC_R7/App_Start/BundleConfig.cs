@@ -66,7 +66,8 @@ namespace BuildSchool_MVC_R7
                     ));
             bundles.Add(new StyleBundle("~/Content/js").Include(
                     "~/Content/js/slick-custom.js",
-                    "~/Content/js/main.js"
+                    "~/Content/js/main.js",
+                    "~/Content/js/map-custom.js"
                     ));
             bundles.Add(new ScriptBundle("~/Content/backJs").Include(
                     "~/Content/js/jquery.min.js",

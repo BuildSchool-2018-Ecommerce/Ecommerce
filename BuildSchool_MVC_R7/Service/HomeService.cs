@@ -11,14 +11,55 @@ namespace BuildSchool_MVC_R7.Service
 {
     public class HomeService
     {
-        public HomeViewModel Home()
+        public HomeViewModel Home(string memberid)
         {
             var productRepository =  ContainerManager.Container.GetInstance<ProductRepository>();
+            var memberRepository = ContainerManager.Container.GetInstance<MemberRepository>();
+            var member = memberRepository.FindById(memberid);
+            User user = new User();
+            if(member != null)
+            {
+                user.UserID = memberid;
+                user.Username = member.Name;
+            }
             var homeViewModel = new HomeViewModel()
             {
+                User = user,
                 NewProduct = productRepository.NewProduct(),
                 SalesProduct = productRepository.SalesProduct(),
                 Top8Product = productRepository.Top8Product()
+            };
+            return homeViewModel;
+        }
+        public HomeViewModel About(string memberid)
+        {
+            var memberRepository = ContainerManager.Container.GetInstance<MemberRepository>();
+            var member = memberRepository.FindById(memberid);
+            User user = new User();
+            if (member != null)
+            {
+                user.UserID = memberid;
+                user.Username = member.Name;
+            }
+            var homeViewModel = new HomeViewModel()
+            {
+                User = user
+            };
+            return homeViewModel;
+        }
+        public HomeViewModel Contact(string memberid)
+        {
+            var memberRepository = ContainerManager.Container.GetInstance<MemberRepository>();
+            var member = memberRepository.FindById(memberid);
+            User user = new User();
+            if (member != null)
+            {
+                user.UserID = memberid;
+                user.Username = member.Name;
+            }
+            var homeViewModel = new HomeViewModel()
+            {
+                User = user
             };
             return homeViewModel;
         }
