@@ -37,15 +37,19 @@ namespace BuildSchool_MVC_R7.Models
             var employee = employeerepository.FindById(int.Parse(Account));
             if(employee == null)
             {
-                yield return new ValidationResult("無此帳號" + base64Password, new string[] { "Account" });
+                yield return new ValidationResult("無此帳號", new string[] { "Account" });
             }
-            //todo到DB抓使用者資料
-            //假如抓不到系統使用者資料
-            //※為了Demo用這種寫法，實際請換成判斷DB的資料存不存在
-            if (!(Account == employee.EmployeeID.ToString() && Phone == employee.Phone.ToString()))
+            else
             {
-                yield return new ValidationResult("密碼不正確"+base64Password, new string[] { "Phone" });
+                //todo到DB抓使用者資料
+                //假如抓不到系統使用者資料
+                //※為了Demo用這種寫法，實際請換成判斷DB的資料存不存在
+                if (!(Account == employee.EmployeeID.ToString() && Phone == employee.Phone.ToString()))
+                {
+                    yield return new ValidationResult("密碼不正確", new string[] { "Phone" });
+                }
             }
+            
         }
     }
 }

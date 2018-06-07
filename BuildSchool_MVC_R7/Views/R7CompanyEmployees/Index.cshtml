@@ -15,7 +15,7 @@
                     </h4>
                     <h5 style="color:red">@ViewBag.Error</h5>
                     <div class="bo4 of-hidden size15 m-b-20">
-                        @Html.TextBoxFor(m => m.Account, htmlAttributes: new { @class = "sizefull s-text7 p-l-22 p-r-22", @placeholder = "帳號 Account" })
+                        @Html.TextBoxFor(m => m.Account, htmlAttributes: new { @class = "sizefull s-text7 p-l-22 p-r-22", @placeholder = "帳號 Account" , @type = "number"})
                         @Html.ValidationMessageFor(m => m.Account)
                     </div>
 
