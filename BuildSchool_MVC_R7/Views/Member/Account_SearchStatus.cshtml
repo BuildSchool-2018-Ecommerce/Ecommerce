@@ -1,7 +1,8 @@
 ﻿
 @{
-    ViewBag.Title = "Account_UpdateMember";
+    ViewBag.Title = "Account_SearchStatus";
 }
+
 
 <header class="header1">
     <!-- Header desktop -->
@@ -375,13 +376,13 @@
                         </li>
 
                         <li class="p-t-4">
-                            <a href="#" class="s-text13 active1">
+                            <a href="@Url.Action("Account_UpdateMember", "Member")" class="s-text13">
                                 修改會員資料
                             </a>
                         </li>
 
                         <li class="p-t-4 s-text13">
-                                查詢訂單
+                            查詢訂單
                         </li>
                         <li>
                             <ul class="p-b-54" style="text-indent: 2em;">
@@ -391,12 +392,12 @@
                                     </a>
                                 </li>
                                 <li class="p-t-4">
-                                    <a href="@Url.Action("Account_SearchTime", "Member")" class="s-text13" >
+                                    <a href="@Url.Action("Account_SearchTime", "Member")" class="s-text13">
                                         依時間查詢
                                     </a>
                                 </li>
                                 <li class="p-t-4">
-                                    <a href="@Url.Action("Account_SearchStatus", "Member")" class="s-text13">
+                                    <a href="@Url.Action("Account_SearchStatus", "Member")" class="s-text13 active1">
                                         依狀態查詢
                                     </a>
                                 </li>

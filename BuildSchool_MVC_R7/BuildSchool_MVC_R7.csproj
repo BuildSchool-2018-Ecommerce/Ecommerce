@@ -2992,6 +2992,9 @@
     <Content Include="Views\Member\Account_Member.cshtml" />
     <Content Include="Views\Member\Account_Order.cshtml" />
     <Content Include="Views\Member\Account_UpdateMember.cshtml" />
+    <Content Include="Views\Member\Account_SearchStatus.cshtml" />
+    <Content Include="Views\Member\Account_SearchTime.cshtml" />
+    <Content Include="Views\Member\Account_SearchOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -94,5 +94,17 @@ namespace BuildSchool_MVC_R7.Controllers
         {
             return View();
         }
+        public ActionResult Account_SearchStatus()
+        {
+            return View();
+        }
+        public ActionResult Account_SearchTime()
+        {
+            return View();
+        }
+        public ActionResult Account_SearchOrder()
+        {
+            return View();
+        }
     }
 }
