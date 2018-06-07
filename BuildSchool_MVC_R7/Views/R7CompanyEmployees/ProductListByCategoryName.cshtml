@@ -1,0 +1,94 @@
+﻿@model BuildSchool_MVC_R7.Models.ProductViewModel
+@{
+    var productList = Model.Products;
+    Layout = "~/Views/Shared/CompanyLayout.cshtml";
+}
+
+
+<style>
+    table {
+        text-align: center;
+    }
+
+    tr {
+        border: 0.1em solid rgb(225, 225, 225);
+    }
+
+    th, td {
+        padding-right: 3em;
+        line-height: 3.5em;
+        text-align: center;
+    }
+
+    button {
+        width: 5em;
+    }
+</style>
+<div class="row">
+    <div id="display" class="col-sm-12">
+        <h1>This is ProductList</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>產品編號</th>
+                    <th>名稱</th>
+                    <th>單價</th>
+                    <th> </th>
+                    <th> </th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in productList)
+                {
+                    <tr>
+                        <td class="productID">@product.ProductID</td>
+                        <td>@product.ProductName</td>
+                        <td>@product.UnitPrice</td>
+                        <td><button class="btn btn-info checkBtn">查看</button></td>
+                        <td><button class="btn btn-primary modifyBtn">修改</button></td>
+                        <td><button class="btn btn-danger deleteBtn">刪除</button></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).on("click", ".checkBtn", function (e) {
+        console.log(e);
+        console.log($(".checkBtn").index(this));
+        console.log($(".productID").eq($(".checkBtn").index(this)).html());
+        $.ajax({
+            url: "/R7CompanyEmployees/ProductFormatDetail",
+            data: {
+                ProductID: $(".productID").eq($(".checkBtn").index(this)).html()
+            },
+            success: function (result) {
+                $("#display").empty();
+                $("#display").html(result);
+            }
+        });
+    })
+</script>
+
+<script>
+    $(document).on("click", ".modifyBtn", function (e) {
+        console.log(e);
+        console.log($(".modifyBtn").index(this));
+        console.log($(".productID").eq($(".modifyBtn").index(this)).html());
+        $.ajax({
+            url: "/R7CompanyEmployees/ProductModify",
+            data: {
+                ProductID: $(".productID").eq($(".modifyBtn").index(this)).html()
+            },
+            success: function (result) {
+                $("#display").empty();
+                $("#display").html(result);
+            }
+        });
+    })
+</script>

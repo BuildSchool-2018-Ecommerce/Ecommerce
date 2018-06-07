@@ -1,0 +1,87 @@
+﻿@model BuildSchool_MVC_R7.Models.ProductFormatViewModel
+@{
+    var productFormatList = Model.ProductFormat;
+}
+
+<style>
+    table {
+        text-align: center;
+    }
+
+    tr {
+        border: 0.1em solid rgb(225, 225, 225);
+    }
+
+    th, td {
+        padding-right: 2em;
+        line-height: 3.5em;
+    }
+    .productName {
+        display: block;
+        width: 25em;
+        height: 3em;
+        overflow: hidden;
+        text-overflow: clip;
+    }
+
+    button {
+        width: 5em;
+    }
+</style>
+
+
+<h1>This is productFormat Detail</h1>
+
+<div class="row">
+    <div id="display" class="col-sm-12">
+        <table>
+            <thead>
+                <tr>
+                    <th>編號</th>
+                    <th class="productName">產品名稱</th>
+                    <th>顏色</th>
+                    <th>尺寸</th>
+                    <th>庫存</th>
+                    <th>單價</th>
+                    <th> </th>
+                    <th> </th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var productFormat in productFormatList)
+                {
+                    <tr>
+                        <td class="productFormatID">@productFormat.ProductFormatID</td>
+                        <td class="productName">@productFormat.ProductName</td>
+                        <td>@productFormat.Color</td>
+                        <td>@productFormat.Size</td>
+                        <td>@productFormat.StockQuantity</td>
+                        <td>@productFormat.UnitPrice.ToString("C", System.Globalization.CultureInfo.CurrentCulture)</td>
+                        <td><button class="btn btn-primary modifyBtn">修改</button></td>
+                        <td><button class="btn btn-danger deleteBtn">刪除</button></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<script>
+    $(document).on("click", ".modifyBtn", function (e) {
+        console.log($(".modifyBtn").index(this));
+        console.log($(".productFormatID").eq($(".modifyBtn").index(this)).html());
+        $.ajax({
+            url: "/R7CompanyEmployees/ProductFormatModify",
+            data: {
+                ProductFormatID: $(".productFormatID").eq($(".modifyBtn").index(this)).html()
+            },
+            success: function (result) {
+                $("#display").empty();
+                $("#display").html(result);
+            }
+        });
+    })
+</script>

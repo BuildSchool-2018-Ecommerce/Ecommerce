@@ -1,0 +1,53 @@
+﻿@model BuildSchool_MVC_R7.Models.ProductFormatViewModel
+@{
+    var productFormatList = Model.ProductFormat;
+}
+
+<style>
+    .field {
+        padding-top: 1.3em;
+    }
+
+    input {
+        width: 100%;
+    }
+
+    label {
+        width: 6em;
+    }
+
+    .col-sm-12 {
+        margin-bottom: 2em;
+    }
+</style>
+
+@using (Html.BeginForm("UpdataProductFormat", "R7CompanyEmployees"))
+{
+    <div class="row">
+        <div id="display" class="col-sm-12 mb-2">
+            <input name="ProductFormatID" value="@ViewBag.ProductFormatID" hidden />
+            @foreach (var productFormat in productFormatList)
+            {
+                <h5>ProductFormatID: @ViewBag.ProductFormatID</h5>
+                <div class="field">
+                    <label>顏色: </label>
+                    <input name="Color" value="@productFormat.Color" type="text" /><br />
+                </div>
+                <div class="field">
+                    <label>尺寸: </label>
+                    <input name="Size" value="@productFormat.Size" type="text" /><br />
+                </div>
+                <div class="field">
+                    <label>庫存: </label>
+                    <input name="StockQuantity" value="@productFormat.StockQuantity" type="text" /><br />
+                </div>
+            }
+        </div>
+        <div class="col-sm-12">
+            <button class="btn btn-primary" type="submit">儲存</button>
+            <a href=@Url.RouteUrl(new { Controller = "R7CompanyEmployees", Action = "ProductList" })>
+                <button class="btn btn-danger cancelBtn">取消</button>
+            </a>
+        </div>
+    </div>
+}

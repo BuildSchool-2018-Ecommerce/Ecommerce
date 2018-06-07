@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Text;
+using BuildSchool_MVC_R7.Models;
 
 namespace BuildSchool_MVC_R7.Service
 {
@@ -30,6 +31,25 @@ namespace BuildSchool_MVC_R7.Service
                 return true;
             }
             return false;
+        }
+        public MemberViewModel GetMembers()
+        {
+            var memberRepository = ContainerManager.Container.GetInstance<MemberRepository>();
+            var memberViewModel = new MemberViewModel()
+            {
+                Members = memberRepository.GetAll().ToList()
+            };
+            return memberViewModel;
+        }
+
+        public MemberViewModel GetMemberById(string memberId)
+        {
+            var memberRepository = ContainerManager.Container.GetInstance<MemberRepository>();
+            var memberViewModel = new MemberViewModel()
+            {
+                Member = memberRepository.FindById(memberId)
+            };
+            return memberViewModel;
         }
     }
 }

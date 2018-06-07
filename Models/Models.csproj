@@ -65,6 +65,8 @@
     <Compile Include="FindProductsByCategory.cs" />
     <Compile Include="GetBuyerOrder.cs" />
     <Compile Include="GetHowLongHireDate.cs" />
+    <Compile Include="GetOrderDetailByOrderID.cs" />
+    <Compile Include="GetProductFormatByProductID.cs" />
     <Compile Include="GetProductOrder.cs" />
     <Compile Include="Images.cs" />
     <Compile Include="NewProduct.cs" />

@@ -69,6 +69,22 @@ namespace BuildSchool_MVC_R7
                     "~/Content/js/main.js",
                     "~/Content/js/map-custom.js"
                     ));
-        }
+            bundles.Add(new ScriptBundle("~/Content/backJs").Include(
+                    "~/Content/js/jquery.min.js",
+                    "~/Content/js/bootstrap.min.js",
+                    "~/Content/js/metisMenu.min.js",
+                    "~/Content/js/raphael.mim.js",
+                    "~/Content/js/morris.min.js",
+                    "~/Content/js/morris-data.js.mim.js",
+                    "~/Content/js/sb-admin-2.js"
+                ));
+            bundles.Add(new StyleBundle("~/Content/backCss").Include(
+                    "~/Content/css/bootstrap.min.css",
+                    "~/Content/css/metisMenu.min.css",
+                    "~/Content/css/sb-admin-2.min.css",
+                    "~/Content/css/morris.css",
+                    "~/Content/css/font-awesome.css"
+                ));
+        }   
     }
 }

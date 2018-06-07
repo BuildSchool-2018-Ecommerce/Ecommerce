@@ -1,0 +1,98 @@
+﻿@model BuildSchool_MVC_R7.Models.OrderViewModel
+@{
+    var orderDetail = Model.OrderDetail;
+    string memberName = "";
+    foreach (var order in orderDetail)
+    {
+        memberName = order.Name;
+    }
+}
+
+
+
+<style>
+    table {
+        text-align: center;
+    }
+
+    tr {
+        border: 0.1em solid rgb(225, 225, 225);
+    }
+
+    th, td {
+        text-align: center;
+        width: 7em;
+        height: 3em;
+    }
+
+    button {
+        width: 5em;
+    }
+
+    .productName {
+        display: block;
+        width: 25em;
+        height: 3em;
+        overflow: hidden;
+        text-overflow: clip;
+    }
+</style>
+
+
+<h1>This is OrderDetailList</h1>
+
+<div class="row">
+    <div id="display" class="col-sm-12">
+        <div style="display: flex; justify-content: space-around; align-items: center">
+            <h5>訂單編號: @ViewBag.OrderID</h5>
+            <h5>會員姓名: @memberName</h5>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th class="productName">產品名稱</th>
+                    <th>尺寸</th>
+                    <th>數量</th>
+                    <th>單價</th>
+                    <th>訂單狀態</th>
+                    <th> </th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var order in orderDetail)
+                {
+                    <tr>
+                        <td class="productName">@order.ProductName</td>
+                        <td class="size">@order.Size</td>
+                        <td>@order.Quantity</td>
+                        <td>@order.UnitPrice.ToString("C", System.Globalization.CultureInfo.CurrentCulture)</td>
+                        <td>@order.Status</td>
+                        <td><button class="btn btn-primary modifyBtn">修改</button></td>
+                        <td><button class="btn btn-danger deleteBtn">刪除</button></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<script>
+    $(document).on("click", ".modifyBtn", function (e) {
+        console.log($(".modifyBtn").index(this));
+        console.log($(".productName").eq($(".modifyBtn").index(this)).html());
+        console.log($(".size").eq($(".modifyBtn").index(this)).html());
+        //$.ajax({
+        //    url: "/R7CompanyEmployees/ProductFormatModify",
+        //    data: {
+        //        ProductFormatID: $(".productFormatID").eq($(".modifyBtn").index(this)).html()
+        //    },
+        //    success: function (result) {
+        //        $("#display").empty();
+        //        $("#display").html(result);
+        //    }
+        //});
+    })
+</script>

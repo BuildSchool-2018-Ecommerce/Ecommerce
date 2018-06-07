@@ -52,12 +52,24 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                 });
         }
 
-        public void Delete(Product model)
+        public void UpdateProductInfo(Product model)
+        {
+            connection.Execute("UPDATE Products SET ProductName = @ProductName, UnitPrice = @UnitPrice, Description = @Description WHERE ProductID = @ProductID",
+                new
+                {
+                    model.ProductName,
+                    model.UnitPrice,
+                    model.Description,
+                    model.ProductID
+                });
+        }
+
+        public void Delete(int ProductID)
         {
             connection.Execute("DELETE FROM Products WHERE ProductID = @ProductID",
                 new
                 {
-                    model.ProductID
+                    ProductID
                 });
         }
 
@@ -103,7 +115,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
         }
         public IEnumerable<Product> FindByProductName(string ProductName)
         {
-            return connection.Query<Product>("SELECT * FROM Products WHERE ProductName LIKE @ProductName",
+            return connection.Query<Product>("SELECT * FROM Products WHERE ProductName LIKE CONCAT('%', @ProductName, '%')",
                 new
                 {
                     ProductName
@@ -187,6 +199,24 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                 {
                     categoryid,
                     productid
+                }, commandType: CommandType.StoredProcedure);
+        }
+
+        public IEnumerable<GetProductFormatByProductID> GetProductFormatByProductID(int ProductID)
+        {
+            return connection.Query<GetProductFormatByProductID>("GetProductFormatByProductID",
+                new
+                {
+                    ProductID
+                }, commandType: CommandType.StoredProcedure);
+        }
+
+        public IEnumerable<Product> GetProductsByCategoryName(string CategoryName)
+        {
+            return connection.Query<Product>("GetProductsByCategoryName",
+                new
+                {
+                    CategoryName
                 }, commandType: CommandType.StoredProcedure);
         }
     }

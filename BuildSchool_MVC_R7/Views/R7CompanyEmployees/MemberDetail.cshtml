@@ -1,0 +1,50 @@
+﻿@model BuildSchool_MVC_R7.Models.MemberViewModel
+@{ 
+    var member = Model.Member;
+}
+
+<style>
+  .field {
+      padding-top: 1.3em;
+  }
+  input {
+      width: 20em;
+  }
+  label {
+      width: 4em;
+  }
+</style>
+
+@using(Html.BeginForm("UpdateMemberInfo", "R7CompanyEmployees"))
+{
+    <div class="row">
+        <div class="col-sm-12">
+            <h6>ViewBag.MemberID: @ViewBag.MemberID</h6>
+            <input name="MemberID" value="@ViewBag.MemberID" hidden />
+            <div class="field">
+                <label>姓名: </label>
+                <input name="Name" value="@member.Name" type="text" /><br />
+            </div>
+            <div class="field">
+                <label>E-mail: </label>
+                <input name="Email" value="@member.Email" type="text" /><br />
+            </div>
+            <div class="field">
+                <label>地址: </label>
+                <input name="Address" value="@member.Address" type="text" /><br />
+            </div>
+            <div class="field">
+                <label>電話: </label>
+                <input name="Phone" value="@member.Phone" type="text" /><br />
+            </div>
+        </div>
+        <div class="col-sm-12 mt-3">
+            <button class="btn btn-primary type="submit">儲存</button>
+            <a href=@Url.RouteUrl(new { Controller = "R7CompanyEmployees", Action = "MemberList" })>
+                <button class="btn btn-danger cancelBtn">取消</button>
+            </a>
+        </div>
+    </div>
+
+
+}

@@ -56,9 +56,9 @@ namespace CommerceTest
         [TestMethod]
         public void Test_GetAll_OrderDetails()
         {
-            var repository = new OrderDetailsRepository();
-            var orderdetails = repository.GetAll();
-            Assert.IsTrue(orderdetails.Count() >= 0);
+            //var repository = new OrderDetailsRepository();
+            //var orderdetails = repository.GetAll();
+            //Assert.IsTrue(orderdetails.Count() >= 0);
         }
     }
 }
