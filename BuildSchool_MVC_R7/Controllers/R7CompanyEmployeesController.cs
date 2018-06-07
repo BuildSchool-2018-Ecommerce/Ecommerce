@@ -8,15 +8,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace BuildSchool_MVC_R7.Controllers
 {
+    [Authorize]
     public class R7CompanyEmployeesController : Controller
     {
         // GET: R7CompanyEmployees
-        public ActionResult Index()
+        [AllowAnonymous]
+        public ActionResult Index(string ReturnUrl)
         {
-            return View();
+            LoginVM vm = new LoginVM() { ReturnUrl = ReturnUrl };
+            return View(vm);
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult VerifyLogIn(LoginVM vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Index", vm);
+            }
+
+            FormsAuthentication.RedirectFromLoginPage(vm.Account, false);
+            return Redirect(FormsAuthentication.GetRedirectUrl(vm.Account, false));
         }
 
         public ActionResult ProductList()

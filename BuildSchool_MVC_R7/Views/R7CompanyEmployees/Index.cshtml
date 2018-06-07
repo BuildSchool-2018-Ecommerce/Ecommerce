@@ -1,14 +1,41 @@
-﻿@{
+﻿@model LoginVM
+@{
     ViewBag.Title = "OrderList";
     Layout = "~/Views/Shared/CompanyLayout.cshtml";
 }
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-2"></div>
+        <div class="col-md-6 p-b-30">
+            @using (Html.BeginForm("VerifyLogIn", "R7CompanyEmployees", new { ReturnUrl = Model.ReturnUrl }, FormMethod.Post, new { autocomplete = "off" }))
+            {
+                <form class="leave-comment">
+                    <h4 class="m-text26 p-b-36 p-t-15 mt-4">
+                        <strong>會員登入 Member Login</strong>
+                    </h4>
+                    <h5 style="color:red">@ViewBag.Error</h5>
+                    <div class="bo4 of-hidden size15 m-b-20">
+                        @Html.TextBoxFor(m => m.Account, htmlAttributes: new { @class = "sizefull s-text7 p-l-22 p-r-22", @placeholder = "帳號 Account" })
+                        @Html.ValidationMessageFor(m => m.Account)
+                    </div>
 
-<div class="row">   
-    <div class="col-4">
-        <label>帳號: </label>&nbsp;
-        <input type="text" placeholder="Account" /><br />
-        <label>密碼: </label>&nbsp;
-        <input type="password" placeholder="Password" /><br />
-        <button>Log in</button>
+                    <div class="bo4 of-hidden size15 m-b-20">
+                        @Html.PasswordFor(m => m.Phone, htmlAttributes: new { @class = "sizefull s-text7 p-l-22 p-r-22", @placeholder = "密碼 Password" })
+                        @Html.ValidationMessageFor(m => m.Phone)
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="w-size25">
+                                <!-- Button -->
+                                <button class="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4">
+                                    Login
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            }
+        </div>
     </div>
 </div>
