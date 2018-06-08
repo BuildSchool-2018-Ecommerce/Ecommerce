@@ -70,5 +70,11 @@ namespace BuildSchool_MVC_R7.Service
             };
             return productViewModel;
         }
+
+        public IEnumerable<AllProduct> salesProducts()
+        {
+            var productrepository = ContainerManager.Container.GetInstance<ProductRepository>();
+            return productrepository.AllProduct();
+        }
     }
 }
