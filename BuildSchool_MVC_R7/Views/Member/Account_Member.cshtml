@@ -1,6 +1,7 @@
-﻿
+﻿@model MemberViewModel
 @{
     ViewBag.Title = "Account_Member";
+    var member = Model.Member;
 }
 
 <header class="header1">
@@ -81,9 +82,61 @@
 
             <!-- Header Icon -->
             <div class="header-icons">
-                <a href="@Url.Action("LogIn", "Member")" class="header-wrapicon1 dis-block">
-                    <img src="~/Content/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
-                </a>
+                @if (Model.User.Username == null)
+                {
+                    <a href="@Url.Action("LogIn", "Member")" class="header-wrapicon1 dis-block">
+                        <img src="@Url.Content("~/Content/images/icons/icon-header-01.png")" class="header-icon1" alt="ICON">
+                    </a>
+                }
+                else
+                {
+                    <div class="header-wrapicon2 m-r-13">
+                        <img src="@Url.Content("~/Content/images/icons/00.png")" class="header-icon1 js-show-header-dropdown" alt="ICON">
+
+                        <!-- Header cart noti -->
+                        <div class="header-cart header-dropdown" style="width:160px;height:200px">
+                            <ul class="header-cart-wrapitem">
+                                <li class="header-cart-item">
+                                    <div>
+                                        <a href="@Url.Action("Account_Member","Member")" class="header-cart-item-name" style="color:royalblue">
+                                            @Model.User.Username
+                                        </a>
+                                    </div>
+                                </li>
+
+                                <li class="header-cart-item">
+
+                                    <div>
+
+                                        <a href="@Url.Action("Account_UpdateMember","Member")" class="header-cart-item-name">
+                                            <i class="far fa-edit"></i>
+                                            修改會員
+                                        </a>
+                                    </div>
+                                </li>
+
+                                <li class="header-cart-item">
+
+                                    <div>
+                                        <a href="@Url.Action("Account_Order","Member")" class="header-cart-item-name">
+                                            <i class="fas fa-search"></i>
+                                            查詢訂單
+                                        </a>
+                                    </div>
+                                </li>
+                                <li class="header-cart-item">
+
+                                    <div>
+                                        <a href="@Url.Action("LogOut","Member")" class="header-cart-item-name">
+                                            <i class="fas fa-sign-out-alt"></i>
+                                            登出
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                }
 
                 <span class="linedivide1"></span>
 
@@ -405,7 +458,39 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-sm-6 col-md-8 col-lg-9 p-b-50"></div>
+            <div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
+                <div class="container">
+                    <div class="row mb-4">
+                        <div class="col-md-6 p-b-30 mt-4">
+                            <form class="leave-comment">
+                                <h3 class="m-text26 p-b-36 p-t-15">
+                                    <strong>會員資料</strong>
+                                </h3>
+                                <div class="row">
+                                    <label class="col-3">帳號</label>
+                                    <div class="size15 m-b-20 col-9">@member.MemberID</div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-3">姓名</label>
+                                    <div class="size15 m-b-20 col-9">@member.Name</div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-3">電子郵件</label>
+                                    <div class="size15 m-b-20 col-9">@member.Email</div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-3">手機號碼</label>
+                                    <div class="size15 m-b-20 col-9">@member.Phone</div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-3">地址</label>
+                                    <div class="size15 m-b-20 col-9">@member.Address</div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>

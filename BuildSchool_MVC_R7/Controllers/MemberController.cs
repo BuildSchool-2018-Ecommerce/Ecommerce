@@ -1,4 +1,5 @@
 ﻿using BuildSchool.MvcSolution.OnlineStore.Models;
+using BuildSchool.MvcSolution.OnlineStore.Repository;
 using BuildSchool_MVC_R7.Models;
 using BuildSchool_MVC_R7.Service;
 using System;
@@ -84,7 +85,10 @@ namespace BuildSchool_MVC_R7.Controllers
         }
         public ActionResult Account_Member()
         {
-            return View();
+            var memberservice = new MemberService();
+            var cookie = Request.Cookies["R7CompanyMember"];
+            var member = memberservice.GetMemberById(cookie.Value);
+            return View(member);
         }
         public ActionResult Account_Order()
         {
@@ -92,7 +96,17 @@ namespace BuildSchool_MVC_R7.Controllers
         }
         public ActionResult Account_UpdateMember()
         {
-            return View();
+            var memberservice = new MemberService();
+            var cookie = Request.Cookies["R7CompanyMember"];
+            var member = memberservice.GetMemberById(cookie.Value);
+            return View(member);
+        }
+        [HttpPost]
+        public ActionResult Account_UpdateMember(Members member)
+        {
+            var memberRepository = new MemberRepository();
+            memberRepository.Update(member);
+            return RedirectToAction("Account_Member", "Member");
         }
         public ActionResult Account_SearchStatus()
         {
@@ -104,7 +118,10 @@ namespace BuildSchool_MVC_R7.Controllers
         }
         public ActionResult Account_SearchOrder()
         {
-            return View();
+            var memberservice = new MemberService();
+            var cookie = Request.Cookies["R7CompanyMember"];
+            var member = memberservice.GetOrderById(cookie.Value);
+            return View(member);
         }
     }
 }

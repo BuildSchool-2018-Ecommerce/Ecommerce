@@ -388,7 +388,7 @@
                             <ul class="p-b-54" style="text-indent: 2em;">
                                 <li class="p-t-4">
                                     <a href="@Url.Action("Account_SearchOrder", "Member")" class="s-text13">
-                                        依訂單編號查詢
+                                        查詢所有產品
                                     </a>
                                 </li>
                                 <li class="p-t-4">
@@ -406,7 +406,22 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-sm-6 col-md-8 col-lg-9 p-b-50"></div>
+            <div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
+                <table class="table-shopping-cart">
+                    <tr class="table-head">
+                        <th class="column-5">訂單編號</th>
+                        <th class="column-5">訂單日期</th>
+                        <th class="column-5">出貨日期</th>
+                        <th class="column-5">狀態</th>
+                    </tr>
+                    <tr class="table-row">
+                        <td class="column-5">1</td>
+                        <td class="column-5">2018.06.07</td>
+                        <td class="column-5">2018.06.09</td>
+                        <td class="column-5">未出貨</td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 </section>
