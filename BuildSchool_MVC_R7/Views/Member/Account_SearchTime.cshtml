@@ -1,7 +1,8 @@
 ﻿
 @{
-    ViewBag.Title = "Account_Order";
+    ViewBag.Title = "Account_SearchTime";
 }
+
 
 <header class="header1">
     <!-- Header desktop -->
@@ -381,7 +382,7 @@
                         </li>
 
                         <li class="p-t-4 s-text13">
-                                查詢訂單
+                            查詢訂單
                         </li>
                         <li>
                             <ul class="p-b-54" style="text-indent: 2em;">
@@ -391,7 +392,7 @@
                                     </a>
                                 </li>
                                 <li class="p-t-4">
-                                    <a href="@Url.Action("Account_SearchTime", "Member")" class="s-text13">
+                                    <a href="@Url.Action("Account_SearchTime", "Member")" class="s-text13 active1">
                                         依時間查詢
                                     </a>
                                 </li>
@@ -404,6 +405,22 @@
                         </li>
                     </ul>
                 </div>
+            </div>
+            <div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
+                <table class="table-shopping-cart">
+                    <tr class="table-head">
+                        <th class="column-5">訂單編號</th>
+                        <th class="column-5">訂單日期</th>
+                        <th class="column-5">出貨日期</th>
+                        <th class="column-5">狀態</th>
+                    </tr>
+                    <tr class="table-row">
+                        <td class="column-5">1</td>
+                        <td class="column-5">2018.06.07</td>
+                        <td class="column-5">2018.06.09</td>
+                        <td class="column-5">未出貨</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>

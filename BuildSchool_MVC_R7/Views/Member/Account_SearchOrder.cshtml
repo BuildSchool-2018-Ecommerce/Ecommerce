@@ -1,7 +1,9 @@
-﻿
+﻿@model MemberViewModel
 @{
-    ViewBag.Title = "Account_Order";
+    ViewBag.Title = "Account_SearchOrder";
+    var orders = Model.Orders;
 }
+
 
 <header class="header1">
     <!-- Header desktop -->
@@ -81,9 +83,61 @@
 
             <!-- Header Icon -->
             <div class="header-icons">
-                <a href="@Url.Action("LogIn", "Member")" class="header-wrapicon1 dis-block">
-                    <img src="~/Content/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
-                </a>
+                @if (Model.User.Username == null)
+                {
+                    <a href="@Url.Action("LogIn", "Member")" class="header-wrapicon1 dis-block">
+                        <img src="@Url.Content("~/Content/images/icons/icon-header-01.png")" class="header-icon1" alt="ICON">
+                    </a>
+                }
+                else
+                {
+                    <div class="header-wrapicon2 m-r-13">
+                        <img src="@Url.Content("~/Content/images/icons/00.png")" class="header-icon1 js-show-header-dropdown" alt="ICON">
+
+                        <!-- Header cart noti -->
+                        <div class="header-cart header-dropdown" style="width:160px;height:200px">
+                            <ul class="header-cart-wrapitem">
+                                <li class="header-cart-item">
+                                    <div>
+                                        <a href="@Url.Action("Account_Member","Member")" class="header-cart-item-name" style="color:royalblue">
+                                            @Model.User.Username
+                                        </a>
+                                    </div>
+                                </li>
+
+                                <li class="header-cart-item">
+
+                                    <div>
+
+                                        <a href="@Url.Action("Account_UpdateMember","Member")" class="header-cart-item-name">
+                                            <i class="far fa-edit"></i>
+                                            修改會員
+                                        </a>
+                                    </div>
+                                </li>
+
+                                <li class="header-cart-item">
+
+                                    <div>
+                                        <a href="@Url.Action("Account_Order","Member")" class="header-cart-item-name">
+                                            <i class="fas fa-search"></i>
+                                            查詢訂單
+                                        </a>
+                                    </div>
+                                </li>
+                                <li class="header-cart-item">
+
+                                    <div>
+                                        <a href="@Url.Action("LogOut","Member")" class="header-cart-item-name">
+                                            <i class="fas fa-sign-out-alt"></i>
+                                            登出
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                }
 
                 <span class="linedivide1"></span>
 
@@ -381,13 +435,13 @@
                         </li>
 
                         <li class="p-t-4 s-text13">
-                                查詢訂單
+                            查詢訂單
                         </li>
                         <li>
                             <ul class="p-b-54" style="text-indent: 2em;">
                                 <li class="p-t-4">
-                                    <a href="@Url.Action("Account_SearchOrder", "Member")" class="s-text13">
-                                        依訂單編號查詢
+                                    <a href="@Url.Action("Account_SearchOrder", "Member")" class="s-text13 active1">
+                                        查詢所有產品
                                     </a>
                                 </li>
                                 <li class="p-t-4">
@@ -404,6 +458,35 @@
                         </li>
                     </ul>
                 </div>
+            </div>
+            <div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
+                <div style="display: flex; justify-content: flex-end; align-items:flex-end; margin-bottom: 2em;">
+                    <span>訂單編號: &nbsp;&nbsp;</span>
+                    <input type="text" placeholder="Search" value="" />
+                    <button>查詢</button>                </div>
+                <table class="table-shopping-cart">
+                    <tr class="table-head">
+                        <th class="column-5">訂單編號</th>
+                        <th class="column-5">訂單日期</th>
+                        <th class="column-5">出貨日期</th>
+                        <th class="column-5">狀態</th>
+                    </tr>
+                    @foreach(var order in orders)
+                    {
+                        <tr class="table-row">
+                            <td class="column-5">@order.OrderID</td>
+                            <td class="column-5">@order.OrderDate</td>
+                            <td class="column-5">@order.ShippedDate</td>
+                            <td class="column-5">@order.Status</td>
+                        </tr>
+                    }
+                    @*<tr class="table-row">
+                        <td class="column-5">@order.OrderID</td>
+                        <td class="column-5">@order.OrderDate</td>
+                        <td class="column-5">@order.ShippedDate</td>
+                        <td class="column-5">@order.Status</td>
+                    </tr>*@
+                </table>
             </div>
         </div>
     </div>

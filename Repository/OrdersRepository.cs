@@ -112,5 +112,24 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
         {
             return connection.Query<Orders>("select * FROM Orders ");
         }
+        public IEnumerable<Orders> GetOrderByMemberId(string MemberID)
+        {
+            return connection.Query<Orders>("select * FROM Orders WHERE MemberID = @MemberID",
+                new
+                {
+                    MemberID
+                });
+            //var result = connection.Query<Orders>("select * FROM Orders WHERE MemberID = @MemberID",
+            //    new
+            //    {
+            //        MemberID
+            //    });
+            ////Orders order = null;
+            //foreach (var item in result)
+            //{
+            //    order = item;
+            //}
+            //return order;
+        }
     }
 }

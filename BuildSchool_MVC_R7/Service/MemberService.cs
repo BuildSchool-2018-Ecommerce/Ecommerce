@@ -45,9 +45,38 @@ namespace BuildSchool_MVC_R7.Service
         public MemberViewModel GetMemberById(string memberId)
         {
             var memberRepository = ContainerManager.Container.GetInstance<MemberRepository>();
+            var member = memberRepository.FindById(memberId);
+            User user = new User();
+            if (member != null)
+            {
+                user.UserID = memberId;
+                user.Username = member.Name;
+            }
             var memberViewModel = new MemberViewModel()
             {
+                User = user,
                 Member = memberRepository.FindById(memberId)
+            };
+            return memberViewModel;
+        }
+
+        public MemberViewModel GetOrderById(string memberId)
+        {
+            var ordersRepository = ContainerManager.Container.GetInstance<OrdersRepository>();
+            var memberRepository = ContainerManager.Container.GetInstance<MemberRepository>();
+            var member = memberRepository.FindById(memberId);
+            var orders = ordersRepository.GetOrderByMemberId(memberId);
+            User user = new User();
+            if (orders != null && member != null)
+            {
+                user.UserID = memberId;
+                user.Username = member.Name;
+            }
+            var memberViewModel = new MemberViewModel()
+            {
+                User = user,
+                Member = member,
+                Orders = ordersRepository.GetOrderByMemberId(memberId)
             };
             return memberViewModel;
         }

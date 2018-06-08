@@ -3026,6 +3026,9 @@
     <Content Include="Views\R7CompanyEmployees\ProductModify.cshtml" />
     <Content Include="Views\Shared\CompanyLayout.cshtml" />
     <Content Include="Views\R7CompanyEmployees\ProductSales.cshtml" />
+    <Content Include="Views\Member\Account_SearchStatus.cshtml" />
+    <Content Include="Views\Member\Account_SearchTime.cshtml" />
+    <Content Include="Views\Member\Account_SearchOrder.cshtml" />
     <Content Include="Views\ShoppingCart\ShoppingBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
