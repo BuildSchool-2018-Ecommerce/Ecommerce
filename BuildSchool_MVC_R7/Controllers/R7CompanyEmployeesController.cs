@@ -8,19 +8,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace BuildSchool_MVC_R7.Controllers
 {
+    [Authorize]
     public class R7CompanyEmployeesController : Controller
     {
         // GET: R7CompanyEmployees
-        public ActionResult Index()
+        [AllowAnonymous]
+        public ActionResult Index(string ReturnUrl)
         {
-            return View();
+            LoginVM vm = new LoginVM() { ReturnUrl = ReturnUrl };
+            return View(vm);
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult VerifyLogIn(LoginVM vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Index", vm);
+            }
+
+            FormsAuthentication.RedirectFromLoginPage(vm.Account, false);
+            return Redirect(FormsAuthentication.GetRedirectUrl(vm.Account, false));
         }
 
         public ActionResult ProductList()
-       {
+        {
             var productService = new ProductService();
             var productList = productService.GetProducts();
             return View(productList);
@@ -57,7 +73,7 @@ namespace BuildSchool_MVC_R7.Controllers
 
         public ActionResult UpdataProductFormat(ProductFormat productFormatInfo)
         {
-            var productFormatRepository = new ProductFormatRepository();
+            var productFormatRepository = ContainerManager.Container.GetInstance<ProductFormatRepository>();
             productFormatRepository.UpdateProductFormat(productFormatInfo);
             return RedirectToAction("ProductList");
         }
@@ -73,14 +89,14 @@ namespace BuildSchool_MVC_R7.Controllers
         [HttpPost]
         public ActionResult UpdateProduct(Product productInfo)
         {
-            var productRepository = new ProductRepository();
+            var productRepository = ContainerManager.Container.GetInstance<ProductRepository>();
             productRepository.UpdateProductInfo(productInfo);
             return RedirectToAction("ProductList");
         }
 
         public ActionResult DeleteProduct(int ProductID)
         {
-            var productRepository = new ProductRepository();
+            var productRepository = ContainerManager.Container.GetInstance<ProductRepository>();
             productRepository.Delete(ProductID);
             return RedirectToAction("ProductList");
         }
@@ -122,9 +138,15 @@ namespace BuildSchool_MVC_R7.Controllers
 
         public ActionResult UpdateMemberInfo(Members member)
         {
-            var memberRepository = new MemberRepository();
+            var memberRepository = ContainerManager.Container.GetInstance<MemberRepository>();
             memberRepository.Update(member);
             return RedirectToAction("MemberList");
+        }
+        public ActionResult ProductSales()
+        {
+            var productService = new ProductService();
+            var product = productService.salesProducts();
+            return View(product);
         }
     }
 }

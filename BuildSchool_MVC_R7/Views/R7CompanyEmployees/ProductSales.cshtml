@@ -1,0 +1,71 @@
+﻿@model IEnumerable<AllProduct>
+@{
+    ViewBag.Title = "ProductSales";
+    Layout = "~/Views/Shared/CompanyLayout.cshtml";
+}
+
+<style>
+    table {
+        text-align: center;
+    }
+
+    tr {
+        border: 0.1em solid rgb(225, 225, 225);
+    }
+
+    th, td {
+        text-align: center;
+        padding-right: 2em;
+        line-height: 3.5em;
+    }
+
+    button {
+        width: 5em;
+    }
+</style>
+<h1>This is Sales Product</h1>
+<div class="row">
+    <div id="display" class="col-sm-12">
+        <table>
+            <thead>
+                <tr>
+                    <th>產品ID</th>
+                    <th>產品名稱</th>
+                    <th>價格</th>
+                    <th>打折價格</th>
+                    <th>開始時間</th>
+                    <th>結束時間</th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var product in Model)
+                {
+                    <tr>
+                        <td>@product.ProductID</td>
+                        <td>@product.ProductName</td>
+                        <td>@product.UnitPrice.ToString("C", CultureInfo.CurrentCulture)</td>
+                        @if (product.Sale == 0)
+                        {
+                            <td>無</td>
+                            <td>無</td>
+                            <td>無</td>
+                        }
+                        else
+                        {
+                            <td>@product.Sale.ToString("C", CultureInfo.CurrentCulture)</td>
+                            <td>@product.StartDate.ToString("g")</td>
+                            <td>@product.EndDate.ToString("g")</td>
+                        }
+                        <td>
+                            <button class="btn btn-primary modifyBtn">修改</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

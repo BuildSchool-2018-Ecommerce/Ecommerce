@@ -30,6 +30,7 @@
     <title>SB Admin 2 - Bootstrap Admin Theme</title>
 
     @Styles.Render("~/Content/backCss")
+    @*@Styles.Render("~/Content/css")*@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     @*<!-- Bootstrap Core CSS -->
         <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -311,33 +312,41 @@
                             </ul>
                         </li>
                         <li>
-                            <a href=@Url.RouteUrl(new { Controller = "R7CompanyEmployees", Action = "OrderList" })>訂單</a>
-                            @*<ul class="nav nav-second-level">
+                            <a href="#">訂單</a>
+                            <ul class="nav nav-second-level">
                                 <li>
                                     <a href=@Url.RouteUrl(new { Controller = "R7CompanyEmployees", Action = "OrderList" })>查詢訂單</a>
                                 </li>
-                                <li>
+                                @*<li>
                                     <a href="#">修改訂單</a>
                                 </li>
                                 <li>
                                     <a href="#">刪除訂單</a>
-                                </li>
-                            </ul>*@
+                                </li>*@
+                            </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href=@Url.RouteUrl(new { Controller = "R7CompanyEmployees", Action = "MemberList" })>會員</a>
-                            @*<ul class="nav nav-second-level">
+                            <a href="#">會員</a>
+                            <ul class="nav nav-second-level">
                                 <li>
                                     <a href=@Url.RouteUrl(new { Controller = "R7CompanyEmployees", Action = "MemberList" })>查詢會員</a>
                                 </li>
-                                <li>
+                                @*<li>
                                     <a href="#">修改會員</a>
                                 </li>
                                 <li>
                                     <a href="#">刪除會員</a>
+                                </li>*@
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">活動</a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="@Url.RouteUrl(new { Controller = "R7CompanyEmployees", Action = "ProductSales" })">打折商品</a>
                                 </li>
-                            </ul>*@
+                            </ul>
                         </li>
                     </ul>
                 </div>
