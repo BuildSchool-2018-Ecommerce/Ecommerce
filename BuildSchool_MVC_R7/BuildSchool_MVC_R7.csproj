@@ -174,6 +174,7 @@
     <Compile Include="Service\OrderService.cs" />
     <Compile Include="Service\ProductService.cs" />
     <Compile Include="Service\LogInService.cs" />
+    <Compile Include="Service\ShopingCartService.cs" />
     <Compile Include="Service\ShopService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -3025,6 +3026,7 @@
     <Content Include="Views\R7CompanyEmployees\ProductModify.cshtml" />
     <Content Include="Views\Shared\CompanyLayout.cshtml" />
     <Content Include="Views\R7CompanyEmployees\ProductSales.cshtml" />
+    <Content Include="Views\ShoppingCart\ShoppingBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -83,6 +83,7 @@
     <Compile Include="ShipData.cs" />
     <Compile Include="Shopping.cs" />
     <Compile Include="ShoppingCart.cs" />
+    <Compile Include="ShoppingIconView.cs" />
     <Compile Include="Top8Product.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
