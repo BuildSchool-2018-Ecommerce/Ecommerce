@@ -22,7 +22,7 @@
             </div>
 
             <div class="header-cart-item-txt">
-                <a href="#" class="header-cart-item-name AutoSkip">
+                <a href="@Url.Action("Product","Shop", new { @item.ProductID })" class="header-cart-item-name AutoSkip">
                     @item.ProductName
                 </a>
                 @if (item.Sale == 0)
