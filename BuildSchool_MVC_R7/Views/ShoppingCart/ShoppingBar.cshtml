@@ -1,7 +1,7 @@
-﻿@model IEnumerable<ShoppingIconView>
+﻿@model ShoppingCartViewModel
 @{ 
     decimal total = 0.0M;
-    foreach(var item in Model)
+    foreach(var item in Model.ShoppingIconView)
     {
         if(item.Sale == 0)
         {
@@ -14,7 +14,7 @@
     }
 }
 <ul class="header-cart-wrapitem">
-    @foreach (var item in Model)
+    @foreach (var item in Model.ShoppingIconView)
     {
         <li class="header-cart-item">
             <div class="header-cart-item-img">

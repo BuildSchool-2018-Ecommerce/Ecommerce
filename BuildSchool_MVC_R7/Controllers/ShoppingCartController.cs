@@ -14,7 +14,17 @@ namespace BuildSchool_MVC_R7.Controllers
         // GET: ShoppingCart
         public ActionResult Index()
         {
-            return View();
+            if(Request.Cookies["R7CompanyMember"] == null)
+            {
+                return RedirectToAction("LogIn", "Member");
+            }
+            var shopservice = new ShopingCartService();
+            var shop = shopservice.ShoppingCarts(Request.Cookies["R7CompanyMember"].Value);
+            if (shop == null)
+            {
+                return RedirectToAction("LogIn", "Member");
+            }
+            return View(shop);
         }
         public ActionResult ShoppingBar()
         {
@@ -31,6 +41,22 @@ namespace BuildSchool_MVC_R7.Controllers
             }
             Response.SetStatus(HttpStatusCode.BadRequest);
             return RedirectToAction("LogIn", "Member");
+        }
+        public ActionResult DeleteProduct(string pfid)
+        {
+            if (Request.Cookies["R7CompanyMember"] == null)
+            {
+                Response.SetStatus(HttpStatusCode.BadRequest);
+                return RedirectToAction("LogIn", "Member");
+            }
+            var shopservice = new ShopingCartService();
+            var shop = shopservice.DelectProduct(Request.Cookies["R7CompanyMember"].Value, int.Parse(pfid));
+            if (shop == false)
+            {
+                Response.SetStatus(HttpStatusCode.BadRequest);
+                return RedirectToAction("LogIn", "Member");
+            }
+            return View();
         }
     }
 }

@@ -77,6 +77,16 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
         {
             return connection.Query<ShoppingCart>("SELECT * FROM ShoppingCart");
         }
+
+        public IEnumerable<ShoppingCart> FindShoppingCartsByMemberId(string memberid)
+        {
+            return connection.Query<ShoppingCart>("SELECT * FROM ShoppingCart WHERE MemberID = @MemberID",
+                new
+                {
+                    memberid
+                });
+        }
+
         public IEnumerable<ShoppingIconView> ShoppingCarts(string memberid)
         {
             return connection.Query<ShoppingIconView>("ShoppingCartByMemberID",
