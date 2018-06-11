@@ -1,6 +1,6 @@
 ﻿@model ShoppingCartViewModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "CheckOut";
     decimal total = 0.0M;
     foreach (var item in Model.ShoppingIconView)
     {
@@ -14,20 +14,16 @@
         }
     }
 }
-
 <style>
     .dollar {
         background-color: #f5f5f5;
         color: black;
         border: 0;
     }
-    th, td {
-        text-align: center;
-    }
 
-    .dollar:focus {
-        outline: none;
-    }
+        .dollar:focus {
+            outline: none;
+        }
 </style>
 
 <!-- Header -->
@@ -464,160 +460,7 @@
 <!-- Cart -->
 <section class="cart bgwhite p-t-70 p-b-100">
     <div class="container">
-        <!-- Cart item -->
-        <div class="container-table-cart pos-relative">
-            <div class="wrap-table-shopping-cart bgwhite">
-                <table class="table-shopping-cart">
-                    <tr class="table-head">
-                        <th style="width:150px;"></th>
-                        <th style="width:200px;">Product</th>
-                        <th style="width:80px;">Color</th>
-                        <th style="width:80px;">Size</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Total</th>
-                        <th>DELETE</th>
-                    </tr>
-                    @foreach (var item in Model.ShoppingIconView)
-                {
-                    <tr class="table-row">
-                        <td style="padding-left:20px;width:150px;padding-right:20px;">
-                            <div class="cart-img-product b-rad-4 o-f-hidden">
-                                <img src="@item.Image" alt="IMG-PRODUCT">
-                            </div>
-                        </td>
-                        <td style="width:200px">@item.ProductName</td>
-                        <td style="width:80px">@item.Color</td>
-                        <td style="width:80px">@item.Size</td>
-                        @if (item.Sale == 0)
-                    {
-                        <td id="price">@item.UnitPrice.ToString("C", CultureInfo.CurrentCulture)</td>
-                }
-                else
-                {
-                    <td id="price" style="color:red">@item.Sale.ToString("C", CultureInfo.CurrentCulture)</td>
-            }
-                        <td style="width:200px;padding-left:30px;">
-                            <div class="flex-w bo5 of-hidden w-size17">
-                                @if (item.Sale == 0)
-                            {
-                                <div id="price" hidden>@item.UnitPrice</div>
-                        }
-                        else
-                        {
-                            <div id="price" hidden>@item.Sale</div>
-                    }
-
-                                <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
-                                    <i class="fs-12 fa fa-minus" aria-hidden="true"></i>
-                                </button>
-
-                                <input class="size8 m-text18 t-center num-product" type="number" name="num-product1" value="@item.Quantity">
-
-                                <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
-                                    <i class="fs-12 fa fa-plus" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </td>
-                        @if (item.Sale == 0)
-                    {
-                        var t = item.UnitPrice * item.Quantity;
-                        <td id="to" style="width:200px;">@t.ToString("C", CultureInfo.CurrentCulture)</td>
-                }
-                else
-                {
-                    var t = item.Sale * item.Quantity;
-                    <td id="to" style="width:200px;">@t.ToString("C", CultureInfo.CurrentCulture)</td>
-            }
-                        <td>
-                            <input id="pfid" type="text" class="inpu" hidden value="@item.ProductFormatID" />
-                            <button id="delete" class="btn btn-danger">
-                                <i class="fs-12 fa fa-trash" aria-hidden="true"></i>
-                            </button>
-                        </td>
-                    </tr>
-            }
-                    @*<tr class="table-row">
-                        <td class="column-1">
-                            <div class="cart-img-product b-rad-4 o-f-hidden">
-                                <img src="@Url.Content("~/Content/images/item-10.jpg")" alt="IMG-PRODUCT">
-                            </div>
-                        </td>
-                        <td class="column-2">Men Tshirt</td>
-                        <td class="column-3">$36.00</td>
-                        <td class="column-4">
-                            <div class="flex-w bo5 of-hidden w-size17">
-                                <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
-                                    <i class="fs-12 fa fa-minus" aria-hidden="true"></i>
-                                </button>
-
-                                <input class="size8 m-text18 t-center num-product" type="number" name="num-product1" value="1">
-
-                                <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
-                                    <i class="fs-12 fa fa-plus" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </td>
-                        <td class="column-5">$36.00</td>
-                    </tr>
-
-                    <tr class="table-row">
-                        <td class="column-1">
-                            <div class="cart-img-product b-rad-4 o-f-hidden">
-                                <img src="@Url.Content("~/Content/images/item-05.jpg")" alt="IMG-PRODUCT">
-                            </div>
-                        </td>
-                        <td class="column-2">Mug Adventure</td>
-                        <td class="column-3">$16.00</td>
-                        <td class="column-4">
-                            <div class="flex-w bo5 of-hidden w-size17">
-                                <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
-                                    <i class="fs-12 fa fa-minus" aria-hidden="true"></i>
-                                </button>
-
-                                <input class="size8 m-text18 t-center num-product" type="number" name="num-product2" value="1">
-
-                                <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
-                                    <i class="fs-12 fa fa-plus" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </td>
-                        <td class="column-5">$16.00</td>
-                    </tr>*@
-                </table>
-            </div>
-        </div>
-
-        <div class="flex-w flex-sb-m p-t-25 p-b-25 bo8 p-l-35 p-r-60 p-lr-15-sm">
-            <div class="flex-w flex-m w-full-sm">
-                <div class="size11 bo4 m-r-10">
-                    <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="coupon-code" placeholder="Coupon Code">
-                </div>
-
-                <div class="size12 trans-0-4 m-t-10 m-b-10 m-r-10">
-                    <!-- Button -->
-                    <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
-                        Apply coupon
-                    </button>
-                </div>
-            </div>
-
-            <div class="size10 trans-0-4 m-t-10 m-b-10">
-                <!-- Button -->
-                <button id="update" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
-                    Update Cart
-                </button>
-            </div>
-        </div>
-
-        <div class="size15 trans-0-4">
-            <!-- Button -->
-            <button id="check" class="flex-c-m bg1 bo-rad-23 hov1 s-text1 trans-0-4" style="width:15%;height:100%;margin-left:80%;margin-top:30px;">
-                Checkout
-            </button>
-        </div>
-        <!-- Total -->
-        @*<div class="bo9 w-size18 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm">
+        <div class="bo9 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm">
             <h5 class="m-text20 p-b-24">
                 Cart Totals
             </h5>
@@ -654,15 +497,20 @@
                             <option>US</option>
                             <option>UK</option>
                             <option>Japan</option>
+                            <option>Taiwan</option>
                         </select>
                     </div>
 
-                    <div class="size13 bo4 m-b-12">
-                        <input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="state" placeholder="State /  country">
+                    <div class="bo4 m-b-12" style="max-width:250px;height:40px;">
+                        <input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="ShipName" placeholder="ShipName">
                     </div>
 
-                    <div class="size13 bo4 m-b-22">
-                        <input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="postcode" placeholder="Postcode / Zip">
+                    <div class="bo4 m-b-22" style="max-width:250px;height:40px;">
+                        <input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="ShipPhone" placeholder="ShipPhone">
+                    </div>
+
+                    <div class="bo4 m-b-22" style="max-width:250px;height:40px;">
+                        <input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="ShipAddress" placeholder="ShipAddress">
                     </div>
 
                     <div class="size14 trans-0-4 m-b-10">
@@ -687,14 +535,13 @@
 
             <div class="size15 trans-0-4">
                 <!-- Button -->
-                <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+                <button class="flex-c-m bg1 bo-rad-23 hov1 s-text1 trans-0-4" style="width:25%;height:100%;margin-left:75%;">
                     Proceed to Checkout
                 </button>
             </div>
-        </div>*@
+        </div>
     </div>
 </section>
-
 <!-- Back to top -->
 <div class="btn-back-to-top bg0-hov" id="myBtn">
     <span class="symbol-btn-back-to-top">
@@ -709,102 +556,7 @@
 @Scripts.Render("~/Content/vendors")
 @Scripts.Render("~/Content/vendors1")
 @Scripts.Render("~/Content/js")
-@*<script type="text/javascript" src="vendor/select2/select2.min.js"></script>*@
 <script type="text/javascript">
-    //$(".selection-1").select2({
-    //    minimumResultsForSearch: 20,
-    //    dropdownParent: $('#dropDownSelect1')
-    //});
-
-    //$(".selection-2").select2({
-    //    minimumResultsForSearch: 20,
-    //    dropdownParent: $('#dropDownSelect2')
-    //});
-    $(document).on('click', '#check', function (e) {
-        location.href = "/ShoppingCart/CheckOut";
-    });
-    $(document).on('click', '.btn-num-product-down', function (e) {
-        find(e.target);
-    });
-    $(document).on('click', '#update', function (e) {
-        console.log($('.num-product'));
-        console.log($('.inpu'));
-        var num = $('.num-product');
-        var input = $('.inpu');
-        var a = {
-            Quantity : [],
-            ProductFormatID : []
-        }
-        for (var item of num) {
-            a.Quantity.push($(item).val());
-        }
-        for (var item of input) {
-            a.ProductFormatID.push($(item).val());
-        }
-        console.log(a);
-        var json = JSON.stringify(a);
-        $.ajax({
-            url: "/ShoppingCart/Update",
-            type: "POST",
-            data: {
-                shop : json
-            },
-            success: function (result) {
-                location.href = "/ShoppingCart/Index";
-            }
-            , error: function () {
-                location.href = "/Member/LogIn";
-            }
-        });
-    });
-    $(document).on('click', '#delete', function (e) {
-        var del = confirm('確定刪除?');
-        if (del == true) {
-            var id = $(e.target).parents('td').find('#pfid').val();
-            $.ajax({
-                url: "/ShoppingCart/DeleteProduct",
-                data: {
-                    pfid: id
-                },
-                success: function (result) {
-                    $(e.target).parents('tr').remove();
-                },
-                error: function () {
-                    alert("刪除失敗!");
-                }
-            })
-        }
-    });
-    $(document).on('click', '.btn-num-product-up', function (e) {
-        find(e.target);
-    });
-    $(document).on('change', '.num-product', function (e) {
-        if (e.target.value == 0) {
-            e.target.value = 1;
-        }
-        find(e.target);
-    });
-    var find = function (result) {
-        var price = parseInt($(result).parents('td').find('#price').text());
-        var quantity = parseInt($(result).parents('td').find('input').val());
-        var to = $(result).parents('tr').find("#to");
-        var all = price * quantity;
-        var total = dealNumber(all);
-        to.text('NT$' + total);
-    };
-    var dealNumber = function (money) {
-        if (money && money != null) {
-            money = String(money);
-            var left = money.split('.')[0], right = money.split('.')[1];
-            right = right ? (right.length >= 2 ? '.' + right.substr(0, 2) : '.' + right + '0') : '.00';
-            var temp = left.split('').reverse().join('').match(/(\d{1,3})/g);
-            return (Number(money) < 0 ? "-" : "") + temp.join(',').split('').reverse().join('') + right;
-        } else if (money === 0) {   //注意===在这里的使用，如果传入的money为0,if中会将其判定为boolean类型，故而要另外做===判断
-            return '0.00';
-        } else {
-            return "";
-        }
-    };
     $('.js-show-header-dropdown.shop').click(function () {
         //if ($('#user').length == 0) {
         //    location.href = "/Member/LogIn";
@@ -819,4 +571,3 @@
         });
     });
 </script>
-

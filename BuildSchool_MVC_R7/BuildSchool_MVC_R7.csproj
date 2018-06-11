@@ -167,6 +167,7 @@
     <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\ShoppingCartViewModel.cs" />
     <Compile Include="Models\ShopViewModel.cs" />
+    <Compile Include="Models\UpdateShoppingCart.cs" />
     <Compile Include="PD\IPasswordValidationService.cs" />
     <Compile Include="PD\PasswordValidationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -3032,6 +3033,7 @@
     <Content Include="Views\Member\Account_SearchOrder.cshtml" />
     <Content Include="Views\ShoppingCart\ShoppingBar.cshtml" />
     <Content Include="Views\ShoppingCart\DeleteProduct.cshtml" />
+    <Content Include="Views\ShoppingCart\CheckOut.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

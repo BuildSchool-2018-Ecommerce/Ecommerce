@@ -12,6 +12,5 @@ namespace BuildSchool.MvcSolution.OnlineStore.Models
         public string MemberID { get; set; }
         public int ProductFormatID { get; set; }
         public int Quantity { get; set; }
-        public decimal UnitPrice { get; set; }
     }
 }

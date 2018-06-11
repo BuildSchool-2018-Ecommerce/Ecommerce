@@ -30,7 +30,7 @@ namespace BuildSchool_MVC_R7.Service
             }
             return null;
         }
-        public bool DelectProduct(string memberid,int productformatid)
+        public bool DelectProduct(string memberid, int productformatid)
         {
             var shopingrepository = ContainerManager.Container.GetInstance<ShoppingCartRepository>();
             var memberrepository = ContainerManager.Container.GetInstance<MemberRepository>();
@@ -44,6 +44,28 @@ namespace BuildSchool_MVC_R7.Service
                     return false;
                 }
                 shopingrepository.Delete(product);
+                return true;
+            }
+            return false;
+        }
+        public bool UpdateProduct(string memberid, UpdateShoppingCart shopping)
+        {
+            var shoppingrepository = ContainerManager.Container.GetInstance<ShoppingCartRepository>();
+            var memberrepository = ContainerManager.Container.GetInstance<MemberRepository>();
+            var member = memberrepository.FindById(memberid);
+            if (member != null)
+            {
+                var shop = shoppingrepository.FindShoppingCartsByMemberId(memberid);
+                for(int i=0;i<shopping.Quantity.Count ; i++)
+                {
+                    var product = shop.FirstOrDefault((x) => x.ProductFormatID == int.Parse(shopping.ProductFormatID[i]));
+                    if(product == null)
+                    {
+                        return false;
+                    }
+                    product.Quantity = int.Parse(shopping.Quantity[i]);
+                    shoppingrepository.Update(product);
+                }
                 return true;
             }
             return false;

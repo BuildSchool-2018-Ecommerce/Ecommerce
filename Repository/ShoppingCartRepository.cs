@@ -33,23 +33,21 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                     model.MemberID,
                     model.ProductFormatID,
                     model.Quantity,
-                    model.UnitPrice
                 });
         }
 
 
         public void Update(ShoppingCart model)
         {
-            connection.Execute("UPDATE ShoppingCart SET MemberID = @MemberID, ProductFormatID = @ProductFormatID, Quantity = @Quantity, UnitPrice = @UnitPrice WHERE ShoppingCartID = @ShoppingCartID",
+            connection.Execute("UPDATE ShoppingCart SET MemberID = @MemberID, ProductFormatID = @ProductFormatID, Quantity = @Quantity WHERE ShoppingCartID = @ShoppingCartID",
                 new
                 {
                     model.MemberID,
                     model.ProductFormatID,
                     model.Quantity,
-                    model.UnitPrice
+                    model.ShoppingCartID,
                 });
         }
-
         public void Delete(ShoppingCart model)
         {
             connection.Execute("DELETE FROM ShoppingCart WHERE ShoppingCartID = @ShoppingCartID",
