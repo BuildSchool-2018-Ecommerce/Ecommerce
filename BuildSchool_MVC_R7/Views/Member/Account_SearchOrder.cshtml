@@ -462,33 +462,60 @@
                 </div>
             </div>
             <div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
-                <div style="display: flex; justify-content: flex-end; align-items:flex-end; margin-bottom: 2em;">
-                    <span>訂單編號: &nbsp;&nbsp;</span>
-                    <input type="text" placeholder="Search" value="" />
-                    <button>查詢</button>                </div>
-                <table class="table-shopping-cart">
-                    <tr class="table-head">
-                        <th class="column-5">訂單編號</th>
-                        <th class="column-5">訂單日期</th>
-                        <th class="column-5">出貨日期</th>
-                        <th class="column-5">狀態</th>
-                    </tr>
-                    @foreach(var order in orders)
-                    {
-                        <tr class="table-row">
-                            <td class="column-5">@order.OrderID</td>
-                            <td class="column-5">@order.OrderDate</td>
-                            <td class="column-5">@order.ShippedDate</td>
-                            <td class="column-5">@order.Status</td>
+                @using (Html.BeginForm("Account_SearchOrder", "Member", FormMethod.Get))
+                {
+                    <div style="display: flex; justify-content: flex-end; align-items:flex-end; margin-bottom: 2em;">
+                        <span>訂單編號: &nbsp;&nbsp;</span>
+                        <input type="number" placeholder="Search" name="ID"/>
+                        <button type="submit">
+                            查詢
+                        </button>               
+                    </div>
+                }
+                @if(ViewBag.ID == null)
+                {
+                    <table class="table-shopping-cart">
+                        <tr class="table-head">
+                            <th class="column-5">訂單編號</th>
+                            <th class="column-5">訂單日期</th>
+                            <th class="column-5">出貨日期</th>
+                            <th class="column-5">狀態</th>
                         </tr>
-                    }
-                    @*<tr class="table-row">
-                        <td class="column-5">@order.OrderID</td>
-                        <td class="column-5">@order.OrderDate</td>
-                        <td class="column-5">@order.ShippedDate</td>
-                        <td class="column-5">@order.Status</td>
-                    </tr>*@
-                </table>
+                        @foreach(var order in orders)
+                        {
+                            <tr class="table-row">
+                                <td class="column-5">@order.OrderID</td>
+                                <td class="column-5">@order.OrderDate</td>
+                                <td class="column-5">@order.ShippedDate</td>
+                                <td class="column-5">@order.Status</td>
+                            </tr>
+                        }
+                    </table>
+                }
+                else
+                {
+                    <table class="table-shopping-cart">
+                        <tr class="table-head">
+                            <th class="column-5">訂單編號</th>
+                            <th class="column-5">訂單日期</th>
+                            <th class="column-5">出貨日期</th>
+                            <th class="column-5">狀態</th>
+                        </tr>
+                        @foreach(var order in orders)
+                        {
+                            if(ViewBag.ID == @order.OrderID.ToString())
+                            {
+                                <tr class="table-row">
+                                    <td class="column-5">@order.OrderID</td>
+                                    <td class="column-5">@order.OrderDate</td>
+                                    <td class="column-5">@order.ShippedDate</td>
+                                    <td class="column-5">@order.Status</td>
+                                </tr>
+                            }
+                        }
+                    </table>
+                }
+
             </div>
         </div>
     </div>

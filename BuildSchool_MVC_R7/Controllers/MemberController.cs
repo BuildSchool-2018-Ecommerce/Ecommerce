@@ -152,7 +152,7 @@ namespace BuildSchool_MVC_R7.Controllers
                 return View();
             }
         }
-        public ActionResult Account_SearchOrder()
+        public ActionResult Account_SearchOrder(string ID)
         {
             if (Request.Cookies["R7CompanyMember"] == null)
             {
@@ -163,6 +163,7 @@ namespace BuildSchool_MVC_R7.Controllers
                 var memberservice = new MemberService();
                 var cookie = Request.Cookies["R7CompanyMember"];
                 var member = memberservice.GetOrderById(cookie.Value);
+                ViewBag.ID = ID;
                 return View(member);
             }
         }
