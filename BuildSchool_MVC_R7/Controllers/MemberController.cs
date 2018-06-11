@@ -85,21 +85,43 @@ namespace BuildSchool_MVC_R7.Controllers
         }
         public ActionResult Account_Member()
         {
-            var memberservice = new MemberService();
-            var cookie = Request.Cookies["R7CompanyMember"];
-            var member = memberservice.GetMemberById(cookie.Value);
-            return View(member);
+            if (Request.Cookies["R7CompanyMember"] == null)
+            {
+                return RedirectToAction("LogIn", "Member");
+            }
+            else
+            {
+                var memberservice = new MemberService();
+                var cookie = Request.Cookies["R7CompanyMember"];
+                var member = memberservice.GetMemberById(cookie.Value);
+                return View(member);
+            }
         }
         public ActionResult Account_Order()
         {
-            return View();
+            if (Request.Cookies["R7CompanyMember"] == null)
+            {
+                return RedirectToAction("LogIn", "Member");
+            }
+            else
+            {
+                return View();
+            }
+            
         }
         public ActionResult Account_UpdateMember()
         {
-            var memberservice = new MemberService();
-            var cookie = Request.Cookies["R7CompanyMember"];
-            var member = memberservice.GetMemberById(cookie.Value);
-            return View(member);
+            if (Request.Cookies["R7CompanyMember"] == null)
+            {
+                return RedirectToAction("LogIn", "Member");
+            }
+            else
+            {
+                var memberservice = new MemberService();
+                var cookie = Request.Cookies["R7CompanyMember"];
+                var member = memberservice.GetMemberById(cookie.Value);
+                return View(member);
+            }
         }
         [HttpPost]
         public ActionResult Account_UpdateMember(Members member)
@@ -110,18 +132,40 @@ namespace BuildSchool_MVC_R7.Controllers
         }
         public ActionResult Account_SearchStatus()
         {
-            return View();
+            if (Request.Cookies["R7CompanyMember"] == null)
+            {
+                return RedirectToAction("LogIn", "Member");
+            }
+            else
+            {
+                return View();
+            }
         }
         public ActionResult Account_SearchTime()
         {
-            return View();
+            if (Request.Cookies["R7CompanyMember"] == null)
+            {
+                return RedirectToAction("LogIn", "Member");
+            }
+            else
+            {
+                return View();
+            }
         }
-        public ActionResult Account_SearchOrder()
+        public ActionResult Account_SearchOrder(string ID)
         {
-            var memberservice = new MemberService();
-            var cookie = Request.Cookies["R7CompanyMember"];
-            var member = memberservice.GetOrderById(cookie.Value);
-            return View(member);
+            if (Request.Cookies["R7CompanyMember"] == null)
+            {
+                return RedirectToAction("LogIn", "Member");
+            }
+            else
+            {
+                var memberservice = new MemberService();
+                var cookie = Request.Cookies["R7CompanyMember"];
+                var member = memberservice.GetOrderById(cookie.Value);
+                ViewBag.ID = ID;
+                return View(member);
+            }
         }
     }
 }
