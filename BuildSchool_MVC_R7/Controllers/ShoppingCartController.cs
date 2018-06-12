@@ -104,15 +104,15 @@ namespace BuildSchool_MVC_R7.Controllers
             {
                 return RedirectToAction("LogIn", "Member");
             }
-            if(orders.ShipName == null || orders.ShipAddress == null || orders.ShipPhone == null)
+            string shop = "請完整輸入";
+            if(orders.ShipName != null && orders.ShipAddress != null && orders.ShipPhone != null)
             {
-                return RedirectToAction("LogIn", "Member");
-            }
-            var shopservice = new ShopingCartService();
-            var shop = shopservice.CreateOrders(Request.Cookies["R7CompanyMember"].Value, orders);
-            if(shop == "ok")
-            {
-                return RedirectToAction("Index", "Home");
+                var shopservice = new ShopingCartService();
+                shop = shopservice.CreateOrders(Request.Cookies["R7CompanyMember"].Value, orders);
+                if (shop == "ok")
+                {
+                    return RedirectToAction("Index", "Home");
+                }
             }
             return RedirectToAction("CheckOut", "ShoppingCart", new { Error = shop });
         }
