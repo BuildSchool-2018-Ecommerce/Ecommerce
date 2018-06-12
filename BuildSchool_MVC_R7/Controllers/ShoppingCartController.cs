@@ -15,7 +15,7 @@ namespace BuildSchool_MVC_R7.Controllers
     public class ShoppingCartController : Controller
     {
         // GET: ShoppingCart
-        public ActionResult Index()
+        public ActionResult Cart()
         {
             if(Request.Cookies["R7CompanyMember"] == null)
             {

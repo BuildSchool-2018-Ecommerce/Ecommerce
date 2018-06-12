@@ -23,16 +23,24 @@ namespace BuildSchool_MVC_R7.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            var homeservice = new HomeService();
+            var home = homeservice.About("0");
+            if (Request.Cookies["R7CompanyMember"] != null)
+            {
+                home = homeservice.About(Request.Cookies["R7CompanyMember"].Value);
+            }
+            return View(home);
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            var homeservice = new HomeService();
+            var home = homeservice.Contact("0");
+            if (Request.Cookies["R7CompanyMember"] != null)
+            {
+                home = homeservice.Contact(Request.Cookies["R7CompanyMember"].Value);
+            }
+            return View(home);
         }
     }
 }

@@ -17,7 +17,7 @@ namespace BuildSchool_MVC_R7.Controllers
     {
         // GET: R7CompanyEmployees
         [AllowAnonymous]
-        public ActionResult Index(string ReturnUrl)
+        public ActionResult LogIn(string ReturnUrl)
         {
             LoginVM vm = new LoginVM() { ReturnUrl = ReturnUrl };
             return View(vm);

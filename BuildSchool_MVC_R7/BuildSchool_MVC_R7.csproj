@@ -147,8 +147,6 @@
     <Compile Include="App_Start\ContainerManager.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AboutController.cs" />
-    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\R7CompanyEmployeesController.cs" />
@@ -2998,9 +2996,6 @@
     <Content Include="Views\Shop\ProductQuantity.cshtml" />
     <Content Include="Views\Shop\ProductSize.cshtml" />
     <Content Include="Views\Shop\CategoryProduct.cshtml" />
-    <Content Include="Views\Shop\Index.cshtml" />
-    <Content Include="Views\About\Index.cshtml" />
-    <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
@@ -3010,11 +3005,9 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\ShoppingCart\Index.cshtml" />
     <Content Include="Views\Member\Account_Member.cshtml" />
     <Content Include="Views\Member\Account_Order.cshtml" />
     <Content Include="Views\Member\Account_UpdateMember.cshtml" />
-    <Content Include="Views\R7CompanyEmployees\Index.cshtml" />
     <Content Include="Views\R7CompanyEmployees\MemberDetail.cshtml" />
     <Content Include="Views\R7CompanyEmployees\MemberList.cshtml" />
     <Content Include="Views\R7CompanyEmployees\OrderDetail.cshtml" />
@@ -3034,6 +3027,9 @@
     <Content Include="Views\ShoppingCart\ShoppingBar.cshtml" />
     <Content Include="Views\ShoppingCart\DeleteProduct.cshtml" />
     <Content Include="Views\ShoppingCart\CheckOut.cshtml" />
+    <Content Include="Views\ShoppingCart\Cart.cshtml" />
+    <Content Include="Views\Shop\ShopHomePage.cshtml" />
+    <Content Include="Views\R7CompanyEmployees\LogIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
