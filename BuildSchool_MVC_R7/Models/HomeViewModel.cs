@@ -12,5 +12,6 @@ namespace BuildSchool_MVC_R7.Models
         public IEnumerable<NewProduct> NewProduct { get; set; }
         public IEnumerable<SalesProduct> SalesProduct { get; set; }
         public IEnumerable<Top8Product> Top8Product { get; set; }
+        public int Count { get; set; }
     }
 }

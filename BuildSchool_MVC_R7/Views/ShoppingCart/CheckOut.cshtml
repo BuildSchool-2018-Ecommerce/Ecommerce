@@ -52,7 +52,7 @@
 
         <div class="wrap_header">
             <!-- Logo -->
-            <a href="index.html" class="logo">
+            <a href="/Home/Index" class="logo">
                 <img src="~/Content/images/icons/logo.png" alt="IMG-LOGO">
             </a>
 
@@ -236,7 +236,7 @@
     <!-- Header Mobile -->
     <div class="wrap_header_mobile">
         <!-- Logo moblie -->
-        <a href="index.html" class="logo-mobile">
+        <a href="/Home/Index" class="logo-mobile">
             <img src="~/Content/images/icons/logo.png" alt="IMG-LOGO">
         </a>
 
@@ -559,6 +559,7 @@
 @Scripts.Render("~/Content/vendors1")
 @Scripts.Render("~/Content/js")
 <script type="text/javascript">
+    $(".header-icons-noti").text(@Model.Count);
     $('.js-show-header-dropdown.shop').click(function () {
         //if ($('#user').length == 0) {
         //    location.href = "/Member/LogIn";

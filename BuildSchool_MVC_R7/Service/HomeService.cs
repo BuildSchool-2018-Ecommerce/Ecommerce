@@ -15,6 +15,7 @@ namespace BuildSchool_MVC_R7.Service
         {
             var productRepository =  ContainerManager.Container.GetInstance<ProductRepository>();
             var memberRepository = ContainerManager.Container.GetInstance<MemberRepository>();
+            var shopingrepository = ContainerManager.Container.GetInstance<ShoppingCartRepository>();
             var member = memberRepository.FindById(memberid);
             User user = new User();
             if(member != null)
@@ -29,11 +30,16 @@ namespace BuildSchool_MVC_R7.Service
                 SalesProduct = productRepository.SalesProduct(),
                 Top8Product = productRepository.Top8Product()
             };
+            if(member != null)
+            {
+                homeViewModel.Count = shopingrepository.ShoppingCarts(memberid).Count();
+            }
             return homeViewModel;
         }
         public HomeViewModel About(string memberid)
         {
             var memberRepository = ContainerManager.Container.GetInstance<MemberRepository>();
+            var shopingrepository = ContainerManager.Container.GetInstance<ShoppingCartRepository>();
             var member = memberRepository.FindById(memberid);
             User user = new User();
             if (member != null)
@@ -45,11 +51,16 @@ namespace BuildSchool_MVC_R7.Service
             {
                 User = user
             };
+            if(member != null)
+            {
+                homeViewModel.Count = shopingrepository.ShoppingCarts(memberid).Count();
+            }
             return homeViewModel;
         }
         public HomeViewModel Contact(string memberid)
         {
             var memberRepository = ContainerManager.Container.GetInstance<MemberRepository>();
+            var shopingrepository = ContainerManager.Container.GetInstance<ShoppingCartRepository>();
             var member = memberRepository.FindById(memberid);
             User user = new User();
             if (member != null)
@@ -61,6 +72,10 @@ namespace BuildSchool_MVC_R7.Service
             {
                 User = user
             };
+            if(member != null)
+            {
+                homeViewModel.Count = shopingrepository.ShoppingCarts(memberid).Count();
+            }
             return homeViewModel;
         }
     }

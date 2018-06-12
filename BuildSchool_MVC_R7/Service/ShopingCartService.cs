@@ -28,6 +28,7 @@ namespace BuildSchool_MVC_R7.Service
                     User = user,
                     ShoppingIconView = shopingrepository.ShoppingCarts(memberid)
                 };
+                shoppingcartviewmodel.Count = shoppingcartviewmodel.ShoppingIconView.Count();
                 return shoppingcartviewmodel;
             }
             return null;

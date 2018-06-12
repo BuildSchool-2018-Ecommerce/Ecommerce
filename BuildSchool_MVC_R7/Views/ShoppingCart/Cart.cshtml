@@ -57,7 +57,7 @@
 
         <div class="wrap_header">
             <!-- Logo -->
-            <a href="index.html" class="logo">
+            <a href="/Home/Index" class="logo">
                 <img src="~/Content/images/icons/logo.png" alt="IMG-LOGO">
             </a>
 
@@ -241,7 +241,7 @@
     <!-- Header Mobile -->
     <div class="wrap_header_mobile">
         <!-- Logo moblie -->
-        <a href="index.html" class="logo-mobile">
+        <a href="/Home/Index" class="logo-mobile">
             <img src="~/Content/images/icons/logo.png" alt="IMG-LOGO">
         </a>
         
@@ -723,6 +723,7 @@
     //    minimumResultsForSearch: 20,
     //    dropdownParent: $('#dropDownSelect2')
     //});
+    $(".header-icons-noti").text(@Model.Count);
     $(document).on('click', '#check', function (e) {
         location.href = "/ShoppingCart/CheckOut";
     });

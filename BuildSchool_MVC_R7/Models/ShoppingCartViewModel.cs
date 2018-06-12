@@ -11,5 +11,6 @@ namespace BuildSchool_MVC_R7.Models
     {
         public User User { get; set; }
         public IEnumerable<ShoppingIconView> ShoppingIconView { get; set; }
+        public int Count { get; set; }
     }
 }

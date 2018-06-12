@@ -39,7 +39,7 @@
 
         <div class="wrap_header">
             <!-- Logo -->
-            <a href="index.html" class="logo">
+            <a href="/Home/Index" class="logo">
                 <img src="~/Content/images/icons/logo.png" alt="IMG-LOGO">
             </a>
 
@@ -50,7 +50,7 @@
                         <li>
                             <a href="/Home/Index">Home</a>
                             @*<ul class="sub_menu">
-                                    <li><a href="index.html">Homepage V1</a></li>
+                                    <li><a href="/Home/Index">Homepage V1</a></li>
                                     <li><a href="home-02.html">Homepage V2</a></li>
                                     <li><a href="home-03.html">Homepage V3</a></li>
                                 </ul>*@
@@ -228,7 +228,7 @@
     <!-- Header Mobile -->
     <div class="wrap_header_mobile">
         <!-- Logo moblie -->
-        <a href="index.html" class="logo-mobile">
+        <a href="/Home/Index" class="logo-mobile">
             <img src="~/Content/images/icons/logo.png" alt="IMG-LOGO">
         </a>
 
@@ -420,7 +420,7 @@
                 <li class="item-menu-mobile">
                     <a href="/Home/Index">Home</a>
                     @*<ul class="sub-menu">
-                            <li><a href="index.html">Homepage V1</a></li>
+                            <li><a href="/Home/Index">Homepage V1</a></li>
                             <li><a href="home-02.html">Homepage V2</a></li>
                             <li><a href="home-03.html">Homepage V3</a></li>
                         </ul>
@@ -858,6 +858,7 @@
             });
         })
     })
+    $(".header-icons-noti").text(@Model.Count);
     $('.js-show-header-dropdown.shop').click(function () {
         //if ($('#user').length == 0) {
         //    location.href = "/Member/LogIn";
