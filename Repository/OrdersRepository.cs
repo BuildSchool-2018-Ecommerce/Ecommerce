@@ -26,7 +26,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
             }
             connection = new SqlConnection(sql);
         }
-        public void Create(Orders model, IDbConnection connection)
+        public void Create(Orders model, IDbConnection connection, IDbTransaction transaction)
         {
             connection.Execute("INSERT INTO Orders VALUES ( @EmployeeID, @MemberID, @ShipName, @ShipAddress, @ShipPhone, @ShippedDate, @OrderDate, @ReceiptedDate, @Discount, @Status)", 
                 new
@@ -41,7 +41,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                     model.ReceiptedDate,
                     model.Discount,
                     model.Status
-                });
+                }, transaction);
         }
 
         public void Update(Orders model)

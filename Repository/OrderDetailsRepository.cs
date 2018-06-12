@@ -25,7 +25,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
             }
             connection = new SqlConnection(sql);
         }
-        public void Create(OrderDetails model, IDbConnection connection)
+        public void Create(OrderDetails model, IDbConnection connection, IDbTransaction transaction)
         {
             connection.Execute("INSERT INTO OrderDetails VALUES (@OrderID, @ProductFormatID, @Quantity, @UnitPrice) ",
                 new
@@ -34,7 +34,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                     model.ProductFormatID,
                     model.Quantity,
                     model.UnitPrice
-                });
+                }, transaction);
 
             var request = new ProductFormatRepository();
             var product = request.FindById(model.ProductFormatID);
@@ -45,7 +45,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                 {
                     model.Quantity,
                     model.ProductFormatID
-                });
+                }, transaction);
             }
             else
             {

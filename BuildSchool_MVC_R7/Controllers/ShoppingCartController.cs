@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
@@ -61,26 +62,27 @@ namespace BuildSchool_MVC_R7.Controllers
             }
             return View();
         }
-        [HttpPost]
         public ActionResult Update(string shop)
         {
             if (Request.Cookies["R7CompanyMember"] == null)
             {
                 Response.SetStatus(HttpStatusCode.BadRequest);
-                return RedirectToAction("LogIn", "Member");
+                return null;
             }
             JavaScriptSerializer JSONSerializer = new JavaScriptSerializer();
             var json = JSONSerializer.Deserialize<UpdateShoppingCart>(shop);
             var shopservice = new ShopingCartService();
-            var shops = shopservice.UpdateProduct(Request.Cookies["R7CompanyMember"].Value, json);
-            if(shops == false)
+            string shops = shopservice.UpdateProduct(Request.Cookies["R7CompanyMember"].Value, json);
+            if(shops == "OK")
             {
-                Response.SetStatus(HttpStatusCode.BadRequest);
-                return RedirectToAction("LogIn", "Member");
+                return null;
             }
-            return null;
+            Response.StatusCode = 400;
+            //設定TrySkipIisCustomErrors，停用IIS自訂錯誤頁面
+            Response.TrySkipIisCustomErrors = true;
+            return Content(shops, "application/json");
         }
-        public ActionResult CheckOut()
+        public ActionResult CheckOut(string Error)
         {
             if (Request.Cookies["R7CompanyMember"] == null)
             {
@@ -92,7 +94,27 @@ namespace BuildSchool_MVC_R7.Controllers
             {
                 return RedirectToAction("LogIn", "Member");
             }
+            ViewBag.Error = Error;
             return View(shop);
+        }
+        [HttpPost]
+        public ActionResult CreateOrder(Orders orders)
+        {
+            if (Request.Cookies["R7CompanyMember"] == null)
+            {
+                return RedirectToAction("LogIn", "Member");
+            }
+            if(orders.ShipName == null || orders.ShipAddress == null || orders.ShipPhone == null)
+            {
+                return RedirectToAction("LogIn", "Member");
+            }
+            var shopservice = new ShopingCartService();
+            var shop = shopservice.CreateOrders(Request.Cookies["R7CompanyMember"].Value, orders);
+            if(shop == "ok")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return RedirectToAction("CheckOut", "ShoppingCart", new { Error = shop });
         }
     }
 }
