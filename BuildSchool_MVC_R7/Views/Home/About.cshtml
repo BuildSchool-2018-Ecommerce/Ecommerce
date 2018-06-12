@@ -498,3 +498,15 @@
         });
     });
 </script>
+@if (Model.User.Username != null)
+{
+    <script type="text/javascript">
+        $.ajax({
+            url: "/ShoppingCart/ShoppingBar",
+            success: function (result) {
+                $('.header-dropdown.shop').empty();
+                $('.header-dropdown.shop').html(result);
+            }
+        });
+    </script>
+}

@@ -10,9 +10,6 @@ namespace BuildSchool.MvcSolution.OnlineStore.Models
     {
         public int ProductID { get; set; }
         public string ProductName { get; set; }
-        public string ProductImage { get; set; }
-        public decimal UnitPrice { get; set; }
-        public string Description { get; set; }
         public string Color { get; set; }
         public string Size { get; set; }
         public int StockQuantity { get; set; }

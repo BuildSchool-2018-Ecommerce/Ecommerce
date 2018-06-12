@@ -17,5 +17,6 @@ namespace BuildSchool.MvcSolution.OnlineStore.Models
         public decimal Sale { get; set; }
         public int Quantity { get; set; }
         public int ProductID { get; set; }
+        public int ShoppingCartID { get; set; }
     }
 }

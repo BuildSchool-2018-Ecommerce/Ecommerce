@@ -63,6 +63,46 @@ namespace BuildSchool_MVC_R7.Service
             }
             return shopViewModel;
         }
+        public string CreateShoppingCart(string memberid, int productid, string color, string size, int quantity)
+        {
+            var productRepository = ContainerManager.Container.GetInstance<ProductRepository>();
+            var product = productRepository.FindProductFormatByProductID(productid).ToList();
+            var shopingrepository = ContainerManager.Container.GetInstance<ShoppingCartRepository>();
+            var memberRepository = ContainerManager.Container.GetInstance<MemberRepository>();
+            var member = memberRepository.FindById(memberid);
+            if (member != null)
+            {
+                var pd = product.FirstOrDefault((x) => x.Color == color && x.Size == size);
+                if(pd != null)
+                {
+                    if (pd.StockQuantity - quantity < 0)
+                    {
+                        return "庫存不足";
+                    }
+                    var shop = new ShoppingCart()
+                    {
+                        MemberID = member.MemberID,
+                        Quantity = quantity,
+                        ProductFormatID = pd.ProductFormatID
+                    };
+                    var shoppingcart = shopingrepository.ShoppingCarts(memberid);
+                    var p = shoppingcart.FirstOrDefault((x) => x.ProductFormatID == shop.ProductFormatID);
+                    if(p == null)
+                    {
+                        shopingrepository.Create(shop);
+                    }
+                    else
+                    {
+                        shop.ShoppingCartID = p.ShoppingCartID;
+                        shop.Quantity = quantity + p.Quantity;
+                        shopingrepository.Update(shop);
+                    }
+                    return "OK";
+                }
+                return "查無此產品";
+            }
+            return "查無此會員";
+        }
         public ShopViewModel FindProductByProductID(int productid, string memberid)
         {
             var productRepository = ContainerManager.Container.GetInstance<ProductRepository>();

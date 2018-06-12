@@ -244,7 +244,7 @@
         <a href="/Home/Index" class="logo-mobile">
             <img src="~/Content/images/icons/logo.png" alt="IMG-LOGO">
         </a>
-        
+
         <!-- Button show menu -->
         <div class="btn-show-menu">
             <!-- Header Icon mobile -->
@@ -831,4 +831,15 @@
         });
     });
 </script>
-
+@if (Model.User.Username != null)
+{
+    <script type="text/javascript">
+        $.ajax({
+            url: "/ShoppingCart/ShoppingBar",
+            success: function (result) {
+                $('.header-dropdown.shop').empty();
+                $('.header-dropdown.shop').html(result);
+            }
+        });
+    </script>
+}

@@ -27,7 +27,7 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
         }
         public void Create(ShoppingCart model)
         {
-            connection.Execute("INSERT INTO ShoppingCart VALUES ( @MemberID, @ProductFormatID, @Quantity, @UnitPrice )",
+            connection.Execute("INSERT INTO ShoppingCart VALUES ( @MemberID, @ProductFormatID, @Quantity )",
                 new
                 {
                     model.MemberID,
