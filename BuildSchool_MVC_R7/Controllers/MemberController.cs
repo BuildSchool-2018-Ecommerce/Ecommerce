@@ -130,7 +130,7 @@ namespace BuildSchool_MVC_R7.Controllers
             memberRepository.Update(member);
             return RedirectToAction("Account_Member", "Member");
         }
-        public ActionResult Account_SearchStatus()
+        public ActionResult Account_SearchStatus(string status)
         {
             if (Request.Cookies["R7CompanyMember"] == null)
             {
@@ -138,7 +138,11 @@ namespace BuildSchool_MVC_R7.Controllers
             }
             else
             {
-                return View();
+                var memberservice = new MemberService();
+                var cookie = Request.Cookies["R7CompanyMember"];
+                var member = memberservice.GetOrderById(cookie.Value);
+                ViewBag.status = status;
+                return View(member);
             }
         }
         public ActionResult Account_SearchTime()
@@ -149,7 +153,10 @@ namespace BuildSchool_MVC_R7.Controllers
             }
             else
             {
-                return View();
+                var memberservice = new MemberService();
+                var cookie = Request.Cookies["R7CompanyMember"];
+                var member = memberservice.GetOrderByDate(cookie.Value);
+                return View(member);
             }
         }
         public ActionResult Account_SearchOrder(string ID)
