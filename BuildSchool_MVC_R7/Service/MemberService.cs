@@ -80,5 +80,26 @@ namespace BuildSchool_MVC_R7.Service
             };
             return memberViewModel;
         }
+
+        public MemberViewModel GetOrderByDate(string memberId)
+        {
+            var ordersRepository = ContainerManager.Container.GetInstance<OrdersRepository>();
+            var memberRepository = ContainerManager.Container.GetInstance<MemberRepository>();
+            var member = memberRepository.FindById(memberId);
+            var orders = ordersRepository.GetOrderByOrderDate(memberId);
+            User user = new User();
+            if (orders != null && member != null)
+            {
+                user.UserID = memberId;
+                user.Username = member.Name;
+            }
+            var memberViewModel = new MemberViewModel()
+            {
+                User = user,
+                Member = member,
+                Orders = ordersRepository.GetOrderByOrderDate(memberId)
+            };
+            return memberViewModel;
+        }
     }
 }

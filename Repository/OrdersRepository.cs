@@ -131,5 +131,13 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
             //}
             //return order;
         }
+        public IEnumerable<Orders> GetOrderByOrderDate(string MemberID)
+        {
+            return connection.Query<Orders>("select * FROM Orders WHERE MemberID = @MemberID ORDER BY OrderDate DESC",
+                new
+                {
+                    MemberID
+                });
+        }
     }
 }

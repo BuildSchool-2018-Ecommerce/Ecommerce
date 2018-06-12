@@ -1,6 +1,7 @@
-﻿
+﻿@model MemberViewModel
 @{
     ViewBag.Title = "Account_SearchStatus";
+    var orders = Model.Orders;
 }
 
 
@@ -82,9 +83,61 @@
 
             <!-- Header Icon -->
             <div class="header-icons">
-                <a href="@Url.Action("LogIn", "Member")" class="header-wrapicon1 dis-block">
-                    <img src="~/Content/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
-                </a>
+                @if (Model.User.Username == null)
+                {
+                    <a href="@Url.Action("LogIn", "Member")" class="header-wrapicon1 dis-block">
+                        <img src="@Url.Content("~/Content/images/icons/icon-header-01.png")" class="header-icon1" alt="ICON">
+                    </a>
+                }
+                else
+                {
+                    <div class="header-wrapicon2 m-r-13">
+                        <img src="@Url.Content("~/Content/images/icons/00.png")" class="header-icon1 js-show-header-dropdown" alt="ICON">
+
+                        <!-- Header cart noti -->
+                        <div class="header-cart header-dropdown" style="width:160px;height:200px">
+                            <ul class="header-cart-wrapitem">
+                                <li class="header-cart-item">
+                                    <div>
+                                        <a href="@Url.Action("Account_Member","Member")" class="header-cart-item-name" style="color:royalblue">
+                                            @Model.User.Username
+                                        </a>
+                                    </div>
+                                </li>
+
+                                <li class="header-cart-item">
+
+                                    <div>
+
+                                        <a href="@Url.Action("Account_UpdateMember","Member")" class="header-cart-item-name">
+                                            <i class="far fa-edit"></i>
+                                            修改會員
+                                        </a>
+                                    </div>
+                                </li>
+
+                                <li class="header-cart-item">
+
+                                    <div>
+                                        <a href="@Url.Action("Account_Order","Member")" class="header-cart-item-name">
+                                            <i class="fas fa-search"></i>
+                                            查詢訂單
+                                        </a>
+                                    </div>
+                                </li>
+                                <li class="header-cart-item">
+
+                                    <div>
+                                        <a href="@Url.Action("LogOut","Member")" class="header-cart-item-name">
+                                            <i class="fas fa-sign-out-alt"></i>
+                                            登出
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                }
 
                 <span class="linedivide1"></span>
 
@@ -93,78 +146,78 @@
                     <span class="header-icons-noti">0</span>
 
                     <!-- Header cart noti -->
-            <div class="header-cart header-dropdown shop">
-                <a href="/Member/LogIn"><i class="fas fa-sign-in-alt" style="margin-right:15px"></i>請登入會員</a>
-                @*<ul class="header-cart-wrapitem">
-                        <li class="header-cart-item">
-                            <div class="header-cart-item-img">
-                                <img src="@Url.Content("~/Content/images/item-cart-01.jpg")" alt="IMG">
+                    <div class="header-cart header-dropdown shop">
+                        <a href="/Member/LogIn"><i class="fas fa-sign-in-alt" style="margin-right:15px"></i>請登入會員</a>
+                        @*<ul class="header-cart-wrapitem">
+                                <li class="header-cart-item">
+                                    <div class="header-cart-item-img">
+                                        <img src="@Url.Content("~/Content/images/item-cart-01.jpg")" alt="IMG">
+                                    </div>
+
+                                    <div class="header-cart-item-txt">
+                                        <a href="#" class="header-cart-item-name AutoSkip">
+                                            White Shirt With Pleat Detail Back
+                                        </a>
+
+                                        <span class="header-cart-item-info">
+                                            12 x $19.00
+                                        </span>
+                                    </div>
+                                </li>
+
+                                <li class="header-cart-item">
+                                    <div class="header-cart-item-img">
+                                        <img src="@Url.Content("~/Content/images/item-cart-02.jpg")" alt="IMG">
+                                    </div>
+
+                                    <div class="header-cart-item-txt">
+                                        <a href="#" class="header-cart-item-name">
+                                            Converse All Star Hi Black Canvas
+                                        </a>
+
+                                        <span class="header-cart-item-info">
+                                            1 x $39.00
+                                        </span>
+                                    </div>
+                                </li>
+
+                                <li class="header-cart-item">
+                                    <div class="header-cart-item-img">
+                                        <img src="@Url.Content("~/Content/images/item-cart-03.jpg")" alt="IMG">
+                                    </div>
+
+                                    <div class="header-cart-item-txt">
+                                        <a href="#" class="header-cart-item-name">
+                                            Nixon Porter Leather Watch In Tan
+                                        </a>
+
+                                        <span class="header-cart-item-info">
+                                            1 x $17.00
+                                        </span>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <div class="header-cart-total Total">
+                                Total: $75.00
                             </div>
 
-                            <div class="header-cart-item-txt">
-                                <a href="#" class="header-cart-item-name AutoSkip">
-                                    White Shirt With Pleat Detail Back
-                                </a>
+                            <div class="header-cart-buttons">
+                                <div class="header-cart-wrapbtn">
+                                    <!-- Button -->
+                                    <a href="/ShoppingCart/Index" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                                        View Cart
+                                    </a>
+                                </div>
 
-                                <span class="header-cart-item-info">
-                                    12 x $19.00
-                                </span>
-                            </div>
-                        </li>
-
-                        <li class="header-cart-item">
-                            <div class="header-cart-item-img">
-                                <img src="@Url.Content("~/Content/images/item-cart-02.jpg")" alt="IMG">
-                            </div>
-
-                            <div class="header-cart-item-txt">
-                                <a href="#" class="header-cart-item-name">
-                                    Converse All Star Hi Black Canvas
-                                </a>
-
-                                <span class="header-cart-item-info">
-                                    1 x $39.00
-                                </span>
-                            </div>
-                        </li>
-
-                        <li class="header-cart-item">
-                            <div class="header-cart-item-img">
-                                <img src="@Url.Content("~/Content/images/item-cart-03.jpg")" alt="IMG">
-                            </div>
-
-                            <div class="header-cart-item-txt">
-                                <a href="#" class="header-cart-item-name">
-                                    Nixon Porter Leather Watch In Tan
-                                </a>
-
-                                <span class="header-cart-item-info">
-                                    1 x $17.00
-                                </span>
-                            </div>
-                        </li>
-                    </ul>
-
-                    <div class="header-cart-total Total">
-                        Total: $75.00
+                                <div class="header-cart-wrapbtn">
+                                    <!-- Button -->
+                                    <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                                        Check Out
+                                    </a>
+                                </div>
+                            </div>*@
                     </div>
-
-                    <div class="header-cart-buttons">
-                        <div class="header-cart-wrapbtn">
-                            <!-- Button -->
-                            <a href="/ShoppingCart/Index" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                View Cart
-                            </a>
-                        </div>
-
-                        <div class="header-cart-wrapbtn">
-                            <!-- Button -->
-                            <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                Check Out
-                            </a>
-                        </div>
-                    </div>*@
-            </div>
                 </div>
             </div>
         </div>
@@ -192,78 +245,78 @@
                     <span class="header-icons-noti">0</span>
 
                     <!-- Header cart noti -->
-            <div class="header-cart header-dropdown shop">
-                <a href="/Member/LogIn"><i class="fas fa-sign-in-alt" style="margin-right:15px"></i>請登入會員</a>
-                @*<ul class="header-cart-wrapitem">
-                        <li class="header-cart-item">
-                            <div class="header-cart-item-img">
-                                <img src="@Url.Content("~/Content/images/item-cart-01.jpg")" alt="IMG">
+                    <div class="header-cart header-dropdown shop">
+                        <a href="/Member/LogIn"><i class="fas fa-sign-in-alt" style="margin-right:15px"></i>請登入會員</a>
+                        @*<ul class="header-cart-wrapitem">
+                                <li class="header-cart-item">
+                                    <div class="header-cart-item-img">
+                                        <img src="@Url.Content("~/Content/images/item-cart-01.jpg")" alt="IMG">
+                                    </div>
+
+                                    <div class="header-cart-item-txt">
+                                        <a href="#" class="header-cart-item-name AutoSkip">
+                                            White Shirt With Pleat Detail Back
+                                        </a>
+
+                                        <span class="header-cart-item-info">
+                                            12 x $19.00
+                                        </span>
+                                    </div>
+                                </li>
+
+                                <li class="header-cart-item">
+                                    <div class="header-cart-item-img">
+                                        <img src="@Url.Content("~/Content/images/item-cart-02.jpg")" alt="IMG">
+                                    </div>
+
+                                    <div class="header-cart-item-txt">
+                                        <a href="#" class="header-cart-item-name">
+                                            Converse All Star Hi Black Canvas
+                                        </a>
+
+                                        <span class="header-cart-item-info">
+                                            1 x $39.00
+                                        </span>
+                                    </div>
+                                </li>
+
+                                <li class="header-cart-item">
+                                    <div class="header-cart-item-img">
+                                        <img src="@Url.Content("~/Content/images/item-cart-03.jpg")" alt="IMG">
+                                    </div>
+
+                                    <div class="header-cart-item-txt">
+                                        <a href="#" class="header-cart-item-name">
+                                            Nixon Porter Leather Watch In Tan
+                                        </a>
+
+                                        <span class="header-cart-item-info">
+                                            1 x $17.00
+                                        </span>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <div class="header-cart-total Total">
+                                Total: $75.00
                             </div>
 
-                            <div class="header-cart-item-txt">
-                                <a href="#" class="header-cart-item-name AutoSkip">
-                                    White Shirt With Pleat Detail Back
-                                </a>
+                            <div class="header-cart-buttons">
+                                <div class="header-cart-wrapbtn">
+                                    <!-- Button -->
+                                    <a href="/ShoppingCart/Index" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                                        View Cart
+                                    </a>
+                                </div>
 
-                                <span class="header-cart-item-info">
-                                    12 x $19.00
-                                </span>
-                            </div>
-                        </li>
-
-                        <li class="header-cart-item">
-                            <div class="header-cart-item-img">
-                                <img src="@Url.Content("~/Content/images/item-cart-02.jpg")" alt="IMG">
-                            </div>
-
-                            <div class="header-cart-item-txt">
-                                <a href="#" class="header-cart-item-name">
-                                    Converse All Star Hi Black Canvas
-                                </a>
-
-                                <span class="header-cart-item-info">
-                                    1 x $39.00
-                                </span>
-                            </div>
-                        </li>
-
-                        <li class="header-cart-item">
-                            <div class="header-cart-item-img">
-                                <img src="@Url.Content("~/Content/images/item-cart-03.jpg")" alt="IMG">
-                            </div>
-
-                            <div class="header-cart-item-txt">
-                                <a href="#" class="header-cart-item-name">
-                                    Nixon Porter Leather Watch In Tan
-                                </a>
-
-                                <span class="header-cart-item-info">
-                                    1 x $17.00
-                                </span>
-                            </div>
-                        </li>
-                    </ul>
-
-                    <div class="header-cart-total Total">
-                        Total: $75.00
+                                <div class="header-cart-wrapbtn">
+                                    <!-- Button -->
+                                    <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                                        Check Out
+                                    </a>
+                                </div>
+                            </div>*@
                     </div>
-
-                    <div class="header-cart-buttons">
-                        <div class="header-cart-wrapbtn">
-                            <!-- Button -->
-                            <a href="/ShoppingCart/Index" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                View Cart
-                            </a>
-                        </div>
-
-                        <div class="header-cart-wrapbtn">
-                            <!-- Button -->
-                            <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                Check Out
-                            </a>
-                        </div>
-                    </div>*@
-            </div>
                 </div>
             </div>
 
@@ -394,12 +447,12 @@
                                     </a>
                                 </li>
                                 <li class="p-t-4">
-                                    <a href="@Url.Action("Account_SearchTime", "Member")" class="s-text13">
+                                    <a href="@Url.Action("Account_SearchTime", "Member")" class="s-text13 active1">
                                         依時間查詢
                                     </a>
                                 </li>
                                 <li class="p-t-4">
-                                    <a href="@Url.Action("Account_SearchStatus", "Member")" class="s-text13 active1">
+                                    <a href="@Url.Action("Account_SearchStatus", "Member")" class="s-text13">
                                         依狀態查詢
                                     </a>
                                 </li>
@@ -409,20 +462,76 @@
                 </div>
             </div>
             <div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
-                <table class="table-shopping-cart">
-                    <tr class="table-head">
-                        <th class="column-5">訂單編號</th>
-                        <th class="column-5">訂單日期</th>
-                        <th class="column-5">出貨日期</th>
-                        <th class="column-5">狀態</th>
-                    </tr>
-                    <tr class="table-row">
-                        <td class="column-5">1</td>
-                        <td class="column-5">2018.06.07</td>
-                        <td class="column-5">2018.06.09</td>
-                        <td class="column-5">未出貨</td>
-                    </tr>
-                </table>
+                @using (Html.BeginForm("Account_SearchStatus", "Member", FormMethod.Get))
+                {
+                    <div class="row mb-5">
+                        <div class="col-4">
+                            <div class="w-size25">
+                                <!-- Button -->
+                                <button class="flex-c-m size2 bg0 bo-rad-23 hov1 m-text3 trans-0-4" name="status" value="已出貨" type="submit">
+                                    已出貨
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="w-size25">
+                                <button class="flex-c-m size2 bg0 bo-rad-23 hov1 m-text3 trans-0-4" name="status" value="派送中" type="submit">
+                                    派送中
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="w-size25">
+                                <button class="flex-c-m size2 bg0 bo-rad-23 hov1 m-text3 trans-0-4" name="status" value="未出貨" type="submit">
+                                    未出貨
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @if(ViewBag.status == null)
+                {
+                    <table class="table-shopping-cart">
+                        <tr class="table-head">
+                            <th class="column-5">訂單編號</th>
+                            <th class="column-5">訂單日期</th>
+                            <th class="column-5">出貨日期</th>
+                            <th class="column-5">狀態</th>
+                        </tr>
+                        @foreach(var order in orders)
+                        {
+                            <tr class="table-row">
+                                <td class="column-5">@order.OrderID</td>
+                                <td class="column-5">@order.OrderDate</td>
+                                <td class="column-5">@order.ShippedDate</td>
+                                <td class="column-5">@order.Status</td>
+                            </tr>
+                        }
+                    </table>
+                }
+                else
+                {
+                    <table class="table-shopping-cart">
+                        <tr class="table-head">
+                            <th class="column-5">訂單編號</th>
+                            <th class="column-5">訂單日期</th>
+                            <th class="column-5">出貨日期</th>
+                            <th class="column-5">狀態</th>
+                        </tr>
+                        @foreach(var order in orders)
+                        {
+                            if(ViewBag.status == @order.Status)
+                            {
+                                <tr class="table-row">
+                                    <td class="column-5">@order.OrderID</td>
+                                    <td class="column-5">@order.OrderDate</td>
+                                    <td class="column-5">@order.ShippedDate</td>
+                                    <td class="column-5">@order.Status</td>
+                                </tr>
+                            }
+                        }
+                    </table>
+                }
             </div>
         </div>
     </div>
