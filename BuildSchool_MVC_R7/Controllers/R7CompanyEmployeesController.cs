@@ -28,7 +28,7 @@ namespace BuildSchool_MVC_R7.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("Index", vm);
+                return View("LogIn", vm);
             }
 
             FormsAuthentication.RedirectFromLoginPage(vm.Account, false);

@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace BuildSchool_MVC_R7.Service
 {
@@ -48,10 +50,11 @@ namespace BuildSchool_MVC_R7.Service
             }
             return false;
         }
-        public bool UpdateProduct(string memberid, UpdateShoppingCart shopping)
+        public string UpdateProduct(string memberid, UpdateShoppingCart shopping)
         {
             var shoppingrepository = ContainerManager.Container.GetInstance<ShoppingCartRepository>();
             var memberrepository = ContainerManager.Container.GetInstance<MemberRepository>();
+            var productformatrepository = ContainerManager.Container.GetInstance<ProductFormatRepository>();
             var member = memberrepository.FindById(memberid);
             if (member != null)
             {
@@ -61,14 +64,83 @@ namespace BuildSchool_MVC_R7.Service
                     var product = shop.FirstOrDefault((x) => x.ProductFormatID == int.Parse(shopping.ProductFormatID[i]));
                     if(product == null)
                     {
-                        return false;
+                        return $"查無此產品,{shopping.ProductFormatID[i]}";
+                    }
+                    var pf = productformatrepository.FindById(int.Parse(shopping.ProductFormatID[i]));
+                    if(pf.StockQuantity - int.Parse(shopping.Quantity[i])<0)
+                    {
+                        return $"產品庫存不足,{pf.ProductFormatID},{pf.StockQuantity}";
                     }
                     product.Quantity = int.Parse(shopping.Quantity[i]);
                     shoppingrepository.Update(product);
                 }
-                return true;
+                return "OK";
             }
-            return false;
+            return "查無使用者";
+        }
+        public string CreateOrders(string memberid,Orders orders)
+        {
+            var memberrepository = ContainerManager.Container.GetInstance<MemberRepository>();
+            var employeesrepository = ContainerManager.Container.GetInstance<EmployeesRepository>();
+            var ordersrepository = ContainerManager.Container.GetInstance<OrdersRepository>();
+            var ordertailrepository = ContainerManager.Container.GetInstance<OrderDetailsRepository>();
+            var shoppingrepository = ContainerManager.Container.GetInstance<ShoppingCartRepository>();
+            var member = memberrepository.FindById(memberid);
+            var employees = employeesrepository.GetAll();
+            if (member != null)
+            {
+                orders.OrderDate = DateTime.Now;
+                orders.MemberID = member.MemberID;
+                orders.Status = "未出貨";
+                var sql = Environment.GetEnvironmentVariable("SQLAZURECONNSTR_ProductionDb");
+
+                if (string.IsNullOrEmpty(sql))
+                {
+                    sql = ConfigurationManager.ConnectionStrings["db"].ConnectionString;
+                }
+                var connection = new SqlConnection(sql);
+                connection.Open();
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        ordersrepository.Create(orders, connection, transaction);
+                        var memberorder = memberrepository.GetBuyerOrder(memberid, connection, transaction);
+                        var lastordeer = memberorder.First();
+                        var shop = shoppingrepository.ShoppingCarts(memberid, connection, transaction);
+                        foreach (var item in shop)
+                        {
+                            var price = 0M;
+                            if(item.Sale == 0)
+                            {
+                                price = item.UnitPrice;
+                            }
+                            else
+                            {
+                                price = item.Sale;
+                            }
+                            OrderDetails od = new OrderDetails()
+                            {
+                                OrderID = lastordeer.OrderID,
+                                ProductFormatID = item.ProductFormatID,
+                                Quantity = item.Quantity,
+                                UnitPrice = price
+                            };
+                            ordertailrepository.Create(od, connection, transaction);
+                        }
+                        shoppingrepository.DeletebyMemberID(member.MemberID, connection, transaction);
+                        transaction.Commit();
+                        return "OK";
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
+                        return "交易失敗，庫存不足";
+                    }
+
+                }
+            }
+            return "查無此會員";
         }
     }
 }

@@ -244,7 +244,7 @@
         <a href="index.html" class="logo-mobile">
             <img src="~/Content/images/icons/logo.png" alt="IMG-LOGO">
         </a>
-
+        
         <!-- Button show menu -->
         <div class="btn-show-menu">
             <!-- Header Icon mobile -->
@@ -487,7 +487,7 @@
                                     <img src="@item.Image" alt="IMG-PRODUCT">
                                 </div>
                             </td>
-                            <td style="width:200px">@item.ProductName</td>
+                            <td id="pn" style="width:200px">@item.ProductName</td>
                             <td style="width:80px">@item.Color</td>
                             <td style="width:80px">@item.Size</td>
                             @if (item.Sale == 0)
@@ -590,6 +590,7 @@
         </div>
 
         <div class="flex-w flex-sb-m p-t-25 p-b-25 bo8 p-l-35 p-r-60 p-lr-15-sm">
+            <h5 id="error" style="color:red;flex: 0 0 100%;text-align:center;"></h5>
             <div class="flex-w flex-m w-full-sm">
                 <div class="size11 bo4 m-r-10">
                     <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="coupon-code" placeholder="Coupon Code">
@@ -612,6 +613,7 @@
         </div>
 
         <div class="size15 trans-0-4">
+
             <!-- Button -->
             <button id="check" class="flex-c-m bg1 bo-rad-23 hov1 s-text1 trans-0-4" style="width:15%;height:100%;margin-left:80%;margin-top:30px;">
                 Checkout
@@ -733,8 +735,8 @@
         var num = $('.num-product');
         var input = $('.inpu');
         var a = {
-            Quantity : [],
-            ProductFormatID : []
+            Quantity: [],
+            ProductFormatID: []
         }
         for (var item of num) {
             a.Quantity.push($(item).val());
@@ -746,15 +748,23 @@
         var json = JSON.stringify(a);
         $.ajax({
             url: "/ShoppingCart/Update",
-            type: "POST",
             data: {
-                shop : json
+                shop: json
             },
             success: function (result) {
-                location.href = "/ShoppingCart/Index";
+                location.href = "/ShoppingCart/Cart";
             }
-            , error: function () {
-                location.href = "/Member/LogIn";
+            , error: function (result) {
+                var error = result.responseText;
+                var s = error.split(",");
+                var inp = $('.inpu');
+                for (var item of inp) {
+                    if ($(item).val() == s[1]) {
+                        var n = $(item).parents('tr').find('#pn').text();
+                        console.log(n);
+                        $('#error').text(s[0] + " (" + n + ") 剩餘數量:"+s[2]);
+                    }
+                }
             }
         });
     });

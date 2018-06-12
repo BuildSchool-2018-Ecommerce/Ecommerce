@@ -95,13 +95,13 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                     memberid
                 }, commandType: CommandType.StoredProcedure);
         }
-        public IEnumerable<GetBuyerOrder> GetBuyerOrder(string memberid, IDbConnection connection)
+        public IEnumerable<GetBuyerOrder> GetBuyerOrder(string memberid, IDbConnection connection, IDbTransaction transaction)
         {
             return connection.Query<GetBuyerOrder>("GetBuyerOrder", 
                 new
                 {
                     memberid
-                }, commandType: CommandType.StoredProcedure);
+                }, transaction, commandType: CommandType.StoredProcedure);
         }
         public IEnumerable<Members> GetAll()
         {

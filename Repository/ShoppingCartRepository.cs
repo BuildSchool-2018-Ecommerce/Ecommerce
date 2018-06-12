@@ -56,6 +56,14 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                     model.ShoppingCartID
                 });
         }
+        public void DeletebyMemberID(string MemberID, IDbConnection connection, IDbTransaction transaction)
+        {
+            connection.Execute("DELETE FROM ShoppingCart WHERE MemberID = @MemberID",
+                new
+                {
+                    MemberID
+                }, transaction);
+        }
 
         public ShoppingCart FindById(int ShoppingCartID)
         {
@@ -92,6 +100,14 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                 {
                     memberid
                 }, commandType: CommandType.StoredProcedure);
+        }
+        public IEnumerable<ShoppingIconView> ShoppingCarts(string memberid,IDbConnection connection, IDbTransaction transaction)
+        {
+            return connection.Query<ShoppingIconView>("ShoppingCartByMemberID",
+                new
+                {
+                    memberid
+                }, transaction, commandType: CommandType.StoredProcedure);
         }
     }
 }
