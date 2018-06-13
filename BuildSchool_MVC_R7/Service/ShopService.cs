@@ -95,6 +95,10 @@ namespace BuildSchool_MVC_R7.Service
                     {
                         shop.ShoppingCartID = p.ShoppingCartID;
                         shop.Quantity = quantity + p.Quantity;
+                        if (pd.StockQuantity - shop.Quantity < 0)
+                        {
+                            return "庫存不足";
+                        }
                         shopingrepository.Update(shop);
                     }
                     return "OK";
