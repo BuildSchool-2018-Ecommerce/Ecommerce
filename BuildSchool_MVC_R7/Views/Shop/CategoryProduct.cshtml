@@ -606,7 +606,9 @@
 
             <div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
                 <!-- Product -->
-
+                <div class="flex-sb-m flex-w p-b-35 m-text14">
+                    @ViewBag.price
+                </div>
                 <div class="flex-sb-m flex-w p-b-35">
                     <div class="flex-w">
                         <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
@@ -638,181 +640,181 @@
 
                 <div class="tab-content" id="pills-tabContent">
                     @for (int i = 0; i < groupcount; i++)
+        {
+            var pid = "p" + i;
+            var phid = "#ph" + i;
+            if (i == 0)
+            {
+                <div class="tab-pane fade show active" id=@phid role="tabpanel" aria-labelledby=@pid>
+                    <div class="row">
+                        @{ min = i * 12; max = min + 12; }
+                        @for (int j = min; j < max; j++)
+            {
+                if (j < categoryProductscount)
+                {
+                    if (categoryProducts[j].Sale != 0)
                     {
-                        var pid = "p" + i;
-                        var phid = "#ph" + i;
-                        if (i == 0)
-                        {
-                            <div class="tab-pane fade show active" id=@phid role="tabpanel" aria-labelledby=@pid>
-                                <div class="row">
-                                    @{ min = i * 12; max = min + 12; }
-                                    @for (int j = min; j < max; j++)
-                                    {
-                                        if (j < categoryProductscount)
-                                        {
-                                            if (categoryProducts[j].Sale != 0)
-                                            {
-                                                <div class="col-sm-4 col-md-4 col-lg-4 p-b-50 filter">
-                                                    <!-- Block2 -->
-                                                    <div class="block2">
-                                                        <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
-                                                            <img src=@categoryProducts[j].Image style="width:255px;height:340px" alt="IMG-PRODUCT">
+                        <div class="col-sm-4 col-md-4 col-lg-4 p-b-50 filter">
+                            <!-- Block2 -->
+                            <div class="block2">
+                                <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
+                                    <img src=@categoryProducts[j].Image style="width:255px;height:340px" alt="IMG-PRODUCT">
 
-                                                            <div class="block2-overlay trans-0-4">
-                                                                <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                                                    <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                                                    <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                                                </a>
-                                                            </div>
-                                                        </div>
+                                    <div class="block2-overlay trans-0-4">
+                                        <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                            <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                            <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                </div>
 
-                                                        <div class="block2-txt p-t-20">
-                                                            <a href=@Url.Action("Product","Shop",new { @productid = categoryProducts[j].ProductID }) class="block2-name dis-block s-text3 p-b-5">
-                                                                @categoryProducts[j].ProductName
-                                                            </a>
-                                                            <span class="block2-oldprice m-text7 p-r-5">
-                                                                @categoryProducts[j].UnitPrice.ToString("C", CultureInfo.CurrentCulture)
-                                                            </span>
+                                <div class="block2-txt p-t-20">
+                                    <a href=@Url.Action("Product","Shop",new { @productid = categoryProducts[j].ProductID }) class="block2-name dis-block s-text3 p-b-5">
+                                        @categoryProducts[j].ProductName
+                                    </a>
+                                    <span class="block2-oldprice m-text7 p-r-5">
+                                        @categoryProducts[j].UnitPrice.ToString("C", CultureInfo.CurrentCulture)
+                                    </span>
 
-                                                            <span class="block2-newprice m-text8 p-r-5 price">
-                                                                @categoryProducts[j].Sale.ToString("C", CultureInfo.CurrentCulture)
-                                                            </span>
+                                    <span class="block2-newprice m-text8 p-r-5 price">
+                                        @categoryProducts[j].Sale.ToString("C", CultureInfo.CurrentCulture)
+                                    </span>
 
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            }
-                                            else
-                                            {
-                                                <div class="col-sm-4 col-md-4 col-lg-4 p-b-50 filter">
-                                                    <!-- Block2 -->
-                                                    <div class="block2">
-                                                        <div class="block2-img wrap-pic-w of-hidden pos-relative ">
-                                                            <img src=@categoryProducts[j].Image style="width:255px;height:340px" alt="IMG-PRODUCT">
-
-                                                            <div class="block2-overlay trans-0-4">
-                                                                <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                                                    <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                                                    <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="block2-txt p-t-20">
-                                                            <a href=@Url.Action("Product","Shop",new { @productid = categoryProducts[j].ProductID }) class="block2-name dis-block s-text3 p-b-5">
-                                                                @categoryProducts[j].ProductName
-                                                            </a>
-
-                                                            <span class="block2-price m-text6 p-r-5 price">
-                                                                @categoryProducts[j].UnitPrice.ToString("C", CultureInfo.CurrentCulture)
-                                                            </span>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            }
-
-                                        }
-                                    }
                                 </div>
                             </div>
-                        }
-                        else
-                        {
-                            <div class="tab-pane fade" id=@phid role="tabpanel" aria-labelledby=@pid>
-                                <div class="row">
-                                    @{ min = i * 12; max = min + 12; }
-                                    @for (int j = min; j < max; j++)
-                                    {
-                                        if (j < categoryProductscount)
-                                        {
-                                            if (categoryProducts[j].Sale != 0)
-                                            {
-                                                <div class="col-sm-4 col-md-4 col-lg-4 p-b-50 filter">
-                                                    <!-- Block2 -->
-                                                    <div class="block2">
-                                                        <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
-                                                            <img src=@categoryProducts[j].Image style="width:255px;height:340px" alt="IMG-PRODUCT">
+                        </div>
+        }
+        else
+        {
+            <div class="col-sm-4 col-md-4 col-lg-4 p-b-50 filter">
+                <!-- Block2 -->
+                <div class="block2">
+                    <div class="block2-img wrap-pic-w of-hidden pos-relative ">
+                        <img src=@categoryProducts[j].Image style="width:255px;height:340px" alt="IMG-PRODUCT">
 
-                                                            <div class="block2-overlay trans-0-4">
-                                                                <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                                                    <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                                                    <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                                                </a>
-                                                            </div>
-                                                        </div>
+                        <div class="block2-overlay trans-0-4">
+                            <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
 
-                                                        <div class="block2-txt p-t-20">
-                                                            <a href=@Url.Action("Product","Shop",new { @productid = categoryProducts[j].ProductID }) class="block2-name dis-block s-text3 p-b-5">
-                                                                @categoryProducts[j].ProductName
-                                                            </a>
-                                                            <span class="block2-oldprice m-text7 p-r-5">
-                                                                @categoryProducts[j].UnitPrice.ToString("C", CultureInfo.CurrentCulture)
-                                                            </span>
+                    <div class="block2-txt p-t-20">
+                        <a href=@Url.Action("Product","Shop",new { @productid = categoryProducts[j].ProductID }) class="block2-name dis-block s-text3 p-b-5">
+                            @categoryProducts[j].ProductName
+                        </a>
 
-                                                            <span class="block2-newprice m-text8 p-r-5 price">
-                                                                @categoryProducts[j].Sale.ToString("C", CultureInfo.CurrentCulture)
-                                                            </span>
+                        <span class="block2-price m-text6 p-r-5 price">
+                            @categoryProducts[j].UnitPrice.ToString("C", CultureInfo.CurrentCulture)
+                        </span>
 
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            }
-                                            else
-                                            {
-                                                <div class="col-sm-4 col-md-4 col-lg-4 p-b-50 filter">
-                                                    <!-- Block2 -->
-                                                    <div class="block2">
-                                                        <div class="block2-img wrap-pic-w of-hidden pos-relative ">
-                                                            <img src=@categoryProducts[j].Image style="width:255px;height:340px" alt="IMG-PRODUCT">
+                    </div>
+                </div>
+            </div>
+}
 
-                                                            <div class="block2-overlay trans-0-4">
-                                                                <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                                                    <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                                                    <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                                                </a>
-                                                            </div>
-                                                        </div>
+}
+}
+                    </div>
+                </div>
+}
+else
+{
+            <div class="tab-pane fade" id=@phid role="tabpanel" aria-labelledby=@pid>
+                <div class="row">
+                    @{ min = i * 12; max = min + 12; }
+                    @for (int j = min; j < max; j++)
+        {
+            if (j < categoryProductscount)
+            {
+                if (categoryProducts[j].Sale != 0)
+                {
+                    <div class="col-sm-4 col-md-4 col-lg-4 p-b-50 filter">
+                        <!-- Block2 -->
+                        <div class="block2">
+                            <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
+                                <img src=@categoryProducts[j].Image style="width:255px;height:340px" alt="IMG-PRODUCT">
 
-                                                        <div class="block2-txt p-t-20">
-                                                            <a href=@Url.Action("Product","Shop",new { @productid = categoryProducts[j].ProductID }) class="block2-name dis-block s-text3 p-b-5">
-                                                                @categoryProducts[j].ProductName
-                                                            </a>
-
-                                                            <span class="block2-price m-text6 p-r-5 price">
-                                                                @categoryProducts[j].UnitPrice.ToString("C", CultureInfo.CurrentCulture)
-                                                            </span>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            }
-                                        }
-                                    }
+                                <div class="block2-overlay trans-0-4">
+                                    <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                        <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                        <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                                    </a>
                                 </div>
                             </div>
-                        }
+
+                            <div class="block2-txt p-t-20">
+                                <a href=@Url.Action("Product","Shop",new { @productid = categoryProducts[j].ProductID }) class="block2-name dis-block s-text3 p-b-5">
+                                    @categoryProducts[j].ProductName
+                                </a>
+                                <span class="block2-oldprice m-text7 p-r-5">
+                                    @categoryProducts[j].UnitPrice.ToString("C", CultureInfo.CurrentCulture)
+                                </span>
+
+                                <span class="block2-newprice m-text8 p-r-5 price">
+                                    @categoryProducts[j].Sale.ToString("C", CultureInfo.CurrentCulture)
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+    }
+    else
+    {
+            <div class="col-sm-4 col-md-4 col-lg-4 p-b-50 filter">
+                <!-- Block2 -->
+                <div class="block2">
+                    <div class="block2-img wrap-pic-w of-hidden pos-relative ">
+                        <img src=@categoryProducts[j].Image style="width:255px;height:340px" alt="IMG-PRODUCT">
+
+                        <div class="block2-overlay trans-0-4">
+                            <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="block2-txt p-t-20">
+                        <a href=@Url.Action("Product","Shop",new { @productid = categoryProducts[j].ProductID }) class="block2-name dis-block s-text3 p-b-5">
+                            @categoryProducts[j].ProductName
+                        </a>
+
+                        <span class="block2-price m-text6 p-r-5 price">
+                            @categoryProducts[j].UnitPrice.ToString("C", CultureInfo.CurrentCulture)
+                        </span>
+
+                    </div>
+                </div>
+            </div>
+}
+}
+}
+                </div>
+            </div>
+}
 
 
-                    }
+}
                 </div>
 
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                     @for (int i = 0; i < groupcount; i++)
-                    {
-                        var pid = "p" + i;
-                        var phid = "#ph" + i;
-                        <li class="nav-item">
-                            @if (i == 0)
-                            {
-                                <a class="item-pagination flex-c-m trans-0-4 active-pagination" id=@pid data-toggle="pill" href=@phid role="tab" aria-controls=@phid aria-selected="false">@(i + 1)</a>
-                            }
-                            else
-                            {
-                                <a class="item-pagination flex-c-m trans-0-4" id=@pid data-toggle="pill" href=@phid role="tab" aria-controls=@phid aria-selected="false">@(i + 1)</a>
-                            }
-                        </li>
-                    }
+        {
+            var pid = "p" + i;
+            var phid = "#ph" + i;
+            <li class="nav-item">
+                @if (i == 0)
+    {
+            <a class="item-pagination flex-c-m trans-0-4 active-pagination" id=@pid data-toggle="pill" href=@phid role="tab" aria-controls=@phid aria-selected="false">@(i + 1)</a>
+}
+else
+{
+            <a class="item-pagination flex-c-m trans-0-4" id=@pid data-toggle="pill" href=@phid role="tab" aria-controls=@phid aria-selected="false">@(i + 1)</a>
+}
+            </li>
+}
                 </ul>
             </div>
         </div>

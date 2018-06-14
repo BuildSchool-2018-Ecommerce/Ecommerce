@@ -608,6 +608,10 @@
                 <!-- Product -->
                 <div class="flex-sb-m flex-w p-b-35 m-text14">
                     依據 "@ViewBag.searchname" 所查詢的商品
+                    @if(ViewBag.price != null)
+                    {
+                        @ViewBag.price;
+                    }
                 </div>
                 <div class="flex-sb-m flex-w p-b-35">
                     <div class="flex-w">

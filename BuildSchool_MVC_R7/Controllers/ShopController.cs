@@ -18,6 +18,14 @@ namespace BuildSchool_MVC_R7.Controllers
             {
                 shop = shopService.Shop(Request.Cookies["R7CompanyMember"].Value, low, high, Orderby);
             }
+            if(low!=null && high != null)
+            {
+                ViewBag.price = "$" + low + " ~ $" + high + " 的商品";
+            }
+            if(Orderby == "1")
+            {
+                ViewBag.price = "$" + low + " up的商品";
+            }
             return View(shop);
         }
         public ActionResult Search(string productname, string low, string high, string Orderby)
@@ -33,6 +41,14 @@ namespace BuildSchool_MVC_R7.Controllers
             {
                 shop = shopService.SearchProduct(Request.Cookies["R7CompanyMember"].Value, productname, low, high, Orderby);
             }
+            if (low != null && high != null)
+            {
+                ViewBag.price = " , $" + low + " ~ $" + high + " 的商品";
+            }
+            if (Orderby == "1")
+            {
+                ViewBag.price = " , $" + low + " up的商品";
+            }
             return View(shop);
         }
         public ActionResult CategoryProduct(string categoryid, string low, string high, string Orderby)
@@ -46,6 +62,14 @@ namespace BuildSchool_MVC_R7.Controllers
             if (Request.Cookies["R7CompanyMember"] != null)
             {
                 shop = shopService.CategoryShop(int.Parse(categoryid), Request.Cookies["R7CompanyMember"].Value, low, high, Orderby);
+            }
+            if (low != null && high != null)
+            {
+                ViewBag.price = "$" + low + " ~ $" + high + " 的商品";
+            }
+            if (Orderby == "1")
+            {
+                ViewBag.price = "$" + low + " up的商品";
             }
             return View(shop);
         }
