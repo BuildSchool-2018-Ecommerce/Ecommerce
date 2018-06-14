@@ -216,7 +216,12 @@
     <Content Include="Content\css\metisMenu.min.css" />
     <Content Include="Content\css\morris.css" />
     <Content Include="Content\css\sb-admin-2.min.css" />
+    <Content Include="Content\images\1438172205530_1.jpg" />
     <Content Include="Content\images\icons\00.png" />
+    <Content Include="Content\images\LOGO13.png" />
+    <Content Include="Content\images\LOGO_9_3.png" />
+    <Content Include="Content\images\Rseven.jpg" />
+    <Content Include="Content\images\龍.jpg" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\jquery.min.js" />
     <Content Include="Content\js\metisMenu.min.js" />

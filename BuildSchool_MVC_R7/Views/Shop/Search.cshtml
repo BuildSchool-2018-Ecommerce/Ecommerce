@@ -45,7 +45,7 @@
         <div class="wrap_header">
             <!-- Logo -->
             <a href="/Home/Index" class="logo">
-                <img src="~/Content/images/icons/logo.png" alt="IMG-LOGO">
+                <img src="~/Content/images/LOGO13.png" alt="IMG-LOGO">
             </a>
 
             <!-- Menu -->
@@ -234,7 +234,7 @@
     <div class="wrap_header_mobile">
         <!-- Logo moblie -->
         <a href="/Home/Index" class="logo-mobile">
-            <img src="~/Content/images/icons/logo.png" alt="IMG-LOGO">
+            <img src="~/Content/images/LOGO13.png" alt="IMG-LOGO">
         </a>
 
         <!-- Button show menu -->
@@ -484,7 +484,7 @@
 
                     <ul class="p-b-54">
                         <li class="p-t-4">
-                            <a href="/Shop/Index" class="s-text13 active1">
+                            <a href="/Shop/ShopHomePage" class="s-text13 active1">
                                 全部
                             </a>
                         </li>
@@ -621,7 +621,7 @@
                         </div>
 
                         <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
-                            <select class="selection-2" name="sorting" style="width: 100%">
+                            <select id="moneyprice" class="selection-2" name="sorting" style="width: 100%">
                                 <option>Price</option>
                                 <option>$0.00 - $50.00</option>
                                 <option>$50.00 - $100.00</option>
@@ -838,6 +838,24 @@
 @Scripts.Render("~/bundles/js")
 
 <script type="text/javascript">
+    $('#moneyprice').on("change", function (e) {
+        if ($(e.target).val().trim() != "Price" && $(e.target).val().trim().indexOf("+") == -1) {
+            var price = $(e.target).val().trim().split("-");
+            var min = price[0].replace("$", "");
+            var max = price[1].replace("$", "");
+            var cid = location.href.split("?");
+            var caid = cid[1].split("&");
+            console.log(cid);
+            location.href = "/Shop/Search?" + caid[0] + "&low=" + min + "&high=" + max;
+        }
+        if ($(e.target).val().trim().indexOf("+") > -1) {
+            var price = $(e.target).val().trim().replace("+", "").replace("$", "");
+            var cid = location.href.split("?");
+            var caid = cid[1].split("&");
+            console.log(cid);
+            location.href = "/Shop/Search?" + caid[0] + "&low=" + price + "&Orderby=" + "1";
+        }
+    })
     $('#btsh').click(function (e) {
         location.href = "/Shop/Search?productname=" + $('#search-p').val();
     });
@@ -895,24 +913,10 @@
         var max = parseInt($("#value-upper").text());
         console.log(min);
         console.log(max);
-        $(".filter").attr('hidden', true);
-        var filter = $(".filter");
-        console.log(filter);
-        for (var items of filter) {
-            var item = parseInt($(items).find(".price").text().replace("NT$", "").replace(",", "").replace("$","").trim());
-            console.log($(items).find(".price").text());
-            console.log(item);
-            if (item > min && item <= max) {
-                $(items).removeAttr("hidden");
-            }
-        }
-        //$(".filter").each(function () {
-        //    var item = parseInt($(this).find(".price").html().replace("NT$", "").replace(",", "").trim());
-        //    console.log(item);
-        //    if (item > min && item <= max) {
-        //        $(this).removeAttr("hidden");
-        //    }
-        //})
+        var cid = location.href.split("?");
+        var caid = cid[1].split("&");
+        console.log(cid);
+        location.href = "/Shop/Search?" + caid[0] + "&low=" + min + "&high=" + max;
     })
     $('.js-show-header-dropdown.shop').click(function () {
         //if ($('#user').length == 0) {

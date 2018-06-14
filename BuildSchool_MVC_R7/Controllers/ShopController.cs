@@ -10,18 +10,17 @@ namespace BuildSchool_MVC_R7.Controllers
     public class ShopController : Controller
     {
         // GET: Shop
-        public ActionResult ShopHomePage()
+        public ActionResult ShopHomePage(string low, string high, string Orderby)
         {
-            
             var shopService = new ShopService();
-            var shop = shopService.Shop("0");
+            var shop = shopService.Shop("0", low, high, Orderby);
             if (Request.Cookies["R7CompanyMember"] != null)
             {
-                shop = shopService.Shop(Request.Cookies["R7CompanyMember"].Value);
+                shop = shopService.Shop(Request.Cookies["R7CompanyMember"].Value, low, high, Orderby);
             }
             return View(shop);
         }
-        public ActionResult Search(string productname)
+        public ActionResult Search(string productname, string low, string high, string Orderby)
         {
             if(productname == null)
             {
@@ -29,20 +28,24 @@ namespace BuildSchool_MVC_R7.Controllers
             }
             ViewBag.searchname = productname;
             var shopService = new ShopService();
-            var shop = shopService.SearchProduct("0", productname);
+            var shop = shopService.SearchProduct("0", productname, low, high, Orderby);
             if (Request.Cookies["R7CompanyMember"] != null)
             {
-                shop = shopService.SearchProduct(Request.Cookies["R7CompanyMember"].Value, productname);
+                shop = shopService.SearchProduct(Request.Cookies["R7CompanyMember"].Value, productname, low, high, Orderby);
             }
             return View(shop);
         }
-        public ActionResult CategoryProduct(int categoryid)
+        public ActionResult CategoryProduct(string categoryid, string low, string high, string Orderby)
         {
+            if(categoryid == null)
+            {
+                return RedirectToAction("ShopHomePage", "Shop");
+            }
             var shopService = new ShopService();
-            var shop = shopService.CategoryShop(categoryid, "0");
+            var shop = shopService.CategoryShop(int.Parse(categoryid), "0", low, high, Orderby);
             if (Request.Cookies["R7CompanyMember"] != null)
             {
-                shop = shopService.CategoryShop(categoryid, Request.Cookies["R7CompanyMember"].Value);
+                shop = shopService.CategoryShop(int.Parse(categoryid), Request.Cookies["R7CompanyMember"].Value, low, high, Orderby);
             }
             return View(shop);
         }

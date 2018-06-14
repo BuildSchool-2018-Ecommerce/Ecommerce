@@ -11,7 +11,7 @@ namespace BuildSchool_MVC_R7.Service
 {
     public class ShopService
     {
-        public ShopViewModel Shop(string memberid)
+        public ShopViewModel Shop(string memberid, string low, string high, string Orderby)
         {
             var categoryRepository = ContainerManager.Container.GetInstance<CategoryRepository>();
             var productRepository = ContainerManager.Container.GetInstance<ProductRepository>();
@@ -31,13 +31,57 @@ namespace BuildSchool_MVC_R7.Service
                 AllProduct = productRepository.AllProduct().ToList(),
                 MaxUnitPrice = productRepository.MaxUnitPrice()
             };
+            if(low!=null && high != null)
+            {
+                var p = new List<AllProduct>();
+                foreach (var item in shopViewModel.AllProduct)
+                {
+                    if(item.Sale == 0)
+                    {
+                        if(item.UnitPrice >= decimal.Parse(low) && item.UnitPrice <=decimal.Parse(high))
+                        {
+                            p.Add(item);
+                        }
+                    }
+                    else
+                    {
+                        if (item.Sale >= decimal.Parse(low) && item.Sale <= decimal.Parse(high))
+                        {
+                            p.Add(item);
+                        }
+                    }
+                }
+                shopViewModel.AllProduct = p;
+            }
+            if(Orderby == "1")
+            {
+                var p = new List<AllProduct>();
+                foreach (var item in shopViewModel.AllProduct)
+                {
+                    if (item.Sale == 0)
+                    {
+                        if (item.UnitPrice >= decimal.Parse(low))
+                        {
+                            p.Add(item);
+                        }
+                    }
+                    else
+                    {
+                        if (item.Sale >= decimal.Parse(low))
+                        {
+                            p.Add(item);
+                        }
+                    }
+                }
+                shopViewModel.AllProduct = p;
+            }
             if (member != null)
             {
                 shopViewModel.Count = shopingrepository.ShoppingCarts(memberid).Count();
             }
             return shopViewModel;
         }
-        public ShopViewModel CategoryShop(int categoryid, string memberid)
+        public ShopViewModel CategoryShop(int categoryid, string memberid, string low, string high, string Orderby)
         {
             var categoryRepository = ContainerManager.Container.GetInstance<CategoryRepository>();
             var productRepository = ContainerManager.Container.GetInstance<ProductRepository>();
@@ -57,6 +101,50 @@ namespace BuildSchool_MVC_R7.Service
                 CategoryProduct = productRepository.CategoryProduct(categoryid).ToList(),
                 MaxUnitPrice = productRepository.MaxUnitPrice()
             };
+            if (low != null && high != null)
+            {
+                var p = new List<CategoryProduct>();
+                foreach (var item in shopViewModel.CategoryProduct)
+                {
+                    if (item.Sale == 0)
+                    {
+                        if (item.UnitPrice >= decimal.Parse(low) && item.UnitPrice <= decimal.Parse(high))
+                        {
+                            p.Add(item);
+                        }
+                    }
+                    else
+                    {
+                        if (item.Sale >= decimal.Parse(low) && item.Sale <= decimal.Parse(high))
+                        {
+                            p.Add(item);
+                        }
+                    }
+                }
+                shopViewModel.CategoryProduct = p;
+            }
+            if (Orderby == "1")
+            {
+                var p = new List<AllProduct>();
+                foreach (var item in shopViewModel.AllProduct)
+                {
+                    if (item.Sale == 0)
+                    {
+                        if (item.UnitPrice >= decimal.Parse(low))
+                        {
+                            p.Add(item);
+                        }
+                    }
+                    else
+                    {
+                        if (item.Sale >= decimal.Parse(low))
+                        {
+                            p.Add(item);
+                        }
+                    }
+                }
+                shopViewModel.AllProduct = p;
+            }
             if (member != null)
             {
                 shopViewModel.Count = shopingrepository.ShoppingCarts(memberid).Count();
@@ -150,7 +238,7 @@ namespace BuildSchool_MVC_R7.Service
             };
             return shopViewModel;
         }
-        public ShopViewModel SearchProduct(string memberid , string productname)
+        public ShopViewModel SearchProduct(string memberid , string productname, string low, string high, string Orderby)
         {
             var categoryRepository = ContainerManager.Container.GetInstance<CategoryRepository>();
             var productRepository = ContainerManager.Container.GetInstance<ProductRepository>();
@@ -170,6 +258,50 @@ namespace BuildSchool_MVC_R7.Service
                 SearchProduct = productRepository.SearchProduct("%"+productname+"%").ToList(),
                 MaxUnitPrice = productRepository.MaxUnitPrice()
             };
+            if (low != null && high != null)
+            {
+                var p = new List<SearchProduct>();
+                foreach (var item in shopViewModel.SearchProduct)
+                {
+                    if (item.Sale == 0)
+                    {
+                        if (item.UnitPrice >= decimal.Parse(low) && item.UnitPrice <= decimal.Parse(high))
+                        {
+                            p.Add(item);
+                        }
+                    }
+                    else
+                    {
+                        if (item.Sale >= decimal.Parse(low) && item.Sale <= decimal.Parse(high))
+                        {
+                            p.Add(item);
+                        }
+                    }
+                }
+                shopViewModel.SearchProduct = p;
+            }
+            if (Orderby == "1")
+            {
+                var p = new List<SearchProduct>();
+                foreach (var item in shopViewModel.SearchProduct)
+                {
+                    if (item.Sale == 0)
+                    {
+                        if (item.UnitPrice >= decimal.Parse(low))
+                        {
+                            p.Add(item);
+                        }
+                    }
+                    else
+                    {
+                        if (item.Sale >= decimal.Parse(low))
+                        {
+                            p.Add(item);
+                        }
+                    }
+                }
+                shopViewModel.SearchProduct = p;
+            }
             if (member != null)
             {
                 shopViewModel.Count = shopingrepository.ShoppingCarts(memberid).Count();
