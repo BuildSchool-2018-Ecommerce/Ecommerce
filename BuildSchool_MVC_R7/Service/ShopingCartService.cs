@@ -42,10 +42,16 @@ namespace BuildSchool_MVC_R7.Service
             {
                 user.UserID = member.MemberID;
                 user.Username = member.Name;
+                var memberorder = memberrepository.GetBuyerOrder(memberid).First();
                 var shoppingcartviewmodel = new ShoppingCartViewModel()
                 {
                     User = user,
                 };
+                TimeSpan ts = new TimeSpan(DateTime.Now.Ticks - memberorder.OrderDate.Ticks);
+                if (ts.TotalMinutes < 5.0)
+                {
+                    shoppingcartviewmodel.Orderid = memberorder.OrderID;
+                }
                 shoppingcartviewmodel.Count = 0;
                 return shoppingcartviewmodel;
             }

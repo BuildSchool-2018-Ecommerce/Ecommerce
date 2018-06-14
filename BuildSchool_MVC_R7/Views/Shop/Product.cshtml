@@ -791,6 +791,14 @@
     $('.btn-addcart-product-detail').each(function () {
         var nameProduct = $('.product-detail-name').html();
         $(this).on('click', function () {
+            var b = false;
+            if ($('.brid').length > 0) {
+                for (var item of $('.brid').val()) {
+                    if (item == @product[0].ProductID) {
+                        b = true;
+                    }
+                }
+            }
             $.ajax({
                 url: "/Shop/CreateProductInShoppingCart",
                 data: {
@@ -801,12 +809,7 @@
                 },
                 success: function (result) {
                     swal(nameProduct, "is added to cart !", "success");
-                    var b = false;
-                    for (var item of $('.brid').val()) {
-                        if (item == @product[0].ProductID) {
-                            b = true;
-                        }
-                    }
+
                     if (b == false) {
                         @{ var t = Model.Count + 1; }
                         $(".header-icons-noti").text(@t);

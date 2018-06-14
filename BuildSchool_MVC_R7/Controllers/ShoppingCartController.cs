@@ -113,9 +113,9 @@ namespace BuildSchool_MVC_R7.Controllers
             {
                 var shopservice = new ShopingCartService();
                 shop = shopservice.CreateOrders(Request.Cookies["R7CompanyMember"].Value, orders);
-                if (shop == "Ok")
+                if (shop == "OK")
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("ShoppingSuccess", "ShoppingCart");
                 }
             }
             return RedirectToAction("CheckOut", "ShoppingCart", new { Error = shop });
