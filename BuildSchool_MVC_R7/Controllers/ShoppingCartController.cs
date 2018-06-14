@@ -94,6 +94,10 @@ namespace BuildSchool_MVC_R7.Controllers
             {
                 return RedirectToAction("LogIn", "Member");
             }
+            if (shop.Count == 0)
+            {
+                return RedirectToAction("ShopHomePage", "Shop");
+            }
             ViewBag.Error = Error;
             return View(shop);
         }
@@ -109,12 +113,26 @@ namespace BuildSchool_MVC_R7.Controllers
             {
                 var shopservice = new ShopingCartService();
                 shop = shopservice.CreateOrders(Request.Cookies["R7CompanyMember"].Value, orders);
-                if (shop == "ok")
+                if (shop == "Ok")
                 {
                     return RedirectToAction("Index", "Home");
                 }
             }
             return RedirectToAction("CheckOut", "ShoppingCart", new { Error = shop });
+        }
+        public ActionResult ShoppingSuccess()
+        {
+            if (Request.Cookies["R7CompanyMember"] == null)
+            {
+                return RedirectToAction("LogIn", "Member");
+            }
+            var shopservice = new ShopingCartService();
+            var shop = shopservice.ShoppingSucces(Request.Cookies["R7CompanyMember"].Value);
+            if (shop == null)
+            {
+                return RedirectToAction("LogIn", "Member");
+            }
+            return View(shop);
         }
     }
 }

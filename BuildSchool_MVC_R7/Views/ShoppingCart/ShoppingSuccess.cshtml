@@ -1,9 +1,8 @@
-﻿@model HomeViewModel
+﻿@model ShoppingCartViewModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "ShoppingSuccess";
 }
 
-<!-- Header -->
 <header class="header1">
     <!-- Header desktop -->
     <div class="container-menu-header">
@@ -30,7 +29,7 @@
         <div class="wrap_header">
             <!-- Logo -->
             <a href="/Home/Index" class="logo">
-                <img src="@Url.Content("~/Content/images/icons/logo.png")" alt="IMG-LOGO">
+                <img src="~/Content/images/icons/logo.png" alt="IMG-LOGO">
             </a>
 
             <!-- Menu -->
@@ -49,7 +48,7 @@
                             <a href="product.html">Sale</a>
                         </li>
 
-                        <li>
+                        <li class="sale-noti">
                             <a href="/ShoppingCart/Cart">Features</a>
                         </li>
 
@@ -57,7 +56,7 @@
                             <a href="blog.html">Blog</a>
                         </li>
 
-                        <li class="sale-noti">
+                        <li>
                             <a href="/Home/About">About</a>
                         </li>
 
@@ -428,56 +427,18 @@
 </header>
 
 <!-- Title Page -->
-<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(http://www.zhiwutuan.com/statics/images/ny_banner_bg3.jpg);"></section>
-
-<!-- content page -->
-<section class="bgwhite p-t-66 p-b-38">
+<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(https://stmed.net/sites/default/files/elle-fanning-wallpapers-26656-4002211.jpg);">
+    <h2 class="l-text2 t-center">
+        R SEVEN
+    </h2>
+</section>
+<section class="cart bgwhite p-t-70 p-b-100">
     <div class="container">
-        <div class="row">
-            <div class="col-md-4 p-b-30">
-                <div class="hov-img-zoom">
-                    <img src="https://lh4.googleusercontent.com/jEKr78U87HRC6RAqhygXms6zYJgvoeQX5jEgY-HhcL8oKnAeBca3rTbExY9qjQWalMWkcytLGxMwplzNFiHI=w1366-h637" alt="IMG-ABOUT">
-                </div>
-            </div>
+        
+        恭喜購買成功~
 
-            <div class="col-md-8 p-b-30">
-                <h3 class="m-text26 p-t-15 p-b-16">
-                    洪識超
-                </h3>
-                <h3 class="m-text26 p-t-15 p-b-16">
-                    黃宗畦
-                </h3>
-                <h3 class="m-text26 p-t-15 p-b-16">
-                    施敬龍
-                </h3>
-                <h3 class="m-text26 p-t-15 p-b-16">
-                    熊祥景
-                </h3>
-                <h3 class="m-text26 p-t-15 p-b-16">
-                    鄭逸涵
-                </h3>
-                <h3 class="m-text26 p-t-15 p-b-16">
-                    林靜華
-                </h3>
-
-                <p class="p-b-28">
-                    Phasellus egestas nisi nisi, lobortis ultricies risus semper nec. Vestibulum pharetra ac ante ut pellentesque. Curabitur fringilla dolor quis lorem accumsan, vitae molestie urna dapibus. Pellentesque porta est ac neque bibendum viverra. Vivamus lobortis magna ut interdum laoreet. Donec gravida lorem elit, quis condimentum ex semper sit amet. Fusce eget ligula magna. Aliquam aliquam imperdiet sodales. Ut fringilla turpis in vehicula vehicula. Pellentesque congue ac orci ut gravida. Aliquam erat volutpat. Donec iaculis lectus a arcu facilisis, eu sodales lectus sagittis. Etiam pellentesque, magna vel dictum rutrum, neque justo eleifend elit, vel tincidunt erat arcu ut sem. Sed rutrum, turpis ut commodo efficitur, quam velit convallis ipsum, et maximus enim ligula ac ligula. Vivamus tristique vulputate ultricies. Sed vitae ultrices orci.
-                </p>
-
-                <div class="bo13 p-l-29 m-l-9 p-b-10">
-                    <p class="p-b-11">
-                        Creativity is just connecting things. When you ask creative people how they did something, they feel a little guilty because they didn't really do it, they just saw something. It seemed obvious to them after a while.
-                    </p>
-
-                    <span class="s-text7">
-                        - Steve Job’s
-                    </span>
-                </div>
-            </div>
-        </div>
     </div>
 </section>
-
 <!-- Back to top -->
 <div class="btn-back-to-top bg0-hov" id="myBtn">
     <span class="symbol-btn-back-to-top">
@@ -492,13 +453,7 @@
 @Scripts.Render("~/bundles/vendors")
 @Scripts.Render("~/bundles/vendors1")
 @Scripts.Render("~/bundles/js")
-
 <script type="text/javascript">
-    $(".header-icons-noti").text(@Model.Count);
-    $(".selection-1").select2({
-        minimumResultsForSearch: 20,
-        dropdownParent: $('#dropDownSelect1')
-    });
     $('.js-show-header-dropdown.shop').click(function () {
         //if ($('#user').length == 0) {
         //    location.href = "/Member/LogIn";

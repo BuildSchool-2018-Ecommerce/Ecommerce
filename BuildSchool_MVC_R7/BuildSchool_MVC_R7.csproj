@@ -3032,6 +3032,7 @@
     <Content Include="Views\ShoppingCart\Cart.cshtml" />
     <Content Include="Views\Shop\ShopHomePage.cshtml" />
     <Content Include="Views\R7CompanyEmployees\LogIn.cshtml" />
+    <Content Include="Views\ShoppingCart\ShoppingSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

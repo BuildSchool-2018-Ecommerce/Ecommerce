@@ -33,6 +33,24 @@ namespace BuildSchool_MVC_R7.Service
             }
             return null;
         }
+        public ShoppingCartViewModel ShoppingSucces(string memberid)
+        {
+            var memberrepository = ContainerManager.Container.GetInstance<MemberRepository>();
+            var member = memberrepository.FindById(memberid);
+            var user = new User();
+            if (member != null)
+            {
+                user.UserID = member.MemberID;
+                user.Username = member.Name;
+                var shoppingcartviewmodel = new ShoppingCartViewModel()
+                {
+                    User = user,
+                };
+                shoppingcartviewmodel.Count = 0;
+                return shoppingcartviewmodel;
+            }
+            return null;
+        }
         public bool DelectProduct(string memberid, int productformatid)
         {
             var shopingrepository = ContainerManager.Container.GetInstance<ShoppingCartRepository>();
@@ -81,15 +99,18 @@ namespace BuildSchool_MVC_R7.Service
         }
         public string CreateOrders(string memberid,Orders orders)
         {
+            Random rnd = new Random();
             var memberrepository = ContainerManager.Container.GetInstance<MemberRepository>();
             var employeesrepository = ContainerManager.Container.GetInstance<EmployeesRepository>();
             var ordersrepository = ContainerManager.Container.GetInstance<OrdersRepository>();
             var ordertailrepository = ContainerManager.Container.GetInstance<OrderDetailsRepository>();
             var shoppingrepository = ContainerManager.Container.GetInstance<ShoppingCartRepository>();
             var member = memberrepository.FindById(memberid);
-            var employees = employeesrepository.GetAll();
+            var employees = employeesrepository.GetAll().ToList();
             if (member != null)
             {
+                var r = rnd.Next(0, employees.Count());
+                orders.EmployeeID = employees[r].EmployeeID;
                 orders.OrderDate = DateTime.Now;
                 orders.MemberID = member.MemberID;
                 orders.Status = "未出貨";

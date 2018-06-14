@@ -888,14 +888,26 @@
     $(document).on("click", "#filter", function () {
         var min = parseInt($("#value-lower").text());
         var max = parseInt($("#value-upper").text());
+        console.log(min);
+        console.log(max);
         $(".filter").attr('hidden', true);
         var filter = $(".filter");
-        $(".filter").each(function () {
-            var item = parseInt($(this).find(".price").html().replace("NT$", "").replace(",", "").trim());
+        console.log(filter);
+        for (var items of filter) {
+            var item = parseInt($(items).find(".price").text().replace("NT$", "").replace(",", "").replace("$","").trim());
+            console.log($(items).find(".price").text());
+            console.log(item);
             if (item > min && item <= max) {
-                $(this).removeAttr("hidden");
+                $(items).removeAttr("hidden");
             }
-        })
+        }
+        //$(".filter").each(function () {
+        //    var item = parseInt($(this).find(".price").html().replace("NT$", "").replace(",", "").trim());
+        //    console.log(item);
+        //    if (item > min && item <= max) {
+        //        $(this).removeAttr("hidden");
+        //    }
+        //})
     })
     $('.js-show-header-dropdown.shop').click(function () {
         //if ($('#user').length == 0) {
