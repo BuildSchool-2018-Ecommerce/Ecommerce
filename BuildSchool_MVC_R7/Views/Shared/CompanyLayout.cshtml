@@ -1,7 +1,4 @@
 ﻿
-@{
-    ViewBag.Title = "Index";
-}
 
 @*@Scripts.Render("~/Content/vendor/jquery/jquery-3.2.1.min.js")
     @Scripts.Render("~/Content/js/sb-admin-2.js")
@@ -29,7 +26,7 @@
     <meta name="author" content="">
     <title>SB Admin 2 - Bootstrap Admin Theme</title>
 
-    @Styles.Render("~/Content/backCss")
+    @Styles.Render("~/bundles/backCss")
     @*@Styles.Render("~/Content/css")*@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     @*<!-- Bootstrap Core CSS -->
@@ -941,7 +938,7 @@
         </div>
         <!-- /#page-wrapper -->
     </div>
-    @Scripts.Render("~/Content/backJs");
+    @Scripts.Render("~/bundles/backJs");
     <!-- /#wrapper -->
     <!-- jQuery -->
     @*<script src="../vendor/jquery/jquery.min.js"></script>

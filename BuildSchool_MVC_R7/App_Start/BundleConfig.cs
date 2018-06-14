@@ -81,8 +81,8 @@ namespace BuildSchool_MVC_R7
                     "~/Content/css/bootstrap.min.css",
                     "~/Content/css/metisMenu.min.css",
                     "~/Content/css/sb-admin-2.min.css",
-                    "~/Content/css/morris.css",
-                    "~/Content/css/font-awesome.css"
+                    "~/Content/css/morris.css"
+                    ).Include("~/Content/css/font-awesome.css", new CssRewriteUrlTransform()
                 ));
         }   
     }
