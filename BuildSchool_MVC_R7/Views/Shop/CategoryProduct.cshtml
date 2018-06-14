@@ -595,9 +595,9 @@
                     </div>
 
                     <div class="search-product pos-relative bo4 of-hidden">
-                        <input class="s-text7 size6 p-l-23 p-r-50" type="text" name="search-product" placeholder="Search Products...">
+                        <input class="s-text7 size6 p-l-23 p-r-50" type="text" id="search-p" name="search-product" placeholder="Search Products...">
 
-                        <button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
+                        <button id="btsh" class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
                             <i class="fs-12 fa fa-search" aria-hidden="true"></i>
                         </button>
                     </div>
@@ -831,11 +831,14 @@
 <div id="dropDownSelect2"></div>
 
 
-@Scripts.Render("~/bundles/vendors")
+@Scripts.Render("~/Content/vendors")
 @Scripts.Render("~/bundles/vendors1")
 @Scripts.Render("~/bundles/js")
 
 <script type="text/javascript">
+    $('#btsh').click(function (e) {
+        location.href = "/Shop/Search?productname=" + $('#search-p').val();
+    });
     $(".selection-1").select2({
         minimumResultsForSearch: 20,
         dropdownParent: $('#dropDownSelect1')

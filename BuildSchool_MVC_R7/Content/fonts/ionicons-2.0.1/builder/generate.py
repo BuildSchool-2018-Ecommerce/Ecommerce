@@ -65,7 +65,7 @@ def generate_less(data):
   d.append('*/');
   d.append('// Ionicons Variables')
   d.append('// --------------------------\n')
-  d.append('@ionicons-font-path: "../fonts";')
+  d.append('@ionicons-font-path: "../../fonts";')
   d.append('@ionicons-font-family: "%s";' % (font_name) )
   d.append('@ionicons-version: "%s";' % (font_version) )
   d.append('@ionicons-prefix: %s;' % (css_prefix) )

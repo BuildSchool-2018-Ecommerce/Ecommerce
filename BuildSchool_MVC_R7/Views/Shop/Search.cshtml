@@ -1,13 +1,13 @@
 ﻿@model ShopViewModel
 @{
-    ViewBag.Title = "ShopHomePage";
+    ViewBag.Title = "Search";
 }
 @{
     var category = Model.Category;
-    var allproduct = Model.AllProduct;
-    var allproductcount = allproduct.Count();
+    var searchproduct = Model.SearchProduct;
+    var allsearchproduct = searchproduct.Count();
     var groupsize = 12;
-    var groupcount = Math.Ceiling(allproductcount / (double)groupsize);
+    var groupcount = Math.Ceiling(allsearchproduct / (double)groupsize);
     var min = 0;
     var max = 12;
     var maxunitprice = Model.MaxUnitPrice;
@@ -606,7 +606,9 @@
 
             <div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
                 <!-- Product -->
-
+                <div class="flex-sb-m flex-w p-b-35 m-text14">
+                    依據 "@ViewBag.searchname" 所查詢的商品
+                </div>
                 <div class="flex-sb-m flex-w p-b-35">
                     <div class="flex-w">
                         <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
@@ -632,7 +634,7 @@
                     </div>
 
                     <span id="results" class="s-text8 p-t-5 p-b-5">
-                        Showing 1 – 12 of @allproductcount results
+                        Showing 1 – 12 of @allsearchproduct results
                     </span>
                 </div>
 
@@ -648,15 +650,15 @@
                                     @{ min = i * 12; max = min + 12; }
                                     @for (int j = min; j < max; j++)
                                     {
-                                        if (j < allproductcount)
+                                        if (j < allsearchproduct)
                                         {
-                                            if (allproduct[j].Sale != 0)
+                                            if (searchproduct[j].Sale != 0)
                                             {
                                                 <div class="col-sm-4 col-md-4 col-lg-4 p-b-50 filter">
                                                     <!-- Block2 -->
                                                     <div class="block2">
                                                         <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
-                                                            <img src=@allproduct[j].Image style="width:255px;height:340px" alt="IMG-PRODUCT">
+                                                            <img src=@searchproduct[j].Image style="width:255px;height:340px" alt="IMG-PRODUCT">
 
                                                             <div class="block2-overlay trans-0-4">
                                                                 <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -667,15 +669,15 @@
                                                         </div>
 
                                                         <div class="block2-txt p-t-20">
-                                                            <a href=@Url.Action("Product","Shop",new { @productid = allproduct[j].ProductID }) class="block2-name dis-block s-text3 p-b-5">
-                                                                @allproduct[j].ProductName
+                                                            <a href=@Url.Action("Product","Shop",new { @productid = searchproduct[j].ProductID }) class="block2-name dis-block s-text3 p-b-5">
+                                                                @searchproduct[j].ProductName
                                                             </a>
                                                             <span class="block2-oldprice m-text7 p-r-5">
-                                                                @allproduct[j].UnitPrice.ToString("C", CultureInfo.CurrentCulture)
+                                                                @searchproduct[j].UnitPrice.ToString("C", CultureInfo.CurrentCulture)
                                                             </span>
 
                                                             <span class="block2-newprice m-text8 p-r-5 price">
-                                                                @allproduct[j].Sale.ToString("C", CultureInfo.CurrentCulture)
+                                                                @searchproduct[j].Sale.ToString("C", CultureInfo.CurrentCulture)
                                                             </span>
 
                                                         </div>
@@ -688,7 +690,7 @@
                                                     <!-- Block2 -->
                                                     <div class="block2">
                                                         <div class="block2-img wrap-pic-w of-hidden pos-relative ">
-                                                            <img src=@allproduct[j].Image style="width:255px;height:340px" alt="IMG-PRODUCT">
+                                                            <img src=@searchproduct[j].Image style="width:255px;height:340px" alt="IMG-PRODUCT">
 
                                                             <div class="block2-overlay trans-0-4">
                                                                 <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -699,12 +701,12 @@
                                                         </div>
 
                                                         <div class="block2-txt p-t-20">
-                                                            <a href=@Url.Action("Product","Shop",new { @productid = allproduct[j].ProductID }) class="block2-name dis-block s-text3 p-b-5">
-                                                                @allproduct[j].ProductName
+                                                            <a href=@Url.Action("Product","Shop",new { @productid = searchproduct[j].ProductID }) class="block2-name dis-block s-text3 p-b-5">
+                                                                @searchproduct[j].ProductName
                                                             </a>
 
                                                             <span class="block2-price m-text6 p-r-5 price">
-                                                                @allproduct[j].UnitPrice.ToString("C", CultureInfo.CurrentCulture)
+                                                                @searchproduct[j].UnitPrice.ToString("C", CultureInfo.CurrentCulture)
                                                             </span>
 
                                                         </div>
@@ -724,15 +726,15 @@
                                     @{ min = i * 12; max = min + 12; }
                                     @for (int j = min; j < max; j++)
                                     {
-                                        if (j < allproductcount)
+                                        if (j < allsearchproduct)
                                         {
-                                            if (allproduct[j].Sale != 0)
+                                            if (searchproduct[j].Sale != 0)
                                             {
                                                 <div class="col-sm-4 col-md-4 col-lg-4 p-b-50 filter">
                                                     <!-- Block2 -->
                                                     <div class="block2">
                                                         <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
-                                                            <img src=@allproduct[j].Image style="width:255px;height:340px" alt="IMG-PRODUCT">
+                                                            <img src=@searchproduct[j].Image style="width:255px;height:340px" alt="IMG-PRODUCT">
 
                                                             <div class="block2-overlay trans-0-4">
                                                                 <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -743,15 +745,15 @@
                                                         </div>
 
                                                         <div class="block2-txt p-t-20">
-                                                            <a href=@Url.Action("Product","Shop",new { @productid = allproduct[j].ProductID }) class="block2-name dis-block s-text3 p-b-5">
-                                                                @allproduct[j].ProductName
+                                                            <a href=@Url.Action("Product","Shop",new { @productid = searchproduct[j].ProductID }) class="block2-name dis-block s-text3 p-b-5">
+                                                                @searchproduct[j].ProductName
                                                             </a>
                                                             <span class="block2-oldprice m-text7 p-r-5">
-                                                                @allproduct[j].UnitPrice.ToString("C", CultureInfo.CurrentCulture)
+                                                                @searchproduct[j].UnitPrice.ToString("C", CultureInfo.CurrentCulture)
                                                             </span>
 
                                                             <span class="block2-newprice m-text8 p-r-5 price">
-                                                                @allproduct[j].Sale.ToString("C", CultureInfo.CurrentCulture)
+                                                                @searchproduct[j].Sale.ToString("C", CultureInfo.CurrentCulture)
                                                             </span>
 
                                                         </div>
@@ -764,7 +766,7 @@
                                                     <!-- Block2 -->
                                                     <div class="block2">
                                                         <div class="block2-img wrap-pic-w of-hidden pos-relative ">
-                                                            <img src=@allproduct[j].Image style="width:255px;height:340px" alt="IMG-PRODUCT">
+                                                            <img src=@searchproduct[j].Image style="width:255px;height:340px" alt="IMG-PRODUCT">
 
                                                             <div class="block2-overlay trans-0-4">
                                                                 <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -775,12 +777,12 @@
                                                         </div>
 
                                                         <div class="block2-txt p-t-20">
-                                                            <a href=@Url.Action("Product","Shop",new { @productid = allproduct[j].ProductID }) class="block2-name dis-block s-text3 p-b-5">
-                                                                @allproduct[j].ProductName
+                                                            <a href=@Url.Action("Product","Shop",new { @productid = searchproduct[j].ProductID }) class="block2-name dis-block s-text3 p-b-5">
+                                                                @searchproduct[j].ProductName
                                                             </a>
 
                                                             <span class="block2-price m-text6 p-r-5 price">
-                                                                @allproduct[j].UnitPrice.ToString("C", CultureInfo.CurrentCulture)
+                                                                @searchproduct[j].UnitPrice.ToString("C", CultureInfo.CurrentCulture)
                                                             </span>
 
                                                         </div>
@@ -885,7 +887,7 @@
     $(document).on("click", ".item-pagination", function () {
         $(".item-pagination").removeClass("active-pagination");
         $(this).addClass("active-pagination");
-        $("#results").text("Showing " + (($(this).text()-1) * 12 + 1) + " – " + ($(this).text() - 1 + 12) + " of @allproductcount results");
+        $("#results").text("Showing " + (($(this).text()-1) * 12 + 1) + " – " + ($(this).text() - 1 + 12) + " of @allsearchproduct results");
         console.log($(this).text());
     })
     $(document).on("click", "#filter", function () {

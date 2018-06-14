@@ -1276,9 +1276,9 @@
             </div>
         </div>
     </div>*@
-@Scripts.Render("~/bundles/vendors")
-@Scripts.Render("~/bundles/vendors1")
-@Scripts.Render("~/bundles/js")
+@Scripts.Render("~/Content/vendors", "~/bundles/vendors1", "~/bundles/js")
+@*@Scripts.Render()
+@Scripts.Render()*@
 <script type="text/javascript">
     $(".selection-1").select2({
         minimumResultsForSearch: 20,

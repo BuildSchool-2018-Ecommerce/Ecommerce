@@ -21,6 +21,21 @@ namespace BuildSchool_MVC_R7.Controllers
             }
             return View(shop);
         }
+        public ActionResult Search(string productname)
+        {
+            if(productname == null)
+            {
+                return RedirectToAction("ShopHomePage", "Shop");
+            }
+            ViewBag.searchname = productname;
+            var shopService = new ShopService();
+            var shop = shopService.SearchProduct("0", productname);
+            if (Request.Cookies["R7CompanyMember"] != null)
+            {
+                shop = shopService.SearchProduct(Request.Cookies["R7CompanyMember"].Value, productname);
+            }
+            return View(shop);
+        }
         public ActionResult CategoryProduct(int categoryid)
         {
             var shopService = new ShopService();

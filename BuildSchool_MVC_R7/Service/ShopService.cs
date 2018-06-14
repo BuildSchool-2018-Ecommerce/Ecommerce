@@ -150,5 +150,31 @@ namespace BuildSchool_MVC_R7.Service
             };
             return shopViewModel;
         }
+        public ShopViewModel SearchProduct(string memberid , string productname)
+        {
+            var categoryRepository = ContainerManager.Container.GetInstance<CategoryRepository>();
+            var productRepository = ContainerManager.Container.GetInstance<ProductRepository>();
+            var memberRepository = ContainerManager.Container.GetInstance<MemberRepository>();
+            var shopingrepository = ContainerManager.Container.GetInstance<ShoppingCartRepository>();
+            var member = memberRepository.FindById(memberid);
+            User user = new User();
+            if (member != null)
+            {
+                user.UserID = memberid;
+                user.Username = member.Name;
+            }
+            var shopViewModel = new ShopViewModel()
+            {
+                User = user,
+                Category = categoryRepository.GetAll(),
+                SearchProduct = productRepository.SearchProduct("%"+productname+"%").ToList(),
+                MaxUnitPrice = productRepository.MaxUnitPrice()
+            };
+            if (member != null)
+            {
+                shopViewModel.Count = shopingrepository.ShoppingCarts(memberid).Count();
+            }
+            return shopViewModel;
+        }
     }
 }
