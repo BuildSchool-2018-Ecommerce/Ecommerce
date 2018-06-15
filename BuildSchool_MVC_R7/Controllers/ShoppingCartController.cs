@@ -132,6 +132,10 @@ namespace BuildSchool_MVC_R7.Controllers
             {
                 return RedirectToAction("LogIn", "Member");
             }
+            if(shop.Orderid==0)
+            {
+                return RedirectToAction("ShopHomePage", "Shop");
+            }
             return View(shop);
         }
     }
