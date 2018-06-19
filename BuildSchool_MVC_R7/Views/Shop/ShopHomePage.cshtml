@@ -612,7 +612,7 @@
                 <div class="flex-sb-m flex-w p-b-35">
                     <div class="flex-w">
                         <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
-                            <select class="selection-2" name="sorting" style="width: 100%">
+                            <select id="order" class="selection-2" name="sorting" style="width: 100%">
                                 <option>Default Sorting</option>
                                 <option>Popularity</option>
                                 <option>Price: low to high</option>
@@ -847,9 +847,20 @@
         }
         if ($(e.target).val().trim().indexOf("+") > -1) {
             var price = $(e.target).val().trim().replace("+", "").replace("$", "");
-            location.href = "/Shop/ShopHomePage?low=" + price + "&Orderby="+"1";
+            location.href = "/Shop/ShopHomePage?low=" + price + "&Orderby=" + "1";
         }
-    })
+    });
+    $('#order').on("change", function (e) {
+        if ($(e.target).val().trim() != "DefaultSorting" && $(e.target).val().trim() != "Popularity") {
+            var price = $(e.target).val().trim().split(":");
+            if (price[1] == " low to high") {
+                location.href = "/Shop/ShopHomePage?Orderby=" + "2";
+            }
+            else if (price[1] == " high to low") {
+                location.href = "/Shop/ShopHomePage?Orderby=" + "3";
+            }
+        }
+    });
     $('#btsh').click(function (e) {
         location.href = "/Shop/Search?productname=" + $('#search-p').val();
     });

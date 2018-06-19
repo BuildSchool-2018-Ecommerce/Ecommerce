@@ -26,6 +26,14 @@ namespace BuildSchool_MVC_R7.Controllers
             {
                 ViewBag.price = "$" + low + " up的商品";
             }
+            else if(Orderby == "2")
+            {
+                ViewBag.price = "low to high";
+            }
+            else if (Orderby == "3")
+            {
+                ViewBag.price = "high to low";
+            }
             return View(shop);
         }
         public ActionResult Search(string productname, string low, string high, string Orderby)
@@ -49,6 +57,14 @@ namespace BuildSchool_MVC_R7.Controllers
             {
                 ViewBag.price = " , $" + low + " up的商品";
             }
+            else if (Orderby == "2")
+            {
+                ViewBag.price = "low to high";
+            }
+            else if (Orderby == "3")
+            {
+                ViewBag.price = "high to low";
+            }
             return View(shop);
         }
         public ActionResult CategoryProduct(string categoryid, string low, string high, string Orderby)
@@ -70,6 +86,14 @@ namespace BuildSchool_MVC_R7.Controllers
             if (Orderby == "1")
             {
                 ViewBag.price = "$" + low + " up的商品";
+            }
+            else if (Orderby == "2")
+            {
+                ViewBag.price = "low to high";
+            }
+            else if (Orderby == "3")
+            {
+                ViewBag.price = "high to low";
             }
             return View(shop);
         }

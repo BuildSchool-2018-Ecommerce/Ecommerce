@@ -75,6 +75,31 @@ namespace BuildSchool_MVC_R7.Service
                 }
                 shopViewModel.AllProduct = p;
             }
+            if(shopViewModel.AllProduct != null)
+            {
+                foreach (var item in shopViewModel.AllProduct)
+                {
+                    if (item.Sale == 0)
+                    {
+                        item.Price = item.UnitPrice;
+                    }
+                    else
+                    {
+                        item.Price = item.Sale;
+                    }
+                }
+                if(Orderby == "2")
+                {
+                    var orderby = shopViewModel.AllProduct.OrderBy((x) => x.Price);
+                    shopViewModel.AllProduct = orderby.ToList();
+                }
+                else if(Orderby == "3")
+                {
+                    var orderby = shopViewModel.AllProduct.OrderByDescending((x) => x.Price);
+                    shopViewModel.AllProduct = orderby.ToList();
+                }
+            }
+            
             if (member != null)
             {
                 shopViewModel.Count = shopingrepository.ShoppingCarts(memberid).Count();
@@ -125,8 +150,8 @@ namespace BuildSchool_MVC_R7.Service
             }
             if (Orderby == "1")
             {
-                var p = new List<AllProduct>();
-                foreach (var item in shopViewModel.AllProduct)
+                var p = new List<CategoryProduct>();
+                foreach (var item in shopViewModel.CategoryProduct)
                 {
                     if (item.Sale == 0)
                     {
@@ -143,8 +168,33 @@ namespace BuildSchool_MVC_R7.Service
                         }
                     }
                 }
-                shopViewModel.AllProduct = p;
+                shopViewModel.CategoryProduct = p;
             }
+            if (shopViewModel.CategoryProduct != null)
+            {
+                foreach (var item in shopViewModel.CategoryProduct)
+                {
+                    if (item.Sale == 0)
+                    {
+                        item.Price = item.UnitPrice;
+                    }
+                    else
+                    {
+                        item.Price = item.Sale;
+                    }
+                }
+                if (Orderby == "2")
+                {
+                    var orderby = shopViewModel.CategoryProduct.OrderBy((x) => x.Price);
+                    shopViewModel.CategoryProduct = orderby.ToList();
+                }
+                else if (Orderby == "3")
+                {
+                    var orderby = shopViewModel.CategoryProduct.OrderByDescending((x) => x.Price);
+                    shopViewModel.CategoryProduct = orderby.ToList();
+                }
+            }
+                
             if (member != null)
             {
                 shopViewModel.Count = shopingrepository.ShoppingCarts(memberid).Count();
@@ -302,6 +352,31 @@ namespace BuildSchool_MVC_R7.Service
                 }
                 shopViewModel.SearchProduct = p;
             }
+            if(shopViewModel.SearchProduct != null)
+            {
+                foreach (var item in shopViewModel.SearchProduct)
+                {
+                    if (item.Sale == 0)
+                    {
+                        item.Price = item.UnitPrice;
+                    }
+                    else
+                    {
+                        item.Price = item.Sale;
+                    }
+                }
+                if (Orderby == "2")
+                {
+                    var orderby = shopViewModel.SearchProduct.OrderBy((x) => x.Price);
+                    shopViewModel.SearchProduct = orderby.ToList();
+                }
+                else if (Orderby == "3")
+                {
+                    var orderby = shopViewModel.SearchProduct.OrderByDescending((x) => x.Price);
+                    shopViewModel.SearchProduct = orderby.ToList();
+                }
+            }
+            
             if (member != null)
             {
                 shopViewModel.Count = shopingrepository.ShoppingCarts(memberid).Count();

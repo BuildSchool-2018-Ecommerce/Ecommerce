@@ -616,7 +616,7 @@
                 <div class="flex-sb-m flex-w p-b-35">
                     <div class="flex-w">
                         <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
-                            <select class="selection-2" name="sorting" style="width: 100%">
+                            <select id="order" class="selection-2" name="sorting" style="width: 100%">
                                 <option>Default Sorting</option>
                                 <option>Popularity</option>
                                 <option>Price: low to high</option>
@@ -859,7 +859,24 @@
             console.log(cid);
             location.href = "/Shop/Search?" + caid[0] + "&low=" + price + "&Orderby=" + "1";
         }
-    })
+    });
+    $('#order').on("change", function (e) {
+        if ($(e.target).val().trim() != "DefaultSorting" && $(e.target).val().trim() != "Popularity") {
+            var price = $(e.target).val().trim().split(":");
+            if (price[1] == " low to high") {
+                var cid = location.href.split("?");
+                var caid = cid[1].split("&");
+                console.log(cid);
+                location.href = "/Shop/Search?" + caid[0] + "&Orderby=" + "2";
+            }
+            else if (price[1] == " high to low")  {
+                var cid = location.href.split("?");
+                var caid = cid[1].split("&");
+                console.log(cid);
+                location.href = "/Shop/Search?" + caid[0] + "&Orderby=" + "3";
+            }
+        }
+    });
     $('#btsh').click(function (e) {
         location.href = "/Shop/Search?productname=" + $('#search-p').val();
     });
