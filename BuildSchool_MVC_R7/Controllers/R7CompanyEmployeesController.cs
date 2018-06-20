@@ -41,6 +41,13 @@ namespace BuildSchool_MVC_R7.Controllers
             var productList = productService.GetProducts();
             return View(productList);
         }
+
+        public ActionResult CreateProduct(Product product)
+        {
+            var productRepository = ContainerManager.Container.GetInstance<ProductRepository>();
+            productRepository.Create(product);
+            return RedirectToAction("ProductList");
+        }
     
         public ActionResult ProductListByCategoryName(string CategoryName)
         {

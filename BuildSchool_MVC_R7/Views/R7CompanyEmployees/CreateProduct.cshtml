@@ -1,0 +1,26 @@
+﻿@model BuildSchool_MVC_R7.Models.ProductViewModel
+
+@using (Html.BeginForm("CreateProduct", "R7CompanyEmployees"))
+{
+    <div class="row">
+        <div id="display" class="col-sm-12 mb-2">
+            <label for="ProductName">產品名稱</label>
+            <input name="ProductName" />
+            <label for="UnitPrice">單價</label>
+            <input name="UnitPrice" />
+            <label for="Description">產品描述</label>
+            <input name="Description" />
+            <label for="CategoryID">種類</label>
+            <select name="CategoryID">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+            </select>
+            <input name="ShelfDate" value=@DateTime.Now hidden />
+        </div>
+        <div class="col-sm-12">
+            <button class="btn btn-primary" type="submit">儲存</button>
+            <button href=@Url.RouteUrl(new { Controller = "R7CompanyEmployees", Action = "ProductList" }) class="btn btn-danger cancelBtn">取消</button>
+        </div>
+    </div>
+}
