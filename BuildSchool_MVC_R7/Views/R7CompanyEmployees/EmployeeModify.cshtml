@@ -1,6 +1,6 @@
-﻿@model BuildSchool_MVC_R7.Models.ProductViewModel
+﻿@model EmployeeViewModel
 @{
-    var productDetail = Model.Product;
+    var employees = Model.Employee;
 }
 
 
@@ -26,23 +26,23 @@
 {
     <div class="row">
         <div id="display" class="col-sm-12 mb-2">
-            <input name="ProductID" value="@ViewBag.ProductID" hidden />
+            <input name="EmployeeID" value="@ViewBag.EmployeeID" hidden />
             <div class="field">
-                <label>產品名稱: </label>
-                <input name="ProductName" value="@productDetail.ProductName" type="text" /><br />
+                <label>員工姓名: </label>
+                <input name="Name" value="@employees.Name" type="text" /><br />
             </div>
             <div class="field">
-                <label>單價: </label>
-                <input name="UnitPrice" value="@productDetail.UnitPrice" type="text" /><br />
+                <label>電話: </label>
+                <input name="Phone" value="@employees.Phone" type="text" /><br />
             </div>
             <div class="field">
-                <label>商品描述: </label>
-                <input name="Description" value="@productDetail.Description" type="text" /><br />
+                <label>E-Mail: </label>
+                <input name="Email" value="@employees.Email" type="text" /><br />
             </div>
         </div>
         <div class="col-sm-12">
             <button class="btn btn-primary" type="submit">儲存</button>
-            <a href=@Url.RouteUrl(new { Controller = "R7CompanyEmployees", Action = "ProductList" })>
+            <a href=@Url.RouteUrl(new { Controller = "R7CompanyEmployees", Action = "EmployeeList" })>
                 <button class="btn btn-danger cancelBtn">取消</button>
             </a>
         </div>

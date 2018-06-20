@@ -181,6 +181,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmployeeViewModel.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\LogInV.cs" />
     <Compile Include="Models\LoginVM .cs" />
@@ -195,6 +196,7 @@
     <Compile Include="PD\IPasswordValidationService.cs" />
     <Compile Include="PD\PasswordValidationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\EmployeeService.cs" />
     <Compile Include="Service\HomeService.cs" />
     <Compile Include="Service\MemberService.cs" />
     <Compile Include="Service\OrderService.cs" />
@@ -5609,6 +5611,9 @@
     <Content Include="Views\ShoppingCart\ShoppingSuccess.cshtml" />
     <Content Include="Views\Shop\Search.cshtml" />
     <Content Include="Views\R7CompanyEmployees\CreateProduct.cshtml" />
+    <Content Include="Views\R7CompanyEmployees\EmployeeList.cshtml" />
+    <Content Include="Views\R7CompanyEmployees\EmployeeModify.cshtml" />
+    <Content Include="Views\R7CompanyEmployees\CreateEmployee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

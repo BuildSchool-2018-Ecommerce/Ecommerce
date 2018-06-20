@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "CreateEmployee";
+    Layout = "~/Views/Shared/CompanyLayout.cshtml";
+}
+
+@using (Html.BeginForm("CreateEmployee", "R7CompanyEmployees"))
+{
+    <div class="row">
+        <div id="display" class="col-sm-12 mb-2">
+            <label for="Name">員工姓名</label>
+            <input name="Name" />
+            <label for="Phone">員工電話</label>
+            <input name="Phone" />
+            <label for="Email">E-mail</label>
+            <input name="Email" />
+            <input name="HireDate" value=@DateTime.Now hidden />
+            <input name="EmployeeGUID" value="00000000-0000-0000-0000-000000000000" hidden />
+            <input name="Image" value="https://0.gravatar.com/avatar/39badcc08cd5ed8c1d9b8f47111c2112?s=150&d=mm&r=G" hidden />
+        </div>
+        <div class="col-sm-12">
+            <button class="btn btn-primary" type="submit">新增</button>
+        </div>
+    </div>
+}
+
+@Scripts.Render("~/Content/vendors")
+@Scripts.Render("~/bundles/vendors1")
+@Scripts.Render("~/bundles/js")
+@Scripts.Render("~/bundles/jqueryval")

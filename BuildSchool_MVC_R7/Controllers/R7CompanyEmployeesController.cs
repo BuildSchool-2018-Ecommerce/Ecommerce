@@ -41,14 +41,53 @@ namespace BuildSchool_MVC_R7.Controllers
             var productList = productService.GetProducts();
             return View(productList);
         }
-
+        public ActionResult CreateProduct()
+        {
+            return View();
+        }
+        [HttpPost]
         public ActionResult CreateProduct(Product product)
         {
             var productRepository = ContainerManager.Container.GetInstance<ProductRepository>();
             productRepository.Create(product);
             return RedirectToAction("ProductList");
         }
-    
+        public ActionResult CreateEmployee()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult CreateEmployee(Employees employee)
+        {
+            var employeeRepository = ContainerManager.Container.GetInstance<EmployeesRepository>();
+            employeeRepository.Create(employee);
+            return RedirectToAction("EmployeeList");
+        }
+        public ActionResult EmployeeList()
+        {
+            var employeeService = new EmployeeService();
+            var employeeList = employeeService.GetEmployees();
+            return View(employeeList);
+        }
+        public ActionResult EmployeeModify(int EmployeeID)
+        {
+            ViewBag.EmployeeID = EmployeeID;
+            var employeeService = new EmployeeService();
+            var employeeModify = employeeService.GetEmployeesByEmployeeID(EmployeeID);
+            return PartialView(employeeModify);
+        }
+        public ActionResult UpdateEmployee(Employees employee)
+        {
+            var employeeRepository = ContainerManager.Container.GetInstance<EmployeesRepository>();
+            employeeRepository.Update(employee);
+            return RedirectToAction("EmployeeList");
+        }
+        public ActionResult DeleteEmployee(Employees employee)
+        {
+            var employeeRepository = ContainerManager.Container.GetInstance<EmployeesRepository>();
+            employeeRepository.Delete(employee);
+            return RedirectToAction("EmployeeList");
+        }
         public ActionResult ProductListByCategoryName(string CategoryName)
         {
             var productService = new ProductService();
@@ -134,7 +173,6 @@ namespace BuildSchool_MVC_R7.Controllers
             var memberList = memberService.GetMembers();
             return View(memberList);
         }
-        
         public ActionResult MemberDetail(string memberId)
         {
             ViewBag.MemberID = memberId;

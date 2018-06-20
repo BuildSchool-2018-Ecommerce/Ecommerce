@@ -41,13 +41,12 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
 
         public void Update(Employees model)
         {
-            connection.Execute("UPDATE Employees SET Name=@Name, Phone=@Phone, Email=@Email, Image=@Image WHERE EmployeeID = @EmployeeID",
+            connection.Execute("UPDATE Employees SET Name=@Name, Phone=@Phone, Email=@Email WHERE EmployeeID = @EmployeeID",
                 new
                 {
                     model.Name,
                     model.Phone,
                     model.Email,
-                    model.Image,
                     model.EmployeeID
                 });
         }

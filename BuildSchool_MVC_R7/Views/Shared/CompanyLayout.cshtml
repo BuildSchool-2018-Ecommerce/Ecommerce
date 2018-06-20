@@ -341,6 +341,17 @@
                             </ul>
                         </li>
                         <li>
+                            <a href="#">員工</a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href=@Url.RouteUrl(new { Controller = "R7CompanyEmployees", Action = "EmployeeList" })>查詢所有員工</a>
+                                </li>
+                                <li>
+                                    <a href=@Url.RouteUrl(new { Controller = "R7CompanyEmployees", Action = "CreateEmployee" })>新增員工</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
                             <a href="#">活動</a>
                             <ul class="nav nav-second-level">
                                 <li>

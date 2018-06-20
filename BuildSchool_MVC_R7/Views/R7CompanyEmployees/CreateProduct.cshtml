@@ -1,5 +1,10 @@
 ﻿@model BuildSchool_MVC_R7.Models.ProductViewModel
 
+@{
+    ViewBag.Title = "CreateProduct";
+    Layout = "~/Views/Shared/CompanyLayout.cshtml";
+}
+
 @using (Html.BeginForm("CreateProduct", "R7CompanyEmployees"))
 {
     <div class="row">
@@ -12,15 +17,21 @@
             <input name="Description" />
             <label for="CategoryID">種類</label>
             <select name="CategoryID">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
+                <option value="1">上衣</option>
+                <option value="2">外套</option>
+                <option value="3">披肩</option>
+                <option value="4">褲子</option>
+                <option value="5">裙子</option>
             </select>
             <input name="ShelfDate" value=@DateTime.Now hidden />
         </div>
         <div class="col-sm-12">
-            <button class="btn btn-primary" type="submit">儲存</button>
-            <button href=@Url.RouteUrl(new { Controller = "R7CompanyEmployees", Action = "ProductList" }) class="btn btn-danger cancelBtn">取消</button>
+            <button class="btn btn-primary" type="submit">新增</button>
         </div>
     </div>
 }
+
+@Scripts.Render("~/Content/vendors")
+@Scripts.Render("~/bundles/vendors1")
+@Scripts.Render("~/bundles/js")
+@Scripts.Render("~/bundles/jqueryval")
