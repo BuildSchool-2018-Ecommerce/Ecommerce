@@ -10,24 +10,90 @@ namespace BuildSchool_MVC_R7.Controllers
     public class ShopController : Controller
     {
         // GET: Shop
-        public ActionResult ShopHomePage()
+        public ActionResult ShopHomePage(string low, string high, string Orderby)
         {
-            
             var shopService = new ShopService();
-            var shop = shopService.Shop("0");
+            var shop = shopService.Shop("0", low, high, Orderby);
             if (Request.Cookies["R7CompanyMember"] != null)
             {
-                shop = shopService.Shop(Request.Cookies["R7CompanyMember"].Value);
+                shop = shopService.Shop(Request.Cookies["R7CompanyMember"].Value, low, high, Orderby);
+            }
+            if(low!=null && high != null)
+            {
+                ViewBag.price = "$" + low + " ~ $" + high + " 的商品";
+            }
+            if(Orderby == "1")
+            {
+                ViewBag.price = "$" + low + " up的商品";
+            }
+            else if(Orderby == "2")
+            {
+                ViewBag.price = "low to high";
+            }
+            else if (Orderby == "3")
+            {
+                ViewBag.price = "high to low";
             }
             return View(shop);
         }
-        public ActionResult CategoryProduct(int categoryid)
+        public ActionResult Search(string productname, string low, string high, string Orderby)
         {
+            if(productname == null)
+            {
+                return RedirectToAction("ShopHomePage", "Shop");
+            }
+            ViewBag.searchname = productname;
             var shopService = new ShopService();
-            var shop = shopService.CategoryShop(categoryid, "0");
+            var shop = shopService.SearchProduct("0", productname, low, high, Orderby);
             if (Request.Cookies["R7CompanyMember"] != null)
             {
-                shop = shopService.CategoryShop(categoryid, Request.Cookies["R7CompanyMember"].Value);
+                shop = shopService.SearchProduct(Request.Cookies["R7CompanyMember"].Value, productname, low, high, Orderby);
+            }
+            if (low != null && high != null)
+            {
+                ViewBag.price = " , $" + low + " ~ $" + high + " 的商品";
+            }
+            if (Orderby == "1")
+            {
+                ViewBag.price = " , $" + low + " up的商品";
+            }
+            else if (Orderby == "2")
+            {
+                ViewBag.price = "low to high";
+            }
+            else if (Orderby == "3")
+            {
+                ViewBag.price = "high to low";
+            }
+            return View(shop);
+        }
+        public ActionResult CategoryProduct(string categoryid, string low, string high, string Orderby)
+        {
+            if(categoryid == null)
+            {
+                return RedirectToAction("ShopHomePage", "Shop");
+            }
+            var shopService = new ShopService();
+            var shop = shopService.CategoryShop(int.Parse(categoryid), "0", low, high, Orderby);
+            if (Request.Cookies["R7CompanyMember"] != null)
+            {
+                shop = shopService.CategoryShop(int.Parse(categoryid), Request.Cookies["R7CompanyMember"].Value, low, high, Orderby);
+            }
+            if (low != null && high != null)
+            {
+                ViewBag.price = "$" + low + " ~ $" + high + " 的商品";
+            }
+            if (Orderby == "1")
+            {
+                ViewBag.price = "$" + low + " up的商品";
+            }
+            else if (Orderby == "2")
+            {
+                ViewBag.price = "low to high";
+            }
+            else if (Orderby == "3")
+            {
+                ViewBag.price = "high to low";
             }
             return View(shop);
         }

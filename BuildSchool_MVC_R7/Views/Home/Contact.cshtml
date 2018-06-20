@@ -29,7 +29,7 @@
         <div class="wrap_header">
             <!-- Logo -->
             <a href="/Home/Index" class="logo">
-                <img src="~/Content/images/icons/logo.png" alt="IMG-LOGO">
+                <img src="~/Content/images/LOGO13.png" alt="IMG-LOGO">
             </a>
 
             <!-- Menu -->
@@ -213,7 +213,7 @@
     <div class="wrap_header_mobile">
         <!-- Logo moblie -->
         <a href="/Home/Index" class="logo-mobile">
-            <img src="~/Content/images/icons/logo.png" alt="IMG-LOGO">
+            <img src="~/Content/images/LOGO13.png" alt="IMG-LOGO">
         </a>
 
         <!-- Button show menu -->
@@ -435,7 +435,7 @@
         <div class="row">
             <div class="col-md-6 p-b-30">
                 <div class="p-r-20 p-r-0-lg">
-                    <div class="contact-map size21" id="google_map" data-map-x="40.614439" data-map-y="-73.926781" data-pin="~/Content/images/icons/icon-position-map.png" data-scrollwhell="0" data-draggable="1"></div>
+                    <div class="contact-map size21" id="google_map" data-map-x="24.759815" data-map-y="120.952946" data-pin="../Content/images/LOGO_9_3.png" data-scrollwhell="0" data-draggable="1"></div>
                 </div>
             </div>
 
@@ -483,11 +483,10 @@
 <div id="dropDownSelect2"></div>
 
 @Scripts.Render("~/Content/vendors")
-@Scripts.Render("~/Content/vendors1")
-@Scripts.Render("~/Content/js")
+@Scripts.Render("~/bundles/vendors1")
+@Scripts.Render("~/bundles/js")
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKFWBqlKAGCeS1rMVoaNlwyayu0e0YRes"></script>
-<script src="js/map-custom.js"></script>
-<script type="text/javascript" src="vendor/select2/select2.min.js"></script>
+<script src="~/Content/js/map-custom.js"></script>
 <script type="text/javascript">
     $(".header-icons-noti").text(@Model.Count);
     $(".selection-1").select2({

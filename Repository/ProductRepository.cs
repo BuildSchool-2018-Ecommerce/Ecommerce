@@ -202,6 +202,15 @@ namespace BuildSchool.MvcSolution.OnlineStore.Repository
                 }, commandType: CommandType.StoredProcedure);
         }
 
+        public IEnumerable<SearchProduct> SearchProduct(string productname)
+        {
+            return connection.Query<SearchProduct>("SearchProduct",
+                new
+                {
+                    productname
+                }, commandType: CommandType.StoredProcedure);
+        }
+
         public IEnumerable<GetProductFormatByProductID> GetProductFormatByProductID(int ProductID)
         {
             return connection.Query<GetProductFormatByProductID>("GetProductFormatByProductID",

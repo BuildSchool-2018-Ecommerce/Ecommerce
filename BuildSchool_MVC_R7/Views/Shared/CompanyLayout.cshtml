@@ -1,7 +1,4 @@
 ﻿
-@{
-    ViewBag.Title = "Index";
-}
 
 @*@Scripts.Render("~/Content/vendor/jquery/jquery-3.2.1.min.js")
     @Scripts.Render("~/Content/js/sb-admin-2.js")
@@ -29,7 +26,7 @@
     <meta name="author" content="">
     <title>SB Admin 2 - Bootstrap Admin Theme</title>
 
-    @Styles.Render("~/Content/backCss")
+    @Styles.Render("~/bundles/backCss")
     @*@Styles.Render("~/Content/css")*@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     @*<!-- Bootstrap Core CSS -->
@@ -60,7 +57,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href=@Url.RouteUrl(new { Controller = "R7CompanyEmployees", Action = "Index" })>阿畦服飾</a>
+                <a class="navbar-brand" href=@Url.RouteUrl(new { Controller = "R7CompanyEmployees", Action = "LogIN" })>阿畦服飾</a>
             </div>
             <!-- /.navbar-header -->
             @*<ul class="nav navbar-top-links navbar-right">
@@ -944,7 +941,7 @@
         </div>
         <!-- /#page-wrapper -->
     </div>
-    @Scripts.Render("~/Content/backJs");
+    @Scripts.Render("~/bundles/backJs");
     <!-- /#wrapper -->
     <!-- jQuery -->
     @*<script src="../vendor/jquery/jquery.min.js"></script>

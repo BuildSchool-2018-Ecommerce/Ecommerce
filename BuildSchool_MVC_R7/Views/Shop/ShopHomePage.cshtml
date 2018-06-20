@@ -1,6 +1,6 @@
 ﻿@model ShopViewModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "ShopHomePage";
 }
 @{
     var category = Model.Category;
@@ -45,7 +45,7 @@
         <div class="wrap_header">
             <!-- Logo -->
             <a href="/Home/Index" class="logo">
-                <img src="~/Content/images/icons/logo.png" alt="IMG-LOGO">
+                <img src="~/Content/images/LOGO13.png" alt="IMG-LOGO">
             </a>
 
             <!-- Menu -->
@@ -234,7 +234,7 @@
     <div class="wrap_header_mobile">
         <!-- Logo moblie -->
         <a href="/Home/Index" class="logo-mobile">
-            <img src="~/Content/images/icons/logo.png" alt="IMG-LOGO">
+            <img src="~/Content/images/LOGO13.png" alt="IMG-LOGO">
         </a>
 
         <!-- Button show menu -->
@@ -484,7 +484,7 @@
 
                     <ul class="p-b-54">
                         <li class="p-t-4">
-                            <a href="/Shop/Index" class="s-text13 active1">
+                            <a href="/Shop/ShopHomePage" class="s-text13 active1">
                                 全部
                             </a>
                         </li>
@@ -595,9 +595,9 @@
                     </div>
 
                     <div class="search-product pos-relative bo4 of-hidden">
-                        <input class="s-text7 size6 p-l-23 p-r-50" type="text" name="search-product" placeholder="Search Products...">
+                        <input class="s-text7 size6 p-l-23 p-r-50" type="text" id="search-p" name="search-product" placeholder="Search Products...">
 
-                        <button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
+                        <button id="btsh" class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
                             <i class="fs-12 fa fa-search" aria-hidden="true"></i>
                         </button>
                     </div>
@@ -606,11 +606,13 @@
 
             <div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
                 <!-- Product -->
-
+                <div class="flex-sb-m flex-w p-b-35 m-text14">
+                    @ViewBag.price
+                </div>
                 <div class="flex-sb-m flex-w p-b-35">
                     <div class="flex-w">
                         <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
-                            <select class="selection-2" name="sorting" style="width: 100%">
+                            <select id="order" class="selection-2" name="sorting" style="width: 100%">
                                 <option>Default Sorting</option>
                                 <option>Popularity</option>
                                 <option>Price: low to high</option>
@@ -619,7 +621,7 @@
                         </div>
 
                         <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
-                            <select class="selection-2" name="sorting" style="width: 100%">
+                            <select id="moneyprice" class="selection-2" name="sorting" style="width: 100%">
                                 <option>Price</option>
                                 <option>$0.00 - $50.00</option>
                                 <option>$50.00 - $100.00</option>
@@ -832,10 +834,36 @@
 
 
 @Scripts.Render("~/Content/vendors")
-@Scripts.Render("~/Content/vendors1")
-@Scripts.Render("~/Content/js")
+@Scripts.Render("~/bundles/vendors1")
+@Scripts.Render("~/bundles/js")
 
 <script type="text/javascript">
+    $('#moneyprice').on("change", function (e) {
+        if ($(e.target).val().trim() != "Price" && $(e.target).val().trim().indexOf("+") == -1) {
+            var price = $(e.target).val().trim().split("-");
+            var min = price[0].replace("$", "");
+            var max = price[1].replace("$", "");
+            location.href = "/Shop/ShopHomePage?low=" + min + "&high=" + max;
+        }
+        if ($(e.target).val().trim().indexOf("+") > -1) {
+            var price = $(e.target).val().trim().replace("+", "").replace("$", "");
+            location.href = "/Shop/ShopHomePage?low=" + price + "&Orderby=" + "1";
+        }
+    });
+    $('#order').on("change", function (e) {
+        if ($(e.target).val().trim() != "DefaultSorting" && $(e.target).val().trim() != "Popularity") {
+            var price = $(e.target).val().trim().split(":");
+            if (price[1] == " low to high") {
+                location.href = "/Shop/ShopHomePage?Orderby=" + "2";
+            }
+            else if (price[1] == " high to low") {
+                location.href = "/Shop/ShopHomePage?Orderby=" + "3";
+            }
+        }
+    });
+    $('#btsh').click(function (e) {
+        location.href = "/Shop/Search?productname=" + $('#search-p').val();
+    });
     $(".selection-1").select2({
         minimumResultsForSearch: 20,
         dropdownParent: $('#dropDownSelect1')
@@ -888,14 +916,9 @@
     $(document).on("click", "#filter", function () {
         var min = parseInt($("#value-lower").text());
         var max = parseInt($("#value-upper").text());
-        $(".filter").attr('hidden', true);
-        var filter = $(".filter");
-        $(".filter").each(function () {
-            var item = parseInt($(this).find(".price").html().replace("NT$", "").replace(",", "").trim());
-            if (item > min && item <= max) {
-                $(this).removeAttr("hidden");
-            }
-        })
+        console.log(min);
+        console.log(max);
+        location.href = "/Shop/ShopHomePage?low="+min+"&high="+max;
     })
     $('.js-show-header-dropdown.shop').click(function () {
         //if ($('#user').length == 0) {

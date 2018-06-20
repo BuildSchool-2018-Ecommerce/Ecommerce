@@ -40,7 +40,7 @@
         <div class="wrap_header">
             <!-- Logo -->
             <a href="/Home/Index" class="logo">
-                <img src="~/Content/images/icons/logo.png" alt="IMG-LOGO">
+                <img src="~/Content/images/LOGO13.png" alt="IMG-LOGO">
             </a>
 
             <!-- Menu -->
@@ -229,7 +229,7 @@
     <div class="wrap_header_mobile">
         <!-- Logo moblie -->
         <a href="/Home/Index" class="logo-mobile">
-            <img src="~/Content/images/icons/logo.png" alt="IMG-LOGO">
+            <img src="~/Content/images/LOGO13.png" alt="IMG-LOGO">
         </a>
 
         <!-- Button show menu -->
@@ -456,7 +456,7 @@
 </header>
 <!-- breadcrumb -->
 <div class="bread-crumb bgwhite flex-w p-l-52 p-r-15 p-t-30 p-l-15-sm">
-    <a href="/Shop/Index" class="s-text16">
+    <a href="/Shop/ShopHomePage" class="s-text16">
         Shop
         <i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
     </a>
@@ -762,8 +762,8 @@
 
 
 @Scripts.Render("~/Content/vendors")
-@Scripts.Render("~/Content/vendors1")
-@Scripts.Render("~/Content/js")
+@Scripts.Render("~/bundles/vendors1")
+@Scripts.Render("~/bundles/js")
 <script type="text/javascript">
     $(".selection-1").select2({
         minimumResultsForSearch: 20,
@@ -791,6 +791,14 @@
     $('.btn-addcart-product-detail').each(function () {
         var nameProduct = $('.product-detail-name').html();
         $(this).on('click', function () {
+            var b = false;
+            if ($('.brid').length > 0) {
+                for (var item of $('.brid').val()) {
+                    if (item == @product[0].ProductID) {
+                        b = true;
+                    }
+                }
+            }
             $.ajax({
                 url: "/Shop/CreateProductInShoppingCart",
                 data: {
@@ -801,12 +809,7 @@
                 },
                 success: function (result) {
                     swal(nameProduct, "is added to cart !", "success");
-                    var b = false;
-                    for (var item of $('.brid').val()) {
-                        if (item == @product[0].ProductID) {
-                            b = true;
-                        }
-                    }
+
                     if (b == false) {
                         @{ var t = Model.Count + 1; }
                         $(".header-icons-noti").text(@t);

@@ -45,7 +45,7 @@
         <div class="wrap_header">
             <!-- Logo -->
             <a href="/Home/Index" class="logo">
-                <img src="~/Content/images/icons/logo.png" alt="IMG-LOGO">
+                <img src="~/Content/images/LOGO13.png" alt="IMG-LOGO">
             </a>
 
             <!-- Menu -->
@@ -234,7 +234,7 @@
     <div class="wrap_header_mobile">
         <!-- Logo moblie -->
         <a href="/Home/Index" class="logo-mobile">
-            <img src="~/Content/images/icons/logo.png" alt="IMG-LOGO">
+            <img src="~/Content/images/LOGO13.png" alt="IMG-LOGO">
         </a>
 
         <!-- Button show menu -->
@@ -484,7 +484,7 @@
 
                     <ul class="p-b-54">
                         <li class="p-t-4">
-                            <a href="/Shop/Index" class="s-text13 active1">
+                            <a href="/Shop/ShopHomePage" class="s-text13 active1">
                                 全部
                             </a>
                         </li>
@@ -595,9 +595,9 @@
                     </div>
 
                     <div class="search-product pos-relative bo4 of-hidden">
-                        <input class="s-text7 size6 p-l-23 p-r-50" type="text" name="search-product" placeholder="Search Products...">
+                        <input class="s-text7 size6 p-l-23 p-r-50" type="text" id="search-p" name="search-product" placeholder="Search Products...">
 
-                        <button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
+                        <button id="btsh" class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
                             <i class="fs-12 fa fa-search" aria-hidden="true"></i>
                         </button>
                     </div>
@@ -606,11 +606,13 @@
 
             <div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
                 <!-- Product -->
-
+                <div class="flex-sb-m flex-w p-b-35 m-text14">
+                    @ViewBag.price
+                </div>
                 <div class="flex-sb-m flex-w p-b-35">
                     <div class="flex-w">
                         <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
-                            <select class="selection-2" name="sorting" style="width: 100%">
+                            <select id="order" class="selection-2" name="sorting" style="width: 100%">
                                 <option>Default Sorting</option>
                                 <option>Popularity</option>
                                 <option>Price: low to high</option>
@@ -619,7 +621,7 @@
                         </div>
 
                         <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
-                            <select class="selection-2" name="sorting" style="width: 100%">
+                            <select id="moneyprice" class="selection-2" name="sorting" style="width: 100%">
                                 <option>Price</option>
                                 <option>$0.00 - $50.00</option>
                                 <option>$50.00 - $100.00</option>
@@ -638,181 +640,181 @@
 
                 <div class="tab-content" id="pills-tabContent">
                     @for (int i = 0; i < groupcount; i++)
+        {
+            var pid = "p" + i;
+            var phid = "#ph" + i;
+            if (i == 0)
+            {
+                <div class="tab-pane fade show active" id=@phid role="tabpanel" aria-labelledby=@pid>
+                    <div class="row">
+                        @{ min = i * 12; max = min + 12; }
+                        @for (int j = min; j < max; j++)
+            {
+                if (j < categoryProductscount)
+                {
+                    if (categoryProducts[j].Sale != 0)
                     {
-                        var pid = "p" + i;
-                        var phid = "#ph" + i;
-                        if (i == 0)
-                        {
-                            <div class="tab-pane fade show active" id=@phid role="tabpanel" aria-labelledby=@pid>
-                                <div class="row">
-                                    @{ min = i * 12; max = min + 12; }
-                                    @for (int j = min; j < max; j++)
-                                    {
-                                        if (j < categoryProductscount)
-                                        {
-                                            if (categoryProducts[j].Sale != 0)
-                                            {
-                                                <div class="col-sm-4 col-md-4 col-lg-4 p-b-50 filter">
-                                                    <!-- Block2 -->
-                                                    <div class="block2">
-                                                        <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
-                                                            <img src=@categoryProducts[j].Image style="width:255px;height:340px" alt="IMG-PRODUCT">
+                        <div class="col-sm-4 col-md-4 col-lg-4 p-b-50 filter">
+                            <!-- Block2 -->
+                            <div class="block2">
+                                <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
+                                    <img src=@categoryProducts[j].Image style="width:255px;height:340px" alt="IMG-PRODUCT">
 
-                                                            <div class="block2-overlay trans-0-4">
-                                                                <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                                                    <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                                                    <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                                                </a>
-                                                            </div>
-                                                        </div>
+                                    <div class="block2-overlay trans-0-4">
+                                        <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                            <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                            <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                </div>
 
-                                                        <div class="block2-txt p-t-20">
-                                                            <a href=@Url.Action("Product","Shop",new { @productid = categoryProducts[j].ProductID }) class="block2-name dis-block s-text3 p-b-5">
-                                                                @categoryProducts[j].ProductName
-                                                            </a>
-                                                            <span class="block2-oldprice m-text7 p-r-5">
-                                                                @categoryProducts[j].UnitPrice.ToString("C", CultureInfo.CurrentCulture)
-                                                            </span>
+                                <div class="block2-txt p-t-20">
+                                    <a href=@Url.Action("Product","Shop",new { @productid = categoryProducts[j].ProductID }) class="block2-name dis-block s-text3 p-b-5">
+                                        @categoryProducts[j].ProductName
+                                    </a>
+                                    <span class="block2-oldprice m-text7 p-r-5">
+                                        @categoryProducts[j].UnitPrice.ToString("C", CultureInfo.CurrentCulture)
+                                    </span>
 
-                                                            <span class="block2-newprice m-text8 p-r-5 price">
-                                                                @categoryProducts[j].Sale.ToString("C", CultureInfo.CurrentCulture)
-                                                            </span>
+                                    <span class="block2-newprice m-text8 p-r-5 price">
+                                        @categoryProducts[j].Sale.ToString("C", CultureInfo.CurrentCulture)
+                                    </span>
 
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            }
-                                            else
-                                            {
-                                                <div class="col-sm-4 col-md-4 col-lg-4 p-b-50 filter">
-                                                    <!-- Block2 -->
-                                                    <div class="block2">
-                                                        <div class="block2-img wrap-pic-w of-hidden pos-relative ">
-                                                            <img src=@categoryProducts[j].Image style="width:255px;height:340px" alt="IMG-PRODUCT">
-
-                                                            <div class="block2-overlay trans-0-4">
-                                                                <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                                                    <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                                                    <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="block2-txt p-t-20">
-                                                            <a href=@Url.Action("Product","Shop",new { @productid = categoryProducts[j].ProductID }) class="block2-name dis-block s-text3 p-b-5">
-                                                                @categoryProducts[j].ProductName
-                                                            </a>
-
-                                                            <span class="block2-price m-text6 p-r-5 price">
-                                                                @categoryProducts[j].UnitPrice.ToString("C", CultureInfo.CurrentCulture)
-                                                            </span>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            }
-
-                                        }
-                                    }
                                 </div>
                             </div>
-                        }
-                        else
-                        {
-                            <div class="tab-pane fade" id=@phid role="tabpanel" aria-labelledby=@pid>
-                                <div class="row">
-                                    @{ min = i * 12; max = min + 12; }
-                                    @for (int j = min; j < max; j++)
-                                    {
-                                        if (j < categoryProductscount)
-                                        {
-                                            if (categoryProducts[j].Sale != 0)
-                                            {
-                                                <div class="col-sm-4 col-md-4 col-lg-4 p-b-50 filter">
-                                                    <!-- Block2 -->
-                                                    <div class="block2">
-                                                        <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
-                                                            <img src=@categoryProducts[j].Image style="width:255px;height:340px" alt="IMG-PRODUCT">
+                        </div>
+        }
+        else
+        {
+            <div class="col-sm-4 col-md-4 col-lg-4 p-b-50 filter">
+                <!-- Block2 -->
+                <div class="block2">
+                    <div class="block2-img wrap-pic-w of-hidden pos-relative ">
+                        <img src=@categoryProducts[j].Image style="width:255px;height:340px" alt="IMG-PRODUCT">
 
-                                                            <div class="block2-overlay trans-0-4">
-                                                                <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                                                    <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                                                    <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                                                </a>
-                                                            </div>
-                                                        </div>
+                        <div class="block2-overlay trans-0-4">
+                            <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
 
-                                                        <div class="block2-txt p-t-20">
-                                                            <a href=@Url.Action("Product","Shop",new { @productid = categoryProducts[j].ProductID }) class="block2-name dis-block s-text3 p-b-5">
-                                                                @categoryProducts[j].ProductName
-                                                            </a>
-                                                            <span class="block2-oldprice m-text7 p-r-5">
-                                                                @categoryProducts[j].UnitPrice.ToString("C", CultureInfo.CurrentCulture)
-                                                            </span>
+                    <div class="block2-txt p-t-20">
+                        <a href=@Url.Action("Product","Shop",new { @productid = categoryProducts[j].ProductID }) class="block2-name dis-block s-text3 p-b-5">
+                            @categoryProducts[j].ProductName
+                        </a>
 
-                                                            <span class="block2-newprice m-text8 p-r-5 price">
-                                                                @categoryProducts[j].Sale.ToString("C", CultureInfo.CurrentCulture)
-                                                            </span>
+                        <span class="block2-price m-text6 p-r-5 price">
+                            @categoryProducts[j].UnitPrice.ToString("C", CultureInfo.CurrentCulture)
+                        </span>
 
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            }
-                                            else
-                                            {
-                                                <div class="col-sm-4 col-md-4 col-lg-4 p-b-50 filter">
-                                                    <!-- Block2 -->
-                                                    <div class="block2">
-                                                        <div class="block2-img wrap-pic-w of-hidden pos-relative ">
-                                                            <img src=@categoryProducts[j].Image style="width:255px;height:340px" alt="IMG-PRODUCT">
+                    </div>
+                </div>
+            </div>
+}
 
-                                                            <div class="block2-overlay trans-0-4">
-                                                                <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-                                                                    <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-                                                                    <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-                                                                </a>
-                                                            </div>
-                                                        </div>
+}
+}
+                    </div>
+                </div>
+}
+else
+{
+            <div class="tab-pane fade" id=@phid role="tabpanel" aria-labelledby=@pid>
+                <div class="row">
+                    @{ min = i * 12; max = min + 12; }
+                    @for (int j = min; j < max; j++)
+        {
+            if (j < categoryProductscount)
+            {
+                if (categoryProducts[j].Sale != 0)
+                {
+                    <div class="col-sm-4 col-md-4 col-lg-4 p-b-50 filter">
+                        <!-- Block2 -->
+                        <div class="block2">
+                            <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelsale">
+                                <img src=@categoryProducts[j].Image style="width:255px;height:340px" alt="IMG-PRODUCT">
 
-                                                        <div class="block2-txt p-t-20">
-                                                            <a href=@Url.Action("Product","Shop",new { @productid = categoryProducts[j].ProductID }) class="block2-name dis-block s-text3 p-b-5">
-                                                                @categoryProducts[j].ProductName
-                                                            </a>
-
-                                                            <span class="block2-price m-text6 p-r-5 price">
-                                                                @categoryProducts[j].UnitPrice.ToString("C", CultureInfo.CurrentCulture)
-                                                            </span>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            }
-                                        }
-                                    }
+                                <div class="block2-overlay trans-0-4">
+                                    <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                        <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                        <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                                    </a>
                                 </div>
                             </div>
-                        }
+
+                            <div class="block2-txt p-t-20">
+                                <a href=@Url.Action("Product","Shop",new { @productid = categoryProducts[j].ProductID }) class="block2-name dis-block s-text3 p-b-5">
+                                    @categoryProducts[j].ProductName
+                                </a>
+                                <span class="block2-oldprice m-text7 p-r-5">
+                                    @categoryProducts[j].UnitPrice.ToString("C", CultureInfo.CurrentCulture)
+                                </span>
+
+                                <span class="block2-newprice m-text8 p-r-5 price">
+                                    @categoryProducts[j].Sale.ToString("C", CultureInfo.CurrentCulture)
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+    }
+    else
+    {
+            <div class="col-sm-4 col-md-4 col-lg-4 p-b-50 filter">
+                <!-- Block2 -->
+                <div class="block2">
+                    <div class="block2-img wrap-pic-w of-hidden pos-relative ">
+                        <img src=@categoryProducts[j].Image style="width:255px;height:340px" alt="IMG-PRODUCT">
+
+                        <div class="block2-overlay trans-0-4">
+                            <a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+                                <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="block2-txt p-t-20">
+                        <a href=@Url.Action("Product","Shop",new { @productid = categoryProducts[j].ProductID }) class="block2-name dis-block s-text3 p-b-5">
+                            @categoryProducts[j].ProductName
+                        </a>
+
+                        <span class="block2-price m-text6 p-r-5 price">
+                            @categoryProducts[j].UnitPrice.ToString("C", CultureInfo.CurrentCulture)
+                        </span>
+
+                    </div>
+                </div>
+            </div>
+}
+}
+}
+                </div>
+            </div>
+}
 
 
-                    }
+}
                 </div>
 
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                     @for (int i = 0; i < groupcount; i++)
-                    {
-                        var pid = "p" + i;
-                        var phid = "#ph" + i;
-                        <li class="nav-item">
-                            @if (i == 0)
-                            {
-                                <a class="item-pagination flex-c-m trans-0-4 active-pagination" id=@pid data-toggle="pill" href=@phid role="tab" aria-controls=@phid aria-selected="false">@(i + 1)</a>
-                            }
-                            else
-                            {
-                                <a class="item-pagination flex-c-m trans-0-4" id=@pid data-toggle="pill" href=@phid role="tab" aria-controls=@phid aria-selected="false">@(i + 1)</a>
-                            }
-                        </li>
-                    }
+        {
+            var pid = "p" + i;
+            var phid = "#ph" + i;
+            <li class="nav-item">
+                @if (i == 0)
+    {
+            <a class="item-pagination flex-c-m trans-0-4 active-pagination" id=@pid data-toggle="pill" href=@phid role="tab" aria-controls=@phid aria-selected="false">@(i + 1)</a>
+}
+else
+{
+            <a class="item-pagination flex-c-m trans-0-4" id=@pid data-toggle="pill" href=@phid role="tab" aria-controls=@phid aria-selected="false">@(i + 1)</a>
+}
+            </li>
+}
                 </ul>
             </div>
         </div>
@@ -832,10 +834,48 @@
 
 
 @Scripts.Render("~/Content/vendors")
-@Scripts.Render("~/Content/vendors1")
-@Scripts.Render("~/Content/js")
+@Scripts.Render("~/bundles/vendors1")
+@Scripts.Render("~/bundles/js")
 
 <script type="text/javascript">
+    $('#moneyprice').on("change", function (e) {
+        if ($(e.target).val().trim() != "Price" && $(e.target).val().trim().indexOf("+") == -1) {
+            var price = $(e.target).val().trim().split("-");
+            var min = price[0].replace("$", "");
+            var max = price[1].replace("$", "");
+            var cid = location.href.split("?");
+            var caid = cid[1].split("&");
+            console.log(cid);
+            location.href = "/Shop/CategoryProduct?" + caid[0] + "&low=" + min + "&high=" + max;
+        }
+        if ($(e.target).val().trim().indexOf("+") > -1) {
+            var price = $(e.target).val().trim().replace("+", "").replace("$", "");
+            var cid = location.href.split("?");
+            var caid = cid[1].split("&");
+            console.log(cid);
+            location.href = "/Shop/CategoryProduct?" + caid[0] + "&low=" + price + "&Orderby=" + "1";
+        }
+    });
+    $('#order').on("change", function (e) {
+        if ($(e.target).val().trim() != "DefaultSorting" && $(e.target).val().trim() != "Popularity") {
+            var price = $(e.target).val().trim().split(":");
+            if (price[1] == " low to high") {
+                var cid = location.href.split("?");
+                var caid = cid[1].split("&");
+                console.log(cid);
+                location.href = "/Shop/CategoryProduct?" + caid[0] + "&Orderby=" + "2";
+            }
+            else if (price[1] == " high to low") {
+                var cid = location.href.split("?");
+                var caid = cid[1].split("&");
+                console.log(cid);
+                location.href = "/Shop/CategoryProduct?" + caid[0] + "&Orderby=" + "3";
+            }
+        }
+    });
+    $('#btsh').click(function (e) {
+        location.href = "/Shop/Search?productname=" + $('#search-p').val();
+    });
     $(".selection-1").select2({
         minimumResultsForSearch: 20,
         dropdownParent: $('#dropDownSelect1')
@@ -888,14 +928,10 @@
     $(document).on("click", "#filter", function () {
         var min = parseInt($("#value-lower").text());
         var max = parseInt($("#value-upper").text());
-        $(".filter").attr('hidden', true);
-        var filter = $(".filter");
-        $(".filter").each(function () {
-            var item = parseInt($(this).find(".price").html().replace("NT$", "").replace(",", "").trim());
-            if (item > min && item <= max) {
-                $(this).removeAttr("hidden");
-            }
-        })
+        var cid = location.href.split("?");
+        var caid = cid[1].split("&");
+        console.log(cid);
+        location.href = "/Shop/CategoryProduct?" + caid[0] + "&low=" + min + "&high=" + max;
     })
     $('.js-show-header-dropdown.shop').click(function () {
         //if ($('#user').length == 0) {
