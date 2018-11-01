@@ -219,6 +219,8 @@
     <Content Include="Content\css\morris.css" />
     <Content Include="Content\css\sb-admin-2.min.css" />
     <Content Include="Content\images\1438172205530_1.jpg" />
+    <Content Include="Content\images\6e3f6aacaec2bd99a03f79b26165a405.jpg" />
+    <Content Include="Content\images\Fashion-girl-sit-at-street_1920x1200.jpg" />
     <Content Include="Content\images\icons\00.png" />
     <Content Include="Content\images\LOGO13.png" />
     <Content Include="Content\images\LOGO_9_3.png" />
@@ -237,6 +239,7 @@
     <Content Include="Content\images\S_8118115381280.jpg" />
     <Content Include="Content\images\S_8118128302935.jpg" />
     <Content Include="Content\images\S_8136057260415.jpg" />
+    <Content Include="Content\images\White-dress-Asian-girl-umbrella-blue-sky_1920x1200.jpg" />
     <Content Include="Content\images\龍.jpg" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\jquery.min.js" />
